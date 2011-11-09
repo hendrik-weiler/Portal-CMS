@@ -4,10 +4,11 @@ Postal Content Management System
 
 Build on [Fuel Framework](https://github.com/fuel/fuel)
 Using:
-*   [Nivo-Slider](https://github.com/gilbitron/Nivo-Slider)
-*   [elRTE](https://github.com/Studio-42/elRTE)
-*   [elFinder](https://github.com/Studio-42/elFinder)
-*   [colorbox](https://github.com/jackmoore/colorbox)
+* [Nivo-Slider](https://github.com/gilbitron/Nivo-Slider)
+* [elRTE](https://github.com/Studio-42/elRTE)
+* [elFinder](https://github.com/Studio-42/elFinder)
+* [colorbox](https://github.com/jackmoore/colorbox)
+* [html5boilerplate](https://github.com/h5bp/html5-boilerplate)
 
 Requirements:
 ---------------------
