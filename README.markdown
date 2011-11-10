@@ -41,7 +41,7 @@ Portal got a simple templating system. You can find all templates in "fuel/app/v
 Within the index.php a folder before you can design your site.
 There a few generators you need to know if you want to work with it.
 
-<code>
+<pre>
 print model_generator_seo::render(); //All searchoptimation will be given out
 print model_generator_navigation::render(); //Prints out the navigation
 print model_generator_content::render(); //Prints site contents out
@@ -54,15 +54,15 @@ print Asset\Manager::insert(); // prints out js,css
 
 print Asset\Manager::get('js->include->modernizr'); // searches in include path after %modernizr% and prints it out
 print Asset\Manager::get('img->admin->logo'); // searches in the img path after the portal logo and prints it out
-</code>
+</pre>
 
 Writing CSS:
 ---------------------
 Portal CMS comes with a light sass,less,stylus-like scripting system.
 
 #### Syntax:
-<code>
-/*>
+<pre>
+/*´>´
 ; above is the opening tag
 ; this is a comment
 
@@ -80,12 +80,12 @@ obj site
 end
 
 ; below is the closing tag
-<*/
+´<´*/
 
-</code>
+</pre>
 
 #### Usage:
-<code>
+<pre>
 body {
   background-color: site.$bg;
 }
@@ -93,4 +93,4 @@ body {
 p:after {
   content: "$im_a_variable"
 }
-</code>
+</pre>
