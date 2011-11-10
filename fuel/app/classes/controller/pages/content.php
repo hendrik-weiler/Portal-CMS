@@ -74,6 +74,7 @@ class Controller_Pages_Content extends Controller
 			$content->text = '';
 			$content->text2 = '';
 			$content->text3 = '';
+			$content->wmode = 'window';
 			$content->refer_content_id = '{"col_1":0,"col_2":0,"col_3":0}';
 			$content->type = Input::post('type');
 			$content->save();
@@ -347,6 +348,93 @@ class Controller_Pages_Content extends Controller
 		$data['col_3_selected'] = $array['col_3'];
 
 		$this->data['content'] = View::factory('admin/type/content_linking_3column',$data);
+	}
+
+	public function action_type10()
+	{
+		$content = model_db_content::find($this->content_id);
+
+		if(isset($_POST['back']))
+		{
+			Response::redirect('admin/sites/edit/' . $this->id);
+		}
+		if(isset($_POST['submit']))
+		{
+
+			if(!is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash'))
+			{
+				File::create_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') , 'flash',0755);
+			}
+
+			if(!is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash/' . $content->id))
+			{
+				File::create_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash' , $content->id,0755);
+			}
+
+			$config = array(
+		    'path' => DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash/' . $content->id,
+		    'randomize' => true,
+		    'ext_whitelist' => array('img', 'jpg', 'jpeg', 'gif', 'png','swf'),
+			);
+
+			// process the uploaded files in $_FILES
+			Upload::process($config);
+
+			// if there are any valid files
+			if (Upload::is_valid())
+			{
+					Upload::save();
+
+			    foreach(Upload::get_files() as $file)
+			    {
+			    	if($file['extension'] == 'swf')
+			    	{
+			    		if(!empty($content->flash_file))
+			    			File::delete(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash/' . $content->id . '/' . $content->flash_file);
+
+			    		$content->flash_file = $file['saved_as'];
+			    	}
+			    	else
+			    	{
+			    		if($content->pictures != 'lightbox')
+			    			File::delete(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash/' . $content->id . '/' . $content->pictures);
+
+			    		$content->pictures = $file['saved_as'];
+			    	}
+			    }
+			}
+			$content->dimensions = Input::post('height') . ';' . Input::post('width');
+			$content->parameter = Input::post('params');
+			$content->wmode = Input::post('wMode');
+			$content->label = Input::post('label');
+			$content->save();
+
+			Response::redirect(Uri::current());
+		}
+		$data = array();
+		$data['params'] = $content->parameter;
+		$data['label'] = $content->label;
+		$data['wMode'] = $content->wmode;
+
+		$dimensions = explode(';',$content->dimensions);
+		$data['height'] = (!isset($dimensions[1])) ? 640 : $dimensions[0];
+		$data['width'] = (!isset($dimensions[1])) ? 480 : $dimensions[1];
+
+		if($content->pictures == 'lightbox')
+			$data['picture'] = Uri::create('assets/img/admin/350x100.gif');
+		else
+			$data['picture'] = Uri::create('uploads/' . Session::get('lang_prefix') . '/flash/' . $content->id . '/' . $content->pictures);
+
+		if(empty($content->flash_file))
+			$data['flash'] = '<img src="' . Uri::create('assets/img/admin/350x100.gif') . '" />';
+		else 
+		{
+			model_generator_preparer::$lang = Session::get('lang_prefix');
+			model_generator_preparer::$currentSite = model_db_site::find(Uri::segment(3));
+			$data['flash'] = model_generator_content::renderContent($content->id,Session::get('lang_prefix'));
+		}
+		
+		$this->data['content'] = View::factory('admin/type/flash',$data);
 	}
 
 	public function action_delete()

@@ -82,15 +82,16 @@ return array(
 
 	'content' => array(
 		'type' => array(
-			2 => 'Contactform',
-			3 => 'Gallery',
-			4 => 'News',
-			5 => '1 Column [Content-linking]',
-			1 => '1 Column [Textcontainer]',
-			6 => '2 Column [Textcontainer]',
-			7 => '3 Column [Textcontainer]',
-			8 => '2 Column [Content-linking]',
-			9 => '3 Column [Content-linking]',
+			2  =>	'Contactform',
+			3  =>	'Gallery',
+			4  =>	'News',
+			5  =>	'1 Column [Content-linking]',
+			1  =>	'1 Column [Textcontainer]',
+			6  =>	'2 Column [Textcontainer]',
+			7  =>	'3 Column [Textcontainer]',
+			8  =>	'2 Column [Content-linking]',
+			9  =>	'3 Column [Content-linking]',
+			10 => 'Flash',
 		),
 		'txtcon' => 'Textcontainer',
 		'cl' => 'Content-linking',
@@ -140,6 +141,12 @@ return array(
 			'header' => 'Choose an existing content',
 			'submit' => 'Save',
 			'back' => 'Back to overview',
+		),
+		'10' => array(
+			'params' => 'Flash Parameter',
+			'params-help' => 'one each line, syntax: key=value. Usable keywords: $language[extension], $sitename[extension]',
+			'replace_pic' => 'Picture, if flash is not available.',
+			'flash_vid' => 'Flash Video',
 		),
 	),
 

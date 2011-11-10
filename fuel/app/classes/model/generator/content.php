@@ -132,8 +132,52 @@ class model_generator_content extends model_db_site
 					$data['group'] = 'group_' . $content->id;
 					$return .= View::factory('public/template/3columns',$data);
 					break;
+					case 10:
+						$return .= self::_viewFlash($content);
+						break;
 			}
 			return $return;
+	}
+
+	private static function _viewFlash($content)
+	{
+		$params = $content->parameter;
+		$params = explode(PHP_EOL,$params);
+		$params_parsed = array();
+		foreach($params as $line)
+		{
+			if(preg_match('#(.*)=(.*)#i',$line))
+			{
+				$split = explode('=',$line);
+				$value = trim($split[1]);
+				if(preg_match_all('#\$([\w]+)\[([\w]+)\]#i',$value,$matches))
+				{
+					$ext = $matches[2][0];
+					if($matches[1][0] == 'language')
+						$value = model_generator_preparer::$lang . '.' . $ext;
+
+					if($matches[1][0] == 'sitename')
+						$value = model_generator_preparer::$currentSite->label . '.' . $ext;
+				}					
+
+				$param_parsed[trim($split[0])] = $value;
+			}
+		}
+
+		$data = array();
+		$data['params'] = Format::factory($param_parsed)->to_json();
+		$data['group'] = 'group_' . $content->id;
+		$data['wmode'] = $content->wmode;
+		
+		$dimensions = explode(';',$content->dimensions);
+		$data['height'] = (!isset($dimensions[1])) ? 640 : $dimensions[0];
+		$data['width'] = (!isset($dimensions[1])) ? 480 : $dimensions[1];
+
+		$path = 'uploads/' . model_generator_preparer::$lang . '/flash/' . $content->id . '/';
+		$data['picture'] = Uri::create($path . $content->pictures);
+		$data['swfPath'] = Uri::create($path . $content->flash_file);
+
+		return View::factory('public/template/flash',$data);
 	}
 
 	private static function _showContactform($content)

@@ -25,7 +25,7 @@ class model_db_content extends Orm\Model
 
 	public static $_table_name = 'en_content';
 
-	protected static $_properties = array('id', 'site_id', 'type','label', 'text','text2','text3', 'pictures', 'form','refer_content_id', 'sort');
+	protected static $_properties = array('id', 'site_id', 'type','label', 'text','text2','text3', 'wmode', 'parameter', 'pictures', 'flash_file','form','refer_content_id','dimensions', 'sort');
 
 	public static function setLangPrefix($prefix)
 	{

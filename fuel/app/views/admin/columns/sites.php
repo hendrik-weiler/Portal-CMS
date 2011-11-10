@@ -75,6 +75,7 @@
 					8 => __('content.type.8'),
 					9 => __('content.type.9'),
 				),
+				10 => __('content.type.10'),
 	 		),array('style'=>'width:210px;'));
 
 			print Form::submit('addContent',__('content.add_button'),array('class'=>'btn'));
@@ -193,7 +194,7 @@
 
 
 			print '<div>';
-			if(in_array($nav->type,array(1,2,3,5,6,7,8,9)))
+			if(in_array($nav->type,array(1,2,3,5,6,7,8,9,10)))
 				print '<a href="' . Uri::create('admin/content/' . $id . '/edit/' . $nav->id . '/type/' . $nav->type) . '">' . __('constants.edit') . '</a> ';
 				
 			print '<a class="delete" href="' . Uri::create('admin/content/delete/' . $nav->id) . '">' . __('constants.delete') . '</a>';

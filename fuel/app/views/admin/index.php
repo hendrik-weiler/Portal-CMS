@@ -25,6 +25,7 @@
   <?php print Asset\Manager::get('js->include->modernizr') ?>
   <?php print Asset\Manager::get('js->include->jquery') ?>
   <?php print Asset\Manager::get('js->include->jquery-ui') ?>
+  <?php print Asset\Manager::get('js->include->swfobject') ?>
 </head>
 
 <body>
