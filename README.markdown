@@ -60,7 +60,7 @@ Writing CSS:
 Portal CMS comes with a light sass,less,stylus-like scripting system.
 
 Syntax:
-´
+```
 /*>
 ; above is the opening tag
 ; this is a comment
@@ -81,10 +81,10 @@ end
 ; below is the closing tag
 <*/
 
-´
+```
 
 Usage:
-`
+```
 body {
   background-color: site.$bg;
 }
@@ -92,4 +92,4 @@ body {
 p:after {
   content: "$im_a_variable"
 }
-`
+```
