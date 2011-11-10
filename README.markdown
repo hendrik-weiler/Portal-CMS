@@ -90,6 +90,10 @@ body {
   background-color: site.$bg;
 }
 
+nav:hover {
+  color: site.navigation.$hover;
+}
+
 p:after {
   content: "$im_a_variable"
 }
