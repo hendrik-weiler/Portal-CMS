@@ -81,7 +81,7 @@ end
 ; below is the closing tag
 <*/
 
-```
+´´´
 
 Usage:
 ```
@@ -92,4 +92,4 @@ body {
 p:after {
   content: "$im_a_variable"
 }
-```
+´´´
