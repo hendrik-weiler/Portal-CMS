@@ -62,7 +62,7 @@ Portal CMS comes with a light sass,less,stylus-like scripting system.
 
 #### Syntax:
 <pre>
-/*´>´
+/*`>`
 ; above is the opening tag
 ; this is a comment
 
@@ -80,7 +80,7 @@ obj site
 end
 
 ; below is the closing tag
-´<´*/
+`<`*/
 
 </pre>
 
