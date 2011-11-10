@@ -27,6 +27,8 @@ return array(
 	'admin/content/:id/edit/:content_id/type/5' => 'pages/content/type5',
 	'admin/content/:id/edit/:content_id/type/6' => 'pages/content/type6',
 	'admin/content/:id/edit/:content_id/type/7' => 'pages/content/type7',
+	'admin/content/:id/edit/:content_id/type/8' => 'pages/content/type8',
+	'admin/content/:id/edit/:content_id/type/9' => 'pages/content/type9',
 
 	'admin/content/add/:id' => 'pages/content/add',
 

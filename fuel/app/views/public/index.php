@@ -34,7 +34,7 @@
     <div id="main" role="main">
       <?php #print model_generator_tools::viewLanguageSelection() ?>      
       <section id="content">
-        <?php #print model_generator_content::render(); ?>
+        <?php print model_generator_content::render(); ?>
         <p>
           <h3>This file is located in "apps/views/public/index.php" !</h3>
         </p>

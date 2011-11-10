@@ -49,7 +49,7 @@ class database
             'text3' => array('type' => 'text', 'null' => true),
             'pictures' => array('type' => 'text', 'null' => true),
             'form' => array('type' => 'text', 'null' => true),
-            'refer_content_id' => array('type' => 'int', 'constraint' => 11, 'null' => true),
+            'refer_content_id' => array('type' => 'text', 'null' => true),
             'sort' => array('type' => 'int', 'constraint' => 11, 'null' => true),
         ), array('id'));
 	}

@@ -74,6 +74,7 @@ class Controller_Pages_Content extends Controller
 			$content->text = '';
 			$content->text2 = '';
 			$content->text3 = '';
+			$content->refer_content_id = '{"col_1":0,"col_2":0,"col_3":0}';
 			$content->type = Input::post('type');
 			$content->save();
 
@@ -268,15 +269,84 @@ class Controller_Pages_Content extends Controller
 		}
 		if(isset($_POST['submit']))
 		{
-			$content->refer_content_id = Input::post('selected');
+			$x = array(
+				'col_1'=>Input::post('col_1'),
+			);
+			$y = Format::factory($x)->to_json();
+			
+			$content->refer_content_id = $y;
 			$content->save();
 
 			Response::redirect(Uri::current());
 		}
 		$data = array();
-		$data['selected'] = $content->refer_content_id;
 
-		$this->data['content'] = View::factory('admin/type/content_linking',$data);
+		$array = Format::factory($content->refer_content_id ,'json')->to_array();
+		$data['col_1_selected'] = $array['col_1'];
+
+		$this->data['content'] = View::factory('admin/type/content_linking_1column',$data);
+	}
+
+	public function action_type8()
+	{
+		$content = model_db_content::find($this->content_id);
+
+		if(isset($_POST['back']))
+		{
+			Response::redirect('admin/sites/edit/' . $this->id);
+		}
+		if(isset($_POST['submit']))
+		{
+			$x = array(
+				'col_1'=>Input::post('col_1'),
+				'col_2'=>Input::post('col_2'),
+			);
+			$y = Format::factory($x)->to_json();
+			
+			$content->refer_content_id = $y;
+			$content->save();
+
+			Response::redirect(Uri::current());
+		}
+		$data = array();
+
+		$array = Format::factory($content->refer_content_id ,'json')->to_array();
+		$data['col_1_selected'] = $array['col_1'];
+		$data['col_2_selected'] = $array['col_2'];
+
+		$this->data['content'] = View::factory('admin/type/content_linking_2column',$data);
+	}
+
+	public function action_type9()
+	{
+		$content = model_db_content::find($this->content_id);
+
+		if(isset($_POST['back']))
+		{
+			Response::redirect('admin/sites/edit/' . $this->id);
+		}
+		if(isset($_POST['submit']))
+		{
+			$x = array(
+				'col_1'=>Input::post('col_1'),
+				'col_2'=>Input::post('col_2'),
+				'col_3'=>Input::post('col_3')
+			);
+			$y = Format::factory($x)->to_json();
+
+			$content->refer_content_id = $y;
+			$content->save();
+
+			Response::redirect(Uri::current());
+		}
+		$data = array();
+
+		$array = Format::factory($content->refer_content_id ,'json')->to_array();
+		$data['col_1_selected'] = $array['col_1'];
+		$data['col_2_selected'] = $array['col_2'];
+		$data['col_3_selected'] = $array['col_3'];
+
+		$this->data['content'] = View::factory('admin/type/content_linking_3column',$data);
 	}
 
 	public function action_delete()

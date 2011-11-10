@@ -10,6 +10,17 @@ Using:
 * [colorbox](https://github.com/jackmoore/colorbox)
 * [html5boilerplate](https://github.com/h5bp/html5-boilerplate)
 
+Features:
+---------------------
+* Multilanguage interface
+* Multilanguage site
+* News
+* Page management
+* Content Stacking
+* Multi Content-linking
+* Multi-Account
+* Simple Permission System
+
 Requirements:
 ---------------------
 PHP 5.3

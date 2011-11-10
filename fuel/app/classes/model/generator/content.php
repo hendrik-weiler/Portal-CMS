@@ -100,8 +100,37 @@ class model_generator_content extends model_db_site
 					$return .= self::_showMultipleNews($news);
 					break;
 				case 5:
-					$referContent = model_db_content::find($content->refer_content_id);
-					$return .= self::_viewContent($referContent);
+					$cols = Format::factory($content->refer_content_id,'json')->to_array();
+
+					$col_1 = model_db_content::find($cols['col_1']);
+					$data = array();
+					$data['text'] = self::_viewContent($col_1);
+					$data['group'] = 'group_' . $content->id;
+					$return .= View::factory('public/template/1columns',$data);
+					break;
+				case 8:
+					$cols = Format::factory($content->refer_content_id,'json')->to_array();
+
+					$col_1 = model_db_content::find($cols['col_1']);
+					$col_2 = model_db_content::find($cols['col_2']);
+					$data = array();
+					$data['text'] = self::_viewContent($col_1);
+					$data['text2'] = self::_viewContent($col_2);
+					$data['group'] = 'group_' . $content->id;
+					$return .= View::factory('public/template/2columns',$data);
+					break;
+				case 9:
+					$cols = Format::factory($content->refer_content_id,'json')->to_array();
+
+					$col_1 = model_db_content::find($cols['col_1']);
+					$col_2 = model_db_content::find($cols['col_2']);
+					$col_3 = model_db_content::find($cols['col_3']);
+					$data = array();
+					$data['text'] = self::_viewContent($col_1);
+					$data['text2'] = self::_viewContent($col_2);
+					$data['text3'] = self::_viewContent($col_3);
+					$data['group'] = 'group_' . $content->id;
+					$return .= View::factory('public/template/3columns',$data);
 					break;
 			}
 			return $return;
