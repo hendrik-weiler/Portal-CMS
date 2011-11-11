@@ -45,6 +45,8 @@ There a few generators you need to know if you want to work with it.
 print model_generator_seo::render(); //All searchoptimation will be given out
 print model_generator_navigation::render(); //Prints out the navigation
 print model_generator_content::render(); //Prints site contents out
+print model_generator_content::renderContent($id_or_name,$language); // Render a single content
+print model_generator_content::renderSite($id_or_name,$language); // Render a single site
 print model_generator_tools::viewLanguageSelection(); //Prints a list of language versions out
 
 //prints out all assets from the include area (public/assets/)
@@ -98,3 +100,10 @@ p:after {
   content: "$im_a_variable"
 }
 </pre>
+
+Troubleshooting:
+---------------------
+
+##### Why do i get a redirection error if i want to take a look at my site?
+You must create a navigation with a site + content in it first. Then the first navigation will be displayed as default.
+
