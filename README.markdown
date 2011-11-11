@@ -36,9 +36,9 @@ Install
 ---------------------
 > 1. Download the files
 > 2. Extract them into your root folder on your webserver
-> 3. Install throught he install tool (http://localhost/projectname/admin/install)
+> 3. Install throught he install tool (http://localhost/projectname/public/admin/install)
 
-Follow all three steps and login into (http://localhost/projectname/admin).<br />
+Follow all three steps and login into (http://localhost/projectname/public/admin).<br />
 *Notice*: you might have to create the bare database yourself.
 
 Templating:
