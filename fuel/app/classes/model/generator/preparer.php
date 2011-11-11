@@ -72,12 +72,12 @@ class model_generator_preparer extends model_db_site
 
 		if(!empty(self::$main) && !empty(self::$sub))
 		{
-			$sub = model_db_navigation::find('first',array(
-				'where' => array('url_title'=>self::$sub)
-			));
-
 			$main = model_db_navigation::find('first',array(
 				'where' => array('url_title'=>self::$main)
+			));
+
+			$sub = model_db_navigation::find('first',array(
+				'where' => array('parent'=>$main->id)
 			));
 
 			if(!empty($main) && !empty($sub))
