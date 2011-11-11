@@ -165,6 +165,10 @@ class model_generator_content extends model_db_site
 		}
 
 		$data = array();
+
+		if(!isset($param_parsed))
+			$param_parsed = array();
+			
 		$data['params'] = Format::factory($param_parsed)->to_json();
 		$data['group'] = 'group_' . $content->id;
 		$data['wmode'] = $content->wmode;

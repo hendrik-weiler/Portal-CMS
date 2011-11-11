@@ -34,10 +34,10 @@
     <div id="main" role="main">
       <?php #print model_generator_tools::viewLanguageSelection() ?>      
       <section id="content">
-        <?php print model_generator_content::render(); ?>
         <p>
           <div id="round">This file is located in "apps/views/public/index.php" !</div>
         </p>
+        <?php print model_generator_content::render(); ?>
       </section>
     </div>
     <footer>

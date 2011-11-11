@@ -136,8 +136,11 @@ class Controller_Pages_Pages extends Controller
 		foreach($contents as $content)
 		{
 			$content->delete();
-			if(is_dir(DOCROOT . 'uploads/gallery/' . $content->id))
-				File::delete_dir(DOCROOT . 'uploads/gallery/' . $content->id);
+			if(is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $content->id))
+				File::delete_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $content->id);
+
+			if(is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash/' . $content->id))
+				File::delete_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash/' . $content->id);
 		}
 
 		Response::redirect('admin/sites');

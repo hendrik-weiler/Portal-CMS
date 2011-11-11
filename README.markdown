@@ -9,7 +9,7 @@ Using:
 [elFinder](https://github.com/Studio-42/elFinder)
 [colorbox](https://github.com/jackmoore/colorbox)
 [html5boilerplate](https://github.com/h5bp/html5-boilerplate)
-[jquery swfobject](http://jquery.thewikies.com/swfobject/)
+[jquery.swfobject](http://jquery.thewikies.com/swfobject/)
 [pie](https://github.com/lojjic/PIE)
 
 Features:
@@ -38,7 +38,7 @@ Install
 > 2. Extract them into your root folder on your webserver
 > 3. Install throught he install tool (http://localhost/projectname/admin/install)
 
-Follow all three steps and login into (http://localhost/projectname/admin).
+Follow all three steps and login into (http://localhost/projectname/admin).<br />
 *Notice*: you might have to create the bare database yourself.
 
 Templating:
@@ -67,8 +67,8 @@ print Asset\Manager::get('img->admin->logo'); // searches in the img path after 
 
 Writing CSS:
 ---------------------
-Portal CMS comes with a light sass,less,stylus-like scripting system.
-*Notice:* The script will be parsed line for line so you cant comment after a variable definition. Everything in the code below is valid.
+Portal CMS comes with a light sass,less,stylus-like scripting system.<br />
+*Notice:* The script will be parsed line for line so you cant comment after a variable definition. Everything in the code below is valid. There can be multiple scripts at any place like in php.
 
 #### Syntax:
 <pre>

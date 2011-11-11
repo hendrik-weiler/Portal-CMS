@@ -7,7 +7,7 @@
       {
         swf: '<?php print $swfPath; ?>',
         flashvars: <?php print $params; ?>,
-        wMode : '<?php print $wmode; ?>',
+        wmode : '<?php print $wmode; ?>',
         height : <?php print $height; ?>,
         width : <?php print $width; ?>
       }

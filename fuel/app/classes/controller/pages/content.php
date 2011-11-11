@@ -389,14 +389,14 @@ class Controller_Pages_Content extends Controller
 			    {
 			    	if($file['extension'] == 'swf')
 			    	{
-			    		if(!empty($content->flash_file))
+			    		if(!empty($content->flash_file) && file_exists(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash/' . $content->id . '/' . $content->flash_file))
 			    			File::delete(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash/' . $content->id . '/' . $content->flash_file);
 
 			    		$content->flash_file = $file['saved_as'];
 			    	}
 			    	else
 			    	{
-			    		if($content->pictures != 'lightbox')
+			    		if($content->pictures != 'lightbox' && file_exists(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash/' . $content->id . '/' . $content->flash_file))
 			    			File::delete(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash/' . $content->id . '/' . $content->pictures);
 
 			    		$content->pictures = $file['saved_as'];
@@ -444,6 +444,9 @@ class Controller_Pages_Content extends Controller
 
 		if(is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $this->id))
 			File::delete_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $this->id);
+
+		if(is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash/' . $this->id))
+			File::delete_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash/' . $this->id);
 
 		Response::redirect('admin/sites');
 	}
