@@ -9,15 +9,22 @@ Using:
 [elFinder](https://github.com/Studio-42/elFinder)
 [colorbox](https://github.com/jackmoore/colorbox)
 [html5boilerplate](https://github.com/h5bp/html5-boilerplate)
+[jquery swfobject](http://jquery.thewikies.com/swfobject/)
+[pie](https://github.com/lojjic/PIE)
 
 Features:
 ---------------------
 * Multilanguage interface
 * Multilanguage site
+* Navigation ( up to 1 hirachie down)
 * News
 * Page management
-* Content Stacking
-* Multi Content-linking
+* Textcontainer ( up to 3 columns )
+* Linking to existing contents ( up to 3 columns )
+* Flash (using jquery.swfobject plugin with picture replacement)
+* Simple contactform
+* Gallery ( slideshow, thumbnail and customizeable)
+* Content Stacking ( multiple contents in 1 page )
 * Multi-Account
 * Simple Permission System
 
@@ -61,12 +68,20 @@ print Asset\Manager::get('img->admin->logo'); // searches in the img path after 
 Writing CSS:
 ---------------------
 Portal CMS comes with a light sass,less,stylus-like scripting system.
+*Notice:* The script will be parsed line for line so you cant comment after a variable definition. Everything in the code below is valid.
 
 #### Syntax:
 <pre>
 /*&gt;
 ; above is the opening tag
 ; this is a comment
+
+; making a variable with permanent root folder in it
+; will represent similiar to this http://localhost/portalcms/public
+$root = "DOCROOT"
+
+; using pie
+$pie = "behavior:url(PIEPATH)"
 
 $im_a_variable = "i contain any possible value"
 im_also_a_variable = 'i contain another value'
@@ -97,9 +112,18 @@ nav:hover {
 }
 
 p:after {
-  content: "$im_a_variable"
+  content: "$im_a_variable";
+  border-radius: 10px;
+  $pie;
 }
 </pre>
+
+Using Flash Content notice:
+---------------------
+Within the parameters you can give the flash file, there are two keywords avaible:
+
+* $language[extension] - Current site language with given extension e.g ( de.jpg, en.swf )
+* $sitename[extension] - Current site name with given extension e.g ( home.jpg, products.swf )
 
 Troubleshooting:
 ---------------------

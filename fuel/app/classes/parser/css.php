@@ -128,8 +128,9 @@ class Css
 					$key = trim($varSplit[0]);
 
 					$url=substr(\Uri::create('/'), 0, -1);
+					$piePath = \Uri::create('assets/htc/PIE.php');
 
-					$value = str_replace(array('"',"'",'DOCROOT'),array('','',$url),trim($varSplit[1]));
+					$value = str_replace(array('"',"'",'DOCROOT','PIEPATH'),array('','',$url,$piePath),trim($varSplit[1]));
 					if(!empty($key))
 						$vars[implode('',$currObj) . trim($varSplit[0])] = $value;
 				}

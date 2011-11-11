@@ -69,6 +69,7 @@ td { vertical-align: top; }
 /*>
 
   $url = "DOCROOT"
+  $pie = "behavior:url(PIEPATH)"
 
   obj body
     $bg = "#E6F8FF"
@@ -86,6 +87,25 @@ body {
   margin:auto;
   margin-top: 50px;
   margin-bottom:20px;
+}
+
+#round
+{
+  background: #B3EDF9;
+  background: -webkit-gradient(linear, 0 0, 0 bottom, from(#B3EDF9), to(#4D8EFE));
+  background: -webkit-linear-gradient(#B3EDF9, #4D8EFE);
+  background: -moz-linear-gradient(#B3EDF9, #4D8EFE);
+  background: -ms-linear-gradient(#B3EDF9, #4D8EFE);
+  background: -o-linear-gradient(#B3EDF9, #4D8EFE);
+  background: linear-gradient(#B3EDF9, #4D8EFE);
+  -pie-background: linear-gradient(#B3EDF9, #4D8EFE);
+  padding:20px;
+  width:100%;
+  text-align:center;
+  font-weight:bold;
+  margin:5px 0;
+  border-radius: 5px;
+  $pie;
 }
 
 /* ==|== non-semantic helper classes ======================================== */
