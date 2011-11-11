@@ -71,6 +71,13 @@ class Controller_Language_Language extends Controller
 
 		if(isset($_POST['submit']))
 		{
+			$search = model_db_language::find('first',array(
+				'where' => array('prefix'=>Input::post('prefix'))
+			));
+
+			if(!empty($search))
+				Response::redirect('admin/language');
+
 			DB::query('CREATE TABLE `' . $prefix . '_site` LIKE `dummy_site`')->execute();
 			DB::query('CREATE TABLE `' . $prefix . '_content` LIKE `dummy_content`')->execute();
 			DB::query('CREATE TABLE `' . $prefix . '_navigation` LIKE `dummy_navigation`')->execute();
@@ -84,10 +91,14 @@ class Controller_Language_Language extends Controller
 			$row->sort = ($sort['maxsort'] == null) ? 0 : $sort['maxsort'];
 			$row->save();
 
+			if(is_dir(DOCROOT . 'uploads/' . $prefix))
+				File::delete_dir(DOCROOT . 'uploads/' . $prefix);
+
 			File::create_dir(DOCROOT . 'uploads/' , $prefix,0775);
 			File::create_dir(DOCROOT . 'uploads/' . $prefix , '/content', 0775);
 			File::create_dir(DOCROOT . 'uploads/' . $prefix , '/news',0775);
 			File::create_dir(DOCROOT . 'uploads/' . $prefix , '/gallery',0775);
+			File::create_dir(DOCROOT . 'uploads/' . $prefix , '/flash',0775);
 
 			model_permission::addLangToPermissionList($prefix);
 

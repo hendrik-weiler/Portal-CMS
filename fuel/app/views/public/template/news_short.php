@@ -16,7 +16,9 @@ else
       <h5 class="right"><?php print $time; ?></h5>
     </hgroup>
     <p>
-      <?php print $short_text; ?>
+      <?php 
+        print $short_text;
+       ?>
       ...<a href="<?php print $fullview_link ?>"><?php print __('news.more'); ?></a>
     </p>
   </section>

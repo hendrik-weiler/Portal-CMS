@@ -177,8 +177,15 @@ class Controller_Install_Tool extends Controller
 
 		        Controller_Advanced_Advanced::initializeOptions();
 
-		        if(!is_dir(DOCROOT . 'uploads/en'))
+		        if(is_dir(DOCROOT . 'uploads/en'))
+		        {
+		        	File::delete_dir(DOCROOT . 'uploads/en');
 		        	File::create_dir(DOCROOT . 'uploads', 'en');
+		        	File::create_dir(DOCROOT . 'uploads/en', 'news');
+		        	File::create_dir(DOCROOT . 'uploads/en', 'content');
+		        	File::create_dir(DOCROOT . 'uploads/en', 'flash');
+		        	File::create_dir(DOCROOT . 'uploads/en', 'gallery');
+		        }
 			}
 			else
 			{

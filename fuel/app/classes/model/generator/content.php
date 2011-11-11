@@ -246,6 +246,7 @@ class model_generator_content extends model_db_site
 			$data['title'] = $new->title;
 			$data['full_text'] = $new->text;
 
+			$new->text = strip_tags($new->text,'<p><a><br>');
 			$short_text = explode("\n", wordwrap($new->text, $options['show_max_token'], "\n"));
 			$data['short_text'] = $short_text[0];
 
