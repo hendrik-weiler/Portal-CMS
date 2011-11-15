@@ -72,21 +72,24 @@ class model_generator_preparer extends model_db_site
 
 		if(!empty(self::$main) && !empty(self::$sub))
 		{
-			$main = model_db_navigation::find('first',array(
-				'where' => array('url_title'=>self::$main)
-			));
-
-			$sub = model_db_navigation::find('first',array(
-				'where' => array('parent'=>$main->id)
-			));
-
-			if(!empty($main) && !empty($sub))
+			if(self::$main != 'news') 
 			{
-				if($sub->parent == $main->id)
+				$main = model_db_navigation::find('first',array(
+					'where' => array('url_title'=>self::$main)
+				));
+
+				$sub = model_db_navigation::find('first',array(
+					'where' => array('parent'=>$main->id)
+				));
+
+				if(!empty($main) && !empty($sub))
 				{
-					$site = self::find('first',array(
-						'where' => array('navigation_id'=>$sub->id)
-					));
+					if($sub->parent == $main->id)
+					{
+						$site = self::find('first',array(
+							'where' => array('navigation_id'=>$sub->id)
+						));
+					}
 				}
 			}
 		}
