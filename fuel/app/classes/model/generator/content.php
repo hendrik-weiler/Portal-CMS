@@ -25,12 +25,14 @@ class model_generator_content extends model_db_site
 
 	private static $_tempLang = null;
 
+	private static $_renderSpecial = false;
+
 	private static function _viewSite($site)
 	{
 		if($site == null && Uri::segment(2) != 'news')
 			return false;
 			
-		if(Uri::segment(2) == 'news')
+		if(Uri::segment(2) == 'news' && !self::$_renderSpecial)
 		{
 			if(Uri::segment(3) == '')
 			{
@@ -250,7 +252,7 @@ class model_generator_content extends model_db_site
 			$data['title'] = $new->title;
 			$data['full_text'] = $new->text;
 
-			$new->text = strip_tags($new->text,'<p><a><br>');
+			$new->text = strip_tags($new->text,'<span><h1><h2><h3><h4><h5><h6><p><a><br>');
 			$short_text = explode("\n", wordwrap($new->text, $options['show_max_token'], "\n"));
 			$data['short_text'] = $short_text[0];
 
@@ -375,9 +377,11 @@ class model_generator_content extends model_db_site
 
 		if($lang == 'auto')
 			self::$_tempLang = model_generator_preparer::$lang;
-		else
+		else 
 			self::$_tempLang = $lang;
 
+		self::$_renderSpecial = true;
+			
 		$current_site = DB::select('*')->from(self::$_tempLang . '_site')->where(array($search['key']=>$search['value']))->execute();
 		$current_site = array_values($current_site->as_array());
 		$current_site = (object)$current_site[0];
@@ -388,6 +392,7 @@ class model_generator_content extends model_db_site
 			$site = 'Site couldnt be found.';
 
 		self::$_tempLang = model_generator_preparer::$lang;
+		self::$_renderSpecial = false;
 
 		return $site;
 	}
@@ -415,6 +420,8 @@ class model_generator_content extends model_db_site
 		else
 			self::$_tempLang = $lang;
 
+		self::$_renderSpecial = true;
+
 		$content = DB::select('*')->from(self::$_tempLang . '_content')->where(array($search['key']=>$search['value']))->execute();
 		$content = array_values($content->as_array());
 		$content = (object)$content[0];
@@ -427,6 +434,7 @@ class model_generator_content extends model_db_site
 			$site = 'Site couldnt be found.';
 
 		self::$_tempLang = model_generator_preparer::$lang;
+		self::$_renderSpecial = false;
 
 		return $site;
 	}
