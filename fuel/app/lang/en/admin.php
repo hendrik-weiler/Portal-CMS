@@ -97,6 +97,7 @@ return array(
 		'cl' => 'Content-linking',
 		'add_button' => ' + ',
 		'none_available' => 'Currently no contents in this site',
+		'preview' => 'Preview',
 	),
 
 	'types' => array(

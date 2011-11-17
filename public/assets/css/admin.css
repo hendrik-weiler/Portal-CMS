@@ -169,7 +169,7 @@ body {
 }
 
 .sites_entry {
-  width:300px;
+  width:330px;
 }
 
 .sites_entry span {
@@ -178,15 +178,15 @@ body {
 
 .sites_entry div {
   text-align:right;
-  width: 150px;
+  width: 190px;
 }
 
 .sites_entry_sub {
-  width:300px;
+  width:330px;
 }
 
 .sites_entry_sub div {
-  width: 150px;
+  width: 180px;
   text-align:right;
 }
 

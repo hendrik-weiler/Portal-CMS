@@ -97,6 +97,7 @@ return array(
 		'cl' => 'Inhalts-verlinkung',
 		'add_button' => ' + ',
 		'none_available' => 'Zurzeit sind keine Inhalte in der Seite',
+		'preview' => 'Vorschau',
 	),
 
 	'types' => array(

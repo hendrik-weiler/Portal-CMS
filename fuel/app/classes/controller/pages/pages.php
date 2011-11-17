@@ -158,6 +158,21 @@ class Controller_Pages_Pages extends Controller
 		}
 	}
 
+	public static function generateUrl($id)
+	{
+		$site = model_db_site::find($id);
+		$main = model_db_navigation::find($site->navigation_id);
+		$sub = '';
+
+		if($main->parent != 0)
+		{
+			$sub = $main->url_title;
+			$main = model_db_navigation::find($main->parent);
+		}
+
+		return Uri::create(Session::get('lang_prefix') . '/' . $main->url_title . '/' . $sub);
+	}
+
 	public function after($response)
 	{
 		$this->response->body = View::factory('admin/index',$this->data);

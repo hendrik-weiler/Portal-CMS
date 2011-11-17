@@ -84,7 +84,7 @@ class database
 		\DBUtil::create_table('accounts', array(
             'id' => array('type' => 'int', 'constraint' => 10,'auto_increment' => true),
             'username' => array('type' => 'varchar', 'constraint' => 15, 'null' => true),
-            'password' => array('type' => 'varchar', 'constraint' => 100, 'null' => true),
+            'password' => array('type' => 'text', 'null' => true),
             'session' => array('type' => 'varchar', 'constraint' => 100),
             'language' => array('type' => 'varchar', 'constraint' => 10, 'null' => true),
             'admin' => array('type' => 'bool', 'null' => true),

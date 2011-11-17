@@ -1,6 +1,11 @@
 $(function() {
 	
-
+$('.btn[name=submit]').click(function(e) {
+	//e.preventDefault();
+	$(this).val('...').removeClass('primary').addClass('success').animate({
+		width: '100%'
+	},300).delay(400);
+});
 
 if(/admin\/language/.test(window.location.href))
 {

@@ -125,6 +125,7 @@
 				$_nav = model_db_navigation::find('first',array(
 					'where' => array('label'=>$key)
 				));
+
 				if(!in_array($_nav->id,$rights['data']) && !$rights['admin'])
 					continue;
 
@@ -171,6 +172,9 @@
 
 			print '<div>';
 
+			if($nav->navigation_id != 0)
+				print '<a target="preview" href="' . Controller_Pages_Pages::generateUrl($nav->id) . '">' . __('content.preview') . '</a> ';			
+
 			print '<a href="' . Uri::create('admin/sites/edit/' . $nav->id) . '">' . __('constants.edit') . '</a> ';
 			print '<a class="delete" href="' . Uri::create('admin/sites/delete/' . $nav->id) . '">' . __('constants.delete') . '</a>';
 
@@ -194,6 +198,7 @@
 
 
 			print '<div>';
+
 			if(in_array($nav->type,array(1,2,3,5,6,7,8,9,10)))
 				print '<a href="' . Uri::create('admin/content/' . $id . '/edit/' . $nav->id . '/type/' . $nav->type) . '">' . __('constants.edit') . '</a> ';
 				
