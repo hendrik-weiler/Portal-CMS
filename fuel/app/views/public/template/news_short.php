@@ -1,6 +1,6 @@
 <?php 
 if(empty($picture_1))
-  $style = 'style="width:910px"';
+  $style = 'no-pictures';
 else
   $style = '';
 ?>
@@ -10,7 +10,7 @@ else
         <img src="<?php print $picture_1 ?>">
       <?php endif; ?>
     </div>
-  <section class="clearfix left" <?php print $style ?>>
+  <section class="clearfix left <?php print $style ?>">
     <hgroup>
       <h1 class="left"><?php print $title; ?></h1>
       <h5 class="right"><?php print $time; ?></h5>

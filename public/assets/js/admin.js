@@ -150,7 +150,7 @@ if(/admin\/news\/edit\/[0-9]$/.test(window.location.href))
 	elRTE.prototype.options.panels.web2pyPanel = [
 	     'bold', 'italic', 'underline', 'forecolor', 'justifyleft', 'justifyright',
 	     'justifycenter', 'justifyfull', 'formatblock', 'insertorderedlist', 'insertunorderedlist',
-	     'link', 'image', 'flash'
+	     'link', 'image', 'flash', 'code'
 	];
  	elRTE.prototype.options.toolbars.web2pyToolbar = ['web2pyPanel', 'tables'];
 	var opts = {

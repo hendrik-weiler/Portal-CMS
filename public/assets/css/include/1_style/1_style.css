@@ -82,8 +82,31 @@ body {
   background: body.$bg;
 }
 
+.navi {
+  float:left;
+  width:300px;
+  overflow:hidden;
+}
+
+.navi a {
+  float:left;
+  display:block;
+  padding: 5px 3px;
+  text-decoration:none;
+}
+
+.navi a:hover {
+  text-decoration:underline;
+}
+
+.language_selection {
+  float:right;
+  list-style:none;
+  width:100px;
+}
+
 #container {
-  width: 400px;
+  width: 500px;
   margin:auto;
   margin-top: 50px;
   margin-bottom:20px;
@@ -103,7 +126,7 @@ body {
   width:100%;
   text-align:center;
   font-weight:bold;
-  margin:5px 0;
+  margin:15px 0;
   border-radius: 5px;
   $pie;
 }

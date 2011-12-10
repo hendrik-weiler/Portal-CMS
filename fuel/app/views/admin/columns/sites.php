@@ -49,7 +49,12 @@
 	  </div>
 	</div>
 	<div class="actions">
-		<?php print Form::submit('submit',__('sites.' . $mode),array('class'=>'btn primary')); ?>
+		<?php 
+			print Form::submit('submit',__('sites.' . $mode),array('class'=>'btn primary')) . ' ';
+
+			if(Uri::segment(3) == 'edit')
+				print '<a class="btn secondary" href="' . Uri::create('admin/sites') . '">' . __('news.edit.back') . '</a>';
+		 ?>
 	</div>
 
 	<?php	print Form::close();	?>
@@ -78,7 +83,7 @@
 				10 => __('content.type.10'),
 	 		),array('style'=>'width:210px;'));
 
-			print Form::submit('addContent',__('content.add_button'),array('class'=>'btn'));
+			print Form::submit('addContent',__('content.add_button'),array('class'=>'btn')) . ' ';
 
 			print Form::close();
 	?>

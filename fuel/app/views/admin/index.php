@@ -1,3 +1,4 @@
+
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
@@ -22,14 +23,14 @@
   <link rel="stylesheet" href="<?php print Uri::create('assets/css/elrte/smoothness/jquery-ui-1.8.13.custom.css') ?>">
   <!-- end CSS-->
 
-  <?php print Asset\Manager::get('js->include->modernizr') ?>
-  <?php print Asset\Manager::get('js->include->jquery') ?>
-  <?php print Asset\Manager::get('js->include->jquery-ui') ?>
-  <?php print Asset\Manager::get('js->include->swfobject') ?>
+  <?php print Asset\Manager::get('js->include->0_modernizr->modernizr') ?>
+  <?php print Asset\Manager::get('js->include->1_jquery->jquery') ?>
+  <?php print Asset\Manager::get('js->include->1_jquery->jquery-ui') ?>
+  <?php print Asset\Manager::get('js->include->4_swfobject->swfobject') ?>
+  <script src="<?php print Uri::create('assets/js/libs/bootstrap-tabs.js') ?>"></script>
 </head>
 
 <body>
-
   <div class="container">
     <header>
       <figure>

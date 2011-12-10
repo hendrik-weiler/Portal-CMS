@@ -7,15 +7,14 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <?php print model_generator_seo::render(); ?>
+  <?php print seo('head'); ?>
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
   <!-- CSS concatenated and minified via ant build script-->
-  <?php print Asset\Manager::insert('css'); ?>
+  <?php print asset_manager_insert('css') ?>
+  <?php print asset_manager_get_group('js->include->jquery') ?>
   <!-- end CSS-->
-
-  <?php print Asset\Manager::insert('js'); ?>
 </head>
 
 <body>
@@ -24,26 +23,31 @@
     <header>
       <section id="top">
         <figure class="left banner">
-          <?php print Asset\Manager::get('img->admin->logo') ?>
+          <?php print asset_manager_get('img->admin->logo'); ?>
         </figure>
         <nav class="right navi">
-          <?php #print model_generator_navigation::render(); ?>
+          <?php print navigation(); ?>
         </nav>
+        <?php print language_switcher(); ?>
       </section>
     </header>
-    <div id="main" role="main">
-      <?php #print model_generator_tools::viewLanguageSelection() ?>      
+    <div id="main" role="main">   
       <section id="content">
         <p>
           <div id="round">This file is located in "apps/views/public/index.php" !</div>
         </p>
-        <?php print model_generator_content::render(); ?>
+        <p>
+          <?php print content(); ?>
+        </p>
       </section>
     </div>
     <footer>
       
     </footer>
   </div>
+
+  <?php print asset_manager_insert('js'); ?>
+  <?php print seo('analytics'); ?>
 
   <!--[if lt IE 7 ]>
     <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>

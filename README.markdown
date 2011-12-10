@@ -27,6 +27,14 @@ Features:
 * Content Stacking ( multiple contents in 1 page )
 * Multi-Account
 * Simple Permission System
+* Module management
+* Asset management
+
+Development Testapp:
+---------------------
+[http://portalcms.hendrikweiler.com/admin](http://portalcms.hendrikweiler.com/admin)
+Username: admin
+Password: test
 
 Requirements:
 ---------------------
@@ -49,20 +57,23 @@ Within the index.php a folder before you can design your site.
 There a few generators you need to know if you want to work with it.
 
 <pre>
-print model_generator_seo::render(); //All searchoptimation will be given out
-print model_generator_navigation::render(); //Prints out the navigation
-print model_generator_content::render(); //Prints site contents out
-print model_generator_content::renderContent($id_or_name,$language); // Render a single content
-print model_generator_content::renderSite($id_or_name,$language); // Render a single site
-print model_generator_tools::viewLanguageSelection(); //Prints a list of language versions out
+//All searchoptimation will be given out
+print seo('head'); // meta tags printout
+print seo('analytics'); // analytics printout
+
+print navigation(); //Prints out the navigation
+print content(); //Prints site contents out
+print content_single($id_or_name,$language); // Render a single content
+print content_site($id_or_name,$language); // Render a single site
+print language_switcher(); //Prints a list of language versions out
 
 //prints out all assets from the include area (public/assets/)
-print Asset\Manager::insert('js'); // public/assets/js/include
-print Asset\Manager::insert('css'); // public/assets/css/include
-print Asset\Manager::insert(); // prints out js,css
+print asset_manager_insert('js'); // bundled javascript in one file
+print asset_manager_insert('css'); // bundled css in one file
+print asset_manager_get_group('jquery') // jquery package in one file
 
-print Asset\Manager::get('js->include->modernizr'); // searches in include path after %modernizr% and prints it out
-print Asset\Manager::get('img->admin->logo'); // searches in the img path after the portal logo and prints it out
+print asset_manager_get('js->include->modernizr'); // searches in include path after %modernizr% and prints it out
+print asset_manager_get('img->admin->logo'); // searches in the img path after the portal logo and prints it out
 </pre>
 
 Writing CSS:
@@ -124,6 +135,12 @@ Within the parameters you can give the flash file, there are two keywords avaibl
 
 * $language[extension] - Current site language with given extension e.g ( de.jpg, en.swf )
 * $sitename[extension] - Current site name with given extension e.g ( home.jpg, products.swf )
+
+Example:
+<pre>
+name = Picturebox
+picture = $sitename[jpg]
+</pre>
 
 Troubleshooting:
 ---------------------

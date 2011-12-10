@@ -26,6 +26,8 @@ class Manager
 {
 	private static $assetPath;
 
+  public static $usedAssetGroups = array();
+
 	private static $cssTemplate = '<link %attr% rel="stylesheet" href="%link%" />';
 
 	private static $jsTemplate = '<script %attr% src="%link%"></script>';
@@ -73,10 +75,15 @@ class Manager
 
   private static function _getDir($type)
   {
-    $html = '';
-    foreach(\File::read_dir(DOCROOT . 'assets/' . $type . '/include',1) as $file)
+    $exclude = '?exclude=' . implode(',',self::$usedAssetGroups);
+    switch($type)
     {
-      $html .= self::get($type . '->include->' . $file);
+      case 'css':
+        $html = str_replace(array('%attr%','%link%'),array('',\Uri::create('parse/css') . $exclude),self::$cssTemplate);
+      break;
+      case 'js':
+        $html = str_replace(array('%attr%','%link%'),array('',\Uri::create('parse/js') . $exclude),self::$jsTemplate);
+      break;
     }
 
     return $html;
@@ -98,6 +105,36 @@ class Manager
       break;
     }
     return $html;
+  }
+
+  public static function getGroup($path)
+  {
+    self::$assetPath = DOCROOT . 'assets/';
+
+    $construct = explode('->',$path);
+    $extension = $construct[0];
+    $file = $construct[count($construct)-1];
+    unset($construct[count($construct)-1]);
+    $path = implode('/',$construct);
+
+    foreach(\File::read_dir(self::$assetPath . $path,1) as $key => $filename)
+    {
+      if(preg_match('#' . $file . '#i',$key))
+      {
+        switch($extension)
+        {
+          case 'css':
+            $html = str_replace(array('%attr%','%link%'),array('',\Uri::create('parse/css/' . str_replace('\\','',$key))),self::$cssTemplate);
+          break;
+          case 'js':
+            $html = str_replace(array('%attr%','%link%'),array('',\Uri::create('parse/js/' . str_replace('\\','',$key))),self::$jsTemplate);
+          break;
+        }
+
+        self::$usedAssetGroups[] = str_replace(DS,'',$key);
+        return $html;
+      }
+    }
   }
 
 	public static function get($search,$attr=array())

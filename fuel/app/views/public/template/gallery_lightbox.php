@@ -9,4 +9,8 @@
 		}
 	?>
 </p>
-<script>$(".<?php print $group ?>").colorbox({rel:'<?php print $group ?>'});</script>
+<script>
+$(function() {
+  $(".<?php print $group ?>").colorbox({rel:'<?php print $group ?>'});
+});
+</script>

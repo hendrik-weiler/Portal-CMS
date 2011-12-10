@@ -21,6 +21,7 @@ class database
             'description' => array('type' => 'text', 'null' => true),
             'redirect' => array('type' => 'varchar', 'constraint' => 100, 'null' => true),
             'sort' => array('type' => 'int', 'constraint' => 10, 'null' => true),
+            'changed' => array('type' => 'timestamp', 'default' => \DB::expr('CURRENT_TIMESTAMP')),
         ), array('id'));
 
 		\DBUtil::create_table($lang . '_news', array(

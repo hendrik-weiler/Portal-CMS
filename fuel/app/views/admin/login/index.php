@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="<?php print Uri::create('assets/css/admin_login.css') ?>">
   <!-- end CSS-->
 
-  <script src="<?php print Uri::create('assets/js/libs/modernizr-2.0.6.min.js') ?>"></script>
+  <?php print Asset\Manager::get('js->include->0_modernizr->mod') ?>
 </head>
 
 <body>
@@ -55,7 +55,7 @@
   </div> <!--! end of #container -->
 
 
-  <?php print Asset\Manager::get('js->include->jquery') ?>
+  <?php print Asset\Manager::get('js->include->1_jquery->jquery') ?>
 
 
   <!-- scripts concatenated and minified via ant build script-->

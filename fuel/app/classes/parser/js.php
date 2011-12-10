@@ -20,29 +20,37 @@
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2011 Hendrik Weiler
  */
-class model_generator_tools extends model_db_site
+namespace Parser;
+
+class Js
 {
-	public static function viewLanguageSelection()
-	{
-		if(!model_generator_module::$language_switcher)
-			return;
-			
-		$langs = model_db_language::find('all',array(
-			'order_by' => array('sort'=>'ASC')
-		));
+  private static $_file;
 
-		$outer = View::factory('public/template/languages_outer');
-		$inner = '';
+  private static $_mode = 'full';
 
-		foreach($langs as $lang)
-		{
-			$data = array();
-			$data['label'] = stripslashes($lang->label);
-			$data['link'] = Uri::create($lang->prefix);
+  private static function _minifyFile()
+  {
+    $content = file(self::$_file);
 
-			$inner .= View::factory('public/template/languages_inner',$data);
-		}
+    if(self::$_mode == 'min')
+    {
+      foreach($content as $key => $value)
+      {
+        $content[$key] = trim($value);
+      }
+    }
 
-		return str_replace('{{INNER}}',$inner,$outer);
-	}
+    $content = implode('',$content);
+
+    return $content;
+  }
+
+  public static function parse($file,$mode='full')
+  {
+    self::$_mode = $mode;
+
+    self::$_file = DOCROOT . 'assets/js/' . $file;
+
+    return self::_minifyFile();
+  }
 }

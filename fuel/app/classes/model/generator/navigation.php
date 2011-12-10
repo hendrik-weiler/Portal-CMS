@@ -54,6 +54,16 @@ class model_generator_navigation extends model_db_navigation
 			$startsite['main']->url_title = '';
 			$startsite['sub']->url_title = '';
 		}
+
+		if(!is_object($startsite))
+		{
+			$startsite = array(
+				'main' => new stdClass,
+				'sub' => new stdClass
+			);
+			$startsite['main']->url_title = '';
+			$startsite['sub']->url_title = '';
+		}
 		
 		foreach($data as $nav)
 		{
@@ -176,6 +186,9 @@ class model_generator_navigation extends model_db_navigation
 
 	public static function render()
 	{
+		if(!model_generator_module::$navigation)
+			return;
+			
 		self::_retrieveData();
 		return self::_navToHTML();
 	}

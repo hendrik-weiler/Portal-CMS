@@ -92,7 +92,11 @@ return array(
 
 	# -- frontend
 
+	'sitemap.xml' => 'sitemap/index',
 	'parse/file/:path' => 'generator/file/index',
+	'parse/js/:cmd' => 'generator/file/js',
+	'parse/js' => 'generator/file/js',
+	'parse/css' => 'generator/file/css',
 
 	':lang/news' => 'public/index',
 	':lang/news/archive' => 'public/index',

@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="<?php print Uri::create('assets/css/install.css') ?>">
   <!-- end CSS-->
 
-  <?php print Asset\Manager::get('js->include->modernizr'); ?>
+  <?php print Asset\Manager::get('js->include->0_modernizr->modernizr'); ?>
 </head>
 
 <body>
@@ -42,7 +42,7 @@
   </div> <!--! end of #container -->
 
 
-   <?php print Asset\Manager::get('js->include->jquery'); ?>
+   <?php print Asset\Manager::get('js->include->1_jquery->jquery'); ?>
   <!--[if lt IE 10]>
   <script src="<?php print Uri::create('assets/js/libs/PIE.js') ?>"></script>
   <![endif]-->

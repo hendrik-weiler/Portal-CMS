@@ -1,4 +1,4 @@
-# domain:www.portalcms
+# domain:null
 <IfModule mod_rewrite.c>
     RewriteEngine on
 

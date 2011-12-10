@@ -34,21 +34,23 @@
   </div>
 </p>
 <script>
-$("#<?php print $group ?>").nivoSlider({
-        effect:"random",
-        slices:15,
-        boxCols:8,
-        boxRows:4,
-        animSpeed:800,
-        pauseTime:5000,
-        startSlide:0,
-        directionNav:true,
-        directionNavHide:true,
-        controlNav:false,
-        controlNavThumbs:false,
-        controlNavThumbsFromRel:true,
-        keyboardNav:true,
-        pauseOnHover:true,
-        manualAdvance:false
-    });
+$(function() {
+  $("#<?php print $group ?>").nivoSlider({
+          effect:"random",
+          slices:15,
+          boxCols:8,
+          boxRows:4,
+          animSpeed:800,
+          pauseTime:5000,
+          startSlide:0,
+          directionNav:true,
+          directionNavHide:true,
+          controlNav:false,
+          controlNavThumbs:false,
+          controlNavThumbsFromRel:true,
+          keyboardNav:true,
+          pauseOnHover:true,
+          manualAdvance:false
+  });
+})
 </script>

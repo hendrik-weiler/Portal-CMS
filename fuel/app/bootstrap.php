@@ -12,6 +12,8 @@ Autoloader::add_classes(array(
 	'Asset\\Manager' => APPPATH . 'classes/asset/manager.php',
   'Parser\\Css' => APPPATH . 'classes/parser/css.php',
   'Parser\\Cache' => APPPATH . 'classes/parser/cache.php',
+  'Parser\\Htaccess' => APPPATH . 'classes/parser/htaccess.php',
+  'Parser\\Js' => APPPATH . 'classes/parser/js.php',
 ));
 
 // Register the autoloader

@@ -191,10 +191,31 @@ return array(
 	),
 
 	'advanced' => array(
+		'tabs' => array(
+			'general' => 'Allgemein',
+			'seo' => 'Suchmaschinenoptimierung',
+			'modules' => 'Module',
+			'assets' => 'CSS/JS',
+		),
 		'header' => array(
 			'thumbnails' => 'Thumbnailgrößen',
 			'news' => 'Nachrichtenoptionen',
 			'accounts' => 'Benutzerkonten & Rechte'
+		),
+		'assets' => array(
+			'list' => 'Modul Liste',
+		),
+		'seo' => array(
+			'analytics_id' => 'Analytics Id',
+			'robots' => 'Robots',
+		),
+		'modules' => array(
+			'description' => 'Verwalte deine Module',
+			'navigation' => 'Navigation',
+			'content' => 'Inhaltsbereich',
+			'seo_head' => 'Seo Meta Tags',
+			'seo_analytics' => 'Google Analytics integration',
+			'language_switcher' => 'Sprachversion auswahl',
 		),
 		'subHeader' => array(
 			'news' => 'Nachrichten',

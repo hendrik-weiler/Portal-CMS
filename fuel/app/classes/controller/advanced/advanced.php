@@ -27,26 +27,67 @@ class Controller_Advanced_Advanced extends Controller
 	private $id;
 
 	private static $options = array(
+		# general
 		'news_thumbs_width','news_thumbs_height','gallery_thumbs_width','gallery_thumbs_height',
-		'show_last','show_max_token'
+		'show_last','show_max_token',
+		# seo
+		'analytics_id','robots',
+		# modules
+		'module_navigation','module_content','module_seo_head','module_seo_analytics','module_language_switcher',
+		# assets
+		'asset_jquery','asset_modernizr','asset_colorbox','asset_nivo_slider','asset_swfobject','asset_custom'
 	);
 
 	private static $defaultValue = array(
+		# general
 		'news_thumbs_width' => 160,
 		'news_thumbs_height' => 120,
 		'gallery_thumbs_width' => 200,
 		'gallery_thumbs_height' => 160,
 		'show_last' => '3',
-		'show_max_token' => '100'
+		'show_max_token' => '100',
+		# seo
+		'analytics_id' => 'UA-XXXXXXXX-X',
+		'robots' => 'index,follow',
+		# modules
+		'module_navigation' => '1',
+		'module_content' => '1',
+		'module_seo_head' => '1',
+		'module_seo_analytics' => '0',
+		'module_language_switcher' => '0',
+		# assets
+		'asset_jquery' => 1,
+		'asset_modernizr' => 1,
+		'asset_colorbox' => 1,
+		'asset_nivo_slider' => 1,
+		'asset_swfobject' => 1,
+		'asset_custom' => 1,
 	);
 
 	private static $minValue = array(
+		# general
 		'news_thumbs_width' => 50,
 		'news_thumbs_height' => 50,
 		'gallery_thumbs_width' => 50,
 		'gallery_thumbs_height' => 50,
 		'show_last' => '1',
-		'show_max_token' => '50'
+		'show_max_token' => '50',
+		# seo
+		'analytics_id' => 'UA-XXXXXXXX-X',
+		'robots' => '',
+		# modules
+		'module_navigation' => '0',
+		'module_content' => '0',
+		'module_seo_head' => '0',
+		'module_seo_analytics' => '0',
+		'module_language_switcher' => '0',
+		# assets
+		'asset_jquery' => 0,
+		'asset_modernizr' => 0,
+		'asset_colorbox' => 0,
+		'asset_nivo_slider' => 0,
+		'asset_swfobject' => 0,
+		'asset_custom' => 0,
 	);
 
 	private static function _resizeAllPictures()
@@ -118,10 +159,15 @@ class Controller_Advanced_Advanced extends Controller
 				$value = Input::post($option);
 				if(!empty($value))
 				{
-					if($value < self::$minValue[$option])
+					if(preg_match('#^[0-9]+$#i',$value) && $value < self::$minValue[$option])
 						$value = self::$minValue[$option];
 						
 					$test->value = $value;
+					$test->save();
+				}
+				else if(preg_match('#(module_|asset_)#i',$option) && empty($value))
+				{
+					$test->value = 0;
 					$test->save();
 				}
 			}

@@ -1,6 +1,7 @@
 <div id="<?php print $group; ?>"></div>
   <img id="<?php print $group; ?>_picture" src="<?php print $picture ?>" >
   <script>
+  $(function() {
    if($.flash.available)
    {
      $('#<?php print $group; ?>').flash(
@@ -14,4 +15,5 @@
     );
     $('#<?php print $group; ?>_picture').hide();
    }
+  });
   </script>

@@ -25,17 +25,56 @@ class model_generator_seo
 
 	private static function _getSeoData($site)
 	{
+		if(!model_generator_module::$seo_head)
+			return;
+			
 		$title = (empty($site->site_title) ? $site->label : $site->site_title);
-		return '<title>' . $title . '</title>
-					<meta name="keywords" content="' . $site->keywords . '">'
-			 . '<meta name="description" content="' . $site->description . '">';
+		return '<title>' . stripslashes($title) . '</title>
+					<meta name="keywords" content="' . stripslashes($site->keywords) . '">'
+			 . '<meta name="description" content="' . $site->description . '">'
+			 . '<base href="' . Uri::create('/') . '" />'
+			 . '<meta http-equiv="Content-Language" content="' . model_generator_preparer::$lang . '" />'
+			 . '<meta name="language" content="' . model_generator_preparer::$lang . '" />'
+			 . '<meta name="robots" content="' . stripslashes(model_db_option::getKey('robots')->value) . '" />';
 	}
 
-	public static function render()
+	private static function _getAnalytics()
 	{
-		$site = model_generator_preparer::$currentSite;
+		if(!model_generator_module::$seo_analytics)
+			return;
+			
+		$id = model_db_option::getKey('analytics_id')->value;
+		return "<script>
+					    var _gaq=[['_setAccount','" . stripslashes($id) . "'],['_trackPageview']];
+					    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+					    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+					    s.parentNode.insertBefore(g,s)}(document,'script'));
+					  </script>";
+	}
 
-		if(!empty($site))
-			return self::_getSeoData($site);
+	public static function render($type='all')
+	{
+		switch($type)
+		{
+			case 'all':
+				$return = '';
+				$site = model_generator_preparer::$currentSite;
+
+				if(!empty($site))
+					$return .= self::_getSeoData($site);
+
+				$return .= self::_getAnalytics();
+				return $return;
+			break;
+			case 'head':
+				$site = model_generator_preparer::$currentSite;
+
+				if(!empty($site))
+					return self::_getSeoData($site);
+			break;
+			case 'analytics':
+				return self::_getAnalytics();
+			break;
+		}
 	}
 }

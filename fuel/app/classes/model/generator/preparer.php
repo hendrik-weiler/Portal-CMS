@@ -111,6 +111,8 @@ class model_generator_preparer extends model_db_site
 		self::$main = Uri::segment(2);
 		self::$sub = Uri::segment(3);
 
+		# Parser\Htaccess::check();
+
 		$langSearch = model_db_language::find('first',array(
 			'where' => array('prefix' => self::$lang)
 		));

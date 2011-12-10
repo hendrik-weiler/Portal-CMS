@@ -287,10 +287,10 @@ class model_generator_content extends model_db_site
 	private static function _showTextcontainer($content)
 	{
 		$data = array();
-		$data['label'] = $content->label;
-		$data['text'] = $content->text;
-		$data['text2'] = $content->text2;
-		$data['text3'] = $content->text3;
+		$data['label'] = stripslashes($content->label);
+		$data['text'] = stripslashes($content->text);
+		$data['text2'] = stripslashes($content->text2);
+		$data['text3'] = stripslashes($content->text3);
 		$data['group'] = 'group_' . $content->id;
 
 		if($content->type == 7)
@@ -306,11 +306,13 @@ class model_generator_content extends model_db_site
 	private static function _showGallery($content)
 	{
 		$data = array();
-		$data['label'] = $content->label;
+		$data['label'] = stripslashes($content->label);
 		$pictures = array();
 		$description = explode(PHP_EOL,$content->text);
 
 		$counter = 0;
+
+		self::$_tempLang = !empty(self::$_tempLang) ? self::$_tempLang : model_generator_preparer::$lang;
 
 		$images = File::read_dir(DOCROOT . 'uploads/' . self::$_tempLang . '/gallery/' . $content->id . '/thumbs',1);
 
@@ -324,7 +326,7 @@ class model_generator_content extends model_db_site
 			$pictures[$counter]['thumb'] = Uri::create('uploads/' . self::$_tempLang . '/gallery/' . $content->id . '/thumbs/' . $pic);
 			
 			if(isset($description[$counter]))
-				$pictures[$counter]['description'] = $description[$counter];
+				$pictures[$counter]['description'] = stripslashes($description[$counter]);
 			else
 				$pictures[$counter]['description'] = '';
 			
@@ -347,7 +349,9 @@ class model_generator_content extends model_db_site
 
 	public static function render()
 	{
-
+		if(!model_generator_module::$content)
+			return;
+		
 		$current_site = model_generator_preparer::$currentSite;
 
 		$site = self::_viewSite($current_site);
@@ -360,6 +364,9 @@ class model_generator_content extends model_db_site
 
 	public static function renderSite($sitename,$lang='auto')
 	{
+		if(!model_generator_module::$content)
+			return;
+
 		if(preg_match('#[0-9]+#i',$sitename))
 		{
 			$search = array(
@@ -399,7 +406,9 @@ class model_generator_content extends model_db_site
 
 	public static function renderContent($contentname,$lang='auto')
 	{
-
+		if(!model_generator_module::$content)
+			return;
+			
 		if(preg_match('#[0-9]+#i',$contentname))
 		{
 			$search = array(
