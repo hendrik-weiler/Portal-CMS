@@ -24,19 +24,19 @@ class model_generator_navigation extends model_db_navigation
 {
 	private static $_navigation = array();
 
-	private static function _retrieveData()
+	private static function _retrieveData($group_id)
 	{
 		$result = null;
 
-		self::$_navigation = self::_collectData(0);
+		self::$_navigation = self::_collectData(0,$group_id);
 	}
 
-	private static function _collectData($parent)
+	private static function _collectData($parent,$group_id)
 	{
 		$result = array();
 
 		$data = self::find('all',array(
-			'where' => array('parent'=>$parent),
+			'where' => array('parent'=>$parent,'group_id'=>$group_id),
 			'order_by' => array('sort'=>'ASC')
 		));
 
@@ -80,7 +80,7 @@ class model_generator_navigation extends model_db_navigation
 				$result[$nav->id]['active'] = false;
 
 			$sub = self::find('all',array(
-				'where' => array('parent'=>$nav->id),
+				'where' => array('parent'=>$nav->id,'group_id'=>$group_id),
 				'order_by' => array('sort'=>'ASC')
 			));
 
@@ -175,21 +175,31 @@ class model_generator_navigation extends model_db_navigation
 		return str_replace('{{INNER}}',$inner,$outer);
 	}
 
-	public static function getNaviAsArray($lang_id)
+	public static function getNaviAsArray($lang_id,$group_id)
 	{
 		self::$_navigation = array();
 		model_db_navigation::setLangPrefix(model_db_language::idToPrefix($lang_id));
-		self::_retrieveData();
+		self::_retrieveData($group_id);
 
 		return self::$_navigation;
 	}
 
-	public static function render()
+	public static function render($group_id)
 	{
 		if(!model_generator_module::$navigation)
 			return;
 			
-		self::_retrieveData();
+		if(!preg_match('#[0-9]#i',$group_id))
+		{
+			$search = model_db_navgroup::find('first',array(
+				'where' => array('title'=>$group_id)
+			));
+
+			if(!empty($search))
+				$group_id = $search->id;
+		}
+
+		self::_retrieveData($group_id);
 		return self::_navToHTML();
 	}
 }

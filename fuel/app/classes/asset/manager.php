@@ -76,13 +76,15 @@ class Manager
   private static function _getDir($type)
   {
     $exclude = '?exclude=' . implode(',',self::$usedAssetGroups);
+    $layout_asset = '&layout_asset=' . implode(',',\model_generator_layout::$assets);
+    $layout_name = '&layout_name=' . \model_generator_layout::$name;
     switch($type)
     {
       case 'css':
-        $html = str_replace(array('%attr%','%link%'),array('',\Uri::create('parse/css') . $exclude),self::$cssTemplate);
+        $html = str_replace(array('%attr%','%link%'),array('',\Uri::create('parse/css') . $exclude . $layout_asset . $layout_name),self::$cssTemplate);
       break;
       case 'js':
-        $html = str_replace(array('%attr%','%link%'),array('',\Uri::create('parse/js') . $exclude),self::$jsTemplate);
+        $html = str_replace(array('%attr%','%link%'),array('',\Uri::create('parse/js') . $exclude . $layout_asset . $layout_name),self::$jsTemplate);
       break;
     }
 

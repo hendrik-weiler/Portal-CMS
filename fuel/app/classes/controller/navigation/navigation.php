@@ -24,13 +24,33 @@ class Controller_Navigation_Navigation extends Controller
 {
 	private $data = array();
 
+	private $_ajax = false;
+
 	private $id;
 
 	private function _getParentArray()
 	{
+		if(preg_match('#[0-9]#i',Uri::segment(3)))
+			$id = Uri::segment(3);
+		else
+		{
+			$num = Uri::segment(4);
+			if(!empty($num))
+			{
+				$nav = model_db_navigation::find(Uri::segment(4));
+				$id = $nav->group_id;
+			}
+			else
+			{
+				$nav = model_db_navigation::find('first');
+				$id = $nav->group_id;
+			}
+		}	
+		
 		$navis = model_db_navigation::find('all',array(
-			'where' => array('parent'=>0)
+			'where' => array('parent'=>0,'group_id'=>$id)
 		));
+
 		$result = array('0'=>__('navigation.none_parent'));
 
 		foreach($navis as $key => $navipoint)
@@ -66,6 +86,18 @@ class Controller_Navigation_Navigation extends Controller
 
 		model_db_navigation::setLangPrefix(Session::get('lang_prefix'));
 		model_db_site::setLangPrefix(Session::get('lang_prefix'));
+		model_db_navgroup::setLangPrefix(Session::get('lang_prefix'));
+
+		if(preg_match('#admin/navigation/([0-9]+)#i',Uri::current()) || Uri::segment(3) == '')
+		{
+			$search = model_db_navgroup::find('first',array('where'=>array('id'=>Uri::segment(3))));
+
+			if(empty($search))
+			{
+				$search = model_db_navgroup::find('first');
+				Response::redirect('admin/navigation/' . $search->id);
+			}
+		}
 	}
 
 	public function action_index()
@@ -87,6 +119,7 @@ class Controller_Navigation_Navigation extends Controller
 			$nav_point = new model_db_navigation();
 			$nav_point->label = (empty($label)) ? __('constants.untitled_element') : $label;
 			$nav_point->url_title = Inflector::friendly_title($nav_point->label);
+			$nav_point->group_id = Input::post('id');
 			$nav_point->parent = Input::post('parent');
 
 			if(!empty($nav_point->parent))
@@ -102,7 +135,7 @@ class Controller_Navigation_Navigation extends Controller
 			$added_nav = model_db_navigation::find('last');
 			model_permission::addNavigationToPermissionList($added_nav->id);
 
-			Response::redirect('admin/navigation');
+			Response::redirect('admin/navigation/' . Input::post('id'));
 		}
 	}
 
@@ -133,7 +166,7 @@ class Controller_Navigation_Navigation extends Controller
 			}
 			$nav_point->save();
 
-			Response::redirect('admin/navigation');
+			Response::redirect('admin/navigation/' . $nav_point->group_id);
 		}
 
 		$data = array();
@@ -194,8 +227,67 @@ class Controller_Navigation_Navigation extends Controller
 		}
 	}
 
+	public function action_group_delete()
+	{
+		$this->_ajax = true;
+
+		$group = model_db_navgroup::find($_GET['id']);
+		$group->delete();
+
+		$navs = model_db_navigation::find('all',array(
+			'where' => array('group_id'=>$_GET['id']),
+		));
+
+		if(!empty($navs))
+		{
+			foreach($navs as $nav)
+				$nav->delete();
+		}
+
+		$sites = model_db_site::find('all',array(
+			'where' => array('group_id'=>$_GET['id']),
+		));
+
+		$group = model_db_navgroup::find('first');
+
+		if(!empty($sites))
+		{
+			foreach($sites as $site)
+			{
+				$site->group_id = $group->id;
+				$site->save();
+			}
+		}
+
+		$this->response->body = 'true';
+	}
+
+	public function action_group_edit()
+	{
+		$this->_ajax = true;
+
+		$group = model_db_navgroup::find($_GET['id']);
+		$group->title = $_GET['name'];
+		$group->save();
+
+		$this->response->body = 'true';
+	}
+
+	public function action_group_new()
+	{
+		$this->_ajax = true;
+
+		$group = new model_db_navgroup();
+		$group->title = $_GET['group'];
+		$group->save();
+
+		$group = model_db_navgroup::find('last');
+		$this->response->body = $group->id;
+	}
+
 	public function after($response)
 	{
-		$this->response->body = View::factory('admin/index',$this->data);
+		if(!$this->_ajax)
+			$this->response->body = View::factory('admin/index',$this->data);
 	}
 }

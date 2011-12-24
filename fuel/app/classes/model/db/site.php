@@ -25,7 +25,7 @@ class model_db_site extends Orm\Model
 
 	protected static $_table_name = 'en_site';
 
-	protected static $_properties = array('id', 'navigation_id','label', 'url_title', 'site_title','keywords', 'description','redirect', 'sort', 'changed');
+	protected static $_properties = array('id', 'navigation_id', 'group_id', 'label', 'url_title', 'site_title','keywords', 'description','redirect', 'sort', 'changed');
 
 	public static function setLangPrefix($prefix)
 	{

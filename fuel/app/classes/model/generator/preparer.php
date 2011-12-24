@@ -124,6 +124,7 @@ class model_generator_preparer extends model_db_site
 		model_db_navigation::setLangPrefix($langSearch->prefix);
 		model_db_content::setLangPrefix($langSearch->prefix);
 		model_db_news::setLangPrefix($langSearch->prefix);
+		model_db_navgroup::setLangPrefix($langSearch->prefix);
 		self::$lang = $langSearch->prefix;
 
 		self::$options = Controller_Advanced_Advanced::getOptions();

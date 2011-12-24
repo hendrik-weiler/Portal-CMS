@@ -64,13 +64,31 @@ class Css
 
 	private static function _collectData($file)
 	{
-		if(file_exists(DOCROOT . 'assets/css/' . $file))
+		
+		if(preg_match('#views/public/layouts/#i',$file))
+			$path = $file;
+		else
+			$path = DOCROOT . 'assets/css/' . $file;
+	
+		if(file_exists($path))
 		{
-			self::$_file = file(DOCROOT . 'assets/css/' . $file,FILE_SKIP_EMPTY_LINES);
+			self::$_file = file($path,FILE_SKIP_EMPTY_LINES);
 
 			#---------- get cache
 
-			$cache = Cache::getFile('css/' . $file,DOCROOT . 'assets/css/' . $file);
+			if(preg_match('#views/public/layouts/#i',$file))
+			{
+				$path_2 = $file;
+				$path_2_2 = $file;
+			}	
+			else
+			{
+				$path_2 = 'css/' . $file;
+				$path_2_2 = 'assets/css/' . $file;
+			}	
+
+
+			$cache = Cache::getFile($path_2,DOCROOT . $path_2_2);
 
 			if($cache != false)
 				return $cache;

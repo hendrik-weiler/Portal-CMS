@@ -165,6 +165,7 @@ return array(
 		'description' => 'Seitenbeschreibung (optional)',
 		'content_header' => 'Inhalte der Seite',
 		'navigation_id' => 'Navigationspunkt',
+		'nav_group' => 'Navigation',
 	),
 
 	'navigation' => array(
@@ -176,6 +177,9 @@ return array(
 		'label' => 'Beschreibung',
 		'add' => 'Neuer Navigationspunkt',
 		'edit' => 'Navigationspunkt ändern',
+
+		'menu_rename' => 'Umbenennen',
+		'menu_delete' => 'Löschen',
 	),
 
 	'languages' => array(
@@ -196,11 +200,17 @@ return array(
 			'seo' => 'Suchmaschinenoptimierung',
 			'modules' => 'Module',
 			'assets' => 'CSS/JS',
+			'layout' => 'Layout',
+			'back' => 'Back',
 		),
 		'header' => array(
 			'thumbnails' => 'Thumbnailgrößen',
 			'news' => 'Nachrichtenoptionen',
 			'accounts' => 'Benutzerkonten & Rechte'
+		),
+		'layout' => array(
+			'wait' => 'Bitte warten...',
+			'current' => 'Jetziges Layout',
 		),
 		'assets' => array(
 			'list' => 'Modul Liste',
@@ -235,7 +245,7 @@ return array(
 					'button' => 'Neues Konto hinzufügen',
 					'user' => 'Benutzername',
 					'pass' => 'Passwort',
-					'language' => 'Sprache',
+					'language' => 'Systemsprache',
 					'back' => 'Zurück zur übersicht',
 				),
 				'edit' => array(
@@ -254,7 +264,7 @@ return array(
 		'header' => array(
 			'language' => 'Sprache'
 		),
-		'lang' => 'Sprache',
+		'lang' => 'Systemsprache',
 	),
 
 );

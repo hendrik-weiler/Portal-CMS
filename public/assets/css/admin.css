@@ -127,6 +127,12 @@ body {
   border:1px dashed red !important;
 }
 
+#moveable_language {
+  position:absolute;
+  top:480px;
+  left:70px;
+}
+
 /* ------------ settings ------------- */
 
 
@@ -152,9 +158,64 @@ body {
   text-align:right;
 }
 
+#layout div.span4 input.primary {
+  margin-left:-100px;
+}
+
+#layout div.span11 {
+  border-left:1px solid #eee;
+  padding-left:10px;
+}
+
+#layout div.span11 div {
+  float:left;
+  width:280px;
+  height:250px;
+  border:1px solid black;
+  padding:10px;
+  margin-right:10px;
+}
+
 /* ------------ navigation ------------ */
 
+.nav_menu {
+  position:absolute;
+  left:0;
+  top:0;
+  display:none;
+  border:1px solid #0022a0;
+  background: #fff;
+}
 
+.nav_menu li {
+  list-style:none;
+}
+
+.nav_menu a {
+  display:block;
+  text-decoration:none;
+  color:black !important;
+  width:100px;
+  padding:5px;
+  text-align:center;
+}
+
+.nav_menu a:hover {
+  background:#0022a0;
+  color:white !important;
+}
+
+#rightclick_navigation {
+  position:absolute;
+  top:280px;
+  left:90px;
+}
+
+#moveable_navigation {
+  position:absolute;
+  top:550px;
+  left:70px;
+}
 
 /* ------------ sites ------------- */
 
@@ -192,6 +253,12 @@ body {
 
 .sites_entry_sub span {
   width:140px;
+}
+
+#moveable_content {
+  position:absolute;
+  top:780px;
+  left:70px;
 }
 
 /* --------- content styling ---------- */

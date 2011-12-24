@@ -5,9 +5,9 @@ function seo($type='all')
   return model_generator_seo::render($type);
 }
 
-function navigation()
+function navigation($group_id)
 {
-  return model_generator_navigation::render();
+  return model_generator_navigation::render($group_id);
 }
 
 function content()

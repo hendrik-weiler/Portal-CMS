@@ -34,12 +34,18 @@ class Controller_Pages_Pages extends Controller
 		model_db_navigation::setLangPrefix(Session::get('lang_prefix'));
 		model_db_site::setLangPrefix(Session::get('lang_prefix'));
 		model_db_content::setLangPrefix(Session::get('lang_prefix'));
+		model_db_navgroup::setLangPrefix(Session::get('lang_prefix'));
 
 		$permissions = model_permission::mainNavigation();
 		$this->data['permission'] = $permissions[Session::get('lang_prefix')];
 		if(!$this->data['permission'][1]['valid'] || !model_permission::currentLangValid())
 			Response::redirect('admin/logout');
 
+		if(Uri::segment(3) == '')
+		{
+			$search = model_db_navgroup::find('first');
+			Response::redirect('admin/sites/' . $search->id);
+		}
 	}
 
 	public function action_index()
@@ -70,6 +76,7 @@ class Controller_Pages_Pages extends Controller
 			$site->keywords = Input::post('keywords');
 			$site->navigation_id = Input::post('navigation_id');
 			$site->description = Input::post('description');
+			$site->group_id = Input::post('id');
 
 			$query = DB::query('SELECT MAX( sort ) +1 AS maxsort FROM  `' . Session::get('lang_prefix') . '_site`')->execute();
 			$row = $query->as_array();
@@ -107,9 +114,10 @@ class Controller_Pages_Pages extends Controller
 			$nav_point->keywords = Input::post('keywords');
 			$nav_point->navigation_id = Input::post('navigation_id');
 			$nav_point->description = Input::post('description');
+			$nav_point->group_id = Input::post('group_id');
 			$nav_point->save();
 
-			Response::redirect('admin/sites');
+			Response::redirect('admin/sites/' . Input::post('group_id'));
 		}
 
 		$data = array();

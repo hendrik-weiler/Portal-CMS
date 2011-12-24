@@ -49,7 +49,10 @@ class Js
   {
     self::$_mode = $mode;
 
-    self::$_file = DOCROOT . 'assets/js/' . $file;
+    if(preg_match('#views/public/layouts/#i',$file))
+      self::$_file = DOCROOT . $file;
+    else
+      self::$_file = DOCROOT . 'assets/js/' . $file;
 
     return self::_minifyFile();
   }

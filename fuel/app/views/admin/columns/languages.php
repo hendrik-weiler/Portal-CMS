@@ -61,3 +61,5 @@ print Form::close();
 
 ?>
 </section>
+
+<img id="moveable_language" src="<?php print Uri::create('assets/img/admin/moveable.png') ?>" alt="Moveable">

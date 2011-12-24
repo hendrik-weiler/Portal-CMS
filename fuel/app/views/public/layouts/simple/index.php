@@ -25,24 +25,26 @@
         <figure class="left banner">
           <?php print asset_manager_get('img->admin->logo'); ?>
         </figure>
-        <nav class="right navi">
-          <?php print navigation(); ?>
+        <nav class="right navi clearfix">
+          <?php print navigation($Main_navigation); ?>
         </nav>
         <?php print language_switcher(); ?>
       </section>
     </header>
-    <div id="main" role="main">   
+    <div class="clearfix" id="main" role="main">   
       <section id="content">
-        <p>
-          <div id="round">This file is located in "apps/views/public/index.php" !</div>
-        </p>
-        <p>
-          <?php print content(); ?>
-        </p>
+        <div class="side">
+          <?php print navigation($Side_navigation); ?>
+        </div>
+        <div class="text">
+          <p>
+            <?php print content(); ?>
+          </p>
+        </div>
       </section>
     </div>
     <footer>
-      
+      <?php print navigation($Footer); ?>
     </footer>
   </div>
 

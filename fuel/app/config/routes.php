@@ -11,6 +11,11 @@ return array(
 
 	# -- admin/advanced
 
+	'admin/advanced/layout/preview/:path' => 'advanced/advanced/layout_image',
+	'admin/advanced/layout/edit' => 'advanced/advanced/layout_edit',
+	'admin/advanced/layout/choose' => 'advanced/advanced/layout_choose',
+	'admin/advanced/layout' => 'advanced/advanced/layout',
+
 	'admin/advanced/edit' => 'advanced/advanced/edit',
 	'admin/advanced' => 'advanced/advanced/index',
 
@@ -47,14 +52,20 @@ return array(
 	'admin/sites/delete/:id' => 'pages/pages/delete',
 	'admin/sites/edit/:id' => 'pages/pages/edit',
 	'admin/sites/add' => 'pages/pages/add',
+	'admin/sites/:group' => 'pages/pages/index',
 	'admin/sites' => 'pages/pages/index',
 
 	# -- admin/navigation
+
+	'admin/navigation/group/edit' => 'navigation/navigation/group_edit',
+	'admin/navigation/group/new' => 'navigation/navigation/group_new',
+	'admin/navigation/group/delete' => 'navigation/navigation/group_delete',
 
 	'admin/navigation/order/update' => 'navigation/navigation/order',
 	'admin/navigation/delete/:id' => 'navigation/navigation/delete',
 	'admin/navigation/edit/:id' => 'navigation/navigation/edit',
 	'admin/navigation/add' => 'navigation/navigation/add',
+	'admin/navigation/:group' => 'navigation/navigation/index',
 	'admin/navigation' => 'navigation/navigation/index',
 
 	# -- admin/settings
@@ -91,6 +102,8 @@ return array(
 	'admin' => 'login/index',
 
 	# -- frontend
+
+	'layout/picture/:path' => 'advanced/advanced/layout_image',
 
 	'sitemap.xml' => 'sitemap/index',
 	'parse/file/:path' => 'generator/file/index',

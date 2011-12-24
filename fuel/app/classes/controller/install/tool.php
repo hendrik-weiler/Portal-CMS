@@ -175,6 +175,10 @@ class Controller_Install_Tool extends Controller
 		        $language->sort = 0;
 		        $language->save();
 
+						$group = new model_db_navgroup();
+						$group->title = 'Main';
+						$group->save();
+
 		        Controller_Advanced_Advanced::initializeOptions();
 
 		        if(is_dir(DOCROOT . 'uploads/en'))

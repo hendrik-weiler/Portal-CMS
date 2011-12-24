@@ -45,43 +45,14 @@ class Controller_Sitemap extends Controller
 
     foreach(model_db_language::find('all') as $lang)
     {
-      $navi = model_generator_navigation::getNaviAsArray($lang->id);
-      foreach($navi as $nav)
+      model_db_navigation::setLangPrefix($lang->prefix);
+      foreach(model_db_navigation::find('all') as $navObj)
       {
-        $navtest = model_db_site::find($nav['id']);
-        
-        if(empty($navtest))
-          continue;
-
-        $navObj = model_db_navigation::find($nav['id']);
-
-        if(isset($nav['sub']))
-        {
-          foreach($nav['sub'] as $subNav)
-          {
-            $subnavtest = model_db_site::find('first',array(
-              'where' => array('navigation_id'=>$subNav['id'])
-            ));
-            if(empty($subnavtest))
-              continue;
-            
-            $subNavObj = model_db_navigation::find($subNav['id']);
-
-            $url = $sitemap->addChild('url');
-              $log = $url->addChild('loc',$this->_getUrl($lang->prefix,$navObj,$subNavObj));
-              $lastmod = $url->addChild('lastmod', Date::forge( strtotime($subnavtest->changed) )->format("%m/%d/%Y") );
-              $changefreq = $url->addChild('changefreq','weekly');
-              $priority = $url->addChild('priority',0.5);
-          }
-        }
-        else
-        {
           $url = $sitemap->addChild('url');
             $log = $url->addChild('loc',$this->_getUrl($lang->prefix,$navObj,false));
-            $lastmod = $url->addChild('lastmod', Date::forge( strtotime($navtest->changed) )->format("%m/%d/%Y") );
+            $lastmod = $url->addChild('lastmod', Date::forge( strtotime($navObj->changed) )->format("%m/%d/%Y") );
             $changefreq = $url->addChild('changefreq','weekly');
             $priority = $url->addChild('priority',0.5);
-        }
       }
     }
 

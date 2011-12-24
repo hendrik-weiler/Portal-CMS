@@ -1,0 +1,84 @@
+/*>
+  $float = left
+<*/
+
+#container {
+  width:960px;
+  margin:auto;
+  margin-top:50px;
+}
+
+.navi {
+  border-bottom: 1px solid #3193c7;
+}
+
+.navi ul {
+  list-style:none;
+  margin-top:20px;
+}
+
+.navi a {
+  float:left;
+  padding:5px 10px;
+  background: #3193c7;
+  border:1px solid #1c447b;
+  text-decoration:none;
+  color:white;
+}
+
+.navi a:hover {
+  background: #1c447b;
+  border:1px solid #3193c7;
+}
+
+.side {
+  float:$float;
+  width:180px;
+  border-right:1px solid #3193c7;
+}
+
+.side ul {
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+
+.side a {
+  display:block;
+  padding:8px 8px;
+  background: #cef0ff;
+  border:1px solid #38a8db;
+  text-decoration:none;
+  color:white;
+}
+
+.side a:hover {
+  background: #cef0ff;
+  border:1px solid #2a578b;
+}
+
+.text {
+  float:$float;
+  width:730px;
+  padding-left:10px;
+}
+
+footer {
+  border-top:1px solid #3193c7;
+  text-align:right;
+}
+
+footer ul {
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+
+footer li {
+  display:inline;
+  padding: 5px 10px;
+}
+
+footer a {
+  text-decoration:none;
+}

@@ -25,18 +25,18 @@ class model_db_navigation extends Orm\Model
 
 	protected static $_table_name = 'en_navigation';
 
-	protected static $_properties = array('id', 'label', 'url_title', 'parent', 'sort');
+	protected static $_properties = array('id', 'label', 'group_id','url_title', 'parent', 'sort');
 
 	public static function setLangPrefix($prefix)
 	{
 		self::$_table_name = $prefix . '_navigation';
 	}
 
-	public static function asSelectBox()
+	public static function asSelectBox($group_id)
 	{
 		$result = array();
 
-		$main = self::find()->where('parent',0)->order_by(array('sort'=>'ASC'))->get();
+		$main = self::find()->where(array('parent'=>0,'group_id'=>$group_id))->order_by(array('sort'=>'ASC'))->get();
 
 		foreach($main as $key => $point)
 		{

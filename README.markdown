@@ -2,21 +2,21 @@ Portal Content Management System
 ====================
 #### Beta
 
-Build on [Fuel Framework](https://github.com/fuel/fuel)
-Using:
-[Nivo-Slider](https://github.com/gilbitron/Nivo-Slider)
-[elRTE](https://github.com/Studio-42/elRTE)
-[elFinder](https://github.com/Studio-42/elFinder)
-[colorbox](https://github.com/jackmoore/colorbox)
-[html5boilerplate](https://github.com/h5bp/html5-boilerplate)
-[jquery.swfobject](http://jquery.thewikies.com/swfobject/)
-[pie](https://github.com/lojjic/PIE)
+Build on [Fuel Framework](https://github.com/fuel/fuel)<br />
+Using:<br />
+[Nivo-Slider](https://github.com/gilbitron/Nivo-Slider)<br />
+[elRTE](https://github.com/Studio-42/elRTE)<br />
+[elFinder](https://github.com/Studio-42/elFinder)<br />
+[colorbox](https://github.com/jackmoore/colorbox)<br />
+[html5boilerplate](https://github.com/h5bp/html5-boilerplate)<br />
+[jquery.swfobject](http://jquery.thewikies.com/swfobject/)<br />
+[pie](https://github.com/lojjic/PIE)<br />
 
 Features:
 ---------------------
 * Multilanguage interface
 * Multilanguage site
-* Navigation ( up to 1 hirachie down)
+* Multi-Navigation ( with every up to 1 hirachie down)
 * News
 * Page management
 * Textcontainer ( up to 3 columns )
@@ -29,12 +29,13 @@ Features:
 * Simple Permission System
 * Module management
 * Asset management
+* Customizeable Layout
 
 Development Testapp:
 ---------------------
-[http://portalcms.hendrikweiler.com/admin](http://portalcms.hendrikweiler.com/admin)
-Username: admin
-Password: test
+[http://portalcms.hendrikweiler.com/admin](http://portalcms.hendrikweiler.com/admin)<br />
+Username: admin<br />
+Password: test<br />
 
 Requirements:
 ---------------------
@@ -147,4 +148,8 @@ Troubleshooting:
 
 ##### Why do i get a redirection error if i want to take a look at my site?
 You must create a navigation with a site + content in it first. Then the first navigation will be displayed as default.
+
+##### Why do i get a warning message at the navigation?
+Currently if you create navigations without creating a Site for it, it will appear.
+To solve this problem create a Site for it or dont create unneeded navigations.
 

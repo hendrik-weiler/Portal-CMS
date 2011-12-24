@@ -165,6 +165,7 @@ return array(
 		'description' => 'Description (optional)',
 		'content_header' => 'Contents of the site',
 		'navigation_id' => 'Navigation point',
+		'nav_group' => 'Navigation',
 	),
 
 	'navigation' => array(
@@ -176,6 +177,10 @@ return array(
 		'label' => 'Label',
 		'add' => 'Add a new navigationpoint',
 		'edit' => 'Edit navigationpoint',
+
+
+		'menu_rename' => 'Rename',
+		'menu_delete' => 'Delete',
 	),
 
 	'languages' => array(
@@ -196,11 +201,17 @@ return array(
 			'seo' => 'Searchoptimizing',
 			'modules' => 'Modules',
 			'assets' => 'CSS/JS',
+			'layout' => 'Layout',
+			'back' => 'Back',
 		),
 		'header' => array(
 			'thumbnails' => 'Sizes of thumbnails',
 			'news' => 'News options',
 			'accounts' => 'Accounts & Permissions'
+		),
+		'layout' => array(
+			'wait' => 'Please wait....',
+			'current' => 'Current Layout',
 		),
 		'assets' => array(
 			'list' => 'Modul List',
@@ -235,7 +246,7 @@ return array(
 					'button' => 'Add new account',
 					'user' => 'Username',
 					'pass' => 'Password',
-					'language' => 'Language',
+					'language' => 'Systemlanguage',
 					'back' => 'Back to overview',
 				),
 				'edit' => array(
@@ -254,7 +265,7 @@ return array(
 		'header' => array(
 			'language' => 'Language'
 		),
-		'lang' => 'Language',
+		'lang' => 'Systemlanguage',
 	),
 
 );

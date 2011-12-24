@@ -42,14 +42,20 @@ class Controller_Login extends Controller
 
 			if(isset($user))
 			{
-				$session = md5(strtotime(Date::time()) . rand(0,999999));
+				if(preg_match('#logout_#i',$user->session))
+				{
+					$session = md5(strtotime(Date::time()) . rand(0,999999));
 
-				Session::create();
-				Session::set('session_id', $session);
+					Session::create();
+					Session::set('session_id', $session);
 
-				$user->session = $session;
-				$user->save();
-
+					$user->session = $session;
+					$user->save();
+				}
+				else
+				{
+					Session::set('session_id', $user->session);
+				}
 				Session::set('lang_prefix',model_permission::getValidLanguage());
 
 				Response::redirect('admin/' . model_permission::getValidRedirect());

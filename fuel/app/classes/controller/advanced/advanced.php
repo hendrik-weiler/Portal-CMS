@@ -24,12 +24,14 @@ class Controller_Advanced_Advanced extends Controller
 {
 	private $data = array();
 
+	private $_ajax = false;
+
 	private $id;
 
 	private static $options = array(
 		# general
 		'news_thumbs_width','news_thumbs_height','gallery_thumbs_width','gallery_thumbs_height',
-		'show_last','show_max_token',
+		'show_last','show_max_token','layout',
 		# seo
 		'analytics_id','robots',
 		# modules
@@ -46,6 +48,7 @@ class Controller_Advanced_Advanced extends Controller
 		'gallery_thumbs_height' => 160,
 		'show_last' => '3',
 		'show_max_token' => '100',
+		'layout' => 'default',
 		# seo
 		'analytics_id' => 'UA-XXXXXXXX-X',
 		'robots' => 'index,follow',
@@ -72,6 +75,7 @@ class Controller_Advanced_Advanced extends Controller
 		'gallery_thumbs_height' => 50,
 		'show_last' => '1',
 		'show_max_token' => '50',
+		'default' => '0',
 		# seo
 		'analytics_id' => 'UA-XXXXXXXX-X',
 		'robots' => '',
@@ -199,6 +203,7 @@ class Controller_Advanced_Advanced extends Controller
 		model_auth::check_startup();
 		model_db_news::setLangPrefix(Session::get('lang_prefix'));
 		model_db_content::setLangPrefix(Session::get('lang_prefix'));
+		model_db_navgroup::setLangPrefix(Session::get('lang_prefix'));
 		$this->data['title'] = 'Admin - ' . ucfirst(Uri::segment(2));
 		$this->id = $this->param('id');
 
@@ -223,8 +228,121 @@ class Controller_Advanced_Advanced extends Controller
 		Response::redirect('admin/advanced');
 	}
 
+	public function action_layout_image()
+	{
+		$this->_ajax = true;
+
+		$path = APPPATH . 'views/public/layouts/' . $this->param('path');
+
+		$data = file_get_contents($path);
+		$info = pathinfo($path);
+
+		$this->response->set_header('Content-Type','image/' . $info['extension']);
+		$this->response->body = $data;
+	}
+
+	public function action_layout_choose()
+	{
+		$this->_ajax = true;
+
+		$name = Input::get('name');
+
+		$layout = model_db_option::getKey('layout');
+		$layout->value = $name;
+		$layout->save();
+	}
+
+	public function action_layout_edit()
+	{
+
+	function indent($json) {
+
+	    $result      = '';
+	    $pos         = 0;
+	    $strLen      = strlen($json);
+	    $indentStr   = '  ';
+	    $newLine     = "\n";
+	    $prevChar    = '';
+	    $outOfQuotes = true;
+
+	    for ($i=0; $i<=$strLen; $i++) {
+
+	        // Grab the next character in the string.
+	        $char = substr($json, $i, 1);
+
+	        // Are we inside a quoted string?
+	        if ($char == '"' && $prevChar != '\\') {
+	            $outOfQuotes = !$outOfQuotes;
+	        
+	        // If this character is the end of an element, 
+	        // output a new line and indent the next line.
+	        } else if(($char == '}' || $char == ']') && $outOfQuotes) {
+	            $result .= $newLine;
+	            $pos --;
+	            for ($j=0; $j<$pos; $j++) {
+	                $result .= $indentStr;
+	            }
+	        }
+	        
+	        // Add the character to the result string.
+	        $result .= $char;
+
+	        // If the last character was the beginning of an element, 
+	        // output a new line and indent the next line.
+	        if (($char == ',' || $char == '{' || $char == '[') && $outOfQuotes) {
+	            $result .= $newLine;
+	            if ($char == '{' || $char == '[') {
+	                $pos ++;
+	            }
+	            
+	            for ($j = 0; $j < $pos; $j++) {
+	                $result .= $indentStr;
+	            }
+	        }
+	        
+	        $prevChar = $char;
+	    }
+
+	    return $result;
+	}
+
+		$this->_ajax = true;
+
+		$layout = model_db_option::getKey('layout');
+		$settings = file_get_contents(APPPATH . 'views/public/layouts/' . $layout->value . '/settings.json');
+		$settings = Format::forge($settings,'json')->to_array();
+
+		unset($settings['components']);
+
+		foreach($_POST as $key => $value)
+		{
+			if($key != 'submit')
+			{
+				$search = model_db_navgroup::find($value);
+				$settings['components'][$key] = $search->title;
+			}
+		}
+
+		File::update(
+			APPPATH . 'views/public/layouts/' . $layout->value,
+			'settings.json',
+			indent(Format::forge($settings)->to_json())
+		);
+
+		Response::redirect('admin/advanced/layout');
+	}
+
+	public function action_layout()
+	{
+		$data = array();
+		$data['lang'] = model_db_accounts::getCol(Session::get('session_id'),'language');
+
+		$this->data['content'] = View::factory('admin/columns/layout',$data);
+	}
+
 	public function after($response)
 	{
-		$this->response->body = View::factory('admin/index',$this->data);
+		if(!$this->_ajax)
+			$this->response->body = View::factory('admin/index',$this->data);
 	}
 }

@@ -82,55 +82,6 @@ body {
   background: body.$bg;
 }
 
-.navi {
-  float:left;
-  width:300px;
-  overflow:hidden;
-}
-
-.navi a {
-  float:left;
-  display:block;
-  padding: 5px 3px;
-  text-decoration:none;
-}
-
-.navi a:hover {
-  text-decoration:underline;
-}
-
-.language_selection {
-  float:right;
-  list-style:none;
-  width:100px;
-}
-
-#container {
-  width: 500px;
-  margin:auto;
-  margin-top: 50px;
-  margin-bottom:20px;
-}
-
-#round
-{
-  background: #B3EDF9;
-  background: -webkit-gradient(linear, 0 0, 0 bottom, from(#B3EDF9), to(#4D8EFE));
-  background: -webkit-linear-gradient(#B3EDF9, #4D8EFE);
-  background: -moz-linear-gradient(#B3EDF9, #4D8EFE);
-  background: -ms-linear-gradient(#B3EDF9, #4D8EFE);
-  background: -o-linear-gradient(#B3EDF9, #4D8EFE);
-  background: linear-gradient(#B3EDF9, #4D8EFE);
-  -pie-background: linear-gradient(#B3EDF9, #4D8EFE);
-  padding:20px;
-  width:100%;
-  text-align:center;
-  font-weight:bold;
-  margin:15px 0;
-  border-radius: 5px;
-  $pie;
-}
-
 /* ==|== non-semantic helper classes ======================================== */
 .ir { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; }
 .ir br { display: none; }

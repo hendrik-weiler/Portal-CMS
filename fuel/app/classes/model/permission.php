@@ -185,10 +185,13 @@ class model_permission extends model_db_accounts
     $language = model_db_language::find('first',array(
       'where' => array('prefix'=>$lang)
     ));
+    model_db_navgroup::setLangPrefix($language->prefix);
 
     $key = self::$permissions['categories_' . $language->id][0];
 
-    return self::$mainNavigationValue[$key];
+    $return = self::$mainNavigationValue[$key];
+
+    return $return;
   }
 
   public static function currentLangValid()

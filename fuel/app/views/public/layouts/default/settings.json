@@ -1,0 +1,15 @@
+{
+  "name":"Default",
+  "description":{
+    "default":"Default Layout containing 2 Navigations",
+    "de":"Ein Layout mit 2 Navigationen."
+  },
+  "preview":"icon.jpg",
+  "assets":[
+    "layout.css"
+  ],
+  "components":{
+    "Main_navigation":"Main",
+    "Footer":null
+  }
+}

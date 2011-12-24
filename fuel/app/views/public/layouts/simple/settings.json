@@ -1,0 +1,16 @@
+{
+  "name":"Simple",
+  "description":{
+    "default":"Simple Layout Containing a top navigation, a side navigation and a footer navigation",
+    "de":"Ein einfaches Layout mit einer top-navigation, rand navigation und footer-navigation."
+  },
+  "preview":"icon.jpg",
+  "assets":[
+    "layout.css"
+  ],
+  "components":{
+    "Main_navigation":"Main Navi",
+    "Side_navigation":null,
+    "Footer":"Footer"
+  }
+}

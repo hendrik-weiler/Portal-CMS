@@ -14,6 +14,7 @@ class database
 		\DBUtil::create_table($lang . '_site', array(
             'id' => array('type' => 'int', 'constraint' => 10,'auto_increment' => true),
             'navigation_id' => array('type' => 'int', 'constraint' => 10, 'null' => true),
+            'group_id' => array('type' => 'int', 'constraint' => 10,'null' => true),
             'label' => array('type' => 'varchar', 'constraint' => 60, 'null' => true),
             'url_title' => array('type' => 'varchar', 'constraint' => 80, 'null' => true),
             'site_title' => array('type' => 'varchar', 'constraint' => 120, 'null' => true),
@@ -32,8 +33,14 @@ class database
             'creation_date' => array('type' => 'timestamp','default' => \DB::expr('CURRENT_TIMESTAMP'), 'null' => true),
         ), array('id'));
 
+            \DBUtil::create_table($lang . '_navigation_group', array(
+            'id' => array('type' => 'int', 'constraint' => 10,'auto_increment' => true),
+            'title' => array('type' => 'varchar', 'constraint' => 80, 'null' => true),
+        ), array('id'));
+
 		\DBUtil::create_table($lang . '_navigation', array(
             'id' => array('type' => 'int', 'constraint' => 10,'auto_increment' => true),
+            'group_id' => array('type' => 'int', 'constraint' => 10,'null' => true),
             'label' => array('type' => 'varchar', 'constraint' => 80, 'null' => true),
             'url_title' => array('type' => 'varchar', 'constraint' => 100, 'null' => true),
             'parent' => array('type' => 'int', 'constraint' => 11, 'null' => true),
@@ -42,6 +49,7 @@ class database
 
 		\DBUtil::create_table($lang . '_content', array(
             'id' => array('type' => 'int', 'constraint' => 10,'auto_increment' => true),
+            'group_id' => array('type' => 'int', 'constraint' => 10,'null' => true),
             'site_id' => array('type' => 'int', 'constraint' => 10, 'null' => true),
             'type' => array('type' => 'int', 'constraint' => 11, 'null' => true),
             'label' => array('type' => 'varchar', 'constraint' => 60, 'null' => true),
@@ -65,6 +73,7 @@ class database
 		\DBUtil::drop_table($lang . '_content');
 		\DBUtil::drop_table($lang . '_news');
 		\DBUtil::drop_table($lang . '_navigation');
+            \DBUtil::drop_table($lang . '_navigation_group');
 	}
 
 	public function up()

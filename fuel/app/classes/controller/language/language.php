@@ -82,6 +82,12 @@ class Controller_Language_Language extends Controller
 			DB::query('CREATE TABLE `' . $prefix . '_content` LIKE `dummy_content`')->execute();
 			DB::query('CREATE TABLE `' . $prefix . '_navigation` LIKE `dummy_navigation`')->execute();
 			DB::query('CREATE TABLE `' . $prefix . '_news` LIKE `dummy_news`')->execute();
+			DB::query('CREATE TABLE `' . $prefix . '_navigation_group` LIKE `dummy_navigation_group`')->execute();
+
+			model_db_navgroup::setLangPrefix($prefix);
+			$group = new model_db_navgroup();
+			$group->title = 'Main';
+			$group->save();
 
 			$sort = DB::query('SELECT max(`sort`) + 1 as maxsort FROM languages')->execute();
 			$sort = $sort->as_array();
@@ -123,6 +129,7 @@ class Controller_Language_Language extends Controller
 				DB::query('RENAME TABLE ' . $row->prefix . '_content TO ' . $prefix . '_content')->execute();
 				DB::query('RENAME TABLE ' . $row->prefix . '_navigation TO ' . $prefix . '_navigation')->execute();
 				DB::query('RENAME TABLE ' . $row->prefix . '_news TO ' . $prefix . '_news')->execute();
+				DB::query('RENAME TABLE ' . $row->prefix . '_navigation_group TO ' . $prefix . '_navigation_group')->execute();
 			}
 
 			File::rename(DOCROOT . 'uploads/' . $row->prefix,DOCROOT . 'uploads/' . $prefix);
@@ -148,6 +155,7 @@ class Controller_Language_Language extends Controller
 		DB::query('DROP TABLE ' . $row->prefix . '_content')->execute();
 		DB::query('DROP TABLE ' . $row->prefix . '_navigation')->execute();
 		DB::query('DROP TABLE ' . $row->prefix . '_news')->execute();
+		DB::query('DROP TABLE ' . $row->prefix . '_navigation_group')->execute();
 
 		model_permission::removeLangFromPermissionList($this->id);
 

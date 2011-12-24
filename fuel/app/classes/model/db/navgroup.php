@@ -20,19 +20,27 @@
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2011 Hendrik Weiler
  */
-class model_db_accounts extends Orm\Model
+class model_db_navgroup extends Orm\Model
 {
 
-	protected static $_table_name = 'accounts';
+  public static $_table_name = 'en_navigation_group';
 
-	protected static $_properties = array('id', 'username', 'password', 'session','language','admin','permissions');
+  protected static $_properties = array('id', 'title');
 
-  public static function getCol($session,$col)
+  public static function setLangPrefix($prefix)
   {
-    $account = model_db_accounts::find('first',array(
-      'where' => array('session' => $session),
-    ));
+    self::$_table_name = $prefix . '_navigation_group';
+  }
 
-    return $account->$col;
+  public static function asSelectBox()
+  {
+    $result = array();
+
+    $main = self::find('all');
+
+    foreach($main as $key => $point)
+      $result[$key] = $point->title;
+
+    return $result;
   }
 }

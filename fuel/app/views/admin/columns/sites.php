@@ -1,3 +1,12 @@
+<?php 
+	if(preg_match('#[0-9]#i',Uri::segment(3)))
+		$group_id = Uri::segment(3);
+	else
+	{
+		$site = model_db_site::find(Uri::Segment(4));
+		$group_id = $site->group_id;
+	}
+?>
 <div class="row">
 	<div class="span8">
 		<h3>
@@ -18,9 +27,20 @@
 	  <div class="input">
 	    <?php 		
 		    $select_data = array(0=>__('constants.not_set'));
-				$select_data = $select_data + model_db_navigation::asSelectBox();
-
+				$select_data = $select_data + model_db_navigation::asSelectBox($group_id);
+				print Form::hidden('id',$group_id);
 				print Form::select('navigation_id',$navigation_id,$select_data,array('style'=>'width:210px;'));
+			?>
+		</div>
+	</div>
+	<div class="clearfix">
+	  <?php print Form::label(__('sites.nav_group')); ?>
+	  <div class="input">
+	    <?php 		
+		    $select_data = array(0=>__('constants.not_set'));
+				$select_data = $select_data + model_db_navgroup::asSelectBox();
+
+				print Form::select('group_id',$group_id,$select_data,array('style'=>'width:210px;'));
 			?>
 		</div>
 	</div>
@@ -60,6 +80,7 @@
 	<?php	print Form::close();	?>
 			
 		<?php if(Uri::segment(3) == 'edit'): ?>
+		<img id="moveable_content" src="<?php print Uri::create('assets/img/admin/moveable.png') ?>" alt="Moveable">
 		<h3>
 			<?php print __('sites.content_header'); ?>
 		</h3>
@@ -110,11 +131,25 @@
 		<h3>
 			<?php print __('sites.current_entries'); ?>
 		</h3>
+
+		<ul id="groups" class="tabs">
+			<?php
+				$navi_groups = model_db_navgroup::find('all');
+				if(!empty($navi_groups)):
+				foreach($navi_groups as $group):
+			?>
+			<li id="<?php print $group->id; ?>" <?php print $group_id == $group->id ? 'class="active"' : '' ?>><a href="<?php print Uri::create('admin/sites/' . $group->id) ?>"><?php print $group->title ?></a></li>
+			<?php 
+					endforeach;
+					endif; 
+			?>
+		</ul>
+		
 		<section id="site_list">
 	<?php
 		$rights = model_permission::getNavigationRights();
 
-		$navigations = model_db_navigation::asSelectBox();
+		$navigations = model_db_navigation::asSelectBox($group_id);
 		$navigations = array(0=>__('constants.not_set')) + $navigations;
 	if(empty($navigations))
 	{
