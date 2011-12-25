@@ -59,6 +59,7 @@ class Controller_News_News extends Controller
 			$new->title = (empty($title)) ? __('constants.untitled_element') : $title;
 			$new->picture = '{}';
 			$new->creation_date = \DB::expr('CURRENT_TIMESTAMP');
+			$new->attachment = '';
 			$new->save();
 
 			Response::redirect('admin/news');
@@ -74,6 +75,7 @@ class Controller_News_News extends Controller
 		{
 			$news->title = Input::post('title');
 			$news->text = Input::post('editor');
+			$news->attachment = Input::post('attachment');
 
 
 		if(!is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/news/' . $news->id))
@@ -127,6 +129,7 @@ class Controller_News_News extends Controller
 		$data['text'] = $news->text;
 		$data['images'] = Format::factory( $news->picture, 'json')->to_array();
 		$data['id'] = $news->id;
+		$data['attachment'] = $news->attachment;
 
 		$this->data['content'] = View::factory('admin/columns/news_edit',$data);
 	}

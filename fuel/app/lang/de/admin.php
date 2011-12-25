@@ -43,7 +43,10 @@ return array(
 
 	'news' => array(
 		'dateformat' => 'd.m.Y H:i',
-
+		'attachment' => array(
+			'header' => 'Anhang',
+			'site' => 'Seite',
+		),
 		'title' => 'Titel',
 		'header' => 'News übersicht',
 		'submit' => 'Erstellen',

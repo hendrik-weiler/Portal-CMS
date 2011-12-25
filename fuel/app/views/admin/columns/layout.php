@@ -18,7 +18,7 @@
             print '
             <div>
               <h3>' . $settings['name'] . '</h3>
-              <img src="' . Uri::create('admin/advanced/layout/preview/' . $settings['name'] . '/' . $settings['preview']) . '" alt="' . $settings['name'] . '_preview" />
+              <img src="' . Uri::create('admin/advanced/layout/preview/' . strtolower($settings['name']) . '/' . $settings['preview']) . '" alt="' . $settings['name'] . '_preview" />
               <article>' . $description . '</article>
             </div>
             ';
@@ -61,7 +61,7 @@
             print '
             <div>
               <h3>' . $settings['name'] . '</h3>
-              <img src="' . Uri::create('admin/advanced/layout/preview/' . $settings['name'] . '/' . $settings['preview']) . '" alt="' . $settings['name'] . '_preview" />
+              <img src="' . Uri::create('admin/advanced/layout/preview/' . strtolower($settings['name']) . '/' . $settings['preview']) . '" alt="' . $settings['name'] . '_preview" />
               <article>' . $description . '</article>
               ' . $radio . '
             </div>

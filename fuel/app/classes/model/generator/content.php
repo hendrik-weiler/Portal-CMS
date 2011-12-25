@@ -27,36 +27,39 @@ class model_generator_content extends model_db_site
 
 	private static $_renderSpecial = false;
 
-	private static function _viewSite($site)
+	private static function _viewSite($site,$directly=false)
 	{
-		if($site == null && Uri::segment(2) != 'news')
-			return false;
-			
-		if(Uri::segment(2) == 'news' && !self::$_renderSpecial)
+		if(!$directly)
 		{
-			if(Uri::segment(3) == '')
-			{
-				Response::redirect(model_generator_preparer::$lang);
-			}
-			if(Uri::segment(3) == 'archive')
-			{
-					$options = model_generator_preparer::$options;
-
-					$news = model_db_news::find()
-					->limit(32700)
-					->offset($options['show_last'])
-					->order_by(array('creation_date'=>'DESC'))
-					->get();
-
-					$data = array();
-					$data['entries'] = self::_showMultipleNews($news);
-					return View::factory('public/template/news_archive',$data);
-			}
-			$news = model_db_news::find(Uri::segment(3));
-			if(empty($news))
-				Response::redirect(model_generator_preparer::$lang);
+			if($site == null && Uri::segment(2) != 'news')
+				return false;
 				
-			return self::_showSingleNews($news,true);
+			if(Uri::segment(2) == 'news' && !self::$_renderSpecial)
+			{
+				if(Uri::segment(3) == '')
+				{
+					Response::redirect(model_generator_preparer::$lang);
+				}
+				if(Uri::segment(3) == 'archive')
+				{
+						$options = model_generator_preparer::$options;
+
+						$news = model_db_news::find()
+						->limit(32700)
+						->offset($options['show_last'])
+						->order_by(array('creation_date'=>'DESC'))
+						->get();
+
+						$data = array();
+						$data['entries'] = self::_showMultipleNews($news);
+						return View::factory('public/template/news_archive',$data);
+				}
+				$news = model_db_news::find(Uri::segment(3));
+				if(empty($news))
+					Response::redirect(model_generator_preparer::$lang);
+					
+				return self::_showSingleNews($news,true);
+			}
 		}
 
 
@@ -279,7 +282,14 @@ class model_generator_content extends model_db_site
 			}
 
 			if($full_view)
-				return View::factory('public/template/news_full',$data);
+			{
+				$html = '';
+				$html .= View::factory('public/template/news_full',$data);
+				
+				if(!empty($new->attachment) || $new->attachment != 0)
+					$html .= self::_viewSite(model_db_site::find($new->attachment),true);
+				return $html;
+			}
 			else
 				return View::factory('public/template/news_short',$data);
 	}

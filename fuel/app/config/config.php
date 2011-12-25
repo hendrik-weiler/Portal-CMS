@@ -75,9 +75,9 @@ return array(
 		'notices'      => true,
 	),
 
-	'language'		=> 'de',
+	'language'		=> 'en',
 
-	'locale'		=> 'de_DE',
+	'locale'		=> 'en_EN',
 
 	'encoding'		=> 'UTF-8',
 

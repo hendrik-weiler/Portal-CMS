@@ -62,6 +62,16 @@
 	<?php print $text; ?>
 </div>
 
+<div>
+	<h3><?php print __('news.attachment.header'); ?></h3>
+	<div class="clearfix">
+		<?php print Form::label(__('news.attachment.site')); ?>
+		<div class="input">
+			<?php print Form::select('attachment',$attachment,array(0=>__('constants.not_set')) + model_db_site::asSelectBox(Session::get('lang_prefix'))); ?>
+		</div>
+	</div>
+</div><!-- / -->
+
 <?php
 	print '<div class="actions">';
 

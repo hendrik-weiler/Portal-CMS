@@ -31,4 +31,18 @@ class model_db_site extends Orm\Model
 	{
 		self::$_table_name = $prefix . '_site';
 	}
+
+  public static function asSelectBox($lang)
+  {
+    self::setLangPrefix($lang);
+
+    $result = array();
+
+    $main = self::find('all');
+
+    foreach($main as $key => $point)
+      $result[$key] = $point->label;
+
+    return $result;
+  }
 }

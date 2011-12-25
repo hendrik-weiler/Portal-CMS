@@ -30,6 +30,7 @@ class database
             'title' => array('type' => 'varchar', 'constraint' => 80, 'null' => true),
             'picture' => array('type' => 'text', 'null' => true),
             'text' => array('type' => 'text', 'null' => true),
+            'attachment' => array('type' => 'text', 'null' => true),
             'creation_date' => array('type' => 'timestamp','default' => \DB::expr('CURRENT_TIMESTAMP'), 'null' => true),
         ), array('id'));
 
