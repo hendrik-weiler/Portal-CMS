@@ -71,6 +71,15 @@ class Controller_Language_Language extends Controller
 
 		if(isset($_POST['submit']))
 		{
+			$match = '#[0-9a-zA-Z_]+#i';
+			if(!preg_match($match,Input::post('label'))
+				|| !preg_match($match,Input::post('prefix'))
+				|| Input::post('label') == ''
+				|| Input::post('prefix') == '')
+			{
+				Response::redirect('admin/language');
+			}
+
 			$search = model_db_language::find('first',array(
 				'where' => array('prefix'=>Input::post('prefix'))
 			));

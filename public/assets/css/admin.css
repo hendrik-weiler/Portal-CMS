@@ -130,7 +130,8 @@ body {
 #moveable_language {
   position:absolute;
   top:480px;
-  left:70px;
+  left:50%;
+  margin-left:-570px;
 }
 
 /* ------------ settings ------------- */
@@ -208,13 +209,15 @@ body {
 #rightclick_navigation {
   position:absolute;
   top:280px;
-  left:90px;
+  left:50%;
+  margin-left:-550px;
 }
 
 #moveable_navigation {
   position:absolute;
   top:550px;
-  left:70px;
+  left:50%;
+  margin-left:-570px;
 }
 
 /* ------------ sites ------------- */
@@ -258,7 +261,8 @@ body {
 #moveable_content {
   position:absolute;
   top:780px;
-  left:70px;
+  left:50%;
+  margin-left:-570px;
 }
 
 /* --------- content styling ---------- */

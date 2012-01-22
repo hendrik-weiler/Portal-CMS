@@ -148,19 +148,26 @@ class model_generator_preparer extends model_db_site
 			'where' => array('id'=>$site->navigation_id)
 		));
 
-		if($firstSearch->parent != 0)
+		if(!empty($firstSearch))
 		{
-			$sub = $firstSearch;
+			if($firstSearch->parent != 0)
+			{
+				$sub = $firstSearch;
 
-			$secondSearch = model_db_navigation::find('first',array(
-				'where' => array('id'=>$firstSearch->parent)
-			));
+				$secondSearch = model_db_navigation::find('first',array(
+					'where' => array('id'=>$firstSearch->parent)
+				));
 
-			$main = $secondSearch;
+				$main = $secondSearch;
+			}
+			else
+			{
+				$main = $firstSearch;
+			}
 		}
 		else
 		{
-			$main = $firstSearch;
+			$main = null;
 		}
 
 		return array(

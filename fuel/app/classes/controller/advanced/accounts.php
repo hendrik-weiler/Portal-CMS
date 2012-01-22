@@ -104,7 +104,7 @@ class Controller_Advanced_Accounts extends Controller
 			$languages = model_db_language::getLanguages();
 
 			$permissions = array();
-			$permissions['language'] = Input::post('global_language');
+			$permissions['language'] =is_null(Input::post('global_language')) ? array() : Input::post('global_language');
 			foreach($languages as $key => $language)
 			{
 				$permissions['navigation_' . $key] = Input::post('navigation_' . $key);
@@ -118,6 +118,7 @@ class Controller_Advanced_Accounts extends Controller
 
 			if(!empty($password))
 				$account->password = md5($password);
+
 
 			$account->language = Input::post('language');
 			$account->save();
