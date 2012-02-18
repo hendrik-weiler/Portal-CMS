@@ -18,6 +18,7 @@ class database
             'label' => array('type' => 'varchar', 'constraint' => 60, 'null' => true),
             'url_title' => array('type' => 'varchar', 'constraint' => 80, 'null' => true),
             'site_title' => array('type' => 'varchar', 'constraint' => 120, 'null' => true),
+            'template' => array('type' => 'varchar', 'constraint' => 255, 'null' => true),
             'keywords' => array('type' => 'varchar', 'constraint' => 100, 'null' => true),
             'description' => array('type' => 'text', 'null' => true),
             'redirect' => array('type' => 'varchar', 'constraint' => 100, 'null' => true),
