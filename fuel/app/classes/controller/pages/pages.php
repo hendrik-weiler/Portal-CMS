@@ -56,7 +56,9 @@ class Controller_Pages_Pages extends Controller
 		$data['keywords'] = '';
 		$data['site_title'] = '';
 		$data['description'] = '';
+                $data['current_template'] = 'default';
 		$data['navigation_id'] = 0;
+                $data['site_id'] = 0;
 		$data['mode'] = 'add';
 		
 		$this->data['content'] = View::factory('admin/columns/sites',$data);
@@ -74,6 +76,7 @@ class Controller_Pages_Pages extends Controller
 			$site->site_title = Input::post('site_title');
 			$site->redirect = Input::post('redirect');
 			$site->keywords = Input::post('keywords');
+                        $site->template = Input::post('current_template');
 			$site->navigation_id = Input::post('navigation_id');
 			$site->description = Input::post('description');
 			$site->group_id = Input::post('id');
@@ -112,22 +115,25 @@ class Controller_Pages_Pages extends Controller
 			$nav_point->redirect = Input::post('redirect');
 			$nav_point->site_title = Input::post('site_title');
 			$nav_point->keywords = Input::post('keywords');
+                        $nav_point->template = Input::post('current_template');
 			$nav_point->navigation_id = Input::post('navigation_id');
 			$nav_point->description = Input::post('description');
 			$nav_point->group_id = Input::post('group_id');
 			$nav_point->save();
 
-			Response::redirect('admin/sites/' . Input::post('group_id'));
+			Response::redirect('admin/sites/edit/' . Input::post('site_id'));
 		}
 
 		$data = array();
 		$data['label'] = $nav_point->label;
+                $data['current_template'] = $nav_point->template;
 		$data['redirect'] = $nav_point->redirect;
 		$data['site_title'] = $nav_point->site_title;
 		$data['keywords'] = $nav_point->keywords;
 		$data['description'] = $nav_point->description;
 		$data['navigation_id'] = $nav_point->navigation_id;
 		$data['id'] = $this->id;
+                $data['site_id'] = $nav_point->id;
 
 		$data['mode'] = 'edit';
 

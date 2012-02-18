@@ -169,6 +169,10 @@ return array(
 		'content_header' => 'Inhalte der Seite',
 		'navigation_id' => 'Navigationspunkt',
 		'nav_group' => 'Navigation',
+            
+                'current_template' => 'Jetziges Template',
+                'template_default' => 'Layout Standard',
+                'template_from_folder' => 'Aus Ordner',
 	),
 
 	'navigation' => array(

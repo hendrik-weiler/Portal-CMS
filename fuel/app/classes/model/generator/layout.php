@@ -38,7 +38,13 @@ class model_generator_layout
     self::$assets = $settings['assets'];
 
     $data = $settings['components'];
-    return View::forge('public/layouts/' . $layout->value . '/index',$data);
+    
+    if(!empty(model_generator_preparer::$currentSite->template))
+        $my_layout = View::forge('public/layouts/' . $layout->value . '/' . model_generator_preparer::$currentSite->template,$data);
+    else
+        $my_layout = View::forge('public/layouts/' . $layout->value . '/default',$data);
+    
+    return $my_layout;
   }
 
   public static function insertAsset($asset)

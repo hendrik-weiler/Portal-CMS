@@ -51,6 +51,15 @@
 	  </div>
 	</div>
 	<div class="clearfix">
+	 <?php print Form::label(__('sites.current_template')); ?>
+	 <div class="input">
+	    <?php print Form::select('current_template',$current_template,array(
+                'default' => __('sites.template_default'),
+                __('sites.template_from_folder') => model_db_site::getLayoutFromFolder(),
+            ),array('style'=>'width:210px;')); ?>
+	  </div>
+	</div>
+	<div class="clearfix">
 	  <label for="xlInput"><?php print __('sites.site_title');  ?></label>
 	  <div class="input">
 	    <?php print Form::input('site_title',$site_title,array('style'=>'width:210px')); ?>
@@ -68,6 +77,7 @@
 	    <?php print Form::textarea('description',$description,array('style'=>'width:210px;height:60px;')); ?>
 	  </div>
 	</div>
+        <?php print Form::hidden('site_id',$site_id); ?>
 	<div class="actions">
 		<?php 
 			print Form::submit('submit',__('sites.' . $mode),array('class'=>'btn primary')) . ' ';

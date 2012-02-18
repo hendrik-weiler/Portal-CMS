@@ -169,6 +169,10 @@ return array(
 		'content_header' => 'Contents of the site',
 		'navigation_id' => 'Navigation point',
 		'nav_group' => 'Navigation',
+            
+                'current_template' => 'Current Template',
+                'template_default' => 'Default Layout',
+                'template_from_folder' => 'From Folder',
 	),
 
 	'navigation' => array(
