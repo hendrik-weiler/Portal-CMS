@@ -366,7 +366,7 @@ class model_generator_content extends model_db_site
 		
 		$current_site = model_generator_preparer::$currentSite;
 
-                if($current_site == null)
+                if($current_site == null && Uri::segment(2) != 'news')
                 {
                     return View::forge('public/errors/error_no_site');
                 }
@@ -374,7 +374,7 @@ class model_generator_content extends model_db_site
 		$site = self::_viewSite($current_site);
 
                 model_db_content::setLangPrefix(model_generator_preparer::$lang);
-                if(count(model_db_content::find('first',array('where'=>array('site_id'=>$current_site->id)))) == 0)
+                if(is_object($current_site) && count(model_db_content::find('first',array('where'=>array('site_id'=>$current_site->id)))) == 0 && Uri::segment(2) != 'news')
                     return View::forge('public/errors/error_no_content');
                 
 		if(!$site)
