@@ -61,9 +61,6 @@ class model_generator_content extends model_db_site
 					
 				return self::_showSingleNews($news,true);
 			}
-                        
-                        if(count(model_db_news::find('all')) == 0)
-                            return View::forge('public/errors/error_no_news_entry');
 		}
 
 
@@ -253,6 +250,7 @@ class model_generator_content extends model_db_site
 
 	private static function _showSingleNews($new,$full_view=false)
 	{
+            
 			$options = model_generator_preparer::$options;
 
 			$data = array();
