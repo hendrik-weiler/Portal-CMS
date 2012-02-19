@@ -50,14 +50,6 @@ class Controller_Generator_File extends Controller
 
     if(empty($cmd))
     {
-      foreach($layout_asset as $asset)
-      {
-        $path = 'views/public/layouts/' . $_GET['layout_name'] . '/' . $asset;
-        $info = pathinfo(APPPATH . $path);
-
-        if($info['extension'] == 'css')
-          $this->response->body .= Parser\Css::parse('../fuel/app/' . $path,'min');
-      }
       foreach(scandir(DOCROOT . '/assets/css/include',1) as $dir)
       {
         if(is_dir(DOCROOT . '/assets/css/include/' . $dir) 
@@ -67,6 +59,14 @@ class Controller_Generator_File extends Controller
           foreach(File::read_dir(DOCROOT . '/assets/css/include/' . $dir,1) as $file)
             $this->response->body .= Parser\Css::parse('include/' . $dir . '/' . $file,'min');
         }
+      }
+      foreach($layout_asset as $asset)
+      {
+        $path = 'views/public/layouts/' . $_GET['layout_name'] . '/' . $asset;
+        $info = pathinfo(APPPATH . $path);
+
+        if($info['extension'] == 'css')
+          $this->response->body .= Parser\Css::parse('../fuel/app/' . $path,'min');
       }
     }
     else
@@ -96,14 +96,6 @@ class Controller_Generator_File extends Controller
 
     if(empty($cmd))
     {
-      foreach($layout_asset as $asset)
-      {
-        $path = 'views/public/layouts/' . $_GET['layout_name'] . '/' . $asset;
-        $info = pathinfo(APPPATH . $path);
-
-        if($info['extension'] == 'js')
-          $this->response->body .= Parser\Js::parse('../fuel/app/' . $path,'min');
-      }
       foreach(scandir(DOCROOT . '/assets/js/include') as $dir)
       {
         if(is_dir(DOCROOT . '/assets/js/include/' . $dir) 
@@ -116,6 +108,14 @@ class Controller_Generator_File extends Controller
             $this->response->body .= Parser\Js::parse('include/' . $dir . '/' . $file,'full');
           }  
         }
+      }
+      foreach($layout_asset as $asset)
+      {
+        $path = 'views/public/layouts/' . $_GET['layout_name'] . '/' . $asset;
+        $info = pathinfo(APPPATH . $path);
+
+        if($info['extension'] == 'js')
+          $this->response->body .= Parser\Js::parse('../fuel/app/' . $path,'min');
       }
     }
     else

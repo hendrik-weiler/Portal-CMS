@@ -55,6 +55,13 @@ class model_generator_preparer extends model_db_site
 				));
 			}
 		}
+                
+                if(empty(self::$main) && empty(self::$sub))
+                {
+                    $landing_page = model_db_option::getKey('landing_page')->value;
+                    if($landing_page != 0)
+                      $site = model_db_site::find($landing_page);
+                }
 
 		if(!empty(self::$main) && empty(self::$sub))
 		{
@@ -74,23 +81,23 @@ class model_generator_preparer extends model_db_site
 		{
 			if(self::$main != 'news') 
 			{
-				$main = model_db_navigation::find('first',array(
-					'where' => array('url_title'=>self::$main)
-				));
+                            $main = model_db_navigation::find('first',array(
+                                    'where' => array('url_title'=>self::$main)
+                            ));
 
-				$sub = model_db_navigation::find('first',array(
-					'where' => array('parent'=>$main->id)
-				));
+                            $sub = model_db_navigation::find('first',array(
+                                    'where' => array('parent'=>$main->id)
+                            ));
 
-				if(!empty($main) && !empty($sub))
-				{
-					if($sub->parent == $main->id)
-					{
-						$site = self::find('first',array(
-							'where' => array('navigation_id'=>$sub->id)
-						));
-					}
-				}
+                            if(!empty($main) && !empty($sub))
+                            {
+                                    if($sub->parent == $main->id)
+                                    {
+                                            $site = self::find('first',array(
+                                                    'where' => array('navigation_id'=>$sub->id)
+                                            ));
+                                    }
+                            }
 			}
 		}
 

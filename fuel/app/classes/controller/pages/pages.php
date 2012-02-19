@@ -25,6 +25,13 @@ class Controller_Pages_Pages extends Controller
 	private $data = array();
 
 	private $id;
+        
+        private function _set_landing_page($id)
+        {
+            $landing_page = model_db_option::getKey('landing_page');
+            $landing_page->value = $id;
+            $landing_page->save();
+        }
 
 	public function before()
 	{
@@ -86,6 +93,11 @@ class Controller_Pages_Pages extends Controller
 
 			$site->sort = ($row[0]['maxsort'] == null) ? 0 : $row[0]['maxsort'];
 			$site->save();
+                        
+                        $last = model_db_site::find('last');
+                        
+                        if(Input::post('landing_page') == 1)
+                            $this->_set_landing_page($last->id);
 
 			Response::redirect('admin/sites');
 		}
@@ -120,6 +132,9 @@ class Controller_Pages_Pages extends Controller
 			$nav_point->description = Input::post('description');
 			$nav_point->group_id = Input::post('group_id');
 			$nav_point->save();
+                        
+                        if(Input::post('landing_page') == 1)
+                            $this->_set_landing_page($nav_point->id);
 
 			Response::redirect('admin/sites/edit/' . Input::post('site_id'));
 		}
@@ -143,6 +158,10 @@ class Controller_Pages_Pages extends Controller
 	public function action_delete()
 	{
 		$nav_point = model_db_site::find($this->id);
+                
+                if(model_db_option::getKey('landing_page')->value == $nav_point->id)
+                    $this->_set_landing_page(0);
+                
 		$nav_point->delete();
 
 		$contents = model_db_content::find()->where('site_id',$this->id)->get();

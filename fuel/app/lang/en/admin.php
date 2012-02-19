@@ -169,6 +169,7 @@ return array(
 		'content_header' => 'Contents of the site',
 		'navigation_id' => 'Navigation point',
 		'nav_group' => 'Navigation',
+                'landingpage' => 'As landingpage',
             
                 'current_template' => 'Current Template',
                 'template_default' => 'Default Layout',

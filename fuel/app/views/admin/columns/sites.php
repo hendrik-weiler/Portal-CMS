@@ -5,6 +5,8 @@
 	{
 		$site = model_db_site::find(Uri::Segment(4));
 		$group_id = $site->group_id;
+                if($site == null)
+                   Response::redirect('admin/sites');
 	}
 ?>
 <div class="row">
@@ -48,6 +50,13 @@
 	 <?php print Form::label(__('sites.redirect')); ?>
 	 <div class="input">
 	    <?php print Form::input('redirect',$redirect,array('style'=>'width:210px;')); ?>
+	  </div>
+	</div>
+	<div class="clearfix">
+	 <?php print Form::label(__('sites.landingpage')); ?>
+	 <div class="input">
+             <?php $checked = model_db_option::getKey('landing_page')->value == Uri::segment(4) ? array('checked'=>'checked') : array(); ?>
+	    <?php print Form::checkbox('landing_page',1,$checked + array('style'=>'width:210px;')); ?>
 	  </div>
 	</div>
 	<div class="clearfix">

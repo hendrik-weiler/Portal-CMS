@@ -31,7 +31,7 @@ class Controller_Advanced_Advanced extends Controller
 	private static $options = array(
 		# general
 		'news_thumbs_width','news_thumbs_height','gallery_thumbs_width','gallery_thumbs_height',
-		'show_last','show_max_token','layout',
+		'show_last','show_max_token','layout','landing_page',
 		# seo
 		'analytics_id','robots',
 		# modules
@@ -49,6 +49,7 @@ class Controller_Advanced_Advanced extends Controller
 		'show_last' => '3',
 		'show_max_token' => '100',
 		'layout' => 'default',
+                'landing_page' => 0,
 		# seo
 		'analytics_id' => 'UA-XXXXXXXX-X',
 		'robots' => 'index,follow',

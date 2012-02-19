@@ -55,11 +55,15 @@ class model_generator_content extends model_db_site
 						return View::factory('public/template/news_archive',$data);
 				}
 				$news = model_db_news::find(Uri::segment(3));
+                                
                                 if(empty($news))
 					Response::redirect(model_generator_preparer::$lang);
 					
 				return self::_showSingleNews($news,true);
 			}
+                        
+                        if(count(model_db_news::find('all')) == 0)
+                            return View::forge('public/errors/error_no_news_entry');
 		}
 
 

@@ -147,8 +147,9 @@ class Css
 
 					$url=substr(\Uri::create('/'), 0, -1);
 					$piePath = \Uri::create('assets/htc/PIE.php');
+                                        $include = \Uri::create('assets/img/include');
 
-					$value = str_replace(array('"',"'",'DOCROOT','PIEPATH'),array('','',$url,$piePath),trim($varSplit[1]));
+					$value = str_replace(array('"',"'",'DOCROOT','PIEPATH','INCLUDE'),array('','',$url,$piePath,$include),trim($varSplit[1]));
 					if(!empty($key))
 						$vars[implode('',$currObj) . trim($varSplit[0])] = $value;
 				}
