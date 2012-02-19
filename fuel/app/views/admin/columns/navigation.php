@@ -68,11 +68,23 @@
 	print Form::open(array('action'=>($mode == 'add') ? 'admin/navigation/add' : Uri::current(),'class'=>'form_style_1'));
 ?>
 <div class="clearfix">
-  <label for="xlInput"<?php print Form::label(__('navigation.label')); ?></label>
+  <?php print Form::label(__('navigation.label')); ?>
   <div class="input">
     <?php print Form::input('label',$label); ?>
   </div>
 </div>
+<?php if(Uri::segment(3) == 'edit'): ?>
+<div class="clearfix">
+    <?php print Form::label(__('sites.nav_group')); ?>
+    <div class="input">
+    <?php 		
+                        $select_data = model_db_navgroup::asSelectBox();
+
+                        print Form::select('group_id',$group_id,$select_data);
+                ?>
+        </div>
+</div>
+<?php endif; ?>
 <div class="clearfix">
   <div class="input">
     <?php print Form::select('parent',$parent,$parent_array); ?>

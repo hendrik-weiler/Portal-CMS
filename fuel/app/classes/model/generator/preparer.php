@@ -101,6 +101,7 @@ class model_generator_preparer extends model_db_site
 		}
 		else
 		{
+                        self::$currentSite = null;
 			return false;
 		}
 	}

@@ -55,7 +55,7 @@ class model_generator_content extends model_db_site
 						return View::factory('public/template/news_archive',$data);
 				}
 				$news = model_db_news::find(Uri::segment(3));
-				if(empty($news))
+                                if(empty($news))
 					Response::redirect(model_generator_preparer::$lang);
 					
 				return self::_showSingleNews($news,true);
@@ -364,10 +364,19 @@ class model_generator_content extends model_db_site
 		
 		$current_site = model_generator_preparer::$currentSite;
 
+                if($current_site == null)
+                {
+                    return View::forge('public/errors/error_no_site');
+                }
+                
 		$site = self::_viewSite($current_site);
 
+                model_db_content::setLangPrefix(model_generator_preparer::$lang);
+                if(count(model_db_content::find('first',array('where'=>array('site_id'=>$current_site->id)))) == 0)
+                    return View::forge('public/errors/error_no_content');
+                
 		if(!$site)
-			Response::redirect(model_generator_preparer::$lang);
+                    Response::redirect(model_generator_preparer::$lang);
 
 		return $site;
 	}

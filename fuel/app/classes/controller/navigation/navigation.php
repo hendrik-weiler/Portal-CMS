@@ -105,6 +105,7 @@ class Controller_Navigation_Navigation extends Controller
 		$data = array();
 		$data['label'] = '';
 		$data['parent'] = 0;
+                $data['group_id'] = 0;
 		$data['parent_array'] = $this->_getParentArray();		
 		$data['mode'] = 'add';
 		
@@ -151,6 +152,7 @@ class Controller_Navigation_Navigation extends Controller
 		{
 			$nav_point->label = Input::post('label');
 			$nav_point->url_title = Inflector::friendly_title($nav_point->label);
+                        $nav_point->group_id = Input::post('group_id');
 			$nav_point->parent = Input::post('parent');
 			if(Input::post('parent') >= 1)
 			{
@@ -172,6 +174,7 @@ class Controller_Navigation_Navigation extends Controller
 		$data = array();
 		$data['label'] = $nav_point->label;
 		$data['parent'] = $nav_point->parent;
+                $data['group_id'] = $nav_point->group_id;
 		$data['parent_array'] = $this->_getParentArray();
 
 		if(isset($data['parent_array'][$this->id]))
@@ -231,24 +234,31 @@ class Controller_Navigation_Navigation extends Controller
 	{
 		$this->_ajax = true;
 
+                if(count(model_db_navgroup::find('all')) == 1)
+                    return;
+                
 		$group = model_db_navgroup::find($_GET['id']);
 		$group->delete();
 
 		$navs = model_db_navigation::find('all',array(
 			'where' => array('group_id'=>$_GET['id']),
 		));
+                
+                $group = model_db_navgroup::find('first');
 
 		if(!empty($navs))
 		{
-			foreach($navs as $nav)
-				$nav->delete();
+                    foreach($navs as $nav)
+                    {
+                        $nav->group_id = $group->id;
+                        $nav->save();
+                    }
 		}
 
 		$sites = model_db_site::find('all',array(
 			'where' => array('group_id'=>$_GET['id']),
 		));
-
-		$group = model_db_navgroup::find('first');
+		
 
 		if(!empty($sites))
 		{

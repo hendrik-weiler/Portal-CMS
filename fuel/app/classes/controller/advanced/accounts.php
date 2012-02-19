@@ -58,12 +58,18 @@ class Controller_Advanced_Accounts extends Controller
 
 			$permissions = array();
 			$permissions['language'] = array();
-
+                        
 			$languages = model_db_language::getLanguages();
+
+			$permissions = array();
+			$permissions['language'] =is_null(Input::post('global_language')) ? array() : Input::post('global_language');
 			foreach($languages as $key => $language)
 			{
-				$permissions['navigation_' . $key] = array();
-				$permissions['categories_' . $key] = array();
+				$permissions['navigation_' . $key] = Input::post('navigation_' . $key);
+				$permissions['categories_' . $key] = Input::post('categories_' . $key);
+
+				$permissions['navigation_' . $key] = ($permissions['navigation_' . $key] == null) ? array() : $permissions['navigation_' . $key];
+				$permissions['categories_' . $key] = ($permissions['categories_' . $key] == null) ? array() : $permissions['categories_' . $key];
 			}
 
 			$account->permissions = Format::factory( $permissions )->to_json();

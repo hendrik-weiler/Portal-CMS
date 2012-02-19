@@ -73,7 +73,7 @@
         <?php
             foreach($languages as $key => $language)
             {
-                $navis = model_generator_navigation::getNaviAsArray($key);
+                $navis = model_generator_navigation::getNaviAsArray($key,$key);
                 $key = model_db_language::idToPrefix($key);
 
                 print '<div id="' . $key . '">';

@@ -99,15 +99,18 @@ if(/admin\/navigation/.test(window.location.href))
 		var li = $('#groups li').eq($.curnav);
 		var _id = li.attr('id');
 		var _name = li.find('input[type=text]').val();
+                
+                if(_name != '')
+                {
+                    $.get(_url + 'admin/navigation/group/edit',{id : _id,name: _name});
 
-		$.get(_url + 'admin/navigation/group/edit',{id : _id,name: _name});
-
-		var nav_group = $('#new_nav_tpl').html()
-											.replace('|url|',_url + 'admin/navigation/' + _id)
-											.replace('|title|',_name)
-											.replace('<li>','')
-											.replace('</li>','');
-		li.html(nav_group);
+                    var nav_group = $('#new_nav_tpl').html()
+                                    .replace('|url|',_url + 'admin/navigation/' + _id)
+                                    .replace('|title|',_name)
+                                    .replace('<li>','')
+                                    .replace('</li>','');
+                    li.html(nav_group);
+                }
 	});
 
 	$(document).click(function() {
@@ -123,17 +126,20 @@ if(/admin\/navigation/.test(window.location.href))
 	$('#submit_group').live('click',function(e) {
 		e.preventDefault();
 		var title = $('input[name=group_title]').val();
-		var new_nav;
-		var self = $(this);
-		$.get(_url + 'admin/navigation/group/new',{group : title},function(data) {
-				new_nav = $('#new_nav_tpl').html()
-										.replace('|url|',_url + 'admin/navigation/' + data)
-										.replace('|title|',title);
+                if(title != '')
+                {
+                    var new_nav;
+                    var self = $(this);
+                    $.get(_url + 'admin/navigation/group/new',{group : title},function(data) {
+                                    new_nav = $('#new_nav_tpl').html()
+                                                                                    .replace('|url|',_url + 'admin/navigation/' + data)
+                                                                                    .replace('|title|',title);
 
-				$('#groups').append(new_nav).append('<li><a id="addnav" href="#">+</a></li>');
-				self.parent().remove();
-				window.location.reload();
-		});
+                                    $('#groups').append(new_nav).append('<li><a id="addnav" href="#">+</a></li>');
+                                    self.parent().remove();
+                                    window.location.reload();
+                    });
+                }
 	});
 
 	$('#submit_cancel').live('click',function(e) {
