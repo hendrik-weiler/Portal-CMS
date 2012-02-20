@@ -33,8 +33,8 @@ class model_generator_seo
 					<meta name="keywords" content="' . stripslashes($site->keywords) . '">'
 			 . '<meta name="description" content="' . $site->description . '">'
 			 . '<base href="' . Uri::create('/') . '" />'
-			 . '<meta http-equiv="Content-Language" content="' . model_generator_preparer::$lang . '" />'
-			 . '<meta name="language" content="' . model_generator_preparer::$lang . '" />'
+			 #. '<meta http-equiv="Content-Language" content="' . model_generator_preparer::$lang . '" />'
+			 #. '<meta name="language" content="' . model_generator_preparer::$lang . '" />'
 			 . '<meta name="robots" content="' . stripslashes(model_db_option::getKey('robots')->value) . '" />';
 	}
 

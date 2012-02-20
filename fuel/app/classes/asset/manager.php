@@ -76,8 +76,8 @@ class Manager
   private static function _getDir($type)
   {
     $exclude = '?exclude=' . implode(',',self::$usedAssetGroups);
-    $layout_asset = '&layout_asset=' . implode(',',\model_generator_layout::$assets);
-    $layout_name = '&layout_name=' . \model_generator_layout::$name;
+    $layout_asset = '&amp;layout_asset=' . implode(',',\model_generator_layout::$assets);
+    $layout_name = '&amp;layout_name=' . \model_generator_layout::$name;
     switch($type)
     {
       case 'css':

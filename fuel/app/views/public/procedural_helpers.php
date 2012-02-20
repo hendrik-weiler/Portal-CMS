@@ -35,9 +35,9 @@ function asset_manager_insert($type)
   return Asset\Manager::insert($type);
 }
 
-function asset_manager_get($path)
+function asset_manager_get($path,$attr=array())
 {
-  return Asset\Manager::get($path);
+  return Asset\Manager::get($path,$attr);
 }
 
 function asset_manager_get_group($path)

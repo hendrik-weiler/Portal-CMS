@@ -95,6 +95,7 @@ return array(
 			8  =>	'2 Spalte [Inhalts-verlinkung]',
 			9  =>	'3 Spalte [Inhalts-verlinkung]',
 			10 => 'Flash',
+                        11 => 'HTML',
 		),
 		'txtcon' => 'Textcontainer',
 		'cl' => 'Inhalts-verlinkung',
@@ -152,6 +153,9 @@ return array(
 			'replace_pic' => 'Bild, falls Flash nicht verfügbar ist.',
 			'flash_vid' => 'Flash Video',
 		),
+                '11' => array(
+                    'header' => 'Fülle HTML/CSS oder Javascript in das Textfeld ein',
+                )
 	),
 
 	'sites' => array(

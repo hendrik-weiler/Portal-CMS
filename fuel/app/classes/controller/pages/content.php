@@ -436,6 +436,28 @@ class Controller_Pages_Content extends Controller
 		
 		$this->data['content'] = View::factory('admin/type/flash',$data);
 	}
+        
+	public function action_type11()
+	{
+		$content = model_db_content::find($this->content_id);
+
+		if(isset($_POST['submit']))
+		{
+			$content->label = 'HTML';
+			$content->text = Input::post('html');
+			$content->save();
+		}
+
+		if(isset($_POST['back']))
+		{
+			Response::redirect('admin/sites/edit/' . $this->id);
+		}
+
+		$data = array();
+		$data['text'] = $content->text;
+		
+		$this->data['content'] = View::factory('admin/type/html',$data);
+	}
 
 	public function action_delete()
 	{

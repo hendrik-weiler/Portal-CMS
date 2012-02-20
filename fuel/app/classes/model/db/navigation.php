@@ -32,11 +32,14 @@ class model_db_navigation extends Orm\Model
 		self::$_table_name = $prefix . '_navigation';
 	}
 
-	public static function asSelectBox($group_id)
+	public static function asSelectBox($group_id='unused')
 	{
 		$result = array();
-
-		$main = self::find()->where(array('parent'=>0,'group_id'=>$group_id))->order_by(array('sort'=>'ASC'))->get();
+                
+                if($group_id == 'unused')
+                    $main = self::find()->where(array('parent'=>0))->order_by(array('sort'=>'ASC'))->get();
+                else
+                    $main = self::find()->where(array('parent'=>0,'group_id'=>$group_id))->order_by(array('sort'=>'ASC'))->get();
 
 		foreach($main as $key => $point)
 		{

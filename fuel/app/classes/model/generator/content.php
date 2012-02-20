@@ -138,9 +138,21 @@ class model_generator_content extends model_db_site
 					$data['group'] = 'group_' . $content->id;
 					$return .= View::factory('public/template/3columns',$data);
 					break;
-					case 10:
-						$return .= self::_viewFlash($content);
-						break;
+				case 10:
+                                        $return .= self::_viewFlash($content);
+                                        break;
+                                case 11:
+
+					$data = array();
+					$data['html'] = str_replace(array(
+                                            'DOCROOT',
+                                            'INCLUDE',
+                                        ),array(
+                                            \Uri::create('/'),
+                                            \Uri::create('/assets/img/include'),
+                                        ),$content->text);
+					$return .= View::factory('public/template/html',$data);
+                                break;
 			}
 			return $return;
 	}
@@ -388,7 +400,7 @@ class model_generator_content extends model_db_site
 		if(!model_generator_module::$content)
 			return;
 
-		if(preg_match('#[0-9]+#i',$sitename))
+		if(preg_match('#^[0-9]+$#i',$sitename))
 		{
 			$search = array(
 				'key' => 'id',
@@ -411,7 +423,7 @@ class model_generator_content extends model_db_site
 		self::$_renderSpecial = true;
 			
 		$current_site = DB::select('*')->from(self::$_tempLang . '_site')->where(array($search['key']=>$search['value']))->execute();
-		$current_site = array_values($current_site->as_array());
+                $current_site = array_values($current_site->as_array());
 		$current_site = (object)$current_site[0];
 
 		$site = self::_viewSite($current_site);
@@ -430,7 +442,7 @@ class model_generator_content extends model_db_site
 		if(!model_generator_module::$content)
 			return;
 			
-		if(preg_match('#[0-9]+#i',$contentname))
+		if(preg_match('#^[0-9]+$#i',$contentname))
 		{
 			$search = array(
 				'key' => 'id',
