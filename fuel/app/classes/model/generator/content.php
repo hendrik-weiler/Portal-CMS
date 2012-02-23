@@ -270,13 +270,20 @@ class model_generator_content extends model_db_site
 			$data['full_text'] = $new->text;
 
 			$new->text = strip_tags($new->text,'<span><h1><h2><h3><h4><h5><h6><p><a><br>');
-			$short_text = explode("\n", wordwrap($new->text, $options['show_max_token'], "\n"));
-			$data['short_text'] = $short_text[0];
+			#$short_text = explode("\n", wordwrap($new->text, $options['show_max_token'], "\n"));
+			$short_text = substr( $new->text, 0, strpos( $new->text, ".", $options['show_max_token'] )+1 );
+			$data['short_text'] = $short_text;#$short_text[0];
 
 			$date = new DateTime($new->creation_date);
 			$data['time'] = $date->format(__('news.dateformat'));
 
 			$data['fullview_link'] = Uri::create(model_generator_preparer::$lang . '/news/' . $new->id . '/' . Inflector::friendly_title($new->title));
+
+			if(strlen($new->text) < $options['show_max_token'])
+			{
+				$data['fullview_link'] = '';
+				$data['short_text'] = $new->text;
+			}	
 
 			$pictures = Format::factory( $new->picture , 'json')->to_array();
 
