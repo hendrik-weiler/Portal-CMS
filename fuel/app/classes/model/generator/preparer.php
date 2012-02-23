@@ -58,9 +58,24 @@ class model_generator_preparer extends model_db_site
                 
                 if(empty(self::$main) && empty(self::$sub))
                 {
-                    $landing_page = model_db_option::getKey('landing_page')->value;
-                    if($landing_page != 0)
-                      $site = model_db_site::find($landing_page);
+                    $lprefix = Uri::segment(1);
+                    if(empty($lprefix))
+                    {
+                        $lang = model_db_language::find('first');
+                        $lprefix = $lang->prefix;
+                    }
+
+                    $lid = model_db_language::prefixToId($lprefix);
+
+                    $landing_page = model_db_option::getKey('landing_page');
+
+                    $format = Format::forge($landing_page->value,'json')->to_array();
+
+                    if($format[$lid] != 0)
+                    {
+                        $site = model_db_site::find($format[$lid]);
+                    }
+                    
                 }
 
 		if(!empty(self::$main) && empty(self::$sub))

@@ -158,7 +158,7 @@ $('input[name="change"]').click(function() {
 
 
 
-if(/admin\/sites(\/edit\/[0-9])?/.test(window.location.href))
+if(/admin\/sites(\/edit\/[0-9]+)?/.test(window.location.href))
 {
 	$('.delete').prompt({
 		header : _prompt.header,
@@ -181,7 +181,7 @@ if(/admin\/sites(\/edit\/[0-9])?/.test(window.location.href))
 	});
 }
 
-if(/admin\/content\/[0-9]\/edit\/[0-9]\/type\/[0-9]/.test(window.location.href))
+if(/admin\/content\/([0-9]+)\/edit\/([0-9]+)\/type\/([0-9]+)/.test(window.location.href))
 {
 	elRTE.prototype.options.panels.web2pyPanel = [
 	     'bold', 'italic', 'underline', 'forecolor', 'justifyleft', 'justifyright',
@@ -231,7 +231,7 @@ if(/admin\/news$/.test(window.location.href))
 	});
 }
 
-if(/admin\/news\/edit\/[0-9]$/.test(window.location.href))
+if(/admin\/news\/edit\/([0-9]+)$/.test(window.location.href))
 {
 	$('.pic_delete').prompt({
 		header : _prompt.header,

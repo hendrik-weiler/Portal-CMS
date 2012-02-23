@@ -55,7 +55,16 @@
 	<div class="clearfix">
 	 <?php print Form::label(__('sites.landingpage')); ?>
 	 <div class="input">
-             <?php $checked = model_db_option::getKey('landing_page')->value == Uri::segment(4) ? array('checked'=>'checked') : array(); ?>
+             <?php 
+            $lprefix = Session::get('lang_prefix');
+            
+            $lid = model_db_language::prefixToId($lprefix);
+            
+            $landing_page = model_db_option::getKey('landing_page');
+            
+            $format = Format::forge($landing_page->value,'json')->to_array();
+             
+             $checked = $format[$lid] == Uri::segment(4) ? array('checked'=>'checked') : array(); ?>
 	    <?php print Form::checkbox('landing_page',1,$checked + array('style'=>'width:210px;')); ?>
 	  </div>
 	</div>

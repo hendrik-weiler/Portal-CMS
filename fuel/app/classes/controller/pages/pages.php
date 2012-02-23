@@ -28,8 +28,16 @@ class Controller_Pages_Pages extends Controller
         
         private function _set_landing_page($id)
         {
+            $lprefix = Session::get('lang_prefix');
+            
+            $lid = model_db_language::prefixToId($lprefix);
+            
             $landing_page = model_db_option::getKey('landing_page');
-            $landing_page->value = $id;
+            
+            $format = Format::forge($landing_page->value,'json')->to_array();
+            $format[$lid] = $id;
+            
+            $landing_page->value = Format::forge($format)->to_json();
             $landing_page->save();
         }
 
@@ -159,7 +167,13 @@ class Controller_Pages_Pages extends Controller
 	{
 		$nav_point = model_db_site::find($this->id);
                 
-                if(model_db_option::getKey('landing_page')->value == $nav_point->id)
+                $lprefix = Session::get('lang_prefix');
+
+                $lid = model_db_language::prefixToId($lprefix);
+                
+                $format = Format::forge(model_db_option::getKey('landing_page')->value,'json')->to_array();
+                
+                if($format[$lid] == $nav_point->id)
                     $this->_set_landing_page(0);
                 
 		$nav_point->delete();

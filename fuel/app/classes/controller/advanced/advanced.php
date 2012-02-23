@@ -49,7 +49,7 @@ class Controller_Advanced_Advanced extends Controller
 		'show_last' => '3',
 		'show_max_token' => '100',
 		'layout' => 'default',
-                'landing_page' => 0,
+                'landing_page' => '{"1":"0"}',
 		# seo
 		'analytics_id' => 'UA-XXXXXXXX-X',
 		'robots' => 'index,follow',

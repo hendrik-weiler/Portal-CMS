@@ -9,8 +9,8 @@
     "layout.css"
   ],
   "components":{
-    "Main_navigation":"Main",
+    "Main_navigation":"testasd",
     "Side_navigation":null,
-    "Footer":"Footer"
+    "Footer":null
   }
 }
