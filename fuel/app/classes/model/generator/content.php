@@ -52,7 +52,11 @@ class model_generator_content extends model_db_site
 
 						$data = array();
 						$data['entries'] = self::_showMultipleNews($news);
-						return View::factory('public/template/news_archive',$data);
+
+                                                if(file_exists(APPPATH . 'views/public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/news_archive.php'))
+                                                        return View::factory('public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/news_archive',$data);
+						else
+                                                        return View::factory('public/template/news_archive',$data);
 				}
 				$news = model_db_news::find(Uri::segment(3));
                                 
@@ -112,7 +116,11 @@ class model_generator_content extends model_db_site
 					$data = array();
 					$data['text'] = self::_viewContent($col_1);
 					$data['group'] = 'group_' . $content->id;
-					$return .= View::factory('public/template/1columns',$data);
+                                        
+                                        if(file_exists(APPPATH . 'views/public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/1columns.php'))
+                                            $return .= View::factory('public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/1columns',$data);
+                                        else
+                                            $return .= View::factory('public/template/1columns',$data);
 					break;
 				case 8:
 					$cols = Format::factory($content->refer_content_id,'json')->to_array();
@@ -123,7 +131,11 @@ class model_generator_content extends model_db_site
 					$data['text'] = self::_viewContent($col_1);
 					$data['text2'] = self::_viewContent($col_2);
 					$data['group'] = 'group_' . $content->id;
-					$return .= View::factory('public/template/2columns',$data);
+					
+                                        if(file_exists(APPPATH . 'views/public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/2columns.php'))
+                                            $return .= View::factory('public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/2columns',$data);
+                                        else
+                                            $return .= View::factory('public/template/2columns',$data);
 					break;
 				case 9:
 					$cols = Format::factory($content->refer_content_id,'json')->to_array();
@@ -136,7 +148,11 @@ class model_generator_content extends model_db_site
 					$data['text2'] = self::_viewContent($col_2);
 					$data['text3'] = self::_viewContent($col_3);
 					$data['group'] = 'group_' . $content->id;
-					$return .= View::factory('public/template/3columns',$data);
+                                        
+                                        if(file_exists(APPPATH . 'views/public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/3columns.php'))
+                                            $return .= View::factory('public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/3columns',$data);
+                                        else
+                                            $return .= View::factory('public/template/3columns',$data);
 					break;
 				case 10:
                                         $return .= self::_viewFlash($content);
@@ -151,7 +167,11 @@ class model_generator_content extends model_db_site
                                             \Uri::create('/'),
                                             \Uri::create('/assets/img/include'),
                                         ),$content->text);
-					$return .= View::factory('public/template/html',$data);
+                                        
+                                        if(file_exists(APPPATH . 'views/public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/html.php'))
+                                            $return .= View::factory('public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/html',$data);
+                                        else
+                                            $return .= View::factory('public/template/html',$data);
                                 break;
 			}
 			return $return;
@@ -199,7 +219,10 @@ class model_generator_content extends model_db_site
 		$data['picture'] = Uri::create($path . $content->pictures);
 		$data['swfPath'] = Uri::create($path . $content->flash_file);
 
-		return View::factory('public/template/flash',$data);
+                if(file_exists(APPPATH . 'views/public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/flash.php'))
+                    return View::factory('public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/flash',$data);
+                else
+                    return View::factory('public/template/flash',$data);
 	}
 
 	private static function _showContactform($content)
@@ -245,8 +268,11 @@ class model_generator_content extends model_db_site
 
 			$data += $_POST;
 		}
-
-		return View::factory('public/template/contactform',$data);
+                
+                if(file_exists(APPPATH . 'views/public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/contactform.php'))
+                    return View::factory('public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/contactform',$data);
+                else
+                    return View::factory('public/template/contactform',$data);
 	}
 
 	private static function _showMultipleNews($news,$full_view=false)
@@ -271,7 +297,7 @@ class model_generator_content extends model_db_site
 
 			$new->text = strip_tags($new->text,'<span><h1><h2><h3><h4><h5><h6><p><a><br>');
 			#$short_text = explode("\n", wordwrap($new->text, $options['show_max_token'], "\n"));
-			$short_text = substr( $new->text, 0, strpos( $new->text, ".", $options['show_max_token'] )+1 );
+			$short_text = substr( $new->text, 0, @strpos( $new->text, ".", $options['show_max_token'] )+1 );
 			$data['short_text'] = $short_text;#$short_text[0];
 
 			$date = new DateTime($new->creation_date);
@@ -305,14 +331,22 @@ class model_generator_content extends model_db_site
 			if($full_view)
 			{
 				$html = '';
-				$html .= View::factory('public/template/news_full',$data);
+                                if(file_exists(APPPATH . 'views/public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/news_full.php'))
+                                    $html .= View::factory('public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/news_full',$data);
+                                else
+                                    $html .= View::factory('public/template/news_full',$data);
 				
 				if(!empty($new->attachment) || $new->attachment != 0)
 					$html .= self::_viewSite(model_db_site::find($new->attachment),true);
 				return $html;
 			}
 			else
-				return View::factory('public/template/news_short',$data);
+			{
+                            if(file_exists(APPPATH . 'views/public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/news_short.php'))
+                                return View::factory('public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/news_short',$data);
+                            else
+                                return View::factory('public/template/news_short',$data);
+                        }
 	}
 
 	private static function _showTextcontainer($content)
@@ -325,11 +359,26 @@ class model_generator_content extends model_db_site
 		$data['group'] = 'group_' . $content->id;
 
 		if($content->type == 7)
-			$tpl = 'public/template/3columns';
+		{
+                    if(file_exists(APPPATH . 'views/public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/3columns.php'))
+                        $tpl = 'public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/3columns';
+                    else
+                        $tpl = 'public/template/3columns';
+                }
 		else if($content->type == 6)
-			$tpl = 'public/template/2columns';
+		{
+                    if(file_exists(APPPATH . 'views/public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/2columns.php'))
+                        $tpl = 'public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/2columns';
+                    else
+                        $tpl = 'public/template/2columns';
+                }
 		else
-			$tpl = 'public/template/1columns';
+		{
+                    if(file_exists(APPPATH . 'views/public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/1columns.php'))
+                        $tpl = 'public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/1columns';
+                    else
+                        $tpl = 'public/template/1columns';
+                }
 
 		return View::factory($tpl,$data);
 	}
@@ -368,10 +417,24 @@ class model_generator_content extends model_db_site
 		$data['pictures'] = $pictures;
 		$data['group'] = 'group_' . $content->id;
 		if($content->pictures == 'lightbox')
-			$path = 'public/template/gallery_lightbox';
+		{
+                    if(file_exists(APPPATH . 'views/public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/gallery_lightbox.php'))
+                        $path = 'public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/gallery_lightbox';
+                    else
+                        $path = 'public/template/gallery_lightbox';
+                }
 		else if($content->pictures == 'slideshow')
-			$path = 'public/template/gallery_slideshow';
-		else {
+		{
+                    if(file_exists(APPPATH . 'views/public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/gallery_slideshow.php'))
+                        $path = 'public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/gallery_slideshow';
+                    else
+                        $path = 'public/template/gallery_slideshow';
+                }
+		else 
+                {
+                    if(file_exists(APPPATH . 'views/public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/' . $content->pictures . '.php'))
+                        $path = 'public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/' . $content->pictures;
+                    else
 			$path = 'public/template/' . $content->pictures;
 		}
 			
