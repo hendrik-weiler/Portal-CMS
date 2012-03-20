@@ -191,6 +191,15 @@ class Controller_Pages_Content extends Controller
 	{
 		$content = model_db_content::find($this->content_id);
 
+		if(!is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $content->id))
+			File::create_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' , $content->id,0777);
+
+		if(!is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $content->id. '/original'))
+			File::create_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' , $content->id . '/original',0777);
+
+		if(!is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $content->id. '/thumbs'))
+			File::create_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' , $content->id . '/thumbs',0777);
+                
 		if(isset($_POST['submit']))
 		{
 			$content->label = Input::post('label');
@@ -202,13 +211,6 @@ class Controller_Pages_Content extends Controller
 				$nr = '/' . Input::post('nr');
 
 			$content->pictures = Input::post('mode') . $nr;
-
-			if(!is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $content->id))
-			{
-				File::create_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' , $content->id,0777);
-				File::create_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' , $content->id . '/original',0777);
-				File::create_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' , $content->id . '/thumbs',0777);
-			}
 
 			$config = array(
 			    'path' => DOCROOT.'uploads/' . Session::get('lang_prefix') . '/gallery/' . $content->id . '/original',
@@ -462,7 +464,9 @@ class Controller_Pages_Content extends Controller
 	public function action_delete()
 	{
 		$delete = model_db_content::find($this->id);
-		$delete->delete();
+                
+                if(in_array('delete',get_class_methods($delete)))
+                    $delete->delete();
 
 		if(is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $this->id))
 			File::delete_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $this->id);

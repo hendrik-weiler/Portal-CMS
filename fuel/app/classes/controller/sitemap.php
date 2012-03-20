@@ -23,37 +23,112 @@
 class Controller_Sitemap extends Controller
 {
 
-  private function _getUrl($lang,$nav,$subNav)
-  {
-    $url_parts = array();
-    $url_parts[] = $lang;
-    $url_parts[] = $nav->url_title;
-    if(is_object($subNav))
-      $url_parts[] = $subNav->url_title;
+    private static function _asd()
+    {
 
-    $url = Uri::create(implode('/',$url_parts));
 
-    return $url;
-  }
+            
+
+    }
 
   public function action_index()
   {
-    $this->response->set_header('Content-Type', 'text/xml; charset=utf-8');
+    #$this->response->set_header('Content-Type', 'text/xml; charset=utf-8');
 
     $sitemap = new SimpleXMLElement("<urlset></urlset>");
     $sitemap->addAttribute('xmlns', 'http://www.google.com/schemas/sitemap/0.90');
 
     foreach(model_db_language::find('all') as $lang)
     {
-      model_db_navigation::setLangPrefix($lang->prefix);
-      foreach(model_db_navigation::find('all') as $navObj)
+      model_db_navgroup::setLangPrefix($lang->prefix);
+      model_db_site::setLangPrefix($lang->prefix);
+      model_generator_navigation::setLangPrefix($lang->prefix);
+      
+      foreach(model_db_navgroup::find('all') as $navgroup)
       {
-          $url = $sitemap->addChild('url');
-            $log = $url->addChild('loc',$this->_getUrl($lang->prefix,$navObj,false));
-            $lastmod = $url->addChild('lastmod', Date::forge( strtotime($navObj->changed) )->format("%m/%d/%Y") );
-            $changefreq = $url->addChild('changefreq','weekly');
-            $priority = $url->addChild('priority',0.5);
+            $group_id = $navgroup->id;
+            foreach(model_generator_navigation::getNaviAsArray($lang->id, $group_id) as $key => $nav)
+            {
+                    $search = model_db_site::find('first',array(
+                            'where' => array('navigation_id'=>$nav['id'])
+                    ));
+
+                    if(empty($search) && !isset($nav['sub']))
+                            continue;
+
+                    $data = array();
+                    $data['active_class'] = '';
+                    $data['target'] = '_self';
+                    $data['label'] = $nav['label'];
+                    $data['link'] = Uri::create($lang->prefix . '/' . $nav['url_title']);
+                    if(isset($nav['sub']))
+                    {
+                            $data['link'] = Uri::create($lang->prefix . '/' . $nav['url_title'] . '/' . $nav['sub'][0]['url_title']);
+                    }
+
+                    if(!empty($search->redirect)) 
+                    {
+                            $data['target'] = '_blank';
+                            $data['link'] = $search->redirect;
+                    }
+
+                    if($nav['active'] == true)
+                            $data['active_class'] = 'active';
+
+                    $navObj = model_db_site::find('first',array('where'=>array('group_id'=>$group_id,'navigation_id'=>$nav['id'])));
+
+                    $url = $sitemap->addChild('url');
+                        $log = $url->addChild('loc',$data['link']);
+                        $lastmod = $url->addChild('lastmod', Date::forge( strtotime($navObj->changed) )->format("%m/%d/%Y") );
+                        $changefreq = $url->addChild('changefreq','weekly');
+                        $priority = $url->addChild('priority',0.5);
+
+                    if(isset($nav['sub']))
+                    {
+
+
+                            $innerHTML = array();
+
+                            foreach($nav['sub'] as $subKey => $sub)
+                            {
+                                    $search = model_db_site::find('first',array(
+                                            'where' => array('navigation_id'=>$sub['id'])
+                                    ));
+                                    if(empty($search))
+                                            continue;
+
+                                    $subData = array();
+                                    $subData['active_class'] = '';
+                                    $subData['target'] = '_self';
+                                    $subData['label'] = $sub['label'];
+                                    $subData['link'] = Uri::create($lang->prefix . '/' . $nav['url_title'] . '/' . $sub['url_title']);
+                                    $subData['target'] = '_self';
+
+                                    if($sub['active'] == true)
+                                            $subData['active_class'] = 'active';
+
+                                    if(!empty($search->redirect))
+                                    {
+                                            $subData['target'] = '_blank';
+                                            $subData['link'] = $search->redirect;
+                                    }
+                                    
+                                    $navObj = model_db_site::find('first',array('where'=>array('group_id'=>$group_id,'navigation_id'=>$sub['id'])));
+                                    
+                                    $url = $sitemap->addChild('url');
+                                        $log = $url->addChild('loc',$subData['link']);
+                                        $lastmod = $url->addChild('lastmod', Date::forge( strtotime($navObj->changed) )->format("%m/%d/%Y") );
+                                        $changefreq = $url->addChild('changefreq','weekly');
+                                        $priority = $url->addChild('priority',0.5);
+
+                                    $subData['active_class'] = '';
+                            }
+
+                    }
+
+                }
       }
+      
     }
 
     $this->response->body = $sitemap->asXML();

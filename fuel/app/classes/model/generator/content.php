@@ -394,25 +394,34 @@ class model_generator_content extends model_db_site
 
 		self::$_tempLang = !empty(self::$_tempLang) ? self::$_tempLang : model_generator_preparer::$lang;
 
-		$images = File::read_dir(DOCROOT . 'uploads/' . self::$_tempLang . '/gallery/' . $content->id . '/thumbs',1);
-
-		$info = getimagesize(DOCROOT . 'uploads/' . self::$_tempLang . '/gallery/' . $content->id . '/original/' . $images[0]);
-		$data['slideshow_height'] = $info[1];
-		$data['slideshow_width'] = $info[0];
-
-		foreach($images as $pic)
+		if(is_dir(DOCROOT . 'uploads/' . self::$_tempLang . '/gallery/' . $content->id)
+			&& is_dir(DOCROOT . 'uploads/' . self::$_tempLang . '/gallery/' . $content->id . '/thumbs')
+			&& is_dir(DOCROOT . 'uploads/' . self::$_tempLang . '/gallery/' . $content->id . '/original'))
 		{
-			$pictures[$counter] = array();
-			$pictures[$counter]['thumb'] = Uri::create('uploads/' . self::$_tempLang . '/gallery/' . $content->id . '/thumbs/' . $pic);
-			
-			if(isset($description[$counter]))
-				$pictures[$counter]['description'] = stripslashes($description[$counter]);
-			else
-				$pictures[$counter]['description'] = '';
-			
-			$pictures[$counter]['original'] = Uri::create('uploads/' . self::$_tempLang . '/gallery/' . $content->id . '/original/' . $pic);
-			$counter++;
-		}
+
+                    $images = File::read_dir(DOCROOT . 'uploads/' . self::$_tempLang . '/gallery/' . $content->id . '/thumbs',1);
+                    if(!empty($images))
+                    {
+                        $info = getimagesize(DOCROOT . 'uploads/' . self::$_tempLang . '/gallery/' . $content->id . '/original/' . $images[0]);
+                        $data['slideshow_height'] = $info[1];
+                        $data['slideshow_width'] = $info[0];
+                    }
+
+                    foreach($images as $pic)
+                    {
+                            $pictures[$counter] = array();
+                            $pictures[$counter]['thumb'] = Uri::create('uploads/' . self::$_tempLang . '/gallery/' . $content->id . '/thumbs/' . $pic);
+
+                            if(isset($description[$counter]))
+                                    $pictures[$counter]['description'] = stripslashes($description[$counter]);
+                            else
+                                    $pictures[$counter]['description'] = '';
+
+                            $pictures[$counter]['original'] = Uri::create('uploads/' . self::$_tempLang . '/gallery/' . $content->id . '/original/' . $pic);
+                            $counter++;
+                    }
+                
+                }
 
 		$data['pictures'] = $pictures;
 		$data['group'] = 'group_' . $content->id;
