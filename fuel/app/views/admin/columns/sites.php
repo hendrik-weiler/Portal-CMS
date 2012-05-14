@@ -130,7 +130,8 @@
 					9 => __('content.type.9'),
 				),
 				10 => __('content.type.10'),
-                                11 => __('content.type.11'),
+                11 => __('content.type.11'),
+                12 => __('content.type.12'),
 	 		),array('style'=>'width:210px;'));
 
 			print Form::submit('addContent',__('content.add_button'),array('class'=>'btn')) . ' ';
@@ -260,7 +261,7 @@
 
 			print '<strong>' . __('content.type.' . $nav->type) . '</strong>: ';
 
-			if(in_array($nav->type,array(1,2)))
+			if(in_array($nav->type,array(1,2,12)))
 			print $nav->label;
 
 			print '</span>';
@@ -268,7 +269,7 @@
 
 			print '<div>';
 
-			if(in_array($nav->type,array(1,2,3,5,6,7,8,9,10,11)))
+			if(in_array($nav->type,array(1,2,3,5,6,7,8,9,10,11,12)))
 				print '<a href="' . Uri::create('admin/content/' . $id . '/edit/' . $nav->id . '/type/' . $nav->type) . '">' . __('constants.edit') . '</a> ';
 				
 			print '<a class="delete" href="' . Uri::create('admin/content/delete/' . $nav->id) . '">' . __('constants.delete') . '</a>';

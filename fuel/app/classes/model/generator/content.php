@@ -167,12 +167,37 @@ class model_generator_content extends model_db_site
                                             \Uri::create('/'),
                                             \Uri::create('/assets/img/include'),
                                         ),$content->text);
+
+					$parameter = json_decode($content->parameter,true);
+					if(is_array($parameter))
+					{
+						foreach ($parameter as $placeholder) 
+						{
+							$data['html'] = str_replace(
+								$placeholder['name'],
+								$placeholder['text'],
+								$data['html']);
+						}
+					}
                                         
                                         if(file_exists(APPPATH . 'views/public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/html.php'))
                                             $return .= View::factory('public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/html',$data);
                                         else
                                             $return .= View::factory('public/template/html',$data);
                                 break;
+			case 12:
+			$params = json_decode($content->parameter,true);
+
+			$split = explode('\\',$params['active']);
+			$data = array();
+			require_once APPPATH . '../../plugin/' . $split[0] .'/' . $split[1] . '.php';
+			$plugin = new $params['active']();
+			$data['content'] = $plugin->render();
+            if(file_exists(APPPATH . 'views/public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/plugin.php'))
+                $return .= View::factory('public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/plugin',$data);
+            else
+                $return .= View::factory('public/template/plugin',$data);
+			break;
 			}
 			return $return;
 	}

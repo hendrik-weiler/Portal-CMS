@@ -10,6 +10,6 @@
   ],
   "components":{
     "Main_navigation":"Main",
-    "Footer":null
+    "Footer":"Footer"
   }
 }

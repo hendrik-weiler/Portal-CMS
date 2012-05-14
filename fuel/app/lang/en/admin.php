@@ -95,7 +95,8 @@ return array(
 			8  =>	'2 Column [Content-linking]',
 			9  =>	'3 Column [Content-linking]',
 			10 => 'Flash',
-                        11 => 'HTML',
+            11 => 'HTML',
+            12 => 'Plugin',
 		),
 		'txtcon' => 'Textcontainer',
 		'cl' => 'Content-linking',
@@ -153,9 +154,13 @@ return array(
 			'replace_pic' => 'Picture, if flash is not available.',
 			'flash_vid' => 'Flash Video',
 		),
-                '11' => array(
-                    'header' => 'Fill in HTML/CSS or javascript into the textfield',
-                )
+        '11' => array(
+            'header' => 'Fill in HTML/CSS or javascript into the textfield',
+            'addplaceholder' => '+ Add Placeholder',
+            'placeholder_name' => 'Placeholder name',
+            'placeholder_text' => 'Placeholder text',
+            'placeholder_delete' => 'Delete placeholder',
+        )
 	),
 
 	'sites' => array(

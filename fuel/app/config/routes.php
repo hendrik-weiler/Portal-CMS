@@ -36,6 +36,7 @@ return array(
 	'admin/content/:id/edit/:content_id/type/9' => 'pages/content/type9',
 	'admin/content/:id/edit/:content_id/type/10' => 'pages/content/type10',
         'admin/content/:id/edit/:content_id/type/11' => 'pages/content/type11',
+        'admin/content/:id/edit/:content_id/type/12' => 'pages/content/type12',
 
 	'admin/content/add/:id' => 'pages/content/add',
 

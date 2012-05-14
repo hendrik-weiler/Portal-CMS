@@ -445,8 +445,21 @@ class Controller_Pages_Content extends Controller
 
 		if(isset($_POST['submit']))
 		{
+			$placeholder_name = Input::post('placeholder_name');
+			$placeholder_text = Input::post('placeholder_text');
+			$parameter = array();
+
+			for($i=0;$i<count($placeholder_text);++$i)
+			{
+				$parameter[] = array(
+					'name' => $placeholder_name[$i],
+					'text' => trim($placeholder_text[$i])
+				);
+			}
+
 			$content->label = 'HTML';
 			$content->text = Input::post('html');
+			$content->parameter = json_encode($parameter);
 			$content->save();
 		}
 
@@ -457,8 +470,63 @@ class Controller_Pages_Content extends Controller
 
 		$data = array();
 		$data['text'] = $content->text;
+		$data['parameter'] = json_decode(
+			empty($content->parameter) ? '{}' : $content->parameter
+		,true);
 		
 		$this->data['content'] = View::factory('admin/type/html',$data);
+	}
+
+	public function action_type12()
+	{
+		$content = model_db_content::find($this->content_id);
+		empty($content->parameter) and $content->parameter = "{active:\"\"}";
+		$params = json_decode($content->parameter,true);
+
+
+		$data = array();
+		if(isset($params['active']))
+		{
+			$split = explode('\\',$params['active']);
+			require_once APPPATH . '../../plugin/' . $split[0] .'/' . $split[1] . '.php';
+			$plugin = new $params['active']();
+			$data['option_form'] = $plugin->get_options();
+		}
+
+		if(isset($_POST['change_options']))
+		{
+			$params['options'] = array();
+			foreach ($data['option_form']['form'] as $name => $x) 
+			{
+				$postdata = Input::post($name);
+				$params['options'][$name] = $postdata == null ? 0 : $postdata;
+			}
+			$content->parameter = json_encode($params);
+			$content->save();
+		}
+
+		if(isset($_POST['submit']))
+		{
+			$params['active'] = Input::post('active_plugin');
+			!isset($params['options']) and $params['options'] = array();
+			$content->parameter = json_encode($params);
+			$content->label = $params['active'];
+			$content->save();
+			Response::redirect(Uri::current());
+		}
+
+		if(isset($_POST['back']))
+		{
+			Response::redirect('admin/sites/edit/' . $this->id);
+		}
+
+		$data['folder_plugin'] = \File::read_dir(APPPATH . '../../plugin',2);
+		$data['active_plugin'] = $params['active'];
+		$data['active_options'] = array();
+
+		is_array($params['options']) and $data['active_options'] = $params['options'];
+
+		$this->data['content'] = View::factory('admin/type/plugin',$data);
 	}
 
 	public function action_delete()

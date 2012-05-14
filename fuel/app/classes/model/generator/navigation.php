@@ -92,7 +92,7 @@ class model_generator_navigation extends model_db_navigation
 		return array_values($result);
 	}
 
-	private static function _navToHTML()
+	private static function _navToHTML($group_id)
 	{
 		$outer = View::factory('public/template/navigation_outer');
 
@@ -124,7 +124,7 @@ class model_generator_navigation extends model_db_navigation
 			}
 			
 			if($nav['active'] == true)
-				$data['active_class'] = 'active';
+				$data['active_class'] = 'active_' . $group_id;
 			
 			$html[$key] = View::factory('public/template/navigation_inner',$data);
 
@@ -200,6 +200,6 @@ class model_generator_navigation extends model_db_navigation
 		}
 
 		self::_retrieveData($group_id);
-		return self::_navToHTML();
+		return self::_navToHTML($group_id);
 	}
 }

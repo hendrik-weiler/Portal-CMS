@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<layout>
-    <col>
-        <input label="Label" />
-        <select src="" />
-    </col>
-</layout>
