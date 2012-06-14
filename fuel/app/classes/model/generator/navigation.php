@@ -126,11 +126,17 @@ class model_generator_navigation extends model_db_navigation
 			if($nav['active'] == true)
 				$data['active_class'] = 'active_' . $group_id;
 			
-			$html[$key] = View::factory('public/template/navigation_inner',$data);
+			if(file_exists(APPPATH . 'views/public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/navigation_inner.php'))
+				$html[$key] = View::factory(APPPATH . 'views/public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/navigation_inner.php',$data);
+			else
+				$html[$key] = View::factory('public/template/navigation_inner',$data);
 
 			if(isset($nav['sub']))
 			{
-				$outerSub = View::factory('public/template/navigation_outer');
+				if(file_exists(APPPATH . 'views/public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/navigation_outer.php'))
+					$outerSub = View::factory(APPPATH . 'views/public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/navigation_outer.php');
+				else
+					$outerSub = View::factory('public/template/navigation_outer');
 
 				$innerHTML = array();
 

@@ -192,6 +192,7 @@ class model_generator_content extends model_db_site
 			$data = array();
 			require_once APPPATH . '../../plugin/' . $split[0] .'/' . $split[1] . '.php';
 			$plugin = new $params['active']();
+			$plugin->param = $params;
 			$data['content'] = $plugin->render();
             if(file_exists(APPPATH . 'views/public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/plugin.php'))
                 $return .= View::factory('public/layouts/' . model_db_option::getKey('layout')->value . '/cms_template/plugin',$data);

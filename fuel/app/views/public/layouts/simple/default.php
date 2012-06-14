@@ -23,7 +23,7 @@
     <header>
       <section id="top">
         <figure class="left banner">
-          <?php print asset_manager_get('img->admin->logo'); ?>
+          <a href="<?php print \Uri::create('/' . model_generator_preparer::$lang) ?>"><?php print asset_manager_get('img->admin->logo'); ?></a>
         </figure>
         <nav class="right navi clearfix">
           <?php print navigation($Main_navigation); ?>

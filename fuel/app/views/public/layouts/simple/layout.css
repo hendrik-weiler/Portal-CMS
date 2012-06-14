@@ -26,9 +26,10 @@
   color:white;
 }
 
-.navi a:hover {
-  background: #1c447b;
-  border:1px solid #3193c7;
+.navi a:hover,
+.active_1 {
+  background: #1c447b !important;
+  border:1px solid #3193c7 !important;
 }
 
 .side {
@@ -81,4 +82,9 @@ footer li {
 
 footer a {
   text-decoration:none;
+}
+
+footer a:hover,
+.active_2 {
+  text-decoration:underline;
 }
