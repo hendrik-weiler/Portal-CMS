@@ -86,7 +86,7 @@ class model_generator_navigation extends model_db_navigation
 
 			if(!empty($sub))
 			{
-				$result[$nav->id]['sub'] = array_values(self::_collectData($nav->id));
+				$result[$nav->id]['sub'] = array_values(self::_collectData($nav->id,$group_id));
 			}
 		}
 		return array_values($result);

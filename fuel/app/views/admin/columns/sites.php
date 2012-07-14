@@ -199,7 +199,8 @@
 				if(!in_array($_nav->id,$rights['data']) && !$rights['admin'])
 					continue;
 
-				print '<h4>' . $key . '</h4><blockquote>';
+				$site = model_db_site::find('first')->where('navigation_id',$key)->order_by(array('sort'=>'ASC'))->get();
+				writeRow($site);
 
 				foreach($navi as $subKey => $subNavi)
 				{
