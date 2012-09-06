@@ -62,11 +62,12 @@ class Controller_Generator_File extends Controller
       }
       foreach($layout_asset as $asset)
       {
-        $path = 'views/public/layouts/' . $_GET['layout_name'] . '/' . $asset;
-        $info = pathinfo(APPPATH . $path);
+        $path = LAYOUTPATH . '/' . $_GET['layout_name'] . '/' . $asset;
+
+        $info = pathinfo($path);
 
         if($info['extension'] == 'css')
-          $this->response->body .= Parser\Css::parse('../fuel/app/' . $path,'min');
+          $this->response->body .= Parser\Css::parse($path,'min');
       }
     }
     else
@@ -111,11 +112,11 @@ class Controller_Generator_File extends Controller
       }
       foreach($layout_asset as $asset)
       {
-        $path = 'views/public/layouts/' . $_GET['layout_name'] . '/' . $asset;
-        $info = pathinfo(APPPATH . $path);
+        $path = LAYOUTPATH . '/' . $_GET['layout_name'] . '/' . $asset;
+        $info = pathinfo($path);
 
         if($info['extension'] == 'js')
-          $this->response->body .= Parser\Js::parse('../fuel/app/' . $path,'min');
+          $this->response->body .= Parser\Js::parse($path,'min');
       }
     }
     else

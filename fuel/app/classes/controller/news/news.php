@@ -82,6 +82,8 @@ class Controller_News_News extends Controller
 		{
 			File::create_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/news/' , $news->id,0777);
 			File::create_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/news/' , $news->id . '/original',0777);
+			File::create_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/news/' , $news->id . '/big',0777);
+			File::create_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/news/' , $news->id . '/thumb',0777);
 		}
 
 		$config = array(
@@ -109,8 +111,20 @@ class Controller_News_News extends Controller
 				$pictures[$file['field']] = 'uploads/' . Session::get('lang_prefix') . '/news/' . $news->id . '/original/' .  $file['saved_as'];
 
 				$resizeObj = new image\resize(DOCROOT . $pictures[$file['field']]);
+
+				$size = Image::sizes(DOCROOT . $pictures[$file['field']]);
+				
+				if($size->width >= 1280)
+					$size->width = 1280;
+
+				if($size->height >= 720)
+					$size->height = 720;
+
+				$resizeObj -> resizeImage($size->width, $size->height, 'auto');
+				$resizeObj -> saveImage(DOCROOT . str_replace('original/','big/',$pictures[$file['field']]), 100);
+
 				$resizeObj -> resizeImage($options['news_thumbs_width'], $options['news_thumbs_height'], 'auto');
-				$resizeObj -> saveImage(DOCROOT . str_replace('original/','',$pictures[$file['field']]), 100);
+				$resizeObj -> saveImage(DOCROOT . str_replace('original/','thumb/',$pictures[$file['field']]), 100);
 			}
 
 			$news->picture = Format::factory( $pictures )->to_json();
@@ -152,8 +166,9 @@ class Controller_News_News extends Controller
 
 		if(isset($picture[$this->param('picture')]) && file_exists(DOCROOT. $picture[$this->param('picture')]))
 		{
-			File::delete(DOCROOT. $picture[$this->param('picture')]);
 			File::delete(DOCROOT. str_replace('original/','',$picture[$this->param('picture')]));
+			File::delete(DOCROOT. str_replace('big/','',$picture[$this->param('picture')]));
+			File::delete(DOCROOT. str_replace('thumb/','',$picture[$this->param('picture')]));
 		}
 
 		unset($picture[$this->param('picture')]);

@@ -13,7 +13,12 @@
 
 		print '<div>';
 
-		print '<a href="' . Uri::create('admin/navigation/edit/' . $nav->id) . '">' . __('constants.edit') . '</a> ';
+		$site = model_db_site::find('first',array(
+			'where' => array('label'=>$nav->label)
+		));
+
+		print '<a href="' . Uri::create('admin/navigation/edit/' . $nav->id) . '">' . __('constants.edit') . '</a> | ';
+		print '<a href="' . Uri::create('admin/sites/edit/' . $site->id) . '">' . __('constants.edit_site') . '</a> | ';
 		print '<a class="delete" href="' . Uri::create('admin/navigation/delete/' . $nav->id) . '">' . __('constants.delete') . '</a>';
 
 		print '</div>';

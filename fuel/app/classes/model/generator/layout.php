@@ -31,7 +31,7 @@ class model_generator_layout
   {
     $layout = model_db_option::getKey('layout');
 
-    $settings = file_get_contents(APPPATH . 'views/public/layouts/' . $layout->value . '/settings.json');
+    $settings = file_get_contents(LAYOUTPATH . '/' . $layout->value . '/settings.json');
     $settings = Format::forge($settings,'json')->to_array();
 
     self::$name = $layout->value;
@@ -40,9 +40,9 @@ class model_generator_layout
     $data = $settings['components'];
     
     if(!empty(model_generator_preparer::$currentSite->template))
-        $my_layout = View::forge('public/layouts/' . $layout->value . '/' . model_generator_preparer::$currentSite->template,$data);
+        $my_layout = View::forge(LAYOUTPATH . '/' . $layout->value . '/' . model_generator_preparer::$currentSite->template . '.php',$data);
     else
-        $my_layout = View::forge('public/layouts/' . $layout->value . '/default',$data);
+        $my_layout = View::forge(LAYOUTPATH . '/' . $layout->value . '/default.php',$data);
     
     return $my_layout;
   }
@@ -51,7 +51,7 @@ class model_generator_layout
   {
     $asset = str_replace('->','/',$asset);
 
-    $path = APPPATH . 'views/public/layouts/' . $asset;
+    $path = LAYOUTPATH . '/' . $asset;
     $info = pathinfo($path);
     $content = file($path);
 

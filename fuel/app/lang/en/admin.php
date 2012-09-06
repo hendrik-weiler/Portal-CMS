@@ -74,6 +74,7 @@ return array(
 
 	'constants' => array(
 		'edit' => 'Edit',
+		'edit_site' => 'Edit Site',
 		'delete' => 'Delete',
 		'save' => 'Save settings',
 		'not_set' => '(unset)',

@@ -19,7 +19,7 @@
 
 	if(isset($images['picture_1'])) {
 		print '<div class="clearfix">';
-		print '<img class="left" src="' . Uri::create(str_replace('original/','',$images['picture_1'])) . '" />';
+		print '<img class="left" src="' . Uri::create(str_replace('original/','thumb/',$images['picture_1'])) . '" />';
 		print '<a class="pic_delete left" href="' . Uri::create('admin/news/picture/delete/' . $id . '/picture_1') . '">' . __('constants.delete') . '</a>';
 		print '</div>';
 	}
@@ -30,7 +30,7 @@
 
 	if(isset($images['picture_2'])) {
 		print '<div class="clearfix">';
-		print '<img class="left" src="' . Uri::create(str_replace('original/','',$images['picture_2'])) . '" />';
+		print '<img class="left" src="' . Uri::create(str_replace('original/','thumb/',$images['picture_2'])) . '" />';
 		print '<a class="pic_delete left" href="' . Uri::create('admin/news/picture/delete/' . $id . '/picture_2') . '">' . __('constants.delete') . '</a>';
 		print '</div>';
 	}
@@ -42,7 +42,7 @@
 
 	if(isset($images['picture_3'])) {
 		print '<div class="clearfix">';
-		print '<img class="left" src="' . Uri::create(str_replace('original/','',$images['picture_3'])) . '" />';
+		print '<img class="left" src="' . Uri::create(str_replace('original/','thumb/',$images['picture_3'])) . '" />';
 		print '<a class="pic_delete left" href="' . Uri::create('admin/news/picture/delete/' . $id . '/picture_3') . '">' . __('constants.delete') . '</a>';
 		print '</div>';
 	}

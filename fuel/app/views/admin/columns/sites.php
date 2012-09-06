@@ -24,17 +24,10 @@
 	    <?php print Form::input('label',$label,array('style'=>'width:210px;')); ?>
 	  </div>
 	</div>
-	<div class="clearfix">
-	  <?php print Form::label(__('sites.navigation_id')); ?>
-	  <div class="input">
-	    <?php 		
-		    $select_data = array(0=>__('constants.not_set'));
-				$select_data = $select_data + model_db_navigation::asSelectBox($group_id);
-				print Form::hidden('id',$group_id);
-				print Form::select('navigation_id',$navigation_id,$select_data,array('style'=>'width:210px;'));
-			?>
-		</div>
-	</div>
+    <?php 		
+		print Form::hidden('id',$group_id);
+		print Form::hidden('navigation_id',$navigation_id);
+	?>
 	<div class="clearfix">
 	  <?php print Form::label(__('sites.nav_group')); ?>
 	  <div class="input">
@@ -101,7 +94,7 @@
 			print Form::submit('submit',__('sites.' . $mode),array('class'=>'btn primary')) . ' ';
 
 			if(Uri::segment(3) == 'edit')
-				print '<a class="btn secondary" href="' . Uri::create('admin/sites') . '">' . __('news.edit.back') . '</a>';
+				print '<a class="btn secondary" href="' . Uri::create('admin/navigation') . '">' . __('news.edit.back') . '</a>';
 		 ?>
 	</div>
 
@@ -247,6 +240,8 @@
 				print '<a target="preview" href="' . Controller_Pages_Pages::generateUrl($nav->id) . '">' . __('content.preview') . '</a> ';			
 
 			print '<a href="' . Uri::create('admin/sites/edit/' . $nav->id) . '">' . __('constants.edit') . '</a> ';
+
+			if($nav->navigation_id == 0)
 			print '<a class="delete" href="' . Uri::create('admin/sites/delete/' . $nav->id) . '">' . __('constants.delete') . '</a>';
 
 			print '</div>';
@@ -262,7 +257,7 @@
 
 			print '<strong>' . __('content.type.' . $nav->type) . '</strong>: ';
 
-			if(in_array($nav->type,array(1,2,12)))
+			if(in_array($nav->type,array(1,2,3,6,7,10,11,12)))
 			print $nav->label;
 
 			print '</span>';

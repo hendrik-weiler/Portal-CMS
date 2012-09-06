@@ -197,6 +197,9 @@ class Controller_Pages_Content extends Controller
 		if(!is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $content->id. '/original'))
 			File::create_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' , $content->id . '/original',0777);
 
+		if(!is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $content->id. '/big'))
+			File::create_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' , $content->id . '/big',0777);
+
 		if(!is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $content->id. '/thumbs'))
 			File::create_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' , $content->id . '/thumbs',0777);
                 
@@ -227,6 +230,17 @@ class Controller_Pages_Content extends Controller
 				foreach(Upload::get_files() as $file)
 				{
 					$resizeObj = new image\resize(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $content->id . '/original/' . $file['saved_as']);
+					$size = Image::sizes(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $content->id . '/original/' . $file['saved_as']);
+					
+					if($size->width >= 1280)
+						$size->width = 1280;
+
+					if($size->height >= 720)
+						$size->height = 720;
+
+					$resizeObj -> resizeImage($size->width, $size->height, 'auto');
+					$resizeObj -> saveImage(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $content->id . '/big/' . $file['saved_as'], 100);
+
 					$resizeObj -> resizeImage($options['gallery_thumbs_width'], $options['gallery_thumbs_height'], 'auto');
 					$resizeObj -> saveImage(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $content->id . '/thumbs/' . $file['saved_as'], 100);
 				}
@@ -433,6 +447,7 @@ class Controller_Pages_Content extends Controller
 		{
 			model_generator_preparer::$lang = Session::get('lang_prefix');
 			model_generator_preparer::$currentSite = model_db_site::find(Uri::segment(3));
+			model_generator_module::$content = true;
 			$data['flash'] = model_generator_content::renderContent($content->id,Session::get('lang_prefix'));
 		}
 		
@@ -553,6 +568,7 @@ class Controller_Pages_Content extends Controller
 		{
 			File::delete(DOCROOT . $file);
 			File::delete(DOCROOT . str_replace('thumbs/','original/',$file));
+			File::delete(DOCROOT . str_replace('thumbs/','big/',$file));
 		}
 	}
 

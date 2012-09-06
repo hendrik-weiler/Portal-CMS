@@ -29,6 +29,8 @@ class model_auth
 	{
 		$session = Session::get('session_id');
 
+		model_helper_management_folder::look_for_missing_folders();
+		
 		$result = false;
 
 		$user = model_db_accounts::find('first',array(

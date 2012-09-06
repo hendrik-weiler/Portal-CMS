@@ -65,7 +65,7 @@ class Css
 	private static function _collectData($file)
 	{
 		
-		if(preg_match('#views/public/layouts/#i',$file))
+		if(preg_match('#/layouts/#i',$file))
 			$path = $file;
 		else
 			$path = DOCROOT . 'assets/css/' . $file;
@@ -76,7 +76,7 @@ class Css
 
 			#---------- get cache
 
-			if(preg_match('#views/public/layouts/#i',$file))
+			if(preg_match('#/layouts/#i',$file))
 			{
 				$path_2 = $file;
 				$path_2_2 = $file;
@@ -84,11 +84,11 @@ class Css
 			else
 			{
 				$path_2 = 'css/' . $file;
-				$path_2_2 = 'assets/css/' . $file;
+				$path_2_2 = DOCROOT . 'assets/css/' . $file;
 			}	
 
 
-			$cache = Cache::getFile($path_2,DOCROOT . $path_2_2);
+			$cache = Cache::getFile($path_2,$path_2_2);
 
 			if($cache != false)
 				return $cache;

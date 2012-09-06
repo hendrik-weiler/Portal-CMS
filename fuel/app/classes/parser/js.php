@@ -49,8 +49,8 @@ class Js
   {
     self::$_mode = $mode;
 
-    if(preg_match('#views/public/layouts/#i',$file))
-      self::$_file = DOCROOT . $file;
+    if(preg_match('#/layouts/#i',$file))
+      self::$_file = $file;
     else
       self::$_file = DOCROOT . 'assets/js/' . $file;
 

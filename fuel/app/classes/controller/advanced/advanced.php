@@ -233,7 +233,7 @@ class Controller_Advanced_Advanced extends Controller
 	{
 		$this->_ajax = true;
 
-		$path = APPPATH . 'views/public/layouts/' . $this->param('path');
+		$path = LAYOUTPATH . '/' . $this->param('path');
 
 		$data = file_get_contents($path);
 		$info = pathinfo($path);
@@ -310,7 +310,7 @@ class Controller_Advanced_Advanced extends Controller
 		$this->_ajax = true;
 
 		$layout = model_db_option::getKey('layout');
-		$settings = file_get_contents(APPPATH . 'views/public/layouts/' . $layout->value . '/settings.json');
+		$settings = file_get_contents(LAYOUTPATH . '/' . $layout->value . '/settings.json');
 		$settings = Format::forge($settings,'json')->to_array();
 
 		unset($settings['components']);
@@ -325,7 +325,7 @@ class Controller_Advanced_Advanced extends Controller
 		}
 
 		File::update(
-			APPPATH . 'views/public/layouts/' . $layout->value,
+			LAYOUTPATH . '/' . $layout->value,
 			'settings.json',
 			indent(Format::forge($settings)->to_json())
 		);

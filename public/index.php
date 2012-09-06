@@ -20,6 +20,7 @@ call_user_func(function() {
 	 * Website docroot
 	 */
 	define('DOCROOT', __DIR__.DIRECTORY_SEPARATOR);
+	define('LAYOUTPATH', realpath(DOCROOT . '../layouts'));
 
 	( ! is_dir($app_path) and is_dir(DOCROOT.$app_path)) and $app_path = DOCROOT.$app_path;
 	( ! is_dir($core_path) and is_dir(DOCROOT.$core_path)) and $core_path = DOCROOT.$core_path;

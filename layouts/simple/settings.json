@@ -9,7 +9,7 @@
     "layout.css"
   ],
   "components":{
-    "Main_navigation":"testasd",
+    "Main_navigation":"Main",
     "Side_navigation":null,
     "Footer":null
   }

@@ -74,6 +74,7 @@ return array(
 
 	'constants' => array(
 		'edit' => 'Ändern',
+		'edit_site' => 'Seite Ändern',
 		'delete' => 'Löschen',
 		'save' => 'Änderungen speichern',
 		'not_set' => '(ohne)',

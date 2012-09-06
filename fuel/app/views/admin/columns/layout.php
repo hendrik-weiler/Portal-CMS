@@ -9,9 +9,9 @@
       <?php
           $layout = model_db_option::getKey('layout');
 
-          if(is_dir(APPPATH . 'views/public/layouts/' . $layout->value))
+          if(is_dir(LAYOUTPATH . '/' . $layout->value))
           {
-            $settings = file_get_contents(APPPATH . 'views/public/layouts/' . $layout->value . '/settings.json');
+            $settings = file_get_contents(LAYOUTPATH . '/' . $layout->value . '/settings.json');
             $settings = Format::forge($settings,'json')->to_array();
 
             $description = isset($settings['description'][$lang]) ? $settings['description'][$lang] : $settings['description']['default'];
@@ -45,12 +45,12 @@
     </div>
     <div class="span11">
       <?php 
-        foreach(File::read_dir(APPPATH . 'views/public/layouts',1) as $key => $dir) 
+        foreach(File::read_dir(LAYOUTPATH . '/',1) as $key => $dir) 
         {
           $key = str_replace(DS,'',$key);
-          if(is_dir(APPPATH . 'views/public/layouts/' . $key))
+          if(is_dir(LAYOUTPATH . '/' . $key))
           {
-            $settings = file_get_contents(APPPATH . 'views/public/layouts/' . $key . '/settings.json');
+            $settings = file_get_contents(LAYOUTPATH . '/' . $key . '/settings.json');
             $settings = Format::forge($settings,'json')->to_array();
 
             $check = $layout->value == $key ? array('checked'=>'checked') : array();

@@ -28,6 +28,21 @@ class Controller_Navigation_Navigation extends Controller
 
 	private $id;
 
+    private function _set_landing_page($id)
+    {
+        $lprefix = Session::get('lang_prefix');
+        
+        $lid = model_db_language::prefixToId($lprefix);
+        
+        $landing_page = model_db_option::getKey('landing_page');
+        
+        $format = Format::forge($landing_page->value,'json')->to_array();
+        $format[$lid] = $id;
+        
+        $landing_page->value = Format::forge($format)->to_json();
+        $landing_page->save();
+    }
+
 	private function _getParentArray()
 	{
 		if(preg_match('#[0-9]#i',Uri::segment(3)))
@@ -133,6 +148,24 @@ class Controller_Navigation_Navigation extends Controller
 
 			$nav_point->save();
 
+			$last_nav = model_db_navigation::find('last');
+
+			$label = Input::post('label');
+
+			$site = new model_db_site();
+			$site->label = $nav_point->label;
+			$site->url_title = Inflector::friendly_title($nav_point->label);
+			$site->site_title = '';
+			$site->redirect = '';
+			$site->keywords = '';
+            $site->template = '';
+			$site->navigation_id = $last_nav->id;
+			$site->description = '';
+			$site->group_id = Input::post('id');
+
+			$site->sort = 0;
+			$site->save();
+
 			$added_nav = model_db_navigation::find('last');
 			model_permission::addNavigationToPermissionList($added_nav->id);
 
@@ -205,6 +238,33 @@ class Controller_Navigation_Navigation extends Controller
 		model_permission::removeNavigationFromPermissionList($this->id);
 
 		$nav_point->delete();
+
+		$site_point = model_db_site::find('first',array(
+			'where' => array('label' => $nav_point->label)
+		));
+                
+                $lprefix = Session::get('lang_prefix');
+
+                $lid = model_db_language::prefixToId($lprefix);
+                
+                $format = Format::forge(model_db_option::getKey('landing_page')->value,'json')->to_array();
+                
+                if($format[$lid] == $site_point->id)
+                    $this->_set_landing_page(0);
+                
+		$site_point->delete();
+
+		$contents = model_db_content::find()->where('site_id',$site_point->id)->get();
+
+		foreach($contents as $content)
+		{
+			$content->delete();
+			if(is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $content->id))
+				File::delete_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $content->id);
+
+			if(is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash/' . $content->id))
+				File::delete_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash/' . $content->id);
+		}
 
 		Response::redirect('admin/navigation');
 	}
