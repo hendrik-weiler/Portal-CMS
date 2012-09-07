@@ -35,6 +35,7 @@
     <header>
       <figure>
         <img src="<?php print Uri::create('assets/img/admin/logo.png'); ?>" />      
+        <div class="version">Version: <?php print number_format(intval(model_about::$version),2); ?></div>
       </figure>
       <?php print file_exists(APPPATH . 'INSTALL_TOOL_DISABLED') ? '' :  '<div class="error">' . __('constants.install_tool_usable') . '</div>' ?>
       <section class="span16" id="change_lang">

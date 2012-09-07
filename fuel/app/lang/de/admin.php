@@ -75,6 +75,7 @@ return array(
 	'constants' => array(
 		'edit' => 'Ändern',
 		'edit_site' => 'Seite Ändern',
+		'back' => 'Zurück zur Übersicht',
 		'delete' => 'Löschen',
 		'save' => 'Änderungen speichern',
 		'not_set' => '(ohne)',
@@ -165,7 +166,7 @@ return array(
 	),
 
 	'sites' => array(
-		'add_header' => 'Erstelle eine neue Seite',
+		'add_header' => 'Erstelle eine neue Freie-Seite',
 		'edit_header' => 'Seite ändern',
 		'current_entries' => 'Derzeitige Einträge',
 		'no_entries' => 'Es wurde bisher noch keine Seiten erstellt.',
@@ -195,6 +196,14 @@ return array(
 		'label' => 'Beschreibung',
 		'add' => 'Neuer Navigationspunkt',
 		'edit' => 'Navigationspunkt ändern',
+		'nav_group' => 'Navigationsgruppe',
+		'parent' => 'Befindet sich in',
+		'show_sub' => 'Zeige untergruppen auf der Webseite',
+		'show_sub_list' => array(
+			'none' => '(Verborgen)',
+			'left' => 'Linke Seite',
+			'right' => 'Rechte Seite'
+		),
 
 		'menu_rename' => 'Umbenennen',
 		'menu_delete' => 'Löschen',

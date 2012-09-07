@@ -33,6 +33,11 @@ class model_generator_preparer extends model_db_site
 
 	public static $currentSite;
 
+	private static function _redirect_to_start()
+	{
+		Response::redirect(static::$lang);
+	}
+
 	private static function _getActualSite()
 	{
 		if(empty(self::$main))
@@ -46,6 +51,8 @@ class model_generator_preparer extends model_db_site
 				$site = self::find('first',array(
 					'where' => array('navigation_id'=>$main->id)
 				));
+
+				if(empty($main)) static::_redirect_to_start();
 			}
 
 			if(empty($site))
@@ -54,35 +61,42 @@ class model_generator_preparer extends model_db_site
 					'order_by' => array('sort'=>'ASC')
 				));
 			}
-		}
-                
-                if(empty(self::$main) && empty(self::$sub))
-                {
-                    $lprefix = Uri::segment(1);
-                    if(empty($lprefix))
-                    {
-                        $lang = model_db_language::find('first');
-                        $lprefix = $lang->prefix;
-                    }
+		}  
+        if(empty(self::$main) && empty(self::$sub))
+        {
+            $lprefix = Uri::segment(1);
+            if(empty($lprefix))
+            {
+                $lang = model_db_language::find('first');
+                $lprefix = $lang->prefix;
+            }
 
-                    $lid = model_db_language::prefixToId($lprefix);
+            $lid = model_db_language::prefixToId($lprefix);
 
-                    $landing_page = model_db_option::getKey('landing_page');
+            $landing_page = model_db_option::getKey('landing_page');
 
-                    $format = Format::forge($landing_page->value,'json')->to_array();
+            $format = Format::forge($landing_page->value,'json')->to_array();
 
-                    if($format[$lid] != 0)
-                    {
-                        $site = model_db_site::find($format[$lid]);
-                    }
-                    
-                }
+            if(isset($format[$lid]) && $format[$lid] != 0)
+            {
+                $site = model_db_site::find($format[$lid]);
+            }
+        
+            $parents = static::getParentsFromSite($site);
+
+            if(empty($parents['sub']))
+            	Response::redirect(static::$lang . '/' . $parents['main']->url_title);
+            else
+            	Response::redirect(static::$lang . '/' . $parents['main']->url_title . '/' . $parents['sub']->url_title);
+        }
 
 		if(!empty(self::$main) && empty(self::$sub))
 		{
 			$main = model_db_navigation::find('first',array(
 				'where' => array('url_title'=>self::$main)
 			));
+
+			if(empty($main)) static::_redirect_to_start();
 
 			if(!empty($main))
 			{
@@ -96,23 +110,32 @@ class model_generator_preparer extends model_db_site
 		{
 			if(self::$main != 'news') 
 			{
-                            $main = model_db_navigation::find('first',array(
-                                    'where' => array('url_title'=>self::$main)
-                            ));
+                $mains = model_db_navigation::find('all',array(
+                        'where' => array('url_title'=>self::$main)
+                ));
 
-                            $sub = model_db_navigation::find('first',array(
-                                    'where' => array('parent'=>$main->id)
-                            ));
+                if(empty($mains)) static::_redirect_to_start();
 
-                            if(!empty($main) && !empty($sub))
-                            {
-                                    if($sub->parent == $main->id)
-                                    {
-                                            $site = self::find('first',array(
-                                                    'where' => array('navigation_id'=>$sub->id)
-                                            ));
-                                    }
-                            }
+                foreach ($mains as $main) 
+                {
+	                $sub = model_db_navigation::find('first',array(
+	                        'where' => array('parent'=>$main->id, 'url_title'=>self::$sub)
+	                ));
+	                if(!empty($sub)) break;
+                }
+
+                if(empty($sub)) static::_redirect_to_start();
+
+                if(!empty($main) && !empty($sub))
+                {
+
+                    if($sub->parent == $main->id)
+                    {
+                        $site = self::find('first',array(
+                                'where' => array('navigation_id'=>$sub->id)
+                        ));
+                    }
+                }
 			}
 		}
 

@@ -26,12 +26,17 @@
 	</div>
     <?php 		
 		print Form::hidden('id',$group_id);
-		print Form::hidden('navigation_id',$navigation_id);
+		if(Uri::segment(3) == 'edit')
+			print Form::hidden('navigation_id',$navigation_id);
+		else
+			print Form::hidden('navigation_id',0);
 	?>
+	<?php if(Uri::segment(3) == 'edit'): ?>
 	<div class="clearfix">
 	  <?php print Form::label(__('sites.nav_group')); ?>
 	  <div class="input">
 	    <?php 		
+
 		    $select_data = array(0=>__('constants.not_set'));
 				$select_data = $select_data + model_db_navgroup::asSelectBox();
 
@@ -39,6 +44,7 @@
 			?>
 		</div>
 	</div>
+	<?php endif; ?>
 	<div class="clearfix">
 	 <?php print Form::label(__('sites.redirect')); ?>
 	 <div class="input">
@@ -56,8 +62,7 @@
             $landing_page = model_db_option::getKey('landing_page');
             
             $format = Format::forge($landing_page->value,'json')->to_array();
-             
-             $checked = $format[$lid] == Uri::segment(4) ? array('checked'=>'checked') : array(); ?>
+             $checked = isset($format[$lid]) && $format[$lid] == Uri::segment(4) ? array('checked'=>'checked') : array(); ?>
 	    <?php print Form::checkbox('landing_page',1,$checked + array('style'=>'width:210px;')); ?>
 	  </div>
 	</div>
@@ -94,14 +99,13 @@
 			print Form::submit('submit',__('sites.' . $mode),array('class'=>'btn primary')) . ' ';
 
 			if(Uri::segment(3) == 'edit')
-				print '<a class="btn secondary" href="' . Uri::create('admin/navigation') . '">' . __('news.edit.back') . '</a>';
+				print '<a class="btn secondary" href="' . Uri::create('admin/navigation/' . $group_id) . '">' . __('news.edit.back') . '</a>';
 		 ?>
 	</div>
 
 	<?php	print Form::close();	?>
 			
 		<?php if(Uri::segment(3) == 'edit'): ?>
-		<img id="moveable_content" src="<?php print Uri::create('assets/img/admin/moveable.png') ?>" alt="Moveable">
 		<h3>
 			<?php print __('sites.content_header'); ?>
 		</h3>
@@ -132,6 +136,7 @@
 			print Form::close();
 	?>
 		<section id="content_list">
+			<img id="moveable_content" src="<?php print Uri::create('assets/img/admin/moveable.png') ?>" alt="Moveable">
 			<?php
 				
 				$contents = model_db_content::find()->where('site_id',$id)->order_by(array('sort'=>'ASC'))->get();
@@ -192,7 +197,10 @@
 				if(!in_array($_nav->id,$rights['data']) && !$rights['admin'])
 					continue;
 
-				$site = model_db_site::find('first')->where('navigation_id',$key)->order_by(array('sort'=>'ASC'))->get();
+				$site = model_db_site::find('first',array(
+					'where' => array('navigation_id'=>$key),
+					'order_by' => array('sort'=>'ASC')
+				));
 				writeRow($site);
 
 				foreach($navi as $subKey => $subNavi)

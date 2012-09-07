@@ -75,6 +75,7 @@ return array(
 	'constants' => array(
 		'edit' => 'Edit',
 		'edit_site' => 'Edit Site',
+		'back' => 'Back to overview',
 		'delete' => 'Delete',
 		'save' => 'Save settings',
 		'not_set' => '(unset)',
@@ -165,7 +166,7 @@ return array(
 	),
 
 	'sites' => array(
-		'add_header' => 'Create a new site',
+		'add_header' => 'Create a new free site',
 		'edit_header' => 'Edit a site',
 		'current_entries' => 'Current entries',
 		'no_entries' => 'Your have no sites created yet.',
@@ -195,7 +196,14 @@ return array(
 		'label' => 'Label',
 		'add' => 'Add a new navigationpoint',
 		'edit' => 'Edit navigationpoint',
-
+		'nav_group' => 'Navigationgroup',
+		'parent' => 'Located in',
+		'show_sub' => 'Show subnavigation on webpage',
+		'show_sub_list' => array(
+			'none' => '(Invisible)',
+			'left' => 'Left side',
+			'right' => 'Right side'
+		),
 
 		'menu_rename' => 'Rename',
 		'menu_delete' => 'Delete',

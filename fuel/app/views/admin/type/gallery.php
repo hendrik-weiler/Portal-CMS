@@ -32,7 +32,12 @@
 					$custom['select'] = array();
 					$custom['index'] = 0;
 
-					foreach(File::read_dir(APPPATH . 'views/public/template/custom',1) as $key => $file)
+                    if(is_dir(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/custom'))
+                        $custom_path = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/custom';
+                    else
+						$custom_path = APPPATH . 'views/public/template/custom';
+
+					foreach(File::read_dir($custom_path,1) as $key => $file)
 					{
 						$file = str_replace('.php','',$file);
 

@@ -35,6 +35,7 @@ print Form::close();
 ?>
 
 <hr />
+<img id="moveable_language" src="<?php print Uri::create('assets/img/admin/moveable.png') ?>" alt="Moveable">
 <h5>
 	<?php print __('languages.sortable') ?>
 </h5>
@@ -61,5 +62,3 @@ print Form::close();
 
 ?>
 </section>
-
-<img id="moveable_language" src="<?php print Uri::create('assets/img/admin/moveable.png') ?>" alt="Moveable">

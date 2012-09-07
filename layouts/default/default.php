@@ -24,18 +24,16 @@
         <figure class="left banner">
           <a href="<?php print \Uri::create('/' . model_generator_preparer::$lang) ?>"><?php print asset_manager_get('img->admin->logo'); ?></a>
         </figure>
+        <div class="right language">
+          <?php print language_switcher(); ?>
+        </div>
         <nav class="right navi clearfix">
           <?php print navigation($Main_navigation); ?>
         </nav>
-        <?php print language_switcher(); ?>
       </section>
     </header>
     <div class="clearfix" id="main" role="main">   
-      <section id="content">
-        <p>
-          <?php print content(); ?>
-        </p>
-      </section>
+          <?php print show_sub_navigation(content()); ?>
     </div>
     <footer>
       <?php print navigation($Footer); ?>

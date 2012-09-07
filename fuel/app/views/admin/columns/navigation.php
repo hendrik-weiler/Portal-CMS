@@ -14,11 +14,19 @@
 		print '<div>';
 
 		$site = model_db_site::find('first',array(
-			'where' => array('label'=>$nav->label)
+			'where' => array('navigation_id'=>$nav->id)
 		));
 
+		$has_sub = model_db_navigation::find('first',array(
+			'where' => array('parent'=>$nav->id)
+		));
+
+		
 		print '<a href="' . Uri::create('admin/navigation/edit/' . $nav->id) . '">' . __('constants.edit') . '</a> | ';
-		print '<a href="' . Uri::create('admin/sites/edit/' . $site->id) . '">' . __('constants.edit_site') . '</a> | ';
+
+		if(!is_object($has_sub))
+			print '<a href="' . Uri::create('admin/sites/edit/' . $site->id) . '">' . __('constants.edit_site') . '</a> | ';
+
 		print '<a class="delete" href="' . Uri::create('admin/navigation/delete/' . $nav->id) . '">' . __('constants.delete') . '</a>';
 
 		print '</div>';
@@ -72,15 +80,18 @@
 <?php
 	print Form::open(array('action'=>($mode == 'add') ? 'admin/navigation/add' : Uri::current(),'class'=>'form_style_1'));
 ?>
+
 <div class="clearfix">
+	<img id="rightclick_navigation" src="<?php print Uri::create('assets/img/admin/rightclick.png') ?>" alt="Rightclickable">
   <?php print Form::label(__('navigation.label')); ?>
   <div class="input">
     <?php print Form::input('label',$label); ?>
   </div>
 </div>
+
 <?php if(Uri::segment(3) == 'edit'): ?>
 <div class="clearfix">
-    <?php print Form::label(__('sites.nav_group')); ?>
+    <?php print Form::label(__('navigation.nav_group')); ?>
     <div class="input">
     <?php 		
                         $select_data = model_db_navgroup::asSelectBox();
@@ -90,15 +101,33 @@
         </div>
 </div>
 <?php endif; ?>
+
+
+<?php if(Uri::segment(3) == 'edit' && $show_sub_field): ?>
+<?php print Form::label(__('navigation.show_sub')); ?>
+<div class="clearfix">
+  <div class="input">
+    <?php print Form::select('show_sub',$show_sub, array(
+    	0 => __('navigation.show_sub_list.none'),
+    	1 => __('navigation.show_sub_list.left'),
+    	2 => __('navigation.show_sub_list.right'),
+    )); ?>
+  </div>
+</div>
+<?php endif; ?>
+
+<?php print Form::label(__('navigation.parent')); ?>
 <div class="clearfix">
   <div class="input">
     <?php print Form::select('parent',$parent,$parent_array); ?>
   </div>
 </div>
 <?php print Form::hidden('id',Uri::segment(3)) ?>
-	
 <div class="actions">
 	<?php print Form::submit('submit',__('navigation.' . $mode),array('class'=>'btn primary')); ?>
+	<?php if(Uri::segment(3) == 'edit'): ?>
+	<a class="btn secondary" href="<?php print Uri::create('admin/navigation/' . $group_id) ?>"><?php print __('constants.back') ?></a>
+	<?php endif; ?>
 </div>
 
 <?php	print Form::close(); ?>
@@ -110,6 +139,7 @@
 	<?php print __('navigation.current_entries'); ?>
 </h3>
 <section id="navigation_list">
+	<img id="moveable_navigation" src="<?php print Uri::create('assets/img/admin/moveable.png') ?>" alt="Moveable">
 <?php
 	$navi_points = model_db_navigation::find('all',array(
 		'where' => array('parent'=>'0','group_id'=>Uri::segment(3)),
@@ -151,10 +181,5 @@
 	<li><a href="#"><?php print __('navigation.menu_rename') ?></a></li>
 	<li><a href="#"><?php print __('navigation.menu_delete') ?></a></li>
 </div>
-
-<img id="rightclick_navigation" src="<?php print Uri::create('assets/img/admin/rightclick.png') ?>" alt="Rightclickable">
-
-<img id="moveable_navigation" src="<?php print Uri::create('assets/img/admin/moveable.png') ?>" alt="Moveable">
-
 
 <?php endif; ?>

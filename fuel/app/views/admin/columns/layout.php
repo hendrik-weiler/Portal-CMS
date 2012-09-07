@@ -61,7 +61,7 @@
             print '
             <div>
               <h3>' . $settings['name'] . '</h3>
-              <img src="' . Uri::create('admin/advanced/layout/preview/' . strtolower($key) . '/' . $settings['preview']) . '" alt="' . $settings['name'] . '_preview" />
+              <img height="150" width="150" src="' . Uri::create('admin/advanced/layout/preview/' . strtolower($key) . '/' . $settings['preview']) . '" alt="' . $settings['name'] . '_preview" />
               <article>' . $description . '</article>
               ' . $radio . '
             </div>

@@ -120,6 +120,7 @@ class Controller_Navigation_Navigation extends Controller
 		$data = array();
 		$data['label'] = '';
 		$data['parent'] = 0;
+		$data['show_sub'] = 0;
                 $data['group_id'] = 0;
 		$data['parent_array'] = $this->_getParentArray();		
 		$data['mode'] = 'add';
@@ -137,6 +138,7 @@ class Controller_Navigation_Navigation extends Controller
 			$nav_point->url_title = Inflector::friendly_title($nav_point->label);
 			$nav_point->group_id = Input::post('id');
 			$nav_point->parent = Input::post('parent');
+			$nav_point->show_sub = 0;
 
 			if(!empty($nav_point->parent))
 				self::_setSitesToNull($nav_point->parent);
@@ -185,20 +187,51 @@ class Controller_Navigation_Navigation extends Controller
 		{
 			$nav_point->label = Input::post('label');
 			$nav_point->url_title = Inflector::friendly_title($nav_point->label);
-                        $nav_point->group_id = Input::post('group_id');
+            $nav_point->group_id = Input::post('group_id');
+            $nav_point->show_sub = Input::post('show_sub');
+
+            $site_point = model_db_site::find('first',array(
+            	'where' => array('navigation_id' => $nav_point->id)
+            ));
+            
+   			if(is_object($site_point))
+            {
+            	$site_point->group_id = $nav_point->group_id;
+            	$site_point->save();
+            }
+
 			$nav_point->parent = Input::post('parent');
+
 			if(Input::post('parent') >= 1)
 			{
-				$sites = model_db_site::find('all',array(
-					'where' => array('navigation_id'=>$nav_point->parent)
+				$navis = model_db_navigation::find('all',array(
+					'where' => array('parent'=>$nav_point->id)
 				));
 
-				foreach($sites as $site)
+				foreach($navis as $navi)
 				{
-					$site->navigation_id = 0;
+					$navi->parent = 0;
+					$navi->save();
+				}
+			}
+			if(Input::post('parent') == 0)
+			{
+				$navis = model_db_navigation::find('all',array(
+					'where' => array('parent'=>$nav_point->id)
+				));
+
+				foreach($navis as $navi)
+				{
+					$navi->group_id = $nav_point->group_id;
+					$navi->save();
+					$site = model_db_site::find('first',array(
+						'where' => array('navigation_id'=>$navi->id)
+					));
+					$site->group_id = $nav_point->group_id;
 					$site->save();
 				}
 			}
+
 			$nav_point->save();
 
 			Response::redirect('admin/navigation/' . $nav_point->group_id);
@@ -207,6 +240,13 @@ class Controller_Navigation_Navigation extends Controller
 		$data = array();
 		$data['label'] = $nav_point->label;
 		$data['parent'] = $nav_point->parent;
+		$data['show_sub'] = $nav_point->show_sub;
+
+		$site = model_db_navigation::find('first',array(
+			'where' => array('parent'=>$nav_point->id)
+		));
+		$data['show_sub_field'] = (is_object($site));
+
                 $data['group_id'] = $nav_point->group_id;
 		$data['parent_array'] = $this->_getParentArray();
 

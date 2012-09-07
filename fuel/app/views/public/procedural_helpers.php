@@ -44,3 +44,13 @@ function asset_manager_get_group($path)
 {
   return Asset\Manager::getGroup($path);
 }
+
+function layout_image($filename)
+{
+	return '<img src="' . Uri::create('server/layout/' . $filename) . '" alt="layout_' . $filename . '" />';
+}
+
+function show_sub_navigation($content)
+{
+  return model_generator_sub_sites::render($content);
+}

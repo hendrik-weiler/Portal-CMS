@@ -1,12 +1,13 @@
 {
-  "name":"Default",
+  "name":"Portal CMS Base",
   "description":{
-    "default":"Default Layout containing 2 Navigations",
-    "de":"Ein Layout mit 2 Navigationen."
+    "default":"Default layout contains a bit of basic styling",
+    "de":"Standard Layout das etwas basis styling besitzt."
   },
   "preview":"icon.jpg",
   "assets":[
-    "layout.css"
+    "layout.css",
+    "navigation.js"
   ],
   "components":{
     "Main_navigation":"Main",

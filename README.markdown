@@ -1,6 +1,6 @@
 Portal Content Management System
 ====================
-#### Beta
+#### v: 1.00
 
 Build on [Fuel Framework](https://github.com/fuel/fuel)<br />
 Using:<br />
@@ -64,6 +64,7 @@ print seo('analytics'); // analytics printout
 
 print navigation(); //Prints out the navigation
 print content(); //Prints site contents out
+print show_sub_navigation($content) // prints out the content with sidebar (if in navigationpoint set to active)
 print content_single($id_or_name,$language); // Render a single content
 print content_site($id_or_name,$language); // Render a single site
 print language_switcher(); //Prints a list of language versions out
@@ -72,6 +73,8 @@ print language_switcher(); //Prints a list of language versions out
 print asset_manager_insert('js'); // bundled javascript in one file
 print asset_manager_insert('css'); // bundled css in one file
 print asset_manager_get_group('jquery') // jquery package in one file
+
+print layout_image('image.jpg') // display a picture from a layout (img folder from layout)
 
 print asset_manager_get('js->include->modernizr'); // searches in include path after %modernizr% and prints it out
 print asset_manager_get('img->admin->logo'); // searches in the img path after the portal logo and prints it out

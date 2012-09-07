@@ -481,10 +481,13 @@ class model_generator_content extends model_db_site
                 }
 		else 
                 {
-                    if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/' . $content->pictures . '.php'))
-                        $path = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/' . $content->pictures . '.php';
-                    else
+                    if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/custom/' . $content->pictures . '.php'))
+                        $path = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/custom/' . $content->pictures . '.php';
+                    else 
 			$path = 'public/template/' . $content->pictures;
+
+			if($content->pictures == 'custom/')
+				$path = 'public/template/gallery_lightbox';
 		}
 			
 		return View::factory($path,$data);

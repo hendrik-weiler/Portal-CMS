@@ -131,11 +131,20 @@ class Controller_Pages_Pages extends Controller
 		if(isset($_POST['submit']))
 		{
 			$nav_point->label = empty($label) ? __('constants.untitled_element') : $label;
-			$nav_point->url_title = Inflector::friendly_title($site->label);
+			$nav_point->url_title = Inflector::friendly_title($nav_point->label);
 			$nav_point->redirect = Input::post('redirect');
 			$nav_point->site_title = Input::post('site_title');
+
+			if($nav_point->navigation_id != 0)
+			{
+				$real_nav_point = model_db_navigation::find($nav_point->navigation_id);
+				$real_nav_point->label = empty($label) ? __('constants.untitled_element') : $label;
+				$real_nav_point->url_title = Inflector::friendly_title($nav_point->label);
+				$real_nav_point->save();
+			}
+
 			$nav_point->keywords = Input::post('keywords');
-                        $nav_point->template = Input::post('current_template');
+            $nav_point->template = Input::post('current_template');
 			$nav_point->navigation_id = Input::post('navigation_id');
 			$nav_point->description = Input::post('description');
 			$nav_point->group_id = Input::post('group_id');
@@ -149,14 +158,14 @@ class Controller_Pages_Pages extends Controller
 
 		$data = array();
 		$data['label'] = $nav_point->label;
-                $data['current_template'] = $nav_point->template;
+        $data['current_template'] = $nav_point->template;
 		$data['redirect'] = $nav_point->redirect;
 		$data['site_title'] = $nav_point->site_title;
 		$data['keywords'] = $nav_point->keywords;
 		$data['description'] = $nav_point->description;
 		$data['navigation_id'] = $nav_point->navigation_id;
 		$data['id'] = $this->id;
-                $data['site_id'] = $nav_point->id;
+        $data['site_id'] = $nav_point->id;
 
 		$data['mode'] = 'edit';
 

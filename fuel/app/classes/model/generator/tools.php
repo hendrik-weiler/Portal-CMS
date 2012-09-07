@@ -31,7 +31,11 @@ class model_generator_tools extends model_db_site
 			'order_by' => array('sort'=>'ASC')
 		));
 
-		$outer = View::factory('public/template/languages_outer');
+        if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/languages_outer.php'))
+            $outer = View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/languages_outer.php');
+		else
+            $outer = View::factory('public/template/languages_outer');
+
 		$inner = '';
 
 		foreach($langs as $lang)
@@ -39,8 +43,15 @@ class model_generator_tools extends model_db_site
 			$data = array();
 			$data['label'] = stripslashes($lang->label);
 			$data['link'] = Uri::create($lang->prefix);
+			if(model_generator_preparer::$lang == $lang->prefix)
+				$data['active'] = 'class="active_language"';
+			else
+				$data['active'] = '';
 
-			$inner .= View::factory('public/template/languages_inner',$data);
+	        if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/languages_inner.php'))
+	            $inner .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/languages_inner.php',$data);
+			else
+	            $inner .= View::factory('public/template/languages_inner',$data);
 		}
 
 		return str_replace('{{INNER}}',$inner,$outer);
