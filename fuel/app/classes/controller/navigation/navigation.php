@@ -193,12 +193,14 @@ class Controller_Navigation_Navigation extends Controller
             $site_point = model_db_site::find('first',array(
             	'where' => array('navigation_id' => $nav_point->id)
             ));
+            $site_point->label = Input::post('label');
             
    			if(is_object($site_point))
             {
             	$site_point->group_id = $nav_point->group_id;
-            	$site_point->save();
             }
+            
+            $site_point->save();
 
 			$nav_point->parent = Input::post('parent');
 

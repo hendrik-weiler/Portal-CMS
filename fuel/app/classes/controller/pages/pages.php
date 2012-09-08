@@ -156,8 +156,10 @@ class Controller_Pages_Pages extends Controller
 			Response::redirect('admin/sites/edit/' . Input::post('site_id'));
 		}
 
+		$navigation = model_db_navigation::find($nav_point->navigation_id);
+
 		$data = array();
-		$data['label'] = $nav_point->label;
+		$data['label'] = $navigation->label;
         $data['current_template'] = $nav_point->template;
 		$data['redirect'] = $nav_point->redirect;
 		$data['site_title'] = $nav_point->site_title;
