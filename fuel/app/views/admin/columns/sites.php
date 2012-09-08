@@ -37,7 +37,7 @@
 	  <div class="input">
 	    <?php 		
 
-		    $select_data = array(0=>__('constants.not_set'));
+		    $select_data = array();
 				$select_data = $select_data + model_db_navgroup::asSelectBox();
 
 				print Form::select('group_id',$group_id,$select_data,array('style'=>'width:210px;'));
@@ -178,7 +178,7 @@
 		$rights = model_permission::getNavigationRights();
 
 		$navigations = model_db_navigation::asSelectBox($group_id);
-		$navigations = array(0=>__('constants.not_set')) + $navigations;
+
 	if(empty($navigations))
 	{
 		print __('sites.no_entries');
@@ -197,36 +197,30 @@
 				if(!in_array($_nav->id,$rights['data']) && !$rights['admin'])
 					continue;
 
-				$site = model_db_site::find('first',array(
-					'where' => array('navigation_id'=>$key),
-					'order_by' => array('sort'=>'ASC')
-				));
-				writeRow($site);
+				print '<h4>' . $key . '</h4>';
 
 				foreach($navi as $subKey => $subNavi)
 				{
 					if(!in_array($subKey,$rights['data']) && !$rights['admin'])
 						continue;
-					print '<h4>' . $subNavi . '</h4>';
 
 					$sites = model_db_site::find()->where('navigation_id',$subKey)->order_by(array('sort'=>'ASC'))->get();
 					foreach($sites as $site)
-						writeRow($site,'sites_entry_sub');
+						writeRow($site);
 				}
 
-				print '</blockquote>';
+				print '</blockquote><hr />';
 			}
 			else
 			{
 				if(!in_array($key,$rights['data']) && !$rights['admin'] && $key != 0)
 					continue;
 
-				print '<h4>' . $navi . '</h4><blockquote>';
 				$sites = model_db_site::find()->where('navigation_id',$key)->order_by(array('sort'=>'ASC'))->get();
 				foreach($sites as $site)
 					writeRow($site);
 
-				print '</blockquote>';
+				print '</blockquote><hr />';
 			}
 		}
 	}

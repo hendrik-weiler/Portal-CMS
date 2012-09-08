@@ -61,6 +61,8 @@ class model_generator_sub_sites extends model_db_navigation
 
 		foreach ($navigations as $navigation) 
 		{
+			if(!$navigation->show_in_navigation) continue;
+
 			$data = array();
 			$data['active_class'] = '';
 			$data['target'] = '_self';
@@ -88,6 +90,8 @@ class model_generator_sub_sites extends model_db_navigation
 		}
 
 		$returnObj->body = str_replace('{{INNER}}', $innerSub, $outerSub);
+
+		if(empty($innerSub)) return false;
 
 		return $returnObj;
 	}

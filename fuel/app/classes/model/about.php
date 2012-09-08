@@ -22,5 +22,5 @@
  */
 class model_about 
 {
-	public static $version = 1.00;
+	public static $version = 1.01;
 }

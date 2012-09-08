@@ -47,6 +47,7 @@ class database
             'url_title' => array('type' => 'varchar', 'constraint' => 100, 'null' => true),
             'parent' => array('type' => 'int', 'constraint' => 11, 'null' => true),
             'show_sub' => array('type' => 'int', 'constraint' => 1,'null' => true,'default'=>0),
+            'show_in_navigation' => array('type' => 'int', 'constraint' => 1,'null' => true,'default'=>1),
             'sort' => array('type' => 'int', 'constraint' => 11, 'null' => true),
         ), array('id'));
 

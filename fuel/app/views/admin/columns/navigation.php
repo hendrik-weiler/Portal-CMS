@@ -89,6 +89,15 @@
   </div>
 </div>
 
+<div class="clearfix">
+  <?php print Form::label(__('navigation.show_in_navigation')); ?>
+  <div class="input">
+  	<?php if(Uri::segment(3) != 'edit') $show_in_navigation = 1; ?>
+  	<?php $check = empty($show_in_navigation) ? array() : array('checked'=>'checked'); ?>
+    <?php print Form::checkbox('show_in_navigation',1,$check); ?>
+  </div>
+</div>
+
 <?php if(Uri::segment(3) == 'edit'): ?>
 <div class="clearfix">
     <?php print Form::label(__('navigation.nav_group')); ?>

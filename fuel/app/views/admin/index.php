@@ -35,7 +35,7 @@
     <header>
       <figure>
         <img src="<?php print Uri::create('assets/img/admin/logo.png'); ?>" />      
-        <div class="version">Version: <?php print number_format(intval(model_about::$version),2); ?></div>
+        <div class="version">Version: <?php print number_format((model_about::$version),2); ?></div>
       </figure>
       <?php print file_exists(APPPATH . 'INSTALL_TOOL_DISABLED') ? '' :  '<div class="error">' . __('constants.install_tool_usable') . '</div>' ?>
       <section class="span16" id="change_lang">
@@ -68,7 +68,10 @@
           <?php endif; ?>
 
           <?php if($permission[1]['valid']): ?>
-          <li <?php print (in_array(Uri::segment(2),array('sites','content'))) ? 'class="active"' : '' ?>><a href="<?php print Uri::create('admin/sites'); ?>"><?php print __('nav.sites') ?></a></li>
+          <?php $first_site = model_db_site::find('first'); ?>
+          <?php if(!empty($first_site)): ?>
+          <li <?php print (in_array(Uri::segment(2),array('sites','content'))) ? 'class="active"' : '' ?>><a href="<?php print Uri::create('admin/sites/edit/' . $first_site->id); ?>"><?php print __('nav.sites') ?></a></li>
+          <?php endif; ?>
           <?php endif; ?>
 
           <?php if($permission[2]['valid']): ?>

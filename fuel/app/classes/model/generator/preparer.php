@@ -51,8 +51,6 @@ class model_generator_preparer extends model_db_site
 				$site = self::find('first',array(
 					'where' => array('navigation_id'=>$main->id)
 				));
-
-				if(empty($main)) static::_redirect_to_start();
 			}
 
 			if(empty($site))
@@ -62,6 +60,7 @@ class model_generator_preparer extends model_db_site
 				));
 			}
 		}  
+
         if(empty(self::$main) && empty(self::$sub))
         {
             $lprefix = Uri::segment(1);

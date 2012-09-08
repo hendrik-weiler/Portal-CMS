@@ -36,7 +36,7 @@ class model_generator_navigation extends model_db_navigation
 		$result = array();
 
 		$data = self::find('all',array(
-			'where' => array('parent'=>$parent,'group_id'=>$group_id),
+			'where' => array('parent'=>$parent,'group_id'=>$group_id,'show_in_navigation'=>1),
 			'order_by' => array('sort'=>'ASC')
 		));
 
@@ -114,7 +114,10 @@ class model_generator_navigation extends model_db_navigation
 			$data['link'] = Uri::create(model_generator_preparer::$lang . '/' . $nav['url_title']);
 			if(isset($nav['sub']))
 			{
-				$data['link'] = Uri::create(model_generator_preparer::$lang . '/' . $nav['url_title'] . '/' . $nav['sub'][0]['url_title']);
+				if(isset($nav['sub'][0]))
+					$data['link'] = Uri::create(model_generator_preparer::$lang . '/' . $nav['url_title'] . '/' . $nav['sub'][0]['url_title']);
+				else
+					$data['link'] = Uri::create(model_generator_preparer::$lang . '/' . $nav['url_title']);
 			}
 			
 			if(!empty($search->redirect)) 

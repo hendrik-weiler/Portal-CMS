@@ -198,6 +198,7 @@ return array(
 		'edit' => 'Navigationspunkt ändern',
 		'nav_group' => 'Navigationsgruppe',
 		'parent' => 'Befindet sich in',
+		'show_in_navigation' => 'Sichtbar in der Navigation',
 		'show_sub' => 'Zeige untergruppen auf der Webseite',
 		'show_sub_list' => array(
 			'none' => '(Verborgen)',

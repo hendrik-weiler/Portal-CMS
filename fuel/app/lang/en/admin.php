@@ -198,6 +198,7 @@ return array(
 		'edit' => 'Edit navigationpoint',
 		'nav_group' => 'Navigationgroup',
 		'parent' => 'Located in',
+		'show_in_navigation' => 'Show up in navigation',
 		'show_sub' => 'Show subnavigation on webpage',
 		'show_sub_list' => array(
 			'none' => '(Invisible)',

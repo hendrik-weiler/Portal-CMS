@@ -77,15 +77,15 @@ class Controller_Navigation_Navigation extends Controller
 
 	private function _setSitesToNull($nav_id)
 	{
-		$sites = model_db_site::find('all',array(
-			'where' => array('navigation_id'=>$nav_id)
-		));
+		#$sites = model_db_site::find('all',array(
+		#	'where' => array('navigation_id'=>$nav_id)
+		#));
 
-		foreach($sites as $site)
-		{
-			$site->navigation_id = 0;
-			$site->save();
-		}
+		#foreach($sites as $site)
+		#{
+			#$site->navigation_id = 0;
+			#$site->save();
+		#}
 	}
 
 	public function before()
@@ -135,8 +135,9 @@ class Controller_Navigation_Navigation extends Controller
 			$label = Input::post('label');
 			$nav_point = new model_db_navigation();
 			$nav_point->label = (empty($label)) ? __('constants.untitled_element') : $label;
-			$nav_point->url_title = Inflector::friendly_title($nav_point->label);
+			$nav_point->url_title = model_generator_seo::friendly_title($nav_point->label);
 			$nav_point->group_id = Input::post('id');
+			$nav_point->show_in_navigation = 1;
 			$nav_point->parent = Input::post('parent');
 			$nav_point->show_sub = 0;
 
@@ -156,7 +157,7 @@ class Controller_Navigation_Navigation extends Controller
 
 			$site = new model_db_site();
 			$site->label = $nav_point->label;
-			$site->url_title = Inflector::friendly_title($nav_point->label);
+			$site->url_title = model_generator_seo::friendly_title($nav_point->label);
 			$site->site_title = '';
 			$site->redirect = '';
 			$site->keywords = '';
@@ -186,9 +187,10 @@ class Controller_Navigation_Navigation extends Controller
 		if(isset($_POST['submit']))
 		{
 			$nav_point->label = Input::post('label');
-			$nav_point->url_title = Inflector::friendly_title($nav_point->label);
+			$nav_point->url_title = model_generator_seo::friendly_title($nav_point->label);
             $nav_point->group_id = Input::post('group_id');
             $nav_point->show_sub = Input::post('show_sub');
+            $nav_point->show_in_navigation = Input::post('show_in_navigation') != '';
 
             $site_point = model_db_site::find('first',array(
             	'where' => array('navigation_id' => $nav_point->id)
@@ -243,6 +245,7 @@ class Controller_Navigation_Navigation extends Controller
 		$data['label'] = $nav_point->label;
 		$data['parent'] = $nav_point->parent;
 		$data['show_sub'] = $nav_point->show_sub;
+		$data['show_in_navigation'] = $nav_point->show_in_navigation;
 
 		$site = model_db_navigation::find('first',array(
 			'where' => array('parent'=>$nav_point->id)
@@ -271,12 +274,6 @@ class Controller_Navigation_Navigation extends Controller
 		if(!empty($nav_point->parent))
 			self::_setSitesToNull($this->id);
 
-		if(!empty($sub_points))
-		{
-			foreach($sub_points as $point)
-				$point->delete();
-		}
-
 		model_permission::removeNavigationFromPermissionList($this->id);
 
 		$nav_point->delete();
@@ -285,14 +282,14 @@ class Controller_Navigation_Navigation extends Controller
 			'where' => array('label' => $nav_point->label)
 		));
                 
-                $lprefix = Session::get('lang_prefix');
+        $lprefix = Session::get('lang_prefix');
 
-                $lid = model_db_language::prefixToId($lprefix);
-                
-                $format = Format::forge(model_db_option::getKey('landing_page')->value,'json')->to_array();
-                
-                if($format[$lid] == $site_point->id)
-                    $this->_set_landing_page(0);
+        $lid = model_db_language::prefixToId($lprefix);
+        
+        $format = Format::forge(model_db_option::getKey('landing_page')->value,'json')->to_array();
+        
+        if($format[$lid] == $site_point->id)
+            $this->_set_landing_page(0);
                 
 		$site_point->delete();
 
@@ -306,6 +303,17 @@ class Controller_Navigation_Navigation extends Controller
 
 			if(is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash/' . $content->id))
 				File::delete_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash/' . $content->id);
+		}
+
+		if(!empty($sub_points))
+		{
+			foreach($sub_points as $point)
+			{
+				$sub_site = model_db_site::find('first',array(
+					'where' => array('navigation_id'=>$point->id)
+				));
+				$sub_site->delete();
+			}	$point->delete();
 		}
 
 		Response::redirect('admin/navigation');
