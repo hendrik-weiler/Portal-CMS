@@ -1,6 +1,6 @@
 Portal Content Management System
 ====================
-#### v: 1.00
+#### v: 1.01
 
 Build on [Fuel Framework](https://github.com/fuel/fuel)<br />
 Using:<br />
@@ -79,6 +79,13 @@ print layout_image('image.jpg') // display a picture from a layout (img folder f
 print asset_manager_get('js->include->modernizr'); // searches in include path after %modernizr% and prints it out
 print asset_manager_get('img->admin->logo'); // searches in the img path after the portal logo and prints it out
 </pre>
+
+Layouts:
+---------------------
+Portal CMS is able to use Layouts/Themes. In 'Advanced settings' in tab 'Layout' you can change
+the current Layout with another one.
+
+All layouts are located at 'root/layouts'.
 
 Writing CSS:
 ---------------------
