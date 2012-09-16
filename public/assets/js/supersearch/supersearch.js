@@ -31,6 +31,8 @@ pcms.supersearch = function()
 
 	var _base_url = _supersearch_base_url;
 
+	var _current_lang_version = 'en';
+
 	var searchterm = '';
 
 	var is_shown = false;
@@ -52,6 +54,7 @@ pcms.supersearch = function()
 		options_for_ajax['hash'] = hash_value;
 		options_for_ajax['searchterm'] = '*';
 		options_for_ajax['type'] = type;
+		options_for_ajax['language_version'] = _current_lang_version;
 
 		$('#form_supersearch_cat').find('option').removeAttr('selected');
 		$('#form_supersearch_cat').find('option[value=' + type + ']').attr('selected','selected');
@@ -121,6 +124,7 @@ pcms.supersearch = function()
 		is_shown = true;
 		options_for_ajax['searchterm'] = searchterm;
 		options_for_ajax['type'] = type;
+		options_for_ajax['language_version'] = _current_lang_version;
 
 		if(old_searchterm != searchterm)
 		_get_results(type);
@@ -130,41 +134,43 @@ pcms.supersearch = function()
 	{
 		var keyboard_selector = 'body ,body *, .userarea *, #form_filter, .el-rte';
 
-		$(keyboard_selector).bind('keyup', 'shift+e', function(){
+		var not_in = '#content input, #content textarea';
+
+		$(keyboard_selector).not(not_in).bind('keyup', 'shift+e', function(){
 			$('#form_supersearch_cat').find('option').removeAttr('selected').eq(0).attr('selected','selected');
 			$('#form_supersearch_input').focus();
 		});
 
-		$(keyboard_selector).bind('keyup', 'shift+t', function(){
+		$(keyboard_selector).not(not_in).bind('keyup', 'shift+t', function(){
 			$('#form_supersearch_cat').find('option').removeAttr('selected').eq(1).attr('selected','selected');
 			$('#form_supersearch_input').focus();
 		});
 
-		$(keyboard_selector).bind('keyup', 'shift+c', function(){
+		$(keyboard_selector).not(not_in).bind('keyup', 'shift+c', function(){
 			$('#form_supersearch_cat').find('option').removeAttr('selected').eq(2).attr('selected','selected');
 			$('#form_supersearch_input').focus();
 		});
 
-		$(keyboard_selector).bind('keyup', 'shift+s', function(){
+		$(keyboard_selector).not(not_in).bind('keyup', 'shift+s', function(){
 			$('#form_supersearch_cat').find('option').removeAttr('selected').eq(3).attr('selected','selected');
 			$('#form_supersearch_input').focus();
 		});
 
-		$(keyboard_selector).bind('keyup', 'shift+n', function(){
+		$(keyboard_selector).not(not_in).bind('keyup', 'shift+n', function(){
 			$('#form_supersearch_cat').find('option').removeAttr('selected').eq(4).attr('selected','selected');
 			$('#form_supersearch_input').focus();
 		});
 
-		$(keyboard_selector).bind('keyup', 'shift+a', function(){
+		$(keyboard_selector).not(not_in).bind('keyup', 'shift+a', function(){
 			$('#form_supersearch_cat').find('option').removeAttr('selected').eq(5).attr('selected','selected');
 			$('#form_supersearch_input').focus();
 		});
 
-		$(keyboard_selector).bind('keyup', 'shift+r', function(){
+		$(keyboard_selector).not(not_in).bind('keyup', 'shift+r', function(){
 			$('#form_supersearch_input').val('').focus();
 		});
 
-		$('body ,body *').bind('keyup','down', function() {
+		$('body ,body *').not(not_in).bind('keyup','down', function() {
 			if(is_shown)
 			{
 				current_index++;
@@ -175,7 +181,7 @@ pcms.supersearch = function()
 			}
 		});
 
-		$('body ,body *').bind('keyup','up', function() {
+		$('body ,body *').not(not_in).bind('keyup','up', function() {
 			if(is_shown)
 			{
 				current_index--;
@@ -213,6 +219,7 @@ pcms.supersearch = function()
 	function supersearch()
 	{
 		$(function() {
+			_current_lang_version = _supersearch_lang_version;
 			_set_link_events($('a[href*=open-supersearch]'));
 
 			$('#form_supersearch_input').bind('keyup',_input_action);

@@ -53,6 +53,13 @@ class Controller_Supersearch_Supersearch extends Controller
 		$this->type = Input::get('type');
 		$this->hash_value = Input::get('hash') == '' ? '' : '#' . Input::get('hash');
 		$this->option = Input::get('option');
+
+		$language_version = Input::get('language_version');
+
+		model_db_content::setLangPrefix($language_version);
+		model_db_site::setLangPrefix($language_version);
+		model_db_news::setLangPrefix($language_version);
+		model_db_navigation::setLangPrefix($language_version);
 	}
 
 	private function _filter_db_results($current_results, $search)

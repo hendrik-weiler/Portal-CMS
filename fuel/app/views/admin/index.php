@@ -151,6 +151,7 @@
   <script src="<?php print Uri::create('assets/js/supersearch/supersearch.js') ?>"></script>
   <script type="text/javascript">
   var _supersearch_base_url = _url;
+  var _supersearch_lang_version = "<?php print Session::get('lang_prefix') ?>";
   var supersearch = new pcms.supersearch();
   supersearch.init_keyboard_shorcuts();
   </script>

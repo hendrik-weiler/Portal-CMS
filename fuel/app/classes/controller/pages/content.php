@@ -548,8 +548,8 @@ class Controller_Pages_Content extends Controller
 	{
 		$delete = model_db_content::find($this->id);
                 
-                if(in_array('delete',get_class_methods($delete)))
-                    $delete->delete();
+        if(in_array('delete',get_class_methods($delete)))
+            $delete->delete();
 
 		if(is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $this->id))
 			File::delete_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $this->id);
@@ -557,7 +557,7 @@ class Controller_Pages_Content extends Controller
 		if(is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash/' . $this->id))
 			File::delete_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash/' . $this->id);
 
-		Response::redirect('admin/sites');
+		Response::redirect('admin/sites/edit/' . $delete->site_id);
 	}
 
 	public function action_delete_gal_picture()

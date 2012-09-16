@@ -137,7 +137,7 @@ class Controller_Navigation_Navigation extends Controller
 			$nav_point->label = (empty($label)) ? __('constants.untitled_element') : $label;
 			$nav_point->url_title = model_generator_seo::friendly_title($nav_point->label);
 			$nav_point->group_id = Input::post('id');
-			$nav_point->show_in_navigation = 1;
+			$nav_point->show_in_navigation = Input::post('show_in_navigation') == 1;
 			$nav_point->parent = Input::post('parent');
 			$nav_point->show_sub = 0;
 

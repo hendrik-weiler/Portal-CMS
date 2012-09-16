@@ -172,6 +172,7 @@ class Controller_Pages_Pages extends Controller
 				$real_nav_point = model_db_navigation::find($nav_point->navigation_id);
 				$real_nav_point->show_in_navigation = Input::post('show_in_navigation') != '';
 				$real_nav_point->parent = Input::post('parent');
+				$real_nav_point->group_id = Input::post('group_id');
 				$real_nav_point->label = empty($label) ? __('constants.untitled_element') : $label;
 				$real_nav_point->url_title = model_generator_seo::friendly_title($nav_point->label);
 				$real_nav_point->save();

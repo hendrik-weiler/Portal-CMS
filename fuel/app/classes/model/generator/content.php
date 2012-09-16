@@ -59,8 +59,8 @@ class model_generator_content extends model_db_site
                                                         return View::factory('public/template/news_archive',$data);
 				}
 				$news = model_db_news::find(Uri::segment(3));
-                                
-                                if(empty($news))
+
+                if(empty($news))
 					Response::redirect(model_generator_preparer::$lang);
 					
 				return self::_showSingleNews($news,true);
@@ -319,6 +319,10 @@ class model_generator_content extends model_db_site
 		{
 			$result .= self::_showSingleNews($new,$full_view);
 		}
+
+		if(count($news) == 0)
+			$result .= __('news.no_data');
+
 		return $result;
 	}
 
@@ -481,8 +485,8 @@ class model_generator_content extends model_db_site
                 }
 		else 
                 {
-                    if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/custom/' . $content->pictures . '.php'))
-                        $path = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/custom/' . $content->pictures . '.php';
+                    if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/' . $content->pictures . '.php'))
+                        $path = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/' . $content->pictures . '.php';
                     else 
 			$path = 'public/template/' . $content->pictures;
 
@@ -510,9 +514,9 @@ class model_generator_content extends model_db_site
                 model_db_content::setLangPrefix(model_generator_preparer::$lang);
                 if(is_object($current_site) && count(model_db_content::find('first',array('where'=>array('site_id'=>$current_site->id)))) == 0 && Uri::segment(2) != 'news')
                     return View::forge('public/errors/error_no_content');
-                
-		if(!$site)
-                    Response::redirect(model_generator_preparer::$lang);
+               
+		if(!$site && $site != '')
+            Response::redirect(model_generator_preparer::$lang);
 
 		return $site;
 	}
@@ -545,7 +549,8 @@ class model_generator_content extends model_db_site
 		self::$_renderSpecial = true;
 			
 		$current_site = DB::select('*')->from(self::$_tempLang . '_site')->where(array($search['key']=>$search['value']))->execute();
-                $current_site = array_values($current_site->as_array());
+        $current_site = array_values($current_site->as_array());
+        if(isset($current_site[0]))
 		$current_site = (object)$current_site[0];
 
 		$site = self::_viewSite($current_site);
