@@ -83,6 +83,11 @@ return array(
 
 	'supersearch_results' => array(
 		'nothing_found' => 'Keine übereinstimmung gefunden.',
+		'main_point' => 'Oberpunkt',
+		'sub_point' => 'Unterpunkt',
+		'normal_point' => 'Normalpunkt',
+		'account_admin' => 'Admin',
+		'account_normal' => 'Normal',
 	),
 
 	'constants' => array(

@@ -99,6 +99,8 @@ class Controller_Advanced_Advanced extends Controller
 	{
 		$settings = self::getOptions();
 
+		$current_lang = Session::get('lang_prefix');
+
 		$news = model_db_news::find('all');
 
 		foreach($news as $new)
@@ -108,22 +110,22 @@ class Controller_Advanced_Advanced extends Controller
 			if(isset($pictures['picture_1']))
 			{
 				$resizer = new image\resize(DOCROOT . $pictures['picture_1']);
-				$resizer->resizeImage($settings['news_thumbs_width'], $settings['news_thumbs_height'], 'auto');
-				$resizer->saveImage(DOCROOT . str_replace('/original','/',$pictures['picture_1']), 100);
+				$resizer->resizeImage($settings['news_thumbs_width'], $settings['news_thumbs_height'], 'crop');
+				$resizer->saveImage(DOCROOT . str_replace('/original','/thumb',$pictures['picture_1']), 100);
 			}
 
 			if(isset($pictures['picture_2']))
 			{
 				$resizer = new image\resize(DOCROOT . $pictures['picture_2']);
-				$resizer->resizeImage($settings['news_thumbs_width'], $settings['news_thumbs_height'], 'auto');
-				$resizer->saveImage(DOCROOT . str_replace('/original','/',$pictures['picture_2']), 100);
+				$resizer->resizeImage($settings['news_thumbs_width'], $settings['news_thumbs_height'], 'crop');
+				$resizer->saveImage(DOCROOT . str_replace('/original','/thumb',$pictures['picture_2']), 100);
 			}
 			
 			if(isset($pictures['picture_3']))
 			{
 				$resizer = new image\resize(DOCROOT . $pictures['picture_3']);
-				$resizer->resizeImage($settings['news_thumbs_width'], $settings['news_thumbs_height'], 'auto');
-				$resizer->saveImage(DOCROOT . str_replace('/original','/',$pictures['picture_3']), 100);
+				$resizer->resizeImage($settings['news_thumbs_width'], $settings['news_thumbs_height'], 'crop');
+				$resizer->saveImage(DOCROOT . str_replace('/original','/thumb',$pictures['picture_3']), 100);
 			}
 		}
 
@@ -131,13 +133,14 @@ class Controller_Advanced_Advanced extends Controller
 
 		foreach($contents as $content)
 		{
-			if(is_dir(DOCROOT . 'uploads/gallery/' . $content->id))
+			var_dump(is_dir(DOCROOT . 'uploads/' . $current_lang . '/gallery/' . $content->id));
+			if(is_dir(DOCROOT . 'uploads/' . $current_lang . '/gallery/' . $content->id))
 			{
-				foreach(File::read_dir(DOCROOT . 'uploads/gallery/' . $content->id . '/original',1) as $picture)
+				foreach(File::read_dir(DOCROOT . 'uploads/' . $current_lang . '/gallery/' . $content->id . '/original',1) as $picture)
 				{
-					$resizer = new image\resize(DOCROOT . 'uploads/gallery/' . $content->id . '/original/' . $picture);
+					$resizer = new image\resize(DOCROOT . 'uploads/' . $current_lang . '/gallery/' . $content->id . '/original/' . $picture);
 					$resizer->resizeImage($settings['gallery_thumbs_width'], $settings['gallery_thumbs_height'], 'crop');
-					$resizer->saveImage(DOCROOT . 'uploads/gallery/' . $content->id . '/thumbs/' . $picture, 100);
+					$resizer->saveImage(DOCROOT . 'uploads/' . $current_lang . '/gallery/' . $content->id . '/thumbs/' . $picture, 100);
 				}
 			}
 		}
@@ -223,10 +226,12 @@ class Controller_Advanced_Advanced extends Controller
 
 	public function action_edit()
 	{
+		$this->_ajax = true;
+
 		self::_resizeAllPictures();
 		self::_checkForOptions();
 
-		Response::redirect('admin/advanced');
+		#Response::redirect('admin/advanced');
 	}
 
 	public function action_layout_image()

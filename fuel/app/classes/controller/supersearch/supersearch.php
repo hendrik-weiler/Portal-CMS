@@ -48,6 +48,7 @@ class Controller_Supersearch_Supersearch extends Controller
 
 		Lang::load('admin');
 		Lang::load('tasks');
+		Lang::load('frontend');
 
 		$this->searchterms = explode(' ', str_replace('*','',Input::get('searchterm')));
 		$this->type = Input::get('type');
@@ -137,7 +138,8 @@ class Controller_Supersearch_Supersearch extends Controller
 	private function _generate_news_results()
 	{
 		$results = model_db_news::find('all',array(
-			'where' => array(array('title','like','%' . $this->searchterms[0] . '%'))
+			'where' => array(array('title','like','%' . $this->searchterms[0] . '%')),
+			'order_by' => array('creation_date' => 'DESC')
 		));
 
 		return $this->_filter_db_results($results,array('title'));
@@ -246,35 +248,74 @@ class Controller_Supersearch_Supersearch extends Controller
 			{
 				case 'tasks':
 				if(preg_match('#(Tour)#i', $result->label))
+				{	
 					$link = $result->link;
+
+					$name = preg_replace('#\(Tour\)#i','', $result->label);
+
+					$name = '<span class="content-type-site">Tour</span>' . $name;
+				}
 				else
 					$link = preg_replace('/\#([\w\=]+)/i','',$result->link);
 
 				break;
 				case 'accounts':
 				$link = \Uri::create('admin/accounts/edit/' . $result->id);
+
+				$status = __('supersearch_results.account_normal');
+
+				if($result->admin)
+					$status = __('supersearch_results.account_admin');
+
+				$name = '<span class="content-type-site">' . $status . '</span>' . $name;
 				break;
 				case 'sites':
+
+				$sub_point = '';
+				$content_type = '';
 
 				$sub_navs = model_db_navigation::find('all',array(
 					'where' => array('parent'=>$result->navigation_id)
 				));
 				if(count($sub_navs) == 0)
+				{
+					$content_type = __('supersearch_results.normal_point');
 					$link = \Uri::create('admin/sites/edit/' . $result->id);
+				}	
 				else
+				{
+					$content_type = __('supersearch_results.main_point');
 					$link = \Uri::create('admin/navigation/edit/' . $result->id);
+				}
+
+				$navi = model_db_navigation::find($result->navigation_id);
+
+				if($navi->parent != 0)
+				{
+					$main_navi = model_db_navigation::find($navi->parent);
+
+					$sub_point = $main_navi->label;
+
+					$content_type = __('supersearch_results.sub_point');
+				}
+
+				$name = '<span class="content-type-site">' . $content_type . '</span><span class="content-pre-site">' . $sub_point . '/</span>' . $name;
 
 				break;
 				case 'content':
 
 				$site = model_db_site::find($result->site_id);
 
-				$name = '<span class="content-pre-site">' . $site->label . '/</span>' . $name;
+				$content_type = __('content.type.' . $result->type);
+
+				$name = '<span class="content-type-site">' . $content_type . '</span><span class="content-pre-site">' . $site->label . '/</span>' . $name;
 
 				$link = \Uri::create('admin/content/' . $result->site_id . '/edit/' . $result->id . '/type/' . $result->type);
 				break;
 				case 'news':
 				$link = \Uri::create('admin/news/edit/' . $result->id);
+
+				$name = '<span class="content-type-site">' . date(__('news.dateformat'), strtotime($result->creation_date)) . '</span>' . $name;
 				break;
 			}
 			

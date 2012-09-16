@@ -319,8 +319,8 @@ body {
 }
 
 .news_pictures img {
-  width: 160px;
-  height: 100px;
+  max-width: 160px;
+  max-height: 160px;
   border:1px solid black;
 }
 .news_pictures div.left {
@@ -402,6 +402,16 @@ body {
   color: #555555;
   width: 30px;
 }
+
+.supersearch-container div.result-block span.content-type-site {
+  background: #0069D6;
+  font-size: 10px;
+  color: white;
+  border-radius: 3px;
+  padding:3px;
+  margin-right: 5px;
+}
+
 
 .supersearch-container div.result-block li.nothing_found {
   padding: 5px;
