@@ -11,6 +11,9 @@ class database
 
 	private function _createCMSDataByLang($lang)
 	{
+
+        # --------------------- site ----------------------------------------
+
 		\DBUtil::create_table($lang . '_site', array(
             'id' => array('type' => 'int', 'constraint' => 10,'auto_increment' => true),
             'navigation_id' => array('type' => 'int', 'constraint' => 10, 'null' => true),
@@ -24,7 +27,11 @@ class database
             'redirect' => array('type' => 'varchar', 'constraint' => 100, 'null' => true),
             'sort' => array('type' => 'int', 'constraint' => 10, 'null' => true),
             'changed' => array('type' => 'timestamp', 'default' => \DB::expr('CURRENT_TIMESTAMP')),
-        ), array('id'));
+        ), array('id'), false, 'InnoDB');
+
+        \DB::query('ALTER TABLE ' . $lang . '_site ADD FULLTEXT(label, description);');
+
+        # --------------------- news ----------------------------------------
 
 		\DBUtil::create_table($lang . '_news', array(
             'id' => array('type' => 'int', 'constraint' => 10,'auto_increment' => true),
@@ -33,12 +40,16 @@ class database
             'text' => array('type' => 'text', 'null' => true),
             'attachment' => array('type' => 'text', 'null' => true),
             'creation_date' => array('type' => 'timestamp','default' => \DB::expr('CURRENT_TIMESTAMP'), 'null' => true),
-        ), array('id'));
+        ), array('id'), false, 'InnoDB');
+
+        \DB::query('ALTER TABLE ' . $lang . '_news ADD FULLTEXT(title, text);');
 
             \DBUtil::create_table($lang . '_navigation_group', array(
             'id' => array('type' => 'int', 'constraint' => 10,'auto_increment' => true),
             'title' => array('type' => 'varchar', 'constraint' => 80, 'null' => true),
-        ), array('id'));
+        ), array('id'), false, 'InnoDB');
+
+        # --------------------- navigation ----------------------------------------
 
 		\DBUtil::create_table($lang . '_navigation', array(
             'id' => array('type' => 'int', 'constraint' => 10,'auto_increment' => true),
@@ -49,7 +60,9 @@ class database
             'show_sub' => array('type' => 'int', 'constraint' => 1,'null' => true,'default'=>0),
             'show_in_navigation' => array('type' => 'int', 'constraint' => 1,'null' => true,'default'=>1),
             'sort' => array('type' => 'int', 'constraint' => 11, 'null' => true),
-        ), array('id'));
+        ), array('id'), false, 'InnoDB');
+
+        # --------------------- content ----------------------------------------
 
 		\DBUtil::create_table($lang . '_content', array(
             'id' => array('type' => 'int', 'constraint' => 10,'auto_increment' => true),
@@ -68,7 +81,9 @@ class database
             'form' => array('type' => 'text', 'null' => true),
             'refer_content_id' => array('type' => 'text', 'null' => true),
             'sort' => array('type' => 'int', 'constraint' => 11, 'null' => true),
-        ), array('id'));
+        ), array('id'), false, 'InnoDB');
+
+        \DB::query('ALTER TABLE ' . $lang . '_content ADD FULLTEXT(label, text, text2, text3);');
 	}
 
 	private function _deleteCMSDataByLang($lang)
@@ -87,13 +102,13 @@ class database
             'label' => array('type' => 'varchar', 'constraint' => 45, 'null' => true),
             'prefix' => array('type' => 'varchar', 'constraint' => 8, 'null' => true),
             'sort' => array('type' => 'int', 'constraint' => 11, 'null' => true),
-        ), array('id'));
+        ), array('id'), false, 'InnoDB');
 
             \DBUtil::create_table('options', array(
             'id' => array('type' => 'int', 'constraint' => 10,'auto_increment' => true),
             'key' => array('type' => 'varchar', 'constraint' => 80, 'null' => true),
             'value' => array('type' => 'text', 'null' => true),
-        ), array('id'));
+        ), array('id'), false, 'InnoDB');
 
 		\DBUtil::create_table('accounts', array(
             'id' => array('type' => 'int', 'constraint' => 10,'auto_increment' => true),
@@ -103,7 +118,9 @@ class database
             'language' => array('type' => 'varchar', 'constraint' => 10, 'null' => true),
             'admin' => array('type' => 'bool', 'null' => true),
             'permissions' => array('type' => 'text', 'null' => true),
-        ), array('id'));
+        ), array('id'), false, 'InnoDB');
+
+        \DB::query('ALTER TABLE accounts ADD FULLTEXT(username);');
 
         $this->_createCMSDataByLang(self::$lang);
 

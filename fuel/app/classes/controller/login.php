@@ -58,7 +58,7 @@ class Controller_Login extends Controller
 				}
 				Session::set('lang_prefix',model_permission::getValidLanguage());
 
-				Response::redirect('admin/' . model_permission::getValidRedirect());
+				Response::redirect('admin/dashboard');
 			}
 			else 
 			{

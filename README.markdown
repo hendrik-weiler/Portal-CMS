@@ -1,6 +1,6 @@
 Portal Content Management System
 ====================
-#### v: 1.01
+#### v: 1.10 dev final
 
 Build on [Fuel Framework](https://github.com/fuel/fuel)<br />
 Using:<br />
@@ -11,6 +11,7 @@ Using:<br />
 [html5boilerplate](https://github.com/h5bp/html5-boilerplate)<br />
 [jquery.swfobject](http://jquery.thewikies.com/swfobject/)<br />
 [pie](https://github.com/lojjic/PIE)<br />
+[jquery.hotkeys](http://github.com/jeresig/jquery.hotkeys)<br />
 
 Features:
 ---------------------
@@ -30,6 +31,8 @@ Features:
 * Module management
 * Asset management
 * Customizeable Layout
+* Supersearch
+* Actionarea
 
 Development Testapp:
 ---------------------
@@ -49,6 +52,27 @@ Install
 
 Follow all three steps and login into (http://localhost/projectname/public/admin).<br />
 *Notice*: you might have to create the bare database yourself.
+
+Actionarea:
+---------------------
+In the actionarea you can looking for the task you want to do and either get a shortcut link
+to the place where it will be done or you get a "learn how" link where you will be guided to
+what needs to be done.
+
+
+Supersearch:
+---------------------
+With supersearch you can search the entire cms restricted to current siteversion your in after
+contents, sites, news, accounts and tasks (from the actionarea).
+
+Shortcuts (works almost everywhere):
+<strong>Shift + r</strong> = Supersearch new search<br />
+<strong>Shift + e</strong> = Supersearch category "all" search<br />
+<strong>Shift + c</strong> = Supersearch category "contents" search<br />
+<strong>Shift + t</strong> = Supersearch category "tasks" search<br />
+<strong>Shift + n</strong> = Supersearch category "news" search<br />
+<strong>Shift + a</strong> = Supersearch category "accounts" search<br />
+<strong>Shift + s</strong> = Supersearch category "sites" search<br />
 
 Templating:
 ---------------------

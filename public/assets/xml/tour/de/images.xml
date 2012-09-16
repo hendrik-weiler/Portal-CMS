@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<storyboard>
+	<tour label="Bildergrößen anpassen" />
+	<steps>
+		<step target=".span8">
+			<position_difference top="120" left="400" />
+			<text>Hier können sie die Höhen und Breiten der Nachrichten Thumbnails einstellen.</text>
+		</step>
+		<step target=".span8">
+			<position_difference top="240" left="400" />
+			<text>Hier können sie die Höhen und Breiten der Galerie Thumbnails einstellen.</text>
+		</step>
+		<step target="#form_submit">
+			<position_difference top="20" left="60" />
+			<text>Die Bilder werden beim Speichern auf das eingegebene Maß geschnitten. Jetzt nurnoch auf den Button drücken und fertig.</text>
+		</step>
+	</steps>
+</storyboard>

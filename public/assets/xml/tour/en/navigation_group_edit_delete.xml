@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<storyboard>
+	<tour label="Edit or delete an existing navigationgroup" />
+	<steps>
+		<step target="#groups li:first" condition="rightclicked">
+			<position_difference top="20" left="20" />
+			<text>By pressing right-click the context menu will opened.</text>
+		</step>
+		<step target="#groups li:first">
+			<position_difference top="20" left="20" />
+			<text>Two options are available, rename and delete. Choose rename.</text>
+		</step>
+		<step target="#groups li:first">
+			<position_difference top="20" left="150" />
+			<text>Now write down the new title.</text>
+		</step>
+		<step target="#groups li:first">
+			<position_difference top="20" left="180" />
+			<text>With the "O" you confirm the creation.</text>
+		</step>
+		<step target="#groups li:first">
+			<position_difference top="20" left="20" />
+			<text>If you want to delete a group, be alerted that you wont be asked if you really want to delete it.</text>
+		</step>
+	</steps>
+</storyboard>

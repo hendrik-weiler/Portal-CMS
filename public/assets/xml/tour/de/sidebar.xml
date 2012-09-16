@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<storyboard>
+	<tour label="Eine Sidebar von einem Navigationpunkt mit Unterpunkten einrichten." />
+	<steps>
+		<step target="#form_show_sub">
+			<position_difference top="15" left="15" />
+			<text>Wählen Sie eine Position.</text>
+		</step>
+		<step target="#form_submit">
+			<position_difference top="20" left="60" />
+			<text>Drücken Sie auf diesen Button um die Änderungen zu speichern.</text>
+		</step>
+	</steps>
+</storyboard>

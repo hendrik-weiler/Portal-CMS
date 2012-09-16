@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<storyboard>
+	<tour label="Change picture sizes" />
+	<steps>
+		<step target=".span8">
+			<position_difference top="120" left="400" />
+			<text>Here you can setup the height and width of the news thumbnails.</text>
+		</step>
+		<step target=".span8">
+			<position_difference top="240" left="400" />
+			<text>Here you can setup the height and width of the gallery thumbnails.</text>
+		</step>
+		<step target="#form_submit">
+			<position_difference top="20" left="60" />
+			<text>Press this button to save the settings and resize the images.</text>
+		</step>
+	</steps>
+</storyboard>

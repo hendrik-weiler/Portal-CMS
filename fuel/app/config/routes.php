@@ -3,6 +3,19 @@ return array(
 	'_root_'  => 'public/index',  // The default route
 	'_404_'   => 'welcome/404',    // The main 404 route
 
+	# -- admin/supersearch
+
+	'admin/supersearch/all' => 'supersearch/supersearch/all',
+	'admin/supersearch/content' => 'supersearch/supersearch/content',
+	'admin/supersearch/sites' => 'supersearch/supersearch/sites',
+	'admin/supersearch/news' => 'supersearch/supersearch/news',
+	'admin/supersearch/accounts' => 'supersearch/supersearch/accounts',
+	'admin/supersearch/tasks' => 'supersearch/supersearch/tasks',
+
+	# -- admin/dashboard
+
+	'admin/dashboard' => 'dashboard/dashboard/index',
+
 	# -- admin/sites
 
 	'admin/accounts/delete/:id' => 'advanced/accounts/delete',

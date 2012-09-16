@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<storyboard>
+	<tour label="Create a new content" />
+	<steps>
+		<step target="#form_type">
+			<position_difference top="20" left="100" />
+			<text>Please choose the content, which should be added.</text>
+		</step>
+		<step target="#form_addContent">
+			<position_difference top="20" left="30" />
+			<text>Press on the plus button to confirm your choice and create it.</text>
+		</step>
+	</steps>
+</storyboard>

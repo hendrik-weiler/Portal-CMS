@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<storyboard>
+	<tour label="Eine neue Navigationsgruppe erstellen" />
+	<steps>
+		<step target="#groups li:last" condition="clicked">
+			<position_difference top="20" left="20" />
+			<text>Der erste schritt ist durch das drücken von plus wird ein Textfeld.</text>
+		</step>
+		<step target="#groups li:last">
+			<position_difference top="20" left="150" />
+			<text>Im zweiten Schritt füllen Sie dieses Textfeld aus.</text>
+		</step>
+		<step target="#groups li:last">
+			<position_difference top="20" left="180" />
+			<text>Mit dem grünem "O" bestätigen Sie ihre Eingabe</text>
+		</step>
+		<step target="#groups li:last">
+			<position_difference top="20" left="220" />
+			<text>Wenn Sie den Vorgang abbrechen möchten drücken Sie den roten "X" Button.</text>
+		</step>
+	</steps>
+</storyboard>

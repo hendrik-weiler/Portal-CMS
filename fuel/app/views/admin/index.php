@@ -26,6 +26,7 @@
   <?php print Asset\Manager::get('js->include->0_modernizr->modernizr') ?>
   <?php print Asset\Manager::get('js->include->1_jquery->jquery') ?>
   <?php print Asset\Manager::get('js->include->1_jquery->jquery-ui') ?>
+  <?php print Asset\Manager::get('js->include->1_jquery->jquery.hotkeys') ?>
   <?php print Asset\Manager::get('js->include->4_swfobject->swfobject') ?>
   <script src="<?php print Uri::create('assets/js/libs/bootstrap-tabs.js') ?>"></script>
 </head>
@@ -33,9 +34,20 @@
 <body>
   <div class="container">
     <header>
+      <div class="userarea row">
+        <div class="user span3"><strong><?php print __('constants.user') . ':</strong> ' . model_db_accounts::getCol(Session::get('session_id'),'username') ?></div>  
+        <div class="span11 supersearch">
+          <div class="row">
+            <div class="span2">Supersearch</div>
+            <div class="span4"><?php print Form::select('supersearch_cat',0,__('supersearch')) ?></div>
+            <div class="span4"><?php print Form::input('supersearch_input','',array('class'=>'large')) ?></div>
+          </div>
+        </div>
+        <div class="logout span2"><a href="<?php print Uri::create('admin/logout'); ?>"><?php print __('nav.logout') ?></a></div>
+      </div>
       <figure>
-        <img src="<?php print Uri::create('assets/img/admin/logo.png'); ?>" />      
-        <div class="version">Version: <?php print number_format((model_about::$version),2); ?></div>
+        <img src="<?php print Uri::create('assets/img/admin/logo.png'); ?>" /> 
+        <div class="version"><?php print model_about::show_version() ?></div>
       </figure>
       <?php print file_exists(APPPATH . 'INSTALL_TOOL_DISABLED') ? '' :  '<div class="error">' . __('constants.install_tool_usable') . '</div>' ?>
       <section class="span16" id="change_lang">
@@ -63,15 +75,10 @@
     <div id="main" role="main">
       <nav class="clearfix">
         <ul class="tabs">
-          <?php if($permission[0]['valid']): ?>
-          <li <?php print (Uri::segment(2) == 'navigation') ? 'class="active"' : '' ?>><a href="<?php print Uri::create('admin/navigation'); ?>"><?php print __('nav.navigation') ?></a></li>
-          <?php endif; ?>
+          <li <?php print (Uri::segment(2) == 'dashboard') ? 'class="active"' : '' ?>><a href="<?php print Uri::create('admin/dashboard'); ?>"><?php print __('nav.dashboard') ?></a></li>
 
-          <?php if($permission[1]['valid']): ?>
-          <?php $first_site = model_db_site::find('first'); ?>
-          <?php if(!empty($first_site)): ?>
-          <li <?php print (in_array(Uri::segment(2),array('sites','content'))) ? 'class="active"' : '' ?>><a href="<?php print Uri::create('admin/sites/edit/' . $first_site->id); ?>"><?php print __('nav.sites') ?></a></li>
-          <?php endif; ?>
+          <?php if($permission[0]['valid']): ?>
+          <li <?php print (in_array(Uri::segment(2),array('sites','content','navigation'))) ? 'class="active"' : '' ?>><a href="<?php print Uri::create('admin/navigation'); ?>"><?php print __('nav.navigation') ?></a></li>
           <?php endif; ?>
 
           <?php if($permission[2]['valid']): ?>
@@ -89,8 +96,6 @@
           <?php if($permission[5]['valid']): ?>
           <li <?php print (in_array(Uri::segment(2),array('advanced','accounts'))) ? 'class="active"' : '' ?>><a href="<?php print Uri::create('admin/advanced'); ?>"><?php print __('nav.advanced') ?></a></li>
           <?php endif; ?>
-
-          <li><a href="<?php print Uri::create('admin/logout'); ?>"><?php print __('nav.logout') ?></a></li>
         </ul>
       </nav>
       <section id="content" class="clearfix">
@@ -132,6 +137,23 @@
   <script src="<?php print Uri::create('assets/js/mylibs/prompt.js') ?>"></script>
   <script defer src="<?php print Uri::create('assets/js/plugins.js') ?>"></script>
   <script defer src="<?php print Uri::create('assets/js/admin.js') ?>"></script>
+
+  <script src="<?php print Uri::create('assets/js/tour/tour.js') ?>"></script>
+  <script type="text/javascript">
+  var _tour_mouse_picture = "<?php print Uri::create('assets/img/admin/cursor.png') ?>";
+  var _tour_language = "<?php print model_db_accounts::getCol(Session::get('session_id'),'language') ?>";
+  var _tour_next_button = "<?php print __('constants.next_step') ?>";
+  var _tour_end_tour_button = "<?php print __('constants.end_tour') ?>";
+  var _tour_base_url = _url;
+  var tour = new pcms.tour();
+  </script>
+
+  <script src="<?php print Uri::create('assets/js/supersearch/supersearch.js') ?>"></script>
+  <script type="text/javascript">
+  var _supersearch_base_url = _url;
+  var supersearch = new pcms.supersearch();
+  supersearch.init_keyboard_shorcuts();
+  </script>
   <!-- end scripts-->
 
   <!--[if lt IE 7 ]>

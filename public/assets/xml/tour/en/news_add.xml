@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<storyboard>
+	<tour label="Create a news entry" />
+	<steps>
+		<step target="#form_title">
+			<position_difference top="20" left="100" />
+			<text>Write down the title of the news.</text>
+		</step>
+		<step target="#form_submit">
+			<position_difference top="20" left="60" />
+			<text>Press this button to create it.</text>
+		</step>
+	</steps>
+</storyboard>

@@ -21,11 +21,13 @@
 			'where' => array('parent'=>$nav->id)
 		));
 
-		
-		print '<a href="' . Uri::create('admin/navigation/edit/' . $nav->id) . '">' . __('constants.edit') . '</a> | ';
-
 		if(!is_object($has_sub))
-			print '<a href="' . Uri::create('admin/sites/edit/' . $site->id) . '">' . __('constants.edit_site') . '</a> | ';
+			print '<a target="preview" href="' . Controller_Pages_Pages::generateUrl($site->id) . '">' . __('content.preview') . '</a> | ';
+
+		if(is_object($has_sub))
+			print '<a href="' . Uri::create('admin/navigation/edit/' . $nav->id) . '">' . __('constants.edit') . '</a> | ';
+		else
+			print '<a href="' . Uri::create('admin/sites/edit/' . $site->id) . '">' . __('constants.edit') . '</a> | ';
 
 		print '<a class="delete" href="' . Uri::create('admin/navigation/delete/' . $nav->id) . '">' . __('constants.delete') . '</a>';
 

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<storyboard>
+	<tour label="Create a new navigationgroup (for example Footer)" />
+	<steps>
+		<step target="#groups li:last" condition="clicked">
+			<position_difference top="20" left="20" />
+			<text>Press the plus to open the formular for creating a group.</text>
+		</step>
+		<step target="#groups li:last">
+			<position_difference top="20" left="150" />
+			<text>Write down the title of the group.</text>
+		</step>
+		<step target="#groups li:last">
+			<position_difference top="20" left="180" />
+			<text>With the "O" you confirm the creation.</text>
+		</step>
+		<step target="#groups li:last">
+			<position_difference top="20" left="220" />
+			<text>If you want to cancel the process, press the "X" button.</text>
+		</step>
+	</steps>
+</storyboard>

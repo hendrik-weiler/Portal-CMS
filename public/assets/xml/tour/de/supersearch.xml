@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<storyboard>
+	<tour label="Supersearch kennenlernen" />
+	<steps>
+		<step target="#form_supersearch_cat">
+			<position_difference top="20" left="80" />
+			<text>Hier wählst du, an welchen Stellen gesucht werden soll.</text>
+		</step>
+		<step target="#form_supersearch_input">
+			<position_difference top="20" left="150" />
+			<text>Klicken Sie auf das Textfeld und geben Sie Ihren Suchbegriff ein.</text>
+		</step>
+		<step target="#form_supersearch_input">
+			<position_difference top="120" left="20" />
+			<text>Alle resultate der Suche sind erscheinen hier. Man hat die möglichkeit nach der Eingabe der Suche mit Pfeil nach unten und oben durch die Resultate hindurchzuwählen und dann mit der Enter Taste zu dem ausgewählten Ergebnis zu gelangen.</text>
+		</step>
+		<step target="#form_supersearch_cat">
+			<position_difference top="20" left="80" />
+			<text><![CDATA[Dabei ist auch hier zu beachten, dass es Tastenkombinationen gibt, die die Suche vereinfachen soll.<br />
+				<p>
+					<strong>Shift + r</strong> = Supersearch neue suche<br />
+					<strong>Shift + e</strong> = Supersearch kategorie "alle" suche<br />
+					<strong>Shift + c</strong> = Supersearch kategorie "inhalte" suche<br />
+					<strong>Shift + n</strong> = Supersearch kategorie "news" suche<br />
+					<strong>Shift + t</strong> = Supersearch kategorie "aufgaben" suche<br />
+					<strong>Shift + a</strong> = Supersearch kategorie "accounts" suche<br />
+					<strong>Shift + s</strong> = Supersearch kategorie "seiten" suche<br />
+				</p>]]></text>
+		</step>
+	</steps>
+</storyboard>

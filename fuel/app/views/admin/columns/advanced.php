@@ -2,7 +2,7 @@
 <?php
 	print Form::open(array('action'=>'admin/advanced/edit','id'=>'advanced_form','class'=>'form_style_1'));
 ?>
-<section id="advanced" class="clearfix">
+<div id="advanced" class="clearfix">
 
 	<ul class="tabs" data-tabs="tabs">
 	  <li class="active"><a href="#general"><?php print __('advanced.tabs.general') ?></a></li>
@@ -206,7 +206,7 @@ foreach($accounts as $account)
 
 	function writeRow($account,$class='list_entry_accounts')
 	{
-		print '<section id="' . $account->id . '" class="list_entry clearfix ' . $class . '">';
+		print '<div id="' . $account->id . '" class="list_entry clearfix ' . $class . '">';
 
 		print '<div><strong>';
 
@@ -230,9 +230,9 @@ foreach($accounts as $account)
 
 		print '</div>';
 
-		print '</section>';
+		print '</div>';
 	}
 ?>
 </div>
-</section>
+</div>
 </div>

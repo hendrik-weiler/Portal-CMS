@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<storyboard>
+	<tour label="Einen neuen Inhalt erstellen" />
+	<steps>
+		<step target="#form_type">
+			<position_difference top="20" left="100" />
+			<text>Wählen Sie den gewünschten Inhalt aus, der hinzugefügt werden soll.</text>
+		</step>
+		<step target="#form_addContent">
+			<position_difference top="20" left="30" />
+			<text>Drücken sie auf das Plus um den neuen Inhalt hinzuzufügen.</text>
+		</step>
+	</steps>
+</storyboard>

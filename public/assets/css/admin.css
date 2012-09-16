@@ -340,5 +340,105 @@ body {
   color: red !important;
 }
 
+/* userarea */
+
+.userarea {
+  border: 1px solid #dedede;
+  border-top: none;
+  padding: 5px;
+  border-radius: 0 0 3px 3px;
+}
+
+.userarea div.logout {
+  text-align: right;
+}
+
+.userarea div.user,
+.userarea div.logout,
+.userarea div.supersearch div.span2 {
+  padding-top: 5px;
+}
+
+.userarea div.supersearch div.span2 {
+  text-align: right;
+}
+
+/* Supersearch */
+
+.supersearch-container {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background: white;
+  border: 1px solid #dedede;
+  border-top: none;
+  padding: 5px;
+  width: 830px;
+  border-radius: 0 0 3px 3px;
+}
+
+.supersearch-container div.result-block ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.supersearch-container a.active,
+.supersearch-container div.result-block a:hover {
+  background: #dedede !important;
+  color: #0069D6 !important;
+}
+
+.supersearch-container div.result-block div.span3 {
+  border-right: 1px solid #dedede;
+}
+
+.supersearch-container div.result-block div.type div {
+  height:25px;
+}
+
+.supersearch-container div.result-block span.content-pre-site {
+  font-size: 11px;
+  color: #555555;
+  width: 30px;
+}
+
+.supersearch-container div.result-block li.nothing_found {
+  padding: 5px;
+  padding-top: 10px;
+}
+
+.supersearch-container div.result-block a {
+  display: block;
+  padding: 5px;
+  text-decoration: none;
+  color: black;
+}
+
+.supersearch-container div.result-block {
+  border-top: 1px solid #dedede;
+  margin-left: 0;
+}
+
 /* account settings */
+
+/* tour */
+
+.tour_textbox {
+  border: 1px solid black;
+  padding: 5px;
+  background: white;
+  width: 400px;
+}
+
+.tour_identifier {
+  border: 1px solid black;
+  padding: 5px;
+  background: white;
+  width: 400px;
+}
+
+.tour_button_disabled {
+  opacity: 0.5;
+}
 

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<storyboard>
+	<tour label="Setup a sidebar from a navigationpoint with subentries" />
+	<steps>
+		<step target="#form_show_sub">
+			<position_difference top="15" left="15" />
+			<text>Choose a position.</text>
+		</step>
+		<step target="#form_submit">
+			<position_difference top="20" left="60" />
+			<text>Save the changes.</text>
+		</step>
+	</steps>
+</storyboard>

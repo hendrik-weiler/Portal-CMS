@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<storyboard>
+	<tour label="Learn about supersearch" />
+	<steps>
+		<step target="#form_supersearch_cat">
+			<position_difference top="20" left="80" />
+			<text>Choose here, in which regions it should search.</text>
+		</step>
+		<step target="#form_supersearch_input">
+			<position_difference top="20" left="150" />
+			<text>Click on the textfield and enter your searchterm.</text>
+		</step>
+		<step target="#form_supersearch_input">
+			<position_difference top="120" left="20" />
+			<text>All results of the search will be displayed here. You can navigate through the resultlist by pressing down or up key. By pressing enter afterwards you will confirm the selection.</text>
+		</step>
+		<step target="#form_supersearch_cat">
+			<position_difference top="20" left="80" />
+			<text><![CDATA[Notice that it exist more keyboard shortcuts for make searching easier:<br />
+				<p>
+					<strong>Shift + r</strong> = Supersearch new search<br />
+					<strong>Shift + e</strong> = Supersearch category "all" search<br />
+					<strong>Shift + c</strong> = Supersearch category "contents" search<br />
+					<strong>Shift + t</strong> = Supersearch category "tasks" search<br />
+					<strong>Shift + n</strong> = Supersearch category "news" search<br />
+					<strong>Shift + a</strong> = Supersearch category "accounts" search<br />
+					<strong>Shift + s</strong> = Supersearch category "sites" search<br />
+				</p>]]></text>
+		</step>
+	</steps>
+</storyboard>

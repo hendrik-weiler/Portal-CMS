@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<storyboard>
+	<tour label="Wie erstelle ich einen neuen Eintrag in der Navigation" />
+	<steps>
+		<step target="#form_label">
+			<position_difference top="20" left="120" />
+			<text>Als erstes gibt man den gewünschten Titel des Navigationspunktes ein.</text>
+		</step>
+		<step target="#form_show_in_navigation">
+			<position_difference top="10" left="10" />
+			<text>Beim zweiten Schritt sollten Sie sich fragen, ob der neue Navigationspunkt sichtbar sein sollte.</text>
+		</step>
+		<step target="#form_parent">
+			<position_difference top="20" left="120" />
+			<text>Wenn der Navigationspunkt einem anderen Punkt untergeordnet sein sollte, sollten Sie hier in dem Dropdown-menü Ihren gewünschten Eintrag auswählen.</text>
+		</step>
+		<step target="#form_submit">
+			<position_difference top="20" left="120" />
+			<text>Zum Schluss den neuen Eintrag durch den Button "Neuen Navigationspunkt" erstellen.</text>
+		</step>
+	</steps>
+</storyboard>

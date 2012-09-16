@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<storyboard>
+	<tour label="Create a new entry in the navigation" />
+	<steps>
+		<step target="#form_label">
+			<position_difference top="20" left="120" />
+			<text>Fill out the name the navigationpoint should have.</text>
+		</step>
+		<step target="#form_show_in_navigation">
+			<position_difference top="10" left="10" />
+			<text>Deactivate, if its shouldnt be displayed in the navigation.</text>
+		</step>
+		<step target="#form_parent">
+			<position_difference top="20" left="120" />
+			<text>Should the navigationspoint be secondary to another one, choose the one you want out of the list.</text>
+		</step>
+		<step target="#form_submit">
+			<position_difference top="20" left="120" />
+			<text>Press this button to create the navigationspoint.</text>
+		</step>
+	</steps>
+</storyboard>

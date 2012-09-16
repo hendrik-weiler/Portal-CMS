@@ -86,13 +86,6 @@
                     $checked = array();
 
                 print Form::checkbox('categories_' . $key . '[]',0,$checked + array('style'=>'width:auto;display:inline')) . __('nav.navigation') . '<br />';
-
-                if(isset($intern['categories_' . $key]) && in_array(1,$intern['categories_' . $key]))
-                    $checked = array('checked'=>'checked');
-                else
-                    $checked = array();
-                    
-                print Form::checkbox('categories_' . $key . '[]',1,$checked + array('style'=>'width:auto;display:inline')) . __('nav.sites') . '<br />';
                 
                 if(isset($intern['categories_' . $key]) && in_array(2,$intern['categories_' . $key]))
                     $checked = array('checked'=>'checked');

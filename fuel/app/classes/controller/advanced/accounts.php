@@ -116,6 +116,9 @@ class Controller_Advanced_Accounts extends Controller
 				$permissions['navigation_' . $key] = Input::post('navigation_' . $key);
 				$permissions['categories_' . $key] = Input::post('categories_' . $key);
 
+				if(!in_array($permissions['categories_' . $key],array(1)))
+					$permissions['categories_' . $key][] = 1;
+
 				$permissions['navigation_' . $key] = ($permissions['navigation_' . $key] == null) ? array() : $permissions['navigation_' . $key];
 				$permissions['categories_' . $key] = ($permissions['categories_' . $key] == null) ? array() : $permissions['categories_' . $key];
 			}

@@ -31,20 +31,6 @@
 		else
 			print Form::hidden('navigation_id',0);
 	?>
-	<?php if(Uri::segment(3) == 'edit'): ?>
-	<div class="clearfix">
-	  <?php print Form::label(__('sites.nav_group')); ?>
-	  <div class="input">
-	    <?php 		
-
-		    $select_data = array();
-				$select_data = $select_data + model_db_navgroup::asSelectBox();
-
-				print Form::select('group_id',$group_id,$select_data,array('style'=>'width:210px;'));
-			?>
-		</div>
-	</div>
-	<?php endif; ?>
 	<div class="clearfix">
 	 <?php print Form::label(__('sites.redirect')); ?>
 	 <div class="input">
@@ -94,6 +80,35 @@
 	  </div>
 	</div>
         <?php print Form::hidden('site_id',$site_id); ?>
+<hr />
+
+<div class="clearfix">
+  <?php print Form::label(__('navigation.show_in_navigation')); ?>
+  <div class="input">
+  	<?php $check = empty($show_in_navigation) ? array() : array('checked'=>'checked'); ?>
+    <?php print Form::checkbox('show_in_navigation',1,$check); ?>
+  </div>
+</div>
+
+<div class="clearfix">
+    <?php print Form::label(__('navigation.nav_group')); ?>
+    <div class="input">
+    <?php 		
+                        $select_data = model_db_navgroup::asSelectBox();
+
+                        print Form::select('group_id',$group_id,$select_data);
+                ?>
+        </div>
+</div>
+
+<?php print Form::label(__('navigation.parent')); ?>
+<div class="clearfix">
+  <div class="input">
+    <?php print Form::select('parent',$parent,$parent_array); ?>
+  </div>
+</div>
+<?php print Form::hidden('id',Uri::segment(3)) ?>
+
 	<div class="actions">
 		<?php 
 			print Form::submit('submit',__('sites.' . $mode),array('class'=>'btn primary')) . ' ';
@@ -102,9 +117,9 @@
 				print '<a class="btn secondary" href="' . Uri::create('admin/navigation/' . $group_id) . '">' . __('news.edit.back') . '</a>';
 		 ?>
 	</div>
-
 	<?php	print Form::close();	?>
-			
+	</div>
+	<div class="span7">
 		<?php if(Uri::segment(3) == 'edit'): ?>
 		<h3>
 			<?php print __('sites.content_header'); ?>
@@ -153,77 +168,11 @@
 
 			?>
 		</section>
+		</div>
+
 		<?php endif; ?>
 	</div>
-	<div class="span7">
-		<h3>
-			<?php print __('sites.current_entries'); ?>
-		</h3>
-
-		<ul id="groups" class="tabs">
-			<?php
-				$navi_groups = model_db_navgroup::find('all');
-				if(!empty($navi_groups)):
-				foreach($navi_groups as $group):
-			?>
-			<li id="<?php print $group->id; ?>" <?php print $group_id == $group->id ? 'class="active"' : '' ?>><a href="<?php print Uri::create('admin/sites/' . $group->id) ?>"><?php print $group->title ?></a></li>
-			<?php 
-					endforeach;
-					endif; 
-			?>
-		</ul>
-		
-		<section id="site_list">
-	<?php
-		$rights = model_permission::getNavigationRights();
-
-		$navigations = model_db_navigation::asSelectBox($group_id);
-
-	if(empty($navigations))
-	{
-		print __('sites.no_entries');
-	}
-	else
-	{
-
-		foreach($navigations as $key => $navi)
-		{
-			if(is_array($navi))
-			{
-				$_nav = model_db_navigation::find('first',array(
-					'where' => array('label'=>$key)
-				));
-
-				if(!in_array($_nav->id,$rights['data']) && !$rights['admin'])
-					continue;
-
-				print '<h4>' . $key . '</h4>';
-
-				foreach($navi as $subKey => $subNavi)
-				{
-					if(!in_array($subKey,$rights['data']) && !$rights['admin'])
-						continue;
-
-					$sites = model_db_site::find()->where('navigation_id',$subKey)->order_by(array('sort'=>'ASC'))->get();
-					foreach($sites as $site)
-						writeRow($site);
-				}
-
-				print '</blockquote><hr />';
-			}
-			else
-			{
-				if(!in_array($key,$rights['data']) && !$rights['admin'] && $key != 0)
-					continue;
-
-				$sites = model_db_site::find()->where('navigation_id',$key)->order_by(array('sort'=>'ASC'))->get();
-				foreach($sites as $site)
-					writeRow($site);
-
-				print '</blockquote><hr />';
-			}
-		}
-	}
+		<?php
 
 		function writeRow($nav,$class='sites_entry')
 		{
@@ -277,6 +226,4 @@
 			print '</div>';
 		}
 	?>
-		</section>
-	</div>
 </div>

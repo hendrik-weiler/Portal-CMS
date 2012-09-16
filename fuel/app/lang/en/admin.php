@@ -63,8 +63,8 @@ return array(
 	),
 
 	'nav' => array(
+		'dashboard' => 'Actionarea',
 		'navigation' => 'Navigation',
-		'sites' => 'Sites',
 		'news' => 'News',
 		'language' => 'Languages',
 		'settings' => 'User settings',
@@ -72,10 +72,26 @@ return array(
 		'logout' => 'Logout',
 	),
 
+	'supersearch' => array(
+		'all' => 'All',
+		'tasks' => 'Tasks',
+		'content' => 'Contents',
+		'sites' => 'Sites',
+		'news' => 'News',
+		'accounts' => 'Accounts',
+	),
+
+	'supersearch_results' => array(
+		'nothing_found' => 'Keine übereinstimmung gefunden.',
+	),
+
 	'constants' => array(
 		'edit' => 'Edit',
 		'edit_site' => 'Edit Site',
 		'back' => 'Back to overview',
+		'user' => 'Username',
+		'next_step' => 'Next Step',
+		'end_tour' => 'Quit tour',
 		'delete' => 'Delete',
 		'save' => 'Save settings',
 		'not_set' => '(unset)',

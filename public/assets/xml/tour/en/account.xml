@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<storyboard>
+	<tour label="Create a new useraccount" />
+	<steps>
+		<step target="#form_username">
+			<position_difference top="20" left="100" />
+			<text>Fill out the username.</text>
+		</step>
+		<step target="#form_password">
+			<position_difference top="20" left="60" />
+			<text>Fill out the password.</text>
+		</step>
+		<step target="#form_language">
+			<position_difference top="20" left="60" />
+			<text>Choose which language the system should have if the user is logged in.</text>
+		</step>
+		<step target="#form_admin">
+			<position_difference top="10" left="10" />
+			<text>If the account should have all rights granted, select the checkbox.</text>
+		</step>
+		<step target="input[name='global_language[]']:first">
+			<position_difference top="20" left="60" />
+			<text>Choose which language versions of website should the account be able to enter.</text>
+		</step>
+		<step target="#tabs_menu">
+			<position_difference top="120" left="60" />
+			<text>Here you can choose in which language versions which parts of the cms should be able to access.</text>
+		</step>
+		<step target="#form_submit">
+			<position_difference top="20" left="120" />
+			<text>To create the account press this button.</text>
+		</step>
+	</steps>
+</storyboard>

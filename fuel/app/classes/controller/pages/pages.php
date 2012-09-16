@@ -26,20 +26,52 @@ class Controller_Pages_Pages extends Controller
 
 	private $id;
         
-        private function _set_landing_page($id)
-        {
-            $lprefix = Session::get('lang_prefix');
-            
-            $lid = model_db_language::prefixToId($lprefix);
-            
-            $landing_page = model_db_option::getKey('landing_page');
-            
-            $format = Format::forge($landing_page->value,'json')->to_array();
-            $format[$lid] = $id;
-            
-            $landing_page->value = Format::forge($format)->to_json();
-            $landing_page->save();
-        }
+    private function _set_landing_page($id)
+    {
+        $lprefix = Session::get('lang_prefix');
+        
+        $lid = model_db_language::prefixToId($lprefix);
+        
+        $landing_page = model_db_option::getKey('landing_page');
+        
+        $format = Format::forge($landing_page->value,'json')->to_array();
+        $format[$lid] = $id;
+        
+        $landing_page->value = Format::forge($format)->to_json();
+        $landing_page->save();
+    }
+
+	private function _getParentArray()
+	{
+		if(preg_match('#[0-9]#i',Uri::segment(3)))
+			$id = Uri::segment(3);
+		else
+		{
+			$num = Uri::segment(4);
+			if(!empty($num))
+			{
+				$nav = model_db_navigation::find(Uri::segment(4));
+				$id = $nav->group_id;
+			}
+			else
+			{
+				$nav = model_db_navigation::find('first');
+				$id = $nav->group_id;
+			}
+		}	
+		
+		$navis = model_db_navigation::find('all',array(
+			'where' => array('parent'=>0,'group_id'=>$id)
+		));
+
+		$result = array('0'=>__('navigation.none_parent'));
+
+		foreach($navis as $key => $navipoint)
+		{
+				$result[$key] = $navipoint['label'];
+		}
+		return $result;
+	}
 
 	public function before()
 	{
@@ -138,6 +170,8 @@ class Controller_Pages_Pages extends Controller
 			if($nav_point->navigation_id != 0)
 			{
 				$real_nav_point = model_db_navigation::find($nav_point->navigation_id);
+				$real_nav_point->show_in_navigation = Input::post('show_in_navigation') != '';
+				$real_nav_point->parent = Input::post('parent');
 				$real_nav_point->label = empty($label) ? __('constants.untitled_element') : $label;
 				$real_nav_point->url_title = model_generator_seo::friendly_title($nav_point->label);
 				$real_nav_point->save();
@@ -168,6 +202,21 @@ class Controller_Pages_Pages extends Controller
 		$data['navigation_id'] = $nav_point->navigation_id;
 		$data['id'] = $this->id;
         $data['site_id'] = $nav_point->id;
+
+		$data['parent'] = $navigation->parent;
+		$data['show_sub'] = $navigation->show_sub;
+		$data['show_in_navigation'] = $navigation->show_in_navigation;
+
+		$site = model_db_navigation::find('first',array(
+			'where' => array('parent'=>$navigation->id)
+		));
+		$data['show_sub_field'] = (is_object($site));
+
+                $data['group_id'] = $navigation->group_id;
+		$data['parent_array'] = $this->_getParentArray();
+
+		if(isset($data['parent_array'][$navigation->id]))
+			unset($data['parent_array'][$navigation->id]);
 
 		$data['mode'] = 'edit';
 

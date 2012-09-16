@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<storyboard>
+	<tour label="Einen Navigationspunkt bearbeiten" />
+	<steps>
+		<step target="#form_label">
+			<position_difference top="20" left="200" />
+			<text>Geben sie eine Titel der Navigation an.</text>
+		</step>
+		<step target="#form_redirect">
+			<position_difference top="20" left="200" />
+			<text>Falls der Navigationspunkt eine weiterleitung aufweisen soll, füllen sie das Feld mit einen Link.</text>
+		</step>
+		<step target="#form_landing_page">
+			<position_difference top="15" left="15" />
+			<text>Falls dieser Punkt als erstes aufgerufen werden soll, aktivieren Sie die Checkbox.</text>
+		</step>
+		<step target="#form_current_template">
+			<position_difference top="20" left="200" />
+			<text>Wählen Sie ein Template aus dem Layout ordner aus.</text>
+		</step>
+		<step target="#form_site_title">
+			<position_difference top="20" left="200" />
+			<text>Dieser Titel wird oben in der Titelleiste des Browsers angezeigt.</text>
+		</step>
+		<step target="#form_keywords">
+			<position_difference top="40" left="200" />
+			<text>Geben sie für die Suchmaschinen Schlüsselwörter, mit Komma getrennt, ein.</text>
+		</step>
+		<step target="#form_description">
+			<position_difference top="70" left="200" />
+			<text>Geben sie für die Suchmaschinen eine kurze Beschreibung der Seite an.</text>
+		</step>
+		<step target="#form_show_in_navigation">
+			<position_difference top="15" left="15" />
+			<text>Falls dieser Punkt in der Navigation nicht angezeigt werden soll deaktivieren Sie die Checkbox.</text>
+		</step>
+		<step target="#form_submit">
+			<position_difference top="20" left="60" />
+			<text>Speichern sie die Änderungen.</text>
+		</step>
+	</steps>
+</storyboard>

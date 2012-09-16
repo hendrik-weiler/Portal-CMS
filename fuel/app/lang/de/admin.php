@@ -54,7 +54,7 @@ return array(
 
 		'edit' => array(
 			'header' => 'Änderung',
-			'submit' => 'Ändern',
+			'submit' => 'Bearbeiten',
 			'back' => 'Zurück zur Übersicht',
 			'title' => 'Titel',
 			'pictures' => 'Bilder',
@@ -63,8 +63,8 @@ return array(
 	),
 
 	'nav' => array(
+		'dashboard' => 'Aktionszentrum',
 		'navigation' => 'Navigation',
-		'sites' => 'Seiten',
 		'news' => 'Nachrichten',
 		'language' => 'Sprachen',
 		'settings' => 'Benutzereinstellungen',
@@ -72,10 +72,26 @@ return array(
 		'logout' => 'Abmelden',
 	),
 
+	'supersearch' => array(
+		'all' => 'Alles',
+		'tasks' => 'Aufgaben',
+		'content' => 'Inhalte',
+		'sites' => 'Seiten',
+		'news' => 'Nachrichten',
+		'accounts' => 'Benutzerkonten',
+	),
+
+	'supersearch_results' => array(
+		'nothing_found' => 'Keine übereinstimmung gefunden.',
+	),
+
 	'constants' => array(
-		'edit' => 'Ändern',
-		'edit_site' => 'Seite Ändern',
+		'edit' => 'Bearbeiten',
+		'edit_site' => 'Seite Bearbeiten',
 		'back' => 'Zurück zur Übersicht',
+		'user' => 'Benutzername',
+		'next_step' => 'Zum nächsten Schritt',
+		'end_tour' => 'Tour beenden',
 		'delete' => 'Löschen',
 		'save' => 'Änderungen speichern',
 		'not_set' => '(ohne)',
@@ -109,10 +125,10 @@ return array(
 
 	'types' => array(
 		'1' => array(
-			'header' => 'Änderne den Textcontainer',
+			'header' => 'Bearbeitene den Textcontainer',
 			'label' => 'Titel',
 			'back' => 'Zurück zur Übersicht',
-			'submit' => 'Ändern',
+			'submit' => 'Bearbeiten',
 		),
 		'2' => array(
 			'header' => 'Verwalte dein Formular',
@@ -143,7 +159,7 @@ return array(
 			'picture_submit' => 'Dateien hochladen',
 			'image_header' => 'Bilder in der Galerie',
 			'no_entries' => 'Die Galerie besitzt noch keine Bilder',
-			'submit' => 'Ändern',
+			'submit' => 'Bearbeiten',
 		),
 		'5' => array(
 			'header' => 'Wähle ein bereits existierender Inhalt',

@@ -18,17 +18,38 @@
  *
  * @author     Hendrik Weiler
  * @license    http://www.gnu.org/licenses/gpl.html
- * @copyright  2012 Hendrik Weiler
+ * @copyright  2011 Hendrik Weiler
  */
-class model_about 
+class Controller_Dashboard_Dashboard extends Controller
 {
-	public static $version = 1.10;
 
-	public static $status = 'dev final';
+	private $data = array();
 
-	public static function show_version()
+	private $id;
+
+	public function before()
 	{
-		$version = number_format(static::$version,2);
-		return '<strong>Version:</strong> ' . $version . ' ' . static::$status;
+		model_auth::check_startup();
+		$this->data['title'] = 'Admin - ' . ucfirst(Uri::segment(2));
+		$this->id = $this->param('id');
+
+		$permissions = model_permission::mainNavigation();
+		$this->data['permission'] = $permissions[Session::get('lang_prefix')];
+		if(!model_permission::currentLangValid())
+			Response::redirect('admin/logout');
+
+		Lang::load('tasks');
+	}
+
+	public function action_index()
+	{
+		$data = array();
+
+		$this->data['content'] = View::factory('admin/columns/dashboard',$data);
+	}
+
+	public function after($response)
+	{
+		$this->response->body = View::factory('admin/index',$this->data);
 	}
 }
