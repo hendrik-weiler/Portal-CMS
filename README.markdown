@@ -1,6 +1,6 @@
 Portal Content Management System
 ====================
-#### v: 1.10 dev final
+#### v: 1.10
 
 Build on [Fuel Framework](https://github.com/fuel/fuel)<br />
 Using:<br />
@@ -17,7 +17,7 @@ Features:
 ---------------------
 * Multilanguage interface
 * Multilanguage site
-* Multi-Navigation ( with every up to 1 hirachie down)
+* Multi-Navigation ( with every to 1 hirachie down)
 * News
 * Page management
 * Textcontainer ( up to 3 columns )
@@ -65,7 +65,7 @@ Supersearch:
 With supersearch you can search the entire cms restricted to current siteversion your in after
 contents, sites, news, accounts and tasks (from the actionarea).
 
-Shortcuts (works almost everywhere):
+Shortcuts (works almost everywhere):<br />
 <strong>Shift + r</strong> = Supersearch new search<br />
 <strong>Shift + e</strong> = Supersearch category "all" search<br />
 <strong>Shift + c</strong> = Supersearch category "contents" search<br />
@@ -73,6 +73,14 @@ Shortcuts (works almost everywhere):
 <strong>Shift + n</strong> = Supersearch category "news" search<br />
 <strong>Shift + a</strong> = Supersearch category "accounts" search<br />
 <strong>Shift + s</strong> = Supersearch category "sites" search<br />
+
+You will see the that the tasks have like special options, for example "show only navigations with with sub entries".
+You can search in the supersearch textfield like that:
+=myoption1;myoption2;myoption3
+
+these options exist now:
+> no_main ( excludes points with sub entries )
+> main_points ( shows only points with sub entries )
 
 Templating:
 ---------------------

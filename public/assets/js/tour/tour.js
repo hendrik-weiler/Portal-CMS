@@ -230,7 +230,7 @@ pcms.tour = function()
 		}).find('.tour_label').html('<strong>Tour: </strong>'+xml.find('tour').attr('label'));
 		$('body').prepend(_tour_label);
 		$(_tour_label).animate({
-			top : 50
+			top : 100
 		});
 		$(_tour_label).find('a').click(function(e) {
 			e.preventDefault();

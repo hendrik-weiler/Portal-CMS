@@ -6,8 +6,8 @@
   },
   "preview":"icon.jpg",
   "assets":[
-    "layout.css",
-    "navigation.js"
+    "assets/css/layout.css",
+    "assets/js/navigation.js"
   ],
   "components":{
     "Main_navigation":"Main",

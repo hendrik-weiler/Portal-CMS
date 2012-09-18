@@ -31,8 +31,8 @@ class model_generator_tools extends model_db_site
 			'order_by' => array('sort'=>'ASC')
 		));
 
-        if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/languages_outer.php'))
-            $outer = View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/languages_outer.php');
+        if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/languages_outer.php'))
+            $outer = View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/languages_outer.php');
 		else
             $outer = View::factory('public/template/languages_outer');
 
@@ -48,8 +48,8 @@ class model_generator_tools extends model_db_site
 			else
 				$data['active'] = '';
 
-	        if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/languages_inner.php'))
-	            $inner .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/languages_inner.php',$data);
+	        if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/languages_inner.php'))
+	            $inner .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/languages_inner.php',$data);
 			else
 	            $inner .= View::factory('public/template/languages_inner',$data);
 		}

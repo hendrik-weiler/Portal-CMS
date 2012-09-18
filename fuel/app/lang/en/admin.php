@@ -100,7 +100,7 @@ return array(
 		'delete' => 'Delete',
 		'save' => 'Save settings',
 		'not_set' => '(unset)',
-		'choose_lang' => 'Choose your language version:',
+		'choose_lang' => 'Language version:',
 		'choose_lang_submit' => 'Change',
 		'untitled_element' => 'Untitled',
 		'install_tool_usable' => '<strong>Warning:</strong> The install tool is usable. Create app/INSTALL_TOOL_DISABLED to disable it.',

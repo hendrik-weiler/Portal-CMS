@@ -53,8 +53,8 @@ class model_generator_content extends model_db_site
 						$data = array();
 						$data['entries'] = self::_showMultipleNews($news);
 
-                                                if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/news_archive.php'))
-                                                        return View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/news_archive.php',$data);
+                                                if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/news_archive.php'))
+                                                        return View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/news_archive.php',$data);
 						else
                                                         return View::factory('public/template/news_archive',$data);
 				}
@@ -117,8 +117,8 @@ class model_generator_content extends model_db_site
 					$data['text'] = self::_viewContent($col_1);
 					$data['group'] = 'group_' . $content->id;
                                         
-                                        if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/1columns.php'))
-                                            $return .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/1columns.php',$data);
+                                        if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/1columns.php'))
+                                            $return .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/1columns.php',$data);
                                         else
                                             $return .= View::factory('public/template/1columns',$data);
 					break;
@@ -132,8 +132,8 @@ class model_generator_content extends model_db_site
 					$data['text2'] = self::_viewContent($col_2);
 					$data['group'] = 'group_' . $content->id;
 					
-                                        if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/2columns.php'))
-                                            $return .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/2columns.php',$data);
+                                        if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/2columns.php'))
+                                            $return .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/2columns.php',$data);
                                         else
                                             $return .= View::factory('public/template/2columns',$data);
 					break;
@@ -149,8 +149,8 @@ class model_generator_content extends model_db_site
 					$data['text3'] = self::_viewContent($col_3);
 					$data['group'] = 'group_' . $content->id;
                                         
-                                        if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/3columns.php'))
-                                            $return .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/3columns.php',$data);
+                                        if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/3columns.php'))
+                                            $return .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/3columns.php',$data);
                                         else
                                             $return .= View::factory('public/template/3columns',$data);
 					break;
@@ -180,8 +180,8 @@ class model_generator_content extends model_db_site
 						}
 					}
                                         
-                                        if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/html.php'))
-                                            $return .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/html.php',$data);
+                                        if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/html.php'))
+                                            $return .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/html.php',$data);
                                         else
                                             $return .= View::factory('public/template/html',$data);
                                 break;
@@ -203,8 +203,8 @@ class model_generator_content extends model_db_site
 				$data['content'] = $plugin->render();
 			}
 			$data['title'] = $content->label;
-            if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/plugin.php'))
-                $return .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/plugin.php',$data);
+            if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/plugin.php'))
+                $return .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/plugin.php',$data);
             else
                 $return .= View::factory('public/template/plugin',$data);
 			break;
@@ -255,8 +255,8 @@ class model_generator_content extends model_db_site
 		$data['swfPath'] = Uri::create($path . $content->flash_file);
 		$data['title'] = $content->label;
 
-                if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/flash.php'))
-                    return View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/flash.php',$data);
+                if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/flash.php'))
+                    return View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/flash.php',$data);
                 else
                     return View::factory('public/template/flash',$data);
 	}
@@ -305,8 +305,8 @@ class model_generator_content extends model_db_site
 			$data += $_POST;
 		}
                 
-                if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/contactform.php'))
-                    return View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/contactform.php',$data);
+                if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/contactform.php'))
+                    return View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/contactform.php',$data);
                 else
                     return View::factory('public/template/contactform',$data);
 	}
@@ -374,8 +374,8 @@ class model_generator_content extends model_db_site
 			if($full_view)
 			{
 				$html = '';
-                                if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/news_full.php'))
-                                    $html .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/news_full.php',$data);
+                                if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/news_full.php'))
+                                    $html .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/news_full.php',$data);
                                 else
                                     $html .= View::factory('public/template/news_full',$data);
 				
@@ -385,8 +385,8 @@ class model_generator_content extends model_db_site
 			}
 			else
 			{
-                            if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/news_short.php'))
-                                return View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/news_short.php',$data);
+                            if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/news_short.php'))
+                                return View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/news_short.php',$data);
                             else
                                 return View::factory('public/template/news_short',$data);
                         }
@@ -403,22 +403,22 @@ class model_generator_content extends model_db_site
 
 		if($content->type == 7)
 		{
-                    if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/3columns.php'))
-                        $tpl = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/3columns.php';
+                    if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/3columns.php'))
+                        $tpl = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/3columns.php';
                     else
                         $tpl = 'public/template/3columns';
                 }
 		else if($content->type == 6)
 		{
-                    if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/2columns.php'))
-                        $tpl = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/2columns.php';
+                    if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/2columns.php'))
+                        $tpl = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/2columns.php';
                     else
                         $tpl = 'public/template/2columns';
                 }
 		else
 		{
-                    if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/1columns.php'))
-                        $tpl = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/1columns.php';
+                    if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/1columns.php'))
+                        $tpl = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/1columns.php';
                     else
                         $tpl = 'public/template/1columns';
                 }
@@ -471,22 +471,22 @@ class model_generator_content extends model_db_site
 		$data['group'] = 'group_' . $content->id;
 		if($content->pictures == 'lightbox')
 		{
-                    if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/gallery_lightbox.php'))
-                        $path = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/gallery_lightbox.php';
+                    if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/gallery_lightbox.php'))
+                        $path = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/gallery_lightbox.php';
                     else
                         $path = 'public/template/gallery_lightbox';
                 }
 		else if($content->pictures == 'slideshow')
 		{
-                    if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/gallery_slideshow.php'))
-                        $path = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/gallery_slideshow.php';
+                    if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/gallery_slideshow.php'))
+                        $path = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/gallery_slideshow.php';
                     else
                         $path = 'public/template/gallery_slideshow';
                 }
 		else 
                 {
-                    if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/' . $content->pictures . '.php'))
-                        $path = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/' . $content->pictures . '.php';
+                    if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/' . $content->pictures . '.php'))
+                        $path = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/' . $content->pictures . '.php';
                     else 
 			$path = 'public/template/' . $content->pictures;
 

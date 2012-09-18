@@ -50,7 +50,7 @@ class model_db_site extends Orm\Model
   {
     $return = array();
     foreach(File::read_dir(
-            LAYOUTPATH . '/' . model_db_option::getKey('layout')->value,
+            LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/templates',
             1,
             array('php')) as $file)
     {

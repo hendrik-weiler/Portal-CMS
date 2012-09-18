@@ -27,13 +27,20 @@ body {
 }
 
 #change_lang {
-  width: 100%;
-  margin-bottom:8px;
+  margin-top: -20px;
+  background: white;
+  border: 1px solid #dedede;
+  border-top: none;
+  padding: 5px;
+  border-radius: 0 0 3px 3px;
 }
 
 #change_lang label {
-  width:600px;
   padding-right:5px;
+}
+
+.logo_lang {
+  margin: 25px 0;
 }
 
 .error {
@@ -44,6 +51,10 @@ body {
 
 .left {
   float:left;
+}
+
+.version {
+  margin-left: 12px;
 }
 
 /* ------------ prompt window ----------- */

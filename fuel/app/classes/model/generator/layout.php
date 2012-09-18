@@ -39,9 +39,9 @@ class model_generator_layout
 
     $data = $settings['components'];
     
-    if(!empty(model_generator_preparer::$currentSite->template))
+    if(!empty(model_generator_preparer::$currentSite->template) && model_generator_preparer::$currentSite->template != 'default')
     {
-        $path = LAYOUTPATH . '/' . $layout->value . '/' . model_generator_preparer::$currentSite->template . '.php';
+        $path = LAYOUTPATH . '/' . $layout->value . '/templates/' . model_generator_preparer::$currentSite->template . '.php';
         if(file_exists($path))
           $my_layout = View::forge($path,$data);
         else

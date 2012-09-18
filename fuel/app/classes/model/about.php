@@ -24,7 +24,7 @@ class model_about
 {
 	public static $version = 1.10;
 
-	public static $status = 'dev final';
+	public static $status = '';
 
 	public static function show_version()
 	{

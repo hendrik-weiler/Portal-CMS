@@ -31,7 +31,7 @@ class Controller_Supersearch_Supersearch extends Controller
 
 	private $hash_value = '';
 
-	private $option = '';
+	private $option = array();
 
 	private $type = array();
 
@@ -51,9 +51,17 @@ class Controller_Supersearch_Supersearch extends Controller
 		Lang::load('frontend');
 
 		$this->searchterms = explode(' ', str_replace('*','',Input::get('searchterm')));
+
 		$this->type = Input::get('type');
 		$this->hash_value = Input::get('hash') == '' ? '' : '#' . Input::get('hash');
-		$this->option = Input::get('option');
+		$this->option = explode(';',Input::get('option'));
+
+		if(preg_match('#=[\w_]+#i', $this->searchterms[0]))
+		{
+			$results = explode('=',$this->searchterms[0]);
+			$this->searchterms = array('');
+			$this->option = explode(';',$results[1]);
+		}
 
 		$language_version = Input::get('language_version');
 
@@ -157,7 +165,7 @@ class Controller_Supersearch_Supersearch extends Controller
 	private function _generate_sites_results()
 	{
 
-		if($this->option == 'no_main' || $this->option == 'main_points')
+		if(in_array('no_main',$this->option) || in_array('main_points',$this->option))
 		{
 			$navis = model_db_navigation::find('all', array(
 				'where' => array(array('label','like','%' . $this->searchterms[0] . '%'))
@@ -171,7 +179,7 @@ class Controller_Supersearch_Supersearch extends Controller
 					'where' => array('parent' => $navi->id)
 				));
 
-				if($this->option == 'main_points')
+				if(in_array('main_points',$this->option))
 				{
 					if(count($has_subs) != 0)
 					{

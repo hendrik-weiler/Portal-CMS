@@ -45,12 +45,16 @@
         </div>
         <div class="logout span2"><a href="<?php print Uri::create('admin/logout'); ?>"><?php print __('nav.logout') ?></a></div>
       </div>
-      <figure>
+
+      <div class="row logo_lang">
+
+      <div class="span7">
         <img src="<?php print Uri::create('assets/img/admin/logo.png'); ?>" /> 
         <div class="version"><?php print model_about::show_version() ?></div>
-      </figure>
+      </div>
       <?php print file_exists(APPPATH . 'INSTALL_TOOL_DISABLED') ? '' :  '<div class="error">' . __('constants.install_tool_usable') . '</div>' ?>
-      <section class="span16" id="change_lang">
+      
+      <div class="span8" id="change_lang">
     <div class="clearfix">
      <?php print Form::label(__('constants.choose_lang')); ?>
      <div class="input">
@@ -70,7 +74,10 @@
         ?>
       </div>
     </div>
-      </section>
+      </div>
+
+      </div>
+
     </header>
     <div id="main" role="main">
       <nav class="clearfix">

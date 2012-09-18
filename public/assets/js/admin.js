@@ -7,6 +7,13 @@ $('.btn[name=submit]').click(function(e) {
 	},300).delay(400);
 });
 
+$('#form_change').click(function(e) {
+	//e.preventDefault();
+	$(this).val('...').removeClass('primary').addClass('success').animate({
+		width: '200px'
+	},300).delay(400);
+});
+
 if(/admin\/language/.test(window.location.href))
 {
 	$('.delete').prompt({
