@@ -78,6 +78,7 @@ class Controller_Supersearch_Supersearch extends Controller
 		model_db_site::setLangPrefix($language_version);
 		model_db_news::setLangPrefix($language_version);
 		model_db_navigation::setLangPrefix($language_version);
+		model_db_navgroup::setLangPrefix($language_version);
 	}
 
 	private function _filter_db_results($current_results, $search)
