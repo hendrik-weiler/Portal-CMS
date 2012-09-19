@@ -36,6 +36,34 @@ return array(
 		'language_version_show_frontend' => 'Display a list of all available website languages on the website',
 	),
 
+	'question_permissions' => array(
+		'supersearch' => '-1',
+
+		'content' => '0,1',
+		'content_news' => '0,1',
+
+		'navigation' => '0,1',
+		'navigation_edit' => '0,1',
+		'navigation_group' => '0,1',
+		'navigation_group_edit_delete' => '0,1',
+		'navigation_sidebar' => '0,1',
+
+		'layout' => '-1',
+
+		'language' => '3',
+
+		'news' => '2',
+		'news_edit' => '2',
+
+		'account' => '-1',
+		'account_edit' => '-1',
+
+		'images' => '-1',
+
+		'language_version' => '-1',
+		'language_version_show_frontend' => '-1',
+	),
+
 	'question_links_show' => array(
 		'supersearch' => 'tour',
 

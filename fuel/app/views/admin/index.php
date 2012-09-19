@@ -39,7 +39,7 @@
         <div class="span11 supersearch">
           <div class="row">
             <div class="span2">Supersearch</div>
-            <div class="span4"><?php print Form::select('supersearch_cat',0,__('supersearch')) ?></div>
+            <div class="span4"><?php print Form::select('supersearch_cat',0,Controller_Supersearch_Supersearch::get_supersearch_columns($permission)) ?></div>
             <div class="span4"><?php print Form::input('supersearch_input','',array('class'=>'large')) ?></div>
           </div>
         </div>

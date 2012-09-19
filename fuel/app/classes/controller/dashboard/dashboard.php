@@ -45,6 +45,7 @@ class Controller_Dashboard_Dashboard extends Controller
 	{
 		$data = array();
 
+		$data['permissions'] = $this->data['permission'];
 		$this->data['content'] = View::factory('admin/columns/dashboard',$data);
 	}
 

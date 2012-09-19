@@ -29,6 +29,10 @@ $links = __('question_links');
 $show = __('question_links_show');
 foreach(__('questions') as $key => $question): 
 ?>
+<?php
+$question_permission = explode(',',__('question_permissions.' . $key));
+if(Controller_Supersearch_Supersearch::get_task_permission($question_permission , $permissions) || model_db_accounts::getCol(Session::get('session_id'),'admin')):
+?>
 	<div class="question span7">
 		<h4><?php print $question ?></h4>
 		<div class="links">
@@ -37,6 +41,7 @@ foreach(__('questions') as $key => $question):
 			<?php if(preg_match('#tour#i',$show[$key])) print Html::anchor($links[$key], __('take_tour')); ?> 
 		</div>
 	</div>
+<?php endif; ?>
 <?php endforeach; ?>
 </div>
 </div>

@@ -314,6 +314,28 @@ body {
   margin:3px;
 }
 
+.placeholder_container div.span4 {
+  background: white;
+  border: 1px solid #dedede;
+  padding: 5px;
+  margin: 10px 0;
+  margin-right: 10px;
+  border-radius: 0 0 3px 3px;
+}
+
+.placeholder_container div.span4 input,
+.placeholder_container div.span4 textarea {
+  margin: 10px 0;
+}
+
+.placeholder_container div.span4 div.delete a {
+  border-bottom: 1px solid #dedede;
+  padding-bottom: 5px;
+  display: block;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
 /* ----------- news style -------------- */
 
 .news_entry date {
@@ -416,6 +438,15 @@ body {
 
 .supersearch-container div.result-block span.content-type-site {
   background: #0069D6;
+  font-size: 10px;
+  color: white;
+  border-radius: 3px;
+  padding:3px;
+  margin-right: 5px;
+}
+
+.supersearch-container div.result-block span.content-type-group {
+  background: #2E8A5C;
   font-size: 10px;
   color: white;
   border-radius: 3px;

@@ -268,8 +268,7 @@ class model_generator_content extends model_db_site
 		if(isset($_POST['contact_submit']))
 		{
 			$required = array();
-
-			$val = Validation::factory('my_validation');
+			$val = Validation::instance( );
 			foreach($data as $key => $value)
 			{
 				if(preg_match('#([\w\_\-\.]+)_required#i',$key))

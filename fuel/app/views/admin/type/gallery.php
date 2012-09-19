@@ -32,8 +32,8 @@
 					$custom['select'] = array();
 					$custom['index'] = 0;
 
-                    if(is_dir(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/custom'))
-                        $custom_path = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/custom';
+                    if(is_dir(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/custom'))
+                        $custom_path = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/custom';
                     else
 						$custom_path = APPPATH . 'views/public/template/custom';
 

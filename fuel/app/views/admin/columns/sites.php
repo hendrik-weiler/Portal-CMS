@@ -143,7 +143,7 @@
 				),
 				10 => __('content.type.10'),
                 11 => __('content.type.11'),
-                12 => __('content.type.12'),
+                //12 => __('content.type.12'),
 	 		),array('style'=>'width:210px;'));
 
 			print Form::submit('addContent',__('content.add_button'),array('class'=>'btn')) . ' ';

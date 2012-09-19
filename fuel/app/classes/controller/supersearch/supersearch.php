@@ -35,6 +35,8 @@ class Controller_Supersearch_Supersearch extends Controller
 
 	private $type = array();
 
+	private $permissions;
+
 	public function before()
 	{
 		model_auth::check_startup();
@@ -64,6 +66,13 @@ class Controller_Supersearch_Supersearch extends Controller
 		}
 
 		$language_version = Input::get('language_version');
+
+		$this->permissions = model_permission::mainNavigation();
+
+		if(isset($this->permissions[$language_version]))
+			$this->permissions = $this->permissions[$language_version];
+		else
+			$this->permissions = false;
 
 		model_db_content::setLangPrefix($language_version);
 		model_db_site::setLangPrefix($language_version);
@@ -96,6 +105,49 @@ class Controller_Supersearch_Supersearch extends Controller
 		return $end_results;
 	}
 
+	public static function get_supersearch_columns($permissions)
+	{
+		Lang::load('admin');
+
+		$columns = array();
+
+		$columns['all'] = __('supersearch.all');
+		$columns['tasks'] = __('supersearch.tasks');
+
+		if($permissions[0]['valid'] && $permissions[1]['valid'])
+		{
+			$columns['content'] = __('supersearch.content');
+			$columns['sites'] = __('supersearch.sites');
+		}
+
+		if($permissions[2]['valid'])
+		{
+			$columns['news'] = __('supersearch.news');
+		}
+
+		if(model_db_accounts::getCol(Session::get('session_id'),'admin'))
+		{
+			$columns = __('supersearch');
+		}
+
+		return $columns;
+	}
+
+	public static function get_task_permission($should_have_this_permissions, $permissions)
+	{
+		$counter = 0;
+		foreach ($should_have_this_permissions as $key) 
+		{	
+			if($key == -1)
+				continue;
+
+			if($permissions[$key]['valid'])
+				$counter++;
+		}
+
+		return ($counter == count($should_have_this_permissions));
+	}
+
 	private function _filter_task_results()
 	{
 		$end_results = array();
@@ -111,12 +163,17 @@ class Controller_Supersearch_Supersearch extends Controller
 					$counter++;
 				}
 
-				if(count($this->searchterms) == $counter && preg_match('#shortcut#i',__('question_links_show.' . $key)))
+				$permissions = explode(',',__('question_permissions.' . $key));
+
+				if(static::get_task_permission($permissions, $this->permissions) || model_db_accounts::getCol(Session::get('session_id'),'admin'))
 				{
-					$end_results[$key] = new \stdClass;
-					$end_results[$key]->label = $result;
-					$end_results[$key]->link = \Uri::create(__('question_links.' . $key));
-				}	
+					if(count($this->searchterms) == $counter && preg_match('#shortcut#i',__('question_links_show.' . $key)))
+					{
+						$end_results[$key] = new \stdClass;
+						$end_results[$key]->label = $result;
+						$end_results[$key]->link = \Uri::create(__('question_links.' . $key));
+					}	
+				}
 			}
 		}
 
@@ -131,11 +188,18 @@ class Controller_Supersearch_Supersearch extends Controller
 					$counter++;
 				}
 
-				if(count($this->searchterms) == $counter && preg_match('#tour#i',__('question_links_show.' . $key)))
+				$permissions = explode(',',__('question_permissions.' . $key));
+
+				if(static::get_task_permission($permissions, $this->permissions) || model_db_accounts::getCol(Session::get('session_id'),'admin'))
 				{
-					$end_results[$key . '_tour'] = new \stdClass;
-					$end_results[$key . '_tour']->label = $result . ' (Tour)';
-					$end_results[$key . '_tour']->link = \Uri::create(__('question_links.' . $key));
+
+					if(count($this->searchterms) == $counter && preg_match('#tour#i',__('question_links_show.' . $key)))
+					{
+						$end_results[$key . '_tour'] = new \stdClass;
+						$end_results[$key . '_tour']->label = $result . ' (Tour)';
+						$end_results[$key . '_tour']->link = \Uri::create(__('question_links.' . $key));
+					}
+
 				}	
 			}
 		}
@@ -285,6 +349,9 @@ class Controller_Supersearch_Supersearch extends Controller
 				$sub_navs = model_db_navigation::find('all',array(
 					'where' => array('parent'=>$result->navigation_id)
 				));
+
+				$group = model_db_navgroup::find($result->group_id);
+
 				if(count($sub_navs) == 0)
 				{
 					$content_type = __('supersearch_results.normal_point');
@@ -307,16 +374,18 @@ class Controller_Supersearch_Supersearch extends Controller
 					$content_type = __('supersearch_results.sub_point');
 				}
 
-				$name = '<span class="content-type-site">' . $content_type . '</span><span class="content-pre-site">' . $sub_point . '/</span>' . $name;
+				$name = '<span class="content-type-site">' . $content_type . '</span><span class="content-type-group">' . $group->title . '</span><span class="content-pre-site">' . $sub_point . '/</span>' . $name;
 
 				break;
 				case 'content':
 
 				$site = model_db_site::find($result->site_id);
 
+				$group = model_db_navgroup::find($site->group_id);
+
 				$content_type = __('content.type.' . $result->type);
 
-				$name = '<span class="content-type-site">' . $content_type . '</span><span class="content-pre-site">' . $site->label . '/</span>' . $name;
+				$name = '<span class="content-type-site">' . $content_type . '</span><span class="content-type-group">' . $group->title . '</span><span class="content-pre-site">' . $site->label . '/</span>' . $name;
 
 				$link = \Uri::create('admin/content/' . $result->site_id . '/edit/' . $result->id . '/type/' . $result->type);
 				break;
@@ -344,26 +413,38 @@ class Controller_Supersearch_Supersearch extends Controller
 
 	public function action_accounts()
 	{
-		$results = $this->_generate_accounts_results();
-		$this->response->body = $this->_display_results($results);
+		if(model_db_accounts::getCol(Session::get('session_id'),'admin'))
+		{
+			$results = $this->_generate_accounts_results();
+			$this->response->body = $this->_display_results($results);
+		}
 	}
 
 	public function action_news()
 	{
-		$results = $this->_generate_news_results();
-		$this->response->body = $this->_display_results($results);
+		if($this->permissions[2]['valid'])
+		{
+			$results = $this->_generate_news_results();
+			$this->response->body = $this->_display_results($results);
+		}
 	}
 
 	public function action_sites()
 	{
-		$results = $this->_generate_sites_results();
-		$this->response->body = $this->_display_results($results);
+		if($this->permissions[0]['valid'] && $this->permissions[1]['valid'])
+		{
+			$results = $this->_generate_sites_results();
+			$this->response->body = $this->_display_results($results);
+		}
 	}
 
 	public function action_content()
 	{
-		$results = $this->_generate_content_results();
-		$this->response->body = $this->_display_results($results);
+		if($this->permissions[0]['valid'] && $this->permissions[1]['valid'])
+		{
+			$results = $this->_generate_content_results();
+			$this->response->body = $this->_display_results($results);
+		}
 	}
 
 	public function action_tasks()
@@ -376,17 +457,29 @@ class Controller_Supersearch_Supersearch extends Controller
 	{
 		$html = '';
 
-		$this->type = 'content';
-		$html .= $this->_display_results( $this->_generate_content_results() );
+		if($this->permissions[0]['valid'] && $this->permissions[1]['valid'])
+		{
+			$this->type = 'content';
+			$html .= $this->_display_results( $this->_generate_content_results() );
+		}
 
-		$this->type = 'sites';
-		$html .= $this->_display_results( $this->_generate_sites_results() );
+		if($this->permissions[0]['valid'] && $this->permissions[1]['valid'])
+		{
+			$this->type = 'sites';
+			$html .= $this->_display_results( $this->_generate_sites_results() );
+		}
 
-		$this->type = 'news';
-		$html .= $this->_display_results( $this->_generate_news_results() );
+		if($this->permissions[2]['valid'])
+		{
+			$this->type = 'news';
+			$html .= $this->_display_results( $this->_generate_news_results() );
+		}
 
-		$this->type = 'accounts';
-		$html .= $this->_display_results( $this->_generate_accounts_results() );
+		if(model_db_accounts::getCol(Session::get('session_id'),'admin'))
+		{
+			$this->type = 'accounts';
+			$html .= $this->_display_results( $this->_generate_accounts_results() );
+		}
 
 		$this->type = 'tasks';
 		$html .= $this->_display_results( $this->_generate_tasks_results() );
