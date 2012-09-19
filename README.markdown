@@ -1,6 +1,6 @@
 Portal Content Management System
 ====================
-#### v: 1.10
+#### v: 1.00
 
 Build on [Fuel Framework](https://github.com/fuel/fuel)<br />
 Using:<br />
@@ -49,6 +49,8 @@ Install
 > 1. Download the files
 > 2. Extract them into your root folder on your webserver
 > 3. Install throught he install tool (http://localhost/projectname/public/admin/install)
+
+if you get message like "install tool disabled" go to "yoursitefolder/fuel/app/" and delete the file : "INSTALL_TOOL_DISABLED"
 
 Follow all three steps and login into (http://localhost/projectname/public/admin).<br />
 *Notice*: you might have to create the bare database yourself.
@@ -190,8 +192,4 @@ Troubleshooting:
 
 ##### Why do i get a redirection error if i want to take a look at my site?
 You must create a navigation with a site + content in it first. Then the first navigation will be displayed as default.
-
-##### Why do i get a warning message at the navigation?
-Currently if you create navigations without creating a Site for it, it will appear.
-To solve this problem create a Site for it or dont create unneeded navigations.
 
