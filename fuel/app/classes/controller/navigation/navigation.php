@@ -265,6 +265,16 @@ class Controller_Navigation_Navigation extends Controller
 
 	public function action_delete()
 	{
+        $lprefix = Session::get('lang_prefix');
+
+		//$language_version = Input::get('language_version');
+		model_db_content::setLangPrefix($lprefix);
+		model_db_site::setLangPrefix($lprefix);
+		model_db_news::setLangPrefix($lprefix);
+		model_db_navigation::setLangPrefix($lprefix);
+		model_db_navgroup::setLangPrefix($lprefix);
+
+		
 		$nav_point = model_db_navigation::find($this->id);
 
 		$sub_points = model_db_navigation::find('all',array(
@@ -281,8 +291,6 @@ class Controller_Navigation_Navigation extends Controller
 		$site_point = model_db_site::find('first',array(
 			'where' => array('label' => $nav_point->label)
 		));
-                
-        $lprefix = Session::get('lang_prefix');
 
         $lid = model_db_language::prefixToId($lprefix);
         
