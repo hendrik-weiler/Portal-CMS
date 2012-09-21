@@ -133,7 +133,6 @@ class Controller_Advanced_Advanced extends Controller
 
 		foreach($contents as $content)
 		{
-			var_dump(is_dir(DOCROOT . 'uploads/' . $current_lang . '/gallery/' . $content->id));
 			if(is_dir(DOCROOT . 'uploads/' . $current_lang . '/gallery/' . $content->id))
 			{
 				foreach(File::read_dir(DOCROOT . 'uploads/' . $current_lang . '/gallery/' . $content->id . '/original',1) as $picture)
@@ -231,7 +230,7 @@ class Controller_Advanced_Advanced extends Controller
 		self::_resizeAllPictures();
 		self::_checkForOptions();
 
-		#Response::redirect('admin/advanced');
+		Response::redirect('admin/advanced');
 	}
 
 	public function action_layout_image()
