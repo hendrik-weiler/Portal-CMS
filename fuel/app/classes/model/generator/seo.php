@@ -45,11 +45,16 @@ class model_generator_seo
 			
 		$id = model_db_option::getKey('analytics_id')->value;
 		return "<script>
-					    var _gaq=[['_setAccount','" . stripslashes($id) . "'],['_trackPageview']];
-					    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-					    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-					    s.parentNode.insertBefore(g,s)}(document,'script'));
-					  </script>";
+				var _gaq = _gaq || [];
+				_gaq.push (['_setAccount', '" . stripslashes($id) . "']);
+				_gaq.push (['_gat._anonymizeIp']);
+				_gaq.push (['_trackPageview']);
+
+				(function() {var ga = document.createElement('script'); 
+					ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; 
+					var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+				})();
+				</script>";
 	}
 
 	private static function _remove_accent($str)
