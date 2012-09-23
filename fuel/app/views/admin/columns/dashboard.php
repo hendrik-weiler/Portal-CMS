@@ -12,9 +12,25 @@
 </style>
 <div class="row">
 	<div class="span16">
+
+<?php if(count($new_updates) != 0): ?>
+<div class="dashboard-message">
+	<?php 
+
+	if(count($new_updates) == 1)
+		$message = __('new_updates_single');
+	else
+		$message = __('new_updates_multi');
+
+	print Html::anchor('admin/advanced/update',count($new_updates) . $message); 
+	?>
+</div>
+<?php endif; ?>
+
 <h1>
 	<?php print __('header') ?>
 </h1>
+
 <?php print Form::open(); ?>
 <div class="clearfix">
 	<?php print Form::label(__('filter')) ?>

@@ -10,6 +10,7 @@
 	  <li><a href="#modules"><?php print __('advanced.tabs.modules') ?></a></li>
 	  <li><a href="#assets"><?php print __('advanced.tabs.assets') ?></a></li>
 	  <li><a href="<?php print Uri::create('admin/advanced/layout') ?>"><?php print __('advanced.tabs.layout') ?></a></li>
+	  <li><a href="<?php print Uri::create('admin/advanced/update') ?>">Updates</a></li>
 	</ul>
  <div class="pill-content">
 		<div class="active" id="general">

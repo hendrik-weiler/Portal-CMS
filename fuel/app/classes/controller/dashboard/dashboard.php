@@ -45,6 +45,10 @@ class Controller_Dashboard_Dashboard extends Controller
 	{
 		$data = array();
 
+		$update = new Controller_Advanced_Update($this->request, $this->response);
+		$update->before();
+		$data['new_updates'] = $update->check_for_new_updates();
+
 		$data['permissions'] = $this->data['permission'];
 		$this->data['content'] = View::factory('admin/columns/dashboard',$data);
 	}

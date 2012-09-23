@@ -494,3 +494,40 @@ body {
   opacity: 0.5;
 }
 
+/* updater */
+
+#update div.head {
+  font-weight: bold;
+  background: #ededed;
+  color: #0069D6;
+}
+
+#update div.success {
+  background: #008C15 !important;
+  color: white;
+}
+
+#update div.failure {
+  background: #C70000 !important;
+  color: white;
+}
+
+.dashboard-message,
+#update div.message {
+  background: #ededed;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+#update div.update {
+  border-bottom: 1px solid #ededed;
+  padding: 5px;
+}
+
+#update div.information {
+  margin: 10px;
+  color: #0069D6;
+  background: #ededed;
+  padding: 10px;
+}
+

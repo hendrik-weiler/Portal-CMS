@@ -1,7 +1,7 @@
 <?php
 /*
  * Portal Content Management System
- * Copyright (C) 2011  Hendrik Weiler
+ * Copyright (C) 2012  Hendrik Weiler
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,15 +20,18 @@
  * @license    http://www.gnu.org/licenses/gpl.html
  * @copyright  2012 Hendrik Weiler
  */
-class model_about 
+
+namespace Update;
+
+class Migration extends \model_db_language
 {
-	public static $version = 1.01;
-
-	public static $status = '';
-
-	public static function show_version()
+	public static function get_languages()
 	{
-		$version = number_format(static::$version,2);
-		return '<strong>Version:</strong> ' . $version . ' ' . static::$status;
+		$result = array();
+
+		foreach(static::find('all') as $lang)
+			$result[$lang->id] = $lang->prefix;
+
+		return $result;
 	}
 }

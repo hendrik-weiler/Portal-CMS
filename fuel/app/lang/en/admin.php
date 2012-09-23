@@ -307,6 +307,27 @@ return array(
 				'navigation' => 'Navigation',
 				'admin' => 'Administrator',
 		),
+		'updater' => array(
+			'release_date' => 'Release date',
+			'version' => 'Version',
+			'description' => 'Content',
+			'update' => 'Update to',
+			'no_updates' => 'No updates available currently.',
+			'update_not_available' => 'Not available yet',
+
+			'dateformat' => 'Y-m-d',
+
+			'success' => 'The update was successfull.',
+			'failure' => 'Problems occured while updating!',
+
+			'no_fsock' => 'The function "fsockopen" have to be available.',
+
+			'manually' => array(
+				'update' => 'Update',
+				'instruction' => 'Download an update and upload it via this form.',
+				'download' => 'Download of version : ',
+			),
+		),
 	),
 
 	'settings' => array(

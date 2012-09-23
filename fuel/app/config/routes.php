@@ -24,6 +24,10 @@ return array(
 
 	# -- admin/advanced
 
+	'admin/advanced/update/execute/manually' => 'advanced/update/execute_manually',
+	'admin/advanced/update/execute' => 'advanced/update/execute',
+	'admin/advanced/update' => 'advanced/update/index',
+
 	'admin/advanced/layout/preview/:path' => 'advanced/advanced/layout_image',
 	'admin/advanced/layout/edit' => 'advanced/advanced/layout_edit',
 	'admin/advanced/layout/choose' => 'advanced/advanced/layout_choose',

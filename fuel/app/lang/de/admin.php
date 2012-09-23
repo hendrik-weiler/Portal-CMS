@@ -307,6 +307,27 @@ return array(
 				'navigation' => 'Navigation',
 				'admin' => 'Administrator',
 		),
+		'updater' => array(
+			'release_date' => 'Erscheinungsdatum',
+			'version' => 'Version',
+			'description' => 'Inhalt',
+			'update' => 'Aktualisieren zu',
+			'no_updates' => 'Es sind keine Updates zurzeit vorhanden.',
+			'update_not_available' => 'Noch nicht verfügbar',
+
+			'dateformat' => 'd.m.Y',
+
+			'success' => 'Das Update war erfolgreich.',
+			'failure' => 'Es gab Probleme beim updaten!',
+
+			'no_fsock' => 'Die Funktion "fsockopen" muss verfügbar sein, damit der Updater funktioniert.',
+
+			'manually' => array(
+				'update' => 'Aktualisieren',
+				'instruction' => 'Laden sie ein Update herunter und laden sie es in diesem Formular hoch.',
+				'download' => 'Download von Version : ',
+			),
+		),
 	),
 
 	'settings' => array(

@@ -7,8 +7,13 @@ return array(
 	'short_cut' => 'To the place',
 	'filter' => 'Filter:',
 
+	'new_updates_single' => ' new update is available.',
+	'new_updates_multi' => ' new updates are available.',
+
 	'questions' => array(
 		'supersearch' => 'Learn about supersearch',
+
+		'updater' => 'Updating the system',
 
 		'content' => 'Create a new content',
 		'content_news' => 'Display news on the website',
@@ -39,6 +44,8 @@ return array(
 	'question_permissions' => array(
 		'supersearch' => '-1',
 
+		'updater' => '-1',
+
 		'content' => '0,1',
 		'content_news' => '0,1',
 
@@ -66,6 +73,8 @@ return array(
 
 	'question_links_show' => array(
 		'supersearch' => 'tour',
+
+		'updater' => 'tour|shortcut',
 
 		'content' => 'tour|shortcut',
 		'content_news' => 'tour|shortcut',
@@ -95,6 +104,8 @@ return array(
 	'question_links' => array(
 		'supersearch' => 'admin/news#tour=supersearch',
 
+		'updater' => 'admin/advanced/update#tour=updater',
+
 		'content' => 'open-supersearch//sites/no_main#tour=content',
 		'content_news' => 'open-supersearch//sites/no_main#tour=content_news',
 
@@ -119,4 +130,5 @@ return array(
 		'language_version' => 'admin/language#tour=language_version',
 		'language_version_show_frontend' => 'admin/language#tour=language_version_show_frontend_1',
 	),
+
 );

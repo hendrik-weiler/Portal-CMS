@@ -7,8 +7,13 @@ return array(
 	'short_cut' => 'Zum Einsatzort',
 	'filter' => 'Filter:',
 
+	'new_updates_single' => ' neues Update ist verfügbar.',
+	'new_updates_multi' => ' neue Updates sind verfügbar.',
+
 	'questions' => array(
 		'supersearch' => 'Supersearch kennenlernen',
+
+		'updater' => 'Das System updaten',
 
 		'content' => 'Einen neuen Inhalt erstellen',
 		'content_news' => 'Nachrichten darstellen auf der Website',
@@ -38,6 +43,8 @@ return array(
 	'question_permissions' => array(
 		'supersearch' => '-1',
 
+		'updater' => '-1',
+
 		'content' => '0,1',
 		'content_news' => '0,1',
 
@@ -66,6 +73,8 @@ return array(
 	'question_links_show' => array(
 		'supersearch' => 'tour',
 
+		'updater' => 'tour|shortcut',
+
 		'content' => 'tour|shortcut',
 		'content_news' => 'tour|shortcut',
 
@@ -93,6 +102,8 @@ return array(
 
 	'question_links' => array(
 		'supersearch' => 'admin/news#tour=supersearch',
+
+		'updater' => 'admin/advanced/update#tour=updater',
 
 		'content' => 'open-supersearch//sites/no_main#tour=content',
 		'content_news' => 'open-supersearch//sites/no_main#tour=content_news',

@@ -194,7 +194,7 @@ return array(
 		 * );
 		 */
 		'packages'	=> array(
-			'orm','elfinder','image'
+			'orm','elfinder','image','sutra'
 		),
 
 		/**

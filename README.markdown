@@ -1,6 +1,6 @@
 Portal Content Management System
 ====================
-#### v: 1.00
+#### v: 1.01
 
 Build on [Fuel Framework](https://github.com/fuel/fuel)<br />
 Using:<br />
@@ -12,6 +12,7 @@ Using:<br />
 [jquery.swfobject](http://jquery.thewikies.com/swfobject/)<br />
 [pie](https://github.com/lojjic/PIE)<br />
 [jquery.hotkeys](http://github.com/jeresig/jquery.hotkeys)<br />
+[sutra](https://github.com/Tatsh/sutra)<br />
 
 Features:
 ---------------------
@@ -43,6 +44,7 @@ Password: test<br />
 Requirements:
 ---------------------
 PHP 5.3
+fsockopen ( else manually updating )
 
 Install
 ---------------------
