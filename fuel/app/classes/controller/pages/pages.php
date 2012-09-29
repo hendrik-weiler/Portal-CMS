@@ -25,6 +25,8 @@ class Controller_Pages_Pages extends Controller
 	private $data = array();
 
 	private $id;
+
+	private $_ajax = false;
         
     private function _set_landing_page($id)
     {
@@ -266,6 +268,28 @@ class Controller_Pages_Pages extends Controller
 		}
 	}
 
+	public function action_classnames()
+	{
+		$this->_ajax = true;
+
+		$class_id = Input::post('classname');
+
+		$ids = Input::post('ids');
+
+		$contents = array();
+
+		foreach($ids as $id)
+			$contents[] = model_db_content::find($id);
+
+		foreach($contents as $content)
+		{
+			$content->classname = $class_id;
+			$content->save();
+		}
+
+		return true;
+	}
+
 	public static function generateUrl($id)
 	{
 		$site = model_db_site::find($id);
@@ -283,6 +307,7 @@ class Controller_Pages_Pages extends Controller
 
 	public function after($response)
 	{
+		if(!$this->_ajax)
 		$this->response->body = View::factory('admin/index',$this->data);
 	}
 }

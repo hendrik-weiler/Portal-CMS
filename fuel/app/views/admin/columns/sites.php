@@ -176,6 +176,9 @@
 
 		function writeRow($nav,$class='sites_entry')
 		{
+
+			
+
 			print '<div id="' . $nav->id . '" class="list_entry clearfix ' . $class . '">';
 
 			print '<span>';
@@ -202,17 +205,33 @@
 
 		function writeRowContent($nav,$id,$class='content_entry')
 		{
+
+			$style = model_db_content::genStyleFromClassname($nav->classname);
+
 			print '<div id="' . $nav->id . '" class="list_entry clearfix ' . $class . '">';
 
 			print '<span>';
 
-			print '<strong>' . __('content.type.' . $nav->type) . '</strong>: ';
+			print '<strong>' . __('content.type.' . $nav->type) . '</strong>: <br />';
 
 			if(in_array($nav->type,array(1,2,3,6,7,10,11,12)))
-			print $nav->label;
+			{
+				print empty($nav->label) ? '&nbsp;' : $nav->label;
+			}
+			else
+			{
+				print '&nbsp;';
+			}
 
 			print '</span>';
 
+			print '<div class="split_box">';
+
+			print $style->type . ' %';
+
+			print Form::checkbox('split_box[]',1,array('data-content-id'=>$nav->id));
+
+			print '</div>';
 
 			print '<div>';
 
@@ -227,3 +246,24 @@
 		}
 	?>
 </div>
+<script type="text/javascript">
+var _confirm_count_single = "<?php print __('content.confirm_count_single'); ?>";
+var _confirm_count_multiple = "<?php print __('content.confirm_count_multiple'); ?>";
+</script>
+<div class="split_box_container">
+	<div class="entries-text">
+		0 <?php print __('content.confirm_count_multiple'); ?>
+	</div>
+	<?php 
+	print Form::select('split_box_choice',0,array(
+		4 => '25%',
+		3 => '33%',
+		2 => '50%',
+		1 => '75%',
+		0 => '100%'
+	)); 
+
+	print Form::button('split_box_choice_button',__('content.confirm'),array('class'=>'btn'));
+	?>
+</div>
+<script type="text/javascript" src="<?php print Uri::create('assets/js/split_box.js') ?>"></script>

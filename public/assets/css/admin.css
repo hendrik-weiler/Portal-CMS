@@ -275,7 +275,17 @@ body {
 
 .content_entry span,
 .content_entry div {
-  width: 100%;
+  width: 200px;
+  float: left;
+}
+
+.content_entry div {
+  text-align:right;
+}
+
+.split_box {
+  float: left;
+  width: 50px;
 }
 
 .content_type_entry {
@@ -288,6 +298,26 @@ body {
 }
 .content_type_entry span {
   width: 740px;
+}
+
+.split_box_container {
+  padding: 5px;
+  background: white;
+  border: 1px solid #dedede;
+  width: 190px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+}
+
+.split_box_container select {
+  width: 60px;
+}
+
+.split_box_container select,
+.split_box_container input {
+  margin:5px;
 }
 
 /* ----------- content types style -------------- */

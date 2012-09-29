@@ -126,6 +126,9 @@ return array(
 		'add_button' => ' + ',
 		'none_available' => 'Zurzeit sind keine Inhalte in der Seite',
 		'preview' => 'Vorschau',
+		'confirm' => 'Übernehmen',
+		'confirm_count_single' => ' Eintrag wird übernommen',
+		'confirm_count_multiple' => ' Einträge werden übernommen',
 	),
 
 	'types' => array(

@@ -126,6 +126,9 @@ return array(
 		'add_button' => ' + ',
 		'none_available' => 'Currently no contents in this site',
 		'preview' => 'Preview',
+		'confirm' => 'Accept',
+		'confirm_count_single' => ' entry will be accepted',
+		'confirm_count_multiple' => ' entries will be accepted',
 	),
 
 	'types' => array(

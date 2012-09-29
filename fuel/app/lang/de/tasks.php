@@ -17,6 +17,7 @@ return array(
 
 		'content' => 'Einen neuen Inhalt erstellen',
 		'content_news' => 'Nachrichten darstellen auf der Website',
+		'content_width' => 'Einzelne Inhalte in spalten aufteilen',
 
 		'navigation' => 'Einen neuen Eintrag in der Navigation erstellen',
 		'navigation_edit' => 'Einen Navigationspunkt bearbeiten',
@@ -47,6 +48,7 @@ return array(
 
 		'content' => '0,1',
 		'content_news' => '0,1',
+		'content_width' => '0,1',
 
 		'navigation' => '0,1',
 		'navigation_edit' => '0,1',
@@ -77,6 +79,7 @@ return array(
 
 		'content' => 'tour|shortcut',
 		'content_news' => 'tour|shortcut',
+		'content_width' => 'tour|shortcut',
 
 		'navigation' => 'tour|shortcut',
 		'navigation_edit' => 'tour|shortcut',
@@ -107,6 +110,7 @@ return array(
 
 		'content' => 'open-supersearch//sites/no_main#tour=content',
 		'content_news' => 'open-supersearch//sites/no_main#tour=content_news',
+		'content_width' => 'open-supersearch//sites/no_main#tour=content_width',
 
 		'navigation' => 'admin/navigation#tour=navigation',
 		'navigation_edit' => 'open-supersearch//sites/no_main#tour=navigation_edit',

@@ -41,6 +41,8 @@ pcms.tour = function()
 
 	var _tour_label = $('<div class="tour_identifier"><div class="tour_label"></div><a href="#" class="btn">' + _end_tour_button + '</a></div>');
 
+	var _xml_data = '';
+
 	var position_top = [];
 
 	var position_left = [];
@@ -76,6 +78,11 @@ pcms.tour = function()
 			var target = $(obj).attr('target');
 			if($(target).length == 0) return;
 			var target_position = $(target).position();
+			if($(target).css('top') != 'auto')
+			{
+				target_position.top = parseFloat( $(target).css('top').replace('px','') );
+				target_position.left = parseFloat( $(target).css('left').replace('px','') );
+			}
 			position_top.push( target_position.top + parseInt($(obj).find('position_difference').attr('top')) );
 			position_left.push( target_position.left + parseInt($(obj).find('position_difference').attr('left')) );
 			texts.push( $(obj).find('text').text() );
@@ -86,12 +93,14 @@ pcms.tour = function()
 
 	function _make_step(number)
 	{
+		_refresh_storyline($(_xml_data));
+
+		var target = targets[number];
 		var top = position_top[number];
 		var left = position_left[number];
 		var text = texts[number];
 		var textbox = $(_textbox.clone());
 		var condition = conditions[number];
-		var target = targets[number];
 		var live_target = $(storyboard).find('step').eq(number).attr('live_target');
 		var redirect_after = $(storyboard).find('step').eq(number).attr('redirect_after');
 		var redirect_by_click = $(storyboard).find('step').eq(number).attr('redirect_by_click');
@@ -258,6 +267,7 @@ pcms.tour = function()
 				url: _base_url + 'assets/xml/tour/' + _language + '/' + tour + '.xml',
 				dataType: "xml",
 				success: function(xml) {
+					_xml_data = xml;
 					_show_tour_label($(xml));
 			 		_start_tour($(xml));
 				}

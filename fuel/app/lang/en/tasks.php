@@ -17,6 +17,7 @@ return array(
 
 		'content' => 'Create a new content',
 		'content_news' => 'Display news on the website',
+		'content_width' => 'Set single contents into columns',
 
 		'navigation' => 'Create a new entry in the navigation',
 		'navigation_edit' => 'Edit an entry of the navigation',
@@ -48,6 +49,7 @@ return array(
 
 		'content' => '0,1',
 		'content_news' => '0,1',
+		'content_width' => '0,1',
 
 		'navigation' => '0,1',
 		'navigation_edit' => '0,1',
@@ -78,6 +80,7 @@ return array(
 
 		'content' => 'tour|shortcut',
 		'content_news' => 'tour|shortcut',
+		'content_width' => 'tour|shortcut',
 
 		'navigation' => 'tour|shortcut',
 		'navigation_edit' => 'tour|shortcut',
@@ -108,6 +111,7 @@ return array(
 
 		'content' => 'open-supersearch//sites/no_main#tour=content',
 		'content_news' => 'open-supersearch//sites/no_main#tour=content_news',
+		'content_width' => 'open-supersearch//sites/no_main#tour=content_width',
 
 		'navigation' => 'admin/navigation#tour=navigation',
 		'navigation_edit' => 'open-supersearch//sites/no_main#tour=navigation_edit',
@@ -130,5 +134,6 @@ return array(
 		'language_version' => 'admin/language#tour=language_version',
 		'language_version_show_frontend' => 'admin/language#tour=language_version_show_frontend_1',
 	),
+
 
 );

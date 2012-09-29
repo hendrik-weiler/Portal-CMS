@@ -25,10 +25,50 @@ class model_db_content extends Orm\Model
 
 	public static $_table_name = 'en_content';
 
-	protected static $_properties = array('id', 'site_id', 'type','label', 'text','text2','text3', 'wmode', 'parameter', 'pictures', 'flash_file','form','refer_content_id','dimensions', 'sort');
+	protected static $_properties = array('id', 'site_id', 'type','label', 'text','text2','text3', 'wmode', 'parameter', 'pictures', 'flash_file','form','refer_content_id','dimensions', 'sort','classname');
 
 	public static function setLangPrefix($prefix)
 	{
 		self::$_table_name = $prefix . '_content';
+	}
+
+	public static function genStyleFromClassname($classname)
+	{
+		$html = 'style="float:left;width:';
+		$type = 100;
+		$value = 98;
+
+		switch($classname)
+		{
+			case '':
+			case 0:
+			$value = 98;
+			break;
+			case 4:
+			$value = 23;
+			$type = 25;
+			break;
+			case 3:
+			$value = 31;
+			$type = 33;
+			break;
+			case 2:
+			$value = 48;
+			$type = 50;
+			break;
+			case 1:
+			$value = 73;
+			$type = 75;
+			break;
+		}
+
+		$html .= $value . '%;"';
+
+		$return = new \stdClass;
+		$return->style = $html;
+		$return->type = $type;
+		$return->value = $value;
+
+		return $return;
 	}
 }

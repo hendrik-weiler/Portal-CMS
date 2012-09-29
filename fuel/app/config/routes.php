@@ -67,6 +67,8 @@ return array(
 
 	# -- admin/sites
 
+	'admin/sites/classnames/update' => 'pages/pages/classnames',
+
 	'admin/sites/order/update' => 'pages/pages/order',
 	'admin/sites/delete/:id' => 'pages/pages/delete',
 	'admin/sites/edit/:id' => 'pages/pages/edit',

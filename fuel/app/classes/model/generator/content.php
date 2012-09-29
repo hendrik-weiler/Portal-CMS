@@ -27,6 +27,8 @@ class model_generator_content extends model_db_site
 
 	private static $_renderSpecial = false;
 
+	private static $_width_counter = 0;
+
 	private static function _viewSite($site,$directly=false)
 	{
 		if(!$directly)
@@ -85,8 +87,19 @@ class model_generator_content extends model_db_site
 	{
 			if($content == null)
 				return false;
-				
+
 			$return = '';
+
+			$style = model_db_content::genStyleFromClassname($content->classname);
+
+			static::$_width_counter += $style->value;
+			if(static::$_width_counter >= 99)
+			{
+				$return = '<br style="clear:left;" />';
+				static::$_width_counter = 0;
+			}
+				
+			$return .= '<div class="width_' . $style->type . '" ' . $style->style . '>';
 			switch($content->type)
 			{
 				case 7:
@@ -209,6 +222,8 @@ class model_generator_content extends model_db_site
                 $return .= View::factory('public/template/plugin',$data);
 			break;
 			}
+
+			$return .= '</div>';
 			return $return;
 	}
 
