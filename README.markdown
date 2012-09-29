@@ -43,7 +43,7 @@ Password: test<br />
 
 Requirements:
 ---------------------
-PHP 5.3
+PHP 5.3<br />
 fsockopen ( else manually updating )
 
 Install
@@ -195,3 +195,6 @@ Troubleshooting:
 ##### Why do i get a redirection error if i want to take a look at my site?
 You must create a navigation with a site + content in it first. Then the first navigation will be displayed as default.
 
+##### Why do i get an error when im updating?
+You have to set the complete folder in mode 777.<br />
+(e.g linux: sudo chmod -R 777 foldername)

@@ -4,6 +4,8 @@ $(function() {
 
 	var first_pos = $('input[name="split_box[]"]').eq(0).position();
 
+	if(first_pos === undefined || first_pos == null) return false;
+
 	$('div.split_box_container').css({
 		top : first_pos.top + 40,
 		left : first_pos.left - 395
