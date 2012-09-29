@@ -50,6 +50,13 @@ class Controller_Advanced_Update extends Controller
 		$this->data['permission'] = $permissions[Session::get('lang_prefix')];
 		if(!$this->data['permission'][5]['valid'] || !model_permission::currentLangValid())
 			Response::redirect('admin/logout');
+
+		$language_version = Session::get('lang_prefix');
+		model_db_content::setLangPrefix($language_version);
+		model_db_site::setLangPrefix($language_version);
+		model_db_news::setLangPrefix($language_version);
+		model_db_navigation::setLangPrefix($language_version);
+		model_db_navgroup::setLangPrefix($language_version);
 	}
 
 	private function _calc_versions(&$updates)

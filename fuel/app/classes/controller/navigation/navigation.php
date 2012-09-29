@@ -298,30 +298,21 @@ class Controller_Navigation_Navigation extends Controller
         
         if($format[$lid] == $site_point->id)
             $this->_set_landing_page(0);
-                
-		$site_point->delete();
 
 		$contents = model_db_content::find()->where('site_id',$site_point->id)->get();
 
+		$site_point->delete();
+
+		model_helper_management_content::remove_unneeded_content();
+
 		foreach($contents as $content)
 		{
-			$content->delete();
+			#$content->delete();
 			if(is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $content->id))
 				File::delete_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $content->id);
 
 			if(is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash/' . $content->id))
 				File::delete_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash/' . $content->id);
-		}
-
-		if(!empty($sub_points))
-		{
-			foreach($sub_points as $point)
-			{
-				$sub_site = model_db_site::find('first',array(
-					'where' => array('navigation_id'=>$point->id)
-				));
-				$sub_site->delete();
-			}	$point->delete();
 		}
 
 		Response::redirect('admin/navigation');
