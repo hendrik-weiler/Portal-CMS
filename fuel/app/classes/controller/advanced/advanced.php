@@ -37,7 +37,9 @@ class Controller_Advanced_Advanced extends Controller
 		# modules
 		'module_navigation','module_content','module_seo_head','module_seo_analytics','module_language_switcher',
 		# assets
-		'asset_jquery','asset_modernizr','asset_colorbox','asset_nivo_slider','asset_swfobject','asset_custom'
+		'asset_jquery','asset_modernizr','asset_colorbox','asset_nivo_slider','asset_swfobject','asset_custom',
+		# navigation images
+		'navigation_image_width','navigation_image_height'
 	);
 
 	private static $defaultValue = array(
@@ -49,7 +51,7 @@ class Controller_Advanced_Advanced extends Controller
 		'show_last' => '3',
 		'show_max_token' => '100',
 		'layout' => 'default',
-                'landing_page' => '{"1":"0"}',
+        'landing_page' => '{"1":"0"}',
 		# seo
 		'analytics_id' => 'UA-XXXXXXXX-X',
 		'robots' => 'index,follow',
@@ -66,6 +68,9 @@ class Controller_Advanced_Advanced extends Controller
 		'asset_nivo_slider' => 1,
 		'asset_swfobject' => 1,
 		'asset_custom' => 1,
+		# navigation images
+		'navigation_image_width' => 60,
+		'navigation_image_height' => 60
 	);
 
 	private static $minValue = array(
@@ -93,6 +98,9 @@ class Controller_Advanced_Advanced extends Controller
 		'asset_nivo_slider' => 0,
 		'asset_swfobject' => 0,
 		'asset_custom' => 0,
+		# navigation images
+		'navigation_image_width' => 10,
+		'navigation_image_height' => 10
 	);
 
 	private static function _resizeAllPictures()
@@ -140,6 +148,21 @@ class Controller_Advanced_Advanced extends Controller
 					$resizer = new image\resize(DOCROOT . 'uploads/' . $current_lang . '/gallery/' . $content->id . '/original/' . $picture);
 					$resizer->resizeImage($settings['gallery_thumbs_width'], $settings['gallery_thumbs_height'], 'crop');
 					$resizer->saveImage(DOCROOT . 'uploads/' . $current_lang . '/gallery/' . $content->id . '/thumbs/' . $picture, 100);
+				}
+			}
+		}
+
+		$navigations = model_db_navigation::find('all');
+
+		foreach($navigations as $navigation)
+		{
+			if(is_dir(DOCROOT . 'uploads/' . $current_lang . '/navigation_images/' . $navigation->id))
+			{
+				foreach(File::read_dir(DOCROOT . 'uploads/' . $current_lang . '/navigation_images/' . $navigation->id . '/original',1) as $picture)
+				{
+					$resizer = new image\resize(DOCROOT . 'uploads/' . $current_lang . '/navigation_images/' . $navigation->id . '/original/' . $picture);
+					$resizer->resizeImage($settings['navigation_image_width'], $settings['navigation_image_height'], 'auto');
+					$resizer->saveImage(DOCROOT . 'uploads/' . $current_lang . '/navigation_images/' . $navigation->id . '/thumbs/' . $picture, 100);
 				}
 			}
 		}
@@ -227,8 +250,8 @@ class Controller_Advanced_Advanced extends Controller
 	{
 		$this->_ajax = true;
 
-		self::_resizeAllPictures();
 		self::_checkForOptions();
+		self::_resizeAllPictures();
 
 		Response::redirect('admin/advanced');
 	}

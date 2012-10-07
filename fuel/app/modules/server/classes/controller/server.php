@@ -215,7 +215,7 @@ class Controller_Server extends \Controller
 			$type = 'img';
 
 		if(static::$is_public_asset)
-			$path = LAYOUTPATH . '/' . \model_db_option::getKey('layout')->value . '/img/' . $file;
+			$path = LAYOUTPATH . '/' . \model_db_option::getKey('layout')->value . '/assets/img/' . $file;
 		else if(static::$is_tooltip)
 		{
 			$path = APPPATH . '../../components/' . $component . '/tooltip/' . str_replace('-', '/', $this->param('path')) . '.xml';
@@ -236,7 +236,7 @@ class Controller_Server extends \Controller
 
 		if(!file_exists($path))
 		{
-			$this->response->body = 'File doesnt exist.';
+			$this->response->body = 'File doesnt exist in ' . $path;
 			return $this->response;
 		}
 

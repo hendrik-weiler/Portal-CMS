@@ -19,7 +19,7 @@ return array(
 			'hostname'   => 'localhost',
 			'database'   => 'portalcms1',
 			'username'   => 'root',
-			'password'   => '',
+			'password'   => 'root',
 			'persistent' => false,
 		),
 		'table_prefix' => '',

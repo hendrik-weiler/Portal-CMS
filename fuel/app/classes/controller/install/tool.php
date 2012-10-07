@@ -201,6 +201,7 @@ class Controller_Install_Tool extends Controller
 		Session::set('step',3);
 		$this->_data['step_3'] = 'active';
 		$this->_data['content'] = View::factory('install/content/step_3');
+		\model_helper_management_content::remove_unneeded_content();
 	}
 
 	public function after($response)

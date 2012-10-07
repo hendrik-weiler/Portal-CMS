@@ -2,7 +2,7 @@
 
 namespace Fuel\Migrations;
 
-class version_1011 extends \Update\Migration
+class version_1012 extends \Update\Migration
 {
 
 	public static $lang = 'dummy';
@@ -21,15 +21,19 @@ class version_1011 extends \Update\Migration
 
         # --------------------- content ----------------------------------------
 
+        \DBUtil::add_fields($lang . '_content', array(
+            'classname' => array('type' => 'text','null' => true),
+        ));
 	}
 
 	private function _deleteCMSDataByLang($lang)
 	{
-		\DBUtil::drop_fields($lang . '_content', 'picture_order');
+		\DBUtil::drop_fields($lang . '_content', 'classname');
 	}
 
 	public function up()
 	{
+
 		$this->_createCMSDataByLang(self::$lang);
 
         foreach (static::get_languages() as $lang) 

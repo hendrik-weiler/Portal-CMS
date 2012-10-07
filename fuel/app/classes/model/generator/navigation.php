@@ -71,6 +71,8 @@ class model_generator_navigation extends model_db_navigation
 				'id' => $nav->id,
 				'label' => $nav->label,
 				'url_title' => $nav->url_title,
+				'image' => $nav->image,
+				'image_is_shown' => $nav->image_is_shown
 			);
 
 			if(Uri::segment(2) == $nav->url_title || Uri::segment(3) == $nav->url_title
@@ -111,6 +113,8 @@ class model_generator_navigation extends model_db_navigation
 			$data['active_class'] = '';
 			$data['target'] = '_self';
 			$data['label'] = $nav['label'];
+			$data['image'] = Uri::create('uploads/' . Uri::segment(1) . '/navigation_images/' . $nav['id'] . '/thumbs/' . $nav['image']);
+			$data['image_is_shown'] = $nav['image_is_shown'];
 			$data['link'] = Uri::create(model_generator_preparer::$lang . '/' . $nav['url_title']);
 			if(isset($nav['sub']))
 			{
@@ -157,6 +161,8 @@ class model_generator_navigation extends model_db_navigation
 					$subData['label'] = $sub['label'];
 					$subData['link'] = Uri::create(model_generator_preparer::$lang . '/' . $nav['url_title'] . '/' . $sub['url_title']);
 					$subData['target'] = '_self';
+					$subData['image'] = Uri::create('uploads/' . Uri::segment(1) . '/navigation_images/' . $sub['id'] . '/thumbs/' . $sub['image']);
+					$subData['image_is_shown'] = $sub['image_is_shown'];
 						
 					if($sub['active'] == true)
 						$subData['active_class'] = 'active_' . $group_id;

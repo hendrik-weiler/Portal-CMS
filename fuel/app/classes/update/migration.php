@@ -32,6 +32,9 @@ class Migration extends \model_db_language
 		foreach(static::find('all') as $lang)
 			$result[$lang->id] = $lang->prefix;
 
+		if(empty($result))
+			$result[] = 'en';
+
 		return $result;
 	}
 }

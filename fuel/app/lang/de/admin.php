@@ -232,6 +232,9 @@ return array(
 
 		'menu_rename' => 'Umbenennen',
 		'menu_delete' => 'Löschen',
+
+		'image' => 'Bild',
+		'image_is_shown' => 'Bild wird angezeigt',
 	),
 
 	'languages' => array(
@@ -283,6 +286,7 @@ return array(
 			'news' => 'Nachrichten',
 			'gallery' => 'Galerie',
 			'view' => 'Design',
+			'navi_images' => 'Navigationsbilder',
 		),
 		'thumbs' => array(
 			'width' => 'Höhe',

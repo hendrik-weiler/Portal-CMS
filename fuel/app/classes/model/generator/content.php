@@ -91,13 +91,6 @@ class model_generator_content extends model_db_site
 			$return = '';
 
 			$style = model_db_content::genStyleFromClassname($content->classname);
-
-			static::$_width_counter += $style->value;
-			if(static::$_width_counter >= 99)
-			{
-				$return = '<br style="clear:left;" />';
-				static::$_width_counter = 0;
-			}
 				
 			$return .= '<div class="width_' . $style->type . '" ' . $style->style . '>';
 			switch($content->type)
@@ -224,6 +217,14 @@ class model_generator_content extends model_db_site
 			}
 
 			$return .= '</div>';
+
+			static::$_width_counter += $style->value;
+			if(static::$_width_counter >= 96)
+			{
+				$return .= '<br style="clear:left;" />';
+				static::$_width_counter = 0;
+			}
+
 			return $return;
 	}
 

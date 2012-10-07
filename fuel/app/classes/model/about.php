@@ -22,13 +22,13 @@
  */
 class model_about 
 {
-	public static $version = 1.012;
+	public static $version = 1.013;
 
 	public static $status = '';
 
 	public static function show_version()
 	{
-		$version = number_format(static::$version,2);
+		$version = number_format(static::$version,3);
 		return '<strong>Version:</strong> ' . $version . ' ' . static::$status;
 	}
 }

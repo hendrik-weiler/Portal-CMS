@@ -169,16 +169,65 @@ class Controller_Pages_Pages extends Controller
 			$nav_point->redirect = Input::post('redirect');
 			$nav_point->site_title = Input::post('site_title');
 
+			$real_nav_point = model_db_navigation::find($nav_point->navigation_id);
 			if($nav_point->navigation_id != 0)
 			{
-				$real_nav_point = model_db_navigation::find($nav_point->navigation_id);
 				$real_nav_point->show_in_navigation = Input::post('show_in_navigation') != '';
 				$real_nav_point->parent = Input::post('parent');
 				$real_nav_point->group_id = Input::post('group_id');
 				$real_nav_point->label = empty($label) ? __('constants.untitled_element') : $label;
 				$real_nav_point->url_title = model_generator_seo::friendly_title($nav_point->label);
-				$real_nav_point->save();
 			}
+
+			$navigation_id = $nav_point->id;
+
+			$config = array(
+			    'path' => DOCROOT.'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/original',
+			    'randomize' => true,
+			    'auto_rename' => false,
+			    'ext_whitelist' => array('img', 'jpg', 'jpeg', 'gif', 'png'),
+			);
+			Upload::process($config);
+
+			$image_file = '';
+
+			if (Upload::is_valid())
+			{
+				if(!empty($real_nav_point->image) 
+					&& file_exists(DOCROOT.'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/original/' . $real_nav_point->image))
+				{
+					File::delete(DOCROOT.'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/original/' . $real_nav_point->image);
+					File::delete(DOCROOT.'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/preview/' . $real_nav_point->image);
+					File::delete(DOCROOT.'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/thumbs/' . $real_nav_point->image);
+				}	
+
+				$options = \Controller_Advanced_Advanced::getOptions();
+				Upload::save();
+				foreach(Upload::get_files() as $file)
+				{
+					$resizeObj = new image\resize(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/original/' . $file['saved_as']);
+					$size = Image::sizes(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/original/' . $file['saved_as']);
+					
+					if($size->width >= 1280)
+						$size->width = 1280;
+
+					if($size->height >= 720)
+						$size->height = 720;
+
+					$resizeObj -> resizeImage($size->width, $size->height, 'auto');
+					$resizeObj -> saveImage(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/original/' . $file['saved_as'], 100);
+
+					$resizeObj -> resizeImage(60, 60, 'auto');
+					$resizeObj -> saveImage(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/preview/' . $file['saved_as'], 100);
+
+					$resizeObj -> resizeImage($options['navigation_image_width'], $options['navigation_image_height'], 'auto');
+					$resizeObj -> saveImage(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/thumbs/' . $file['saved_as'], 100);
+				}
+				$image_file = $file['saved_as'];
+			}
+			$real_nav_point->image = empty($image_file) ? $real_nav_point->image : $image_file;
+			$real_nav_point->image_is_shown = Input::post('image_is_shown');
+			$real_nav_point->save();
 
 			$nav_point->keywords = Input::post('keywords');
             $nav_point->template = Input::post('current_template');
@@ -187,8 +236,8 @@ class Controller_Pages_Pages extends Controller
 			$nav_point->group_id = Input::post('group_id');
 			$nav_point->save();
                         
-                        if(Input::post('landing_page') == 1)
-                            $this->_set_landing_page($nav_point->id);
+            if(Input::post('landing_page') == 1)
+                $this->_set_landing_page($nav_point->id);
 
 			Response::redirect('admin/sites/edit/' . Input::post('site_id'));
 		}
@@ -205,6 +254,9 @@ class Controller_Pages_Pages extends Controller
 		$data['navigation_id'] = $nav_point->navigation_id;
 		$data['id'] = $this->id;
         $data['site_id'] = $nav_point->id;
+
+		$data['image'] = Uri::create('uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation->id . '/preview/' . $navigation->image);
+		$data['image_is_shown'] = $navigation->image_is_shown;
 
 		$data['parent'] = $navigation->parent;
 		$data['show_sub'] = $navigation->show_sub;

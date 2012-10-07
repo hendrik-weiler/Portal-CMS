@@ -26,6 +26,10 @@ class model_helper_management_content
 	{
 
 		$language_version = Session::get('lang_prefix');
+
+		if(empty($language_version))
+			$language_version = 'en';
+		
 		model_db_content::setLangPrefix($language_version);
 		model_db_site::setLangPrefix($language_version);
 		model_db_news::setLangPrefix($language_version);

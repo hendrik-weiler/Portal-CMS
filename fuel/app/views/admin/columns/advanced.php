@@ -48,6 +48,23 @@
 			      <?php print Form::input('gallery_thumbs_height',$gallery_thumbs_height); ?>
 			    </div>
 			  </div>
+
+			<h4>
+				<?php print __('advanced.subHeader.navi_images') ?>
+			</h4>
+			  <div class="clearfix">
+			   <?php print Form::label(__('advanced.thumbs.width')); ?>
+			   <div class="input">
+			      <?php print Form::input('navigation_image_width',$navigation_image_width); ?>
+			    </div>
+			  </div>
+			  <div class="clearfix">
+			   <?php print Form::label(__('advanced.thumbs.height')); ?>
+			   <div class="input">
+			      <?php print Form::input('navigation_image_height',$navigation_image_height); ?>
+			    </div>
+			  </div>
+
 			</div>
 		<div class="span7">
 			<h3>

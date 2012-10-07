@@ -80,7 +80,7 @@
 </ul>
 
 <?php
-	print Form::open(array('action'=>($mode == 'add') ? 'admin/navigation/add' : Uri::current(),'class'=>'form_style_1'));
+	print Form::open(array('action'=>($mode == 'add') ? 'admin/navigation/add' : Uri::current(),'class'=>'form_style_1','enctype'=>'multipart/form-data'));
 ?>
 
 <div class="clearfix">
@@ -97,6 +97,25 @@
   	<?php if(Uri::segment(3) != 'edit') $show_in_navigation = 1; ?>
   	<?php $check = empty($show_in_navigation) ? array() : array('checked'=>'checked'); ?>
     <?php print Form::checkbox('show_in_navigation',1,$check); ?>
+  </div>
+</div>
+
+<div class="clearfix">
+	<?php print Form::label(__('navigation.image')); ?>
+  <div class="input">
+	<?php if(!empty($image)): ?>
+	<img src="<?php print $image ?>" />
+	<?php endif; ?>
+    <?php print Form::file('image'); ?>
+  </div>
+</div>
+
+<div class="clearfix">
+  <?php print Form::label(__('navigation.image_is_shown')); ?>
+  <div class="input">
+  	<?php if(Uri::segment(3) != 'edit') $image_is_shown = 1; ?>
+  	<?php $check = empty($image_is_shown) ? array() : array('checked'=>'checked'); ?>
+    <?php print Form::checkbox('image_is_shown',1,$check); ?>
   </div>
 </div>
 
