@@ -256,6 +256,7 @@ class Controller_Pages_Pages extends Controller
         $data['site_id'] = $nav_point->id;
 
 		$data['image'] = Uri::create('uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation->id . '/preview/' . $navigation->image);
+		$data['image_exists'] = is_file(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation->id . '/preview/' . $navigation->image);
 		$data['image_is_shown'] = $navigation->image_is_shown;
 
 		$data['parent'] = $navigation->parent;

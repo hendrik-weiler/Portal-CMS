@@ -59,7 +59,7 @@ body {
 
 /* ------------ prompt window ----------- */
 
-#overlay {
+.overlay {
   background: rgba(0,0,0,0.5);
   position:absolute;
   top:0;
@@ -67,10 +67,9 @@ body {
   z-index: 1;
 }
 
-#prompt {
+.prompt {
   background: #f9f9f9;
-  padding: 10px;
-  border:1px solid #e9e9e9;
+  padding: 15px;
   position:absolute;
   width: 250px;
   margin-left: -125px;
@@ -79,16 +78,16 @@ body {
   z-index: 2;
 }
 
-#prompt button {
+.prompt button {
   width:110px;
   margin: 10px 5px;
-  padding:3px;
+  padding:5px;
   background: #e9e9e9;
-  border:1px solid #d8d8d8;
 }
 
-#prompt button:hover {
-  background: #f9f9f9;
+.prompt button:hover {
+  background: #0069D6;
+  color: white;
 }
 
 /* ------------ Lists styling ---------- */
@@ -98,6 +97,7 @@ body {
   margin:5px;
   border: 1px dashed #898989;
   overflow:hidden;
+  cursor: move;
 }
 
 .list_entry span {
@@ -132,6 +132,7 @@ body {
   border:1px dashed #aaa;
   padding:3px;
   margin: 5px 0;
+  cursor: move;
 }
 
 .ui-sortable-helper {
@@ -144,6 +145,9 @@ body {
 
 /* ------------ settings ------------- */
 
+#gallery_3_list .picture_list li {
+  float: left;
+}
 
 /* ----------- advanced settings ---------- */
 
@@ -271,6 +275,7 @@ body {
 
 .content_entry {
   width: 100%;
+  cursor: move;
 }
 
 .content_entry span,
@@ -339,9 +344,27 @@ body {
   padding-left:15px;
 }
 
+#gallery_3_list ul {
+  list-style: none;
+  margin:0;
+}
+
+.single_picture,
+#gallery_3_list li {
+  position: relative;
+}
+
+.news_pictures img,
 #gallery_3_list img {
-  border:1px solid black;
-  margin:3px;
+  border:1px solid #f9f9f9;
+  padding:3px;
+}
+
+.news_pictures img:hover,
+#gallery_3_list img:hover {
+  border:1px solid #0069D6;
+  padding:3px;
+  cursor: move;
 }
 
 .placeholder_container div.span4 {
@@ -368,6 +391,10 @@ body {
 
 /* ----------- news style -------------- */
 
+.news_entry {
+  cursor: inherit;
+}
+
 .news_entry date {
   width: 180px;
   float:left;
@@ -381,26 +408,33 @@ body {
   text-align:right;
 }
 
+.news_pictures img:hover,
 .news_pictures img {
-  max-width: 160px;
-  max-height: 160px;
-  border:1px solid black;
+  cursor:inherit;
 }
+
 .news_pictures div.left {
   width:300px;
 }
 
+.gallery_pic_delete,
 .pic_delete {
-  margin-left:-80px;
-  border:1px solid #000;
-  border-top:none;
-  padding:2px;
+  position: absolute;
+  display: block;
+  border:none;
+  padding:5px;
   color:black !important;
   text-decoration:none;
   background: #f9f9f9;
+  bottom: 0;
+  left: 0;
 }
+
+.gallery_pic_delete:hover,
 .pic_delete:hover {
-  color: red !important;
+  color: white !important;
+  background: #0069D6 !important;
+  text-decoration: none;
 }
 
 /* userarea */

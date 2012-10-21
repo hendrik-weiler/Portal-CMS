@@ -74,7 +74,7 @@ class Controller_News_News extends Controller
 		if(isset($_POST['submit']))
 		{
 			$news->title = Input::post('title');
-			$news->text = Input::post('editor');
+			$news->text = stripslashes(Input::post('editor'));
 			$news->attachment = Input::post('attachment');
 
 
@@ -123,7 +123,7 @@ class Controller_News_News extends Controller
 				$resizeObj -> resizeImage($size->width, $size->height, 'auto');
 				$resizeObj -> saveImage(DOCROOT . str_replace('original/','big/',$pictures[$file['field']]), 100);
 
-				$resizeObj -> resizeImage($options['news_thumbs_width'], $options['news_thumbs_height'], 'auto');
+				$resizeObj -> resizeImage($options['news_thumbs_width'], $options['news_thumbs_height'], 'crop');
 				$resizeObj -> saveImage(DOCROOT . str_replace('original/','thumb/',$pictures[$file['field']]), 100);
 			}
 
@@ -153,8 +153,8 @@ class Controller_News_News extends Controller
 		$news = model_db_news::find($this->id);
 		$news->delete();
 
-		if(is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/news/' . $this->id))
-			File::delete_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . 'news/' . $this->id);
+		if(is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/news/' . $news->id))
+			File::delete_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/news/' . $news->id);
 
 		Response::redirect('admin/news');
 	}
@@ -166,9 +166,9 @@ class Controller_News_News extends Controller
 
 		if(isset($picture[$this->param('picture')]) && file_exists(DOCROOT. $picture[$this->param('picture')]))
 		{
-			File::delete(DOCROOT. str_replace('original/','',$picture[$this->param('picture')]));
-			File::delete(DOCROOT. str_replace('big/','',$picture[$this->param('picture')]));
-			File::delete(DOCROOT. str_replace('thumb/','',$picture[$this->param('picture')]));
+			File::delete(DOCROOT. $picture[$this->param('picture')]);
+			File::delete(DOCROOT. str_replace('original/','big/',$picture[$this->param('picture')]));
+			File::delete(DOCROOT. str_replace('original/','thumb/',$picture[$this->param('picture')]));
 		}
 
 		unset($picture[$this->param('picture')]);

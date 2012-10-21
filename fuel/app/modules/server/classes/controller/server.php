@@ -140,7 +140,9 @@ class Controller_Server extends \Controller
 		$ct['xsl'] = 'text/xml';
 		$ct['xml'] = 'text/xml';
 		 
-		$extension =  @array_pop(explode('.',$value));
+		$filename_array = explode('.',$value);
+
+		$extension =  array_pop($filename_array);
 		 
 		if (!$type = $ct[strtolower($extension)]) 
 		{
@@ -215,7 +217,7 @@ class Controller_Server extends \Controller
 			$type = 'img';
 
 		if(static::$is_public_asset)
-			$path = LAYOUTPATH . '/' . \model_db_option::getKey('layout')->value . '/assets/img/' . $file;
+			$path = LAYOUTPATH . '/' . \model_db_option::getKey('layout')->value . '/assets/' . $type . '/' . $file;
 		else if(static::$is_tooltip)
 		{
 			$path = APPPATH . '../../components/' . $component . '/tooltip/' . str_replace('-', '/', $this->param('path')) . '.xml';

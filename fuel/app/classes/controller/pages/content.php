@@ -28,6 +28,8 @@ class Controller_Pages_Content extends Controller
 
 	private $content_id;
 
+	private $_ajax = false;
+
 	public function before()
 	{
 		model_auth::check_startup();
@@ -90,7 +92,7 @@ class Controller_Pages_Content extends Controller
 		if(isset($_POST['submit']))
 		{
 			$content->label = Input::post('label');
-			$content->text = Input::post('editor');
+			$content->text = stripslashes(Input::post('editor'));
 			$content->save();
 		}
 
@@ -113,8 +115,8 @@ class Controller_Pages_Content extends Controller
 		if(isset($_POST['submit']))
 		{
 			$content->label = Input::post('label');
-			$content->text = Input::post('editor');
-			$content->text2 = Input::post('editor2');
+			$content->text = stripslashes(Input::post('editor'));
+			$content->text2 = stripslashes(Input::post('editor2'));
 			$content->save();
 		}
 
@@ -138,9 +140,9 @@ class Controller_Pages_Content extends Controller
 		if(isset($_POST['submit']))
 		{
 			$content->label = Input::post('label');
-			$content->text = Input::post('editor');
-			$content->text2 = Input::post('editor2');
-			$content->text3 = Input::post('editor3');
+			$content->text = stripslashes(Input::post('editor'));
+			$content->text2 = stripslashes(Input::post('editor2'));
+			$content->text3 = stripslashes(Input::post('editor3'));
 			$content->save();
 		}
 
@@ -223,6 +225,9 @@ class Controller_Pages_Content extends Controller
 			);
 			Upload::process($config);
 
+			empty($content->parameter) and $content->parameter = '[]';
+			$content->parameter = json_decode($content->parameter,true);
+
 			if (Upload::is_valid())
 			{
 				$options = \Controller_Advanced_Advanced::getOptions();
@@ -238,13 +243,18 @@ class Controller_Pages_Content extends Controller
 					if($size->height >= 720)
 						$size->height = 720;
 
+					$content->parameter[] = $file['saved_as'];
+
 					$resizeObj -> resizeImage($size->width, $size->height, 'auto');
 					$resizeObj -> saveImage(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $content->id . '/big/' . $file['saved_as'], 100);
 
-					$resizeObj -> resizeImage($options['gallery_thumbs_width'], $options['gallery_thumbs_height'], 'auto');
+					$resizeObj -> resizeImage($options['gallery_thumbs_width'], $options['gallery_thumbs_height'], 'crop');
 					$resizeObj -> saveImage(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $content->id . '/thumbs/' . $file['saved_as'], 100);
 				}
 			}
+
+			$content->parameter = json_encode($content->parameter);
+
 			$content->save();
 			
 			Response::redirect(Uri::current());
@@ -268,10 +278,7 @@ class Controller_Pages_Content extends Controller
 			$data['customFile'] = $custom[1];
 		}
 
-		if(is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $content->id . '/thumbs'))
-			$data['pictures'] = File::read_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $content->id . '/thumbs',1);
-		else
-			$data['pictures'] = array();
+		$data['pictures'] = !empty($content->parameter) ? json_decode($content->parameter) : array();
 		
 		$this->data['content'] = View::factory('admin/type/gallery',$data);
 	}
@@ -562,14 +569,36 @@ class Controller_Pages_Content extends Controller
 
 	public function action_delete_gal_picture()
 	{
-		$file = Input::post('attr');
+		$file = Input::post('filename');
+		$content = model_db_content::find(Input::post('content_id'));
 
-		if(file_exists(DOCROOT . $file))
+		$path = DOCROOT . 'uploads/'. Session::get('lang_prefix') . '/gallery/' . $content->id;
+
+		if(file_exists($path . '/original/' . $file))
 		{
-			File::delete(DOCROOT . $file);
-			File::delete(DOCROOT . str_replace('thumbs/','original/',$file));
-			File::delete(DOCROOT . str_replace('thumbs/','big/',$file));
+			File::delete($path . '/original/' . $file);
+			File::delete($path . '/big/' . $file);
+			File::delete($path . '/thumbs/' . $file);
 		}
+
+		$pictures = json_decode($content->parameter,true);
+		$content->parameter = array_filter($pictures, function($value) use ($file) {
+			return ($value != $file);
+		});
+		$content->parameter = json_encode($content->parameter);
+		$content->save();
+	}
+
+	public function action_update_gal_order()
+	{
+		$this->_ajax = true;
+
+		$order = Input::post('order');
+
+		$content = model_db_content::find($this->param('id'));
+
+		$content->parameter = json_encode($order);
+		$content->save();
 	}
 
 	public function action_order()
@@ -586,6 +615,7 @@ class Controller_Pages_Content extends Controller
 
 	public function after($response)
 	{
+		if(!$this->_ajax)
 		$this->response->body = View::factory('admin/index',$this->data);
 	}
 }

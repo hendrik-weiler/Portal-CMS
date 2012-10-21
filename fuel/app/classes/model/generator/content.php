@@ -121,7 +121,7 @@ class model_generator_content extends model_db_site
 					$col_1 = model_db_content::find($cols['col_1']);
 					$data = array();
 					$data['text'] = self::_viewContent($col_1);
-					$data['group'] = 'group_' . $content->id;
+					$data['group'] = 'group_' . model_generator_preparer::$lang . '_' . $content->id;
                                         
                                         if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/1columns.php'))
                                             $return .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/1columns.php',$data);
@@ -136,7 +136,7 @@ class model_generator_content extends model_db_site
 					$data = array();
 					$data['text'] = self::_viewContent($col_1);
 					$data['text2'] = self::_viewContent($col_2);
-					$data['group'] = 'group_' . $content->id;
+					$data['group'] = 'group_' . model_generator_preparer::$lang . '_' . $content->id;
 					
                                         if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/2columns.php'))
                                             $return .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/2columns.php',$data);
@@ -153,7 +153,7 @@ class model_generator_content extends model_db_site
 					$data['text'] = self::_viewContent($col_1);
 					$data['text2'] = self::_viewContent($col_2);
 					$data['text3'] = self::_viewContent($col_3);
-					$data['group'] = 'group_' . $content->id;
+					$data['group'] = 'group_' . model_generator_preparer::$lang . '_' . $content->id;
                                         
                                         if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/3columns.php'))
                                             $return .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/3columns.php',$data);
@@ -360,9 +360,9 @@ class model_generator_content extends model_db_site
 
 			$data['fullview_link'] = Uri::create(model_generator_preparer::$lang . '/news/' . $new->id . '/' . Inflector::friendly_title($new->title));
 
-			if(strlen($new->text) < $options['show_max_token'])
+			if(strlen($new->text) <= $options['show_max_token'])
 			{
-				$data['fullview_link'] = '';
+				//$data['fullview_link'] = '';
 				$data['short_text'] = $new->text;
 			}	
 
@@ -414,7 +414,7 @@ class model_generator_content extends model_db_site
 		$data['text'] = stripslashes($content->text);
 		$data['text2'] = stripslashes($content->text2);
 		$data['text3'] = stripslashes($content->text3);
-		$data['group'] = 'group_' . $content->id;
+		$data['group'] = 'group_' . model_generator_preparer::$lang . '_' . $content->id;
 
 		if($content->type == 7)
 		{

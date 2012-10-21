@@ -17,9 +17,6 @@
   <!-- CSS concatenated and minified via ant build script-->
   <link rel="stylesheet" href="<?php print Uri::create('assets/css/bootstrap.min.css') ?>">
   <link rel="stylesheet" href="<?php print Uri::create('assets/css/admin.css') ?>">
-  <link rel="stylesheet" href="<?php print Uri::create('assets/css/elrte/elrte.min.css') ?>">
-  <link rel="stylesheet" href="<?php print Uri::create('assets/css/elrte/elrte-inner.css') ?>">
-  <link rel="stylesheet" href="<?php print Uri::create('assets/css/elrte/elfinder.css') ?>">
   <link rel="stylesheet" href="<?php print Uri::create('assets/css/elrte/smoothness/jquery-ui-1.8.13.custom.css') ?>">
   <!-- end CSS-->
 
@@ -28,6 +25,26 @@
   <?php print Asset\Manager::get('js->include->1_jquery->jquery-ui') ?>
   <?php print Asset\Manager::get('js->include->1_jquery->jquery.hotkeys') ?>
   <?php print Asset\Manager::get('js->include->4_swfobject->swfobject') ?>
+  <?php print Asset\Manager::get('js->dialog->dialog') ?>
+  <?php print Asset\Manager::get('js->picturemanager->picturemanager') ?>
+
+  <script>
+    var _prompt = {
+      header : '<?php print __('prompt.' . Uri::segment(2) . '.header') ?>',
+      text : '<?php print __('prompt.' . Uri::segment(2) . '.text') ?>',
+      ok : '<?php print __('prompt.' . Uri::segment(2) . '.ok') ?>',
+      cancel : '<?php print __('prompt.' . Uri::segment(2) . '.cancel') ?>'
+    };
+    var _url = '<?php print Uri::create('/') ?>';
+    var _currentPos = '<?php 
+    if(Uri::segment(2) == 'accounts')
+      print 'advanced';
+    else if(Uri::segment(2) == 'content')
+      print 'sites';
+    else
+      print Uri::segment(2);
+    ?>';
+  </script>
   <script src="<?php print Uri::create('assets/js/libs/bootstrap-tabs.js') ?>"></script>
 </head>
 
@@ -114,32 +131,6 @@
     </footer>
   </div> <!--! end of #container -->
 
-
-  <!--[if lte IE 8]>
-  <script src="<?php print Uri::create('assets/js/libs/elrte-ie.min.js') ?>"></script>
-  <![endif]-->
-  <!--[if !IE]> -->
-  <script src="<?php print Uri::create('assets/js/libs/elrte.min.js') ?>"></script>
-  <!-- <![endif]-->
-  <script src="<?php print Uri::create('assets/js/libs/elfinder.min.js') ?>"></script>
-  <script>
-    var _prompt = {
-      header : '<?php print __('prompt.' . Uri::segment(2) . '.header') ?>',
-      text : '<?php print __('prompt.' . Uri::segment(2) . '.text') ?>',
-      ok : '<?php print __('prompt.' . Uri::segment(2) . '.ok') ?>',
-      cancel : '<?php print __('prompt.' . Uri::segment(2) . '.cancel') ?>'
-    };
-    var _url = '<?php print Uri::create('/') ?>';
-    var _currentPos = '<?php 
-    if(Uri::segment(2) == 'accounts')
-      print 'advanced';
-    else if(Uri::segment(2) == 'content')
-      print 'sites';
-    else
-      print Uri::segment(2);
-    ?>';
-  </script>
-
   <!-- scripts concatenated and minified via ant build script-->
   <script src="<?php print Uri::create('assets/js/mylibs/prompt.js') ?>"></script>
   <script defer src="<?php print Uri::create('assets/js/plugins.js') ?>"></script>
@@ -163,11 +154,6 @@
   supersearch.init_keyboard_shorcuts();
   </script>
   <!-- end scripts-->
-
-  <!--[if lt IE 7 ]>
-    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
-    <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
-  <![endif]-->
   
 </body>
 </html>

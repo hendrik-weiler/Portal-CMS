@@ -93,7 +93,7 @@
 <div class="clearfix">
 	<?php print Form::label(__('navigation.image')); ?>
   <div class="input">
-	<?php if(!empty($image)): ?>
+	<?php if($image_exists): ?>
 	<img src="<?php print $image ?>" />
 	<?php endif; ?>
     <?php print Form::file('image'); ?>
@@ -123,7 +123,14 @@
 <?php print Form::label(__('navigation.parent')); ?>
 <div class="clearfix">
   <div class="input">
-    <?php print Form::select('parent',$parent,$parent_array); ?>
+    <?php 
+    if(empty($parent_array))
+    {
+    	Response::redirect('admin/navigation');
+    	exit;
+    }
+    print Form::select('parent',$parent,$parent_array); 
+    ?>
   </div>
 </div>
 <?php print Form::hidden('id',Uri::segment(3)) ?>
@@ -257,7 +264,7 @@
 			if(in_array($nav->type,array(1,2,3,5,6,7,8,9,10,11,12)))
 				print '<a href="' . Uri::create('admin/content/' . $id . '/edit/' . $nav->id . '/type/' . $nav->type) . '">' . __('constants.edit') . '</a> ';
 				
-			print '<a class="delete" href="' . Uri::create('admin/content/delete/' . $nav->id) . '">' . __('constants.delete') . '</a>';
+			print '<a data-id="' . $nav->id . '" class="delete" href="' . Uri::create('admin/content/delete/' . $nav->id) . '">' . __('constants.delete') . '</a>';
 
 			print '</div>';
 
@@ -286,3 +293,16 @@ var _confirm_count_multiple = "<?php print __('content.confirm_count_multiple');
 	?>
 </div>
 <script type="text/javascript" src="<?php print Uri::create('assets/js/split_box.js') ?>"></script>
+<script type="text/javascript">
+	var dialog = new pcms.dialog('.delete', {
+		title : _prompt.header,
+		text : _prompt.text,
+		confirm : _prompt.ok,
+		cancel : _prompt.cancel
+	});
+	dialog.onConfirm = function(helper, event) {
+		var id = $(event.initiator).attr('data-id');
+		helper.post_data(_url + 'admin/content/delete/' + id, {});
+	}
+	dialog.render(); 
+</script>

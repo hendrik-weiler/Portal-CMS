@@ -1,12 +1,11 @@
 Portal Content Management System
 ====================
-#### v: 1.01
+#### v: 1.02
 
 Build on [Fuel Framework](https://github.com/fuel/fuel)<br />
 Using:<br />
 [Nivo-Slider](https://github.com/gilbitron/Nivo-Slider)<br />
-[elRTE](https://github.com/Studio-42/elRTE)<br />
-[elFinder](https://github.com/Studio-42/elFinder)<br />
+[tinymce](https://github.com/tinymce)<br />
 [colorbox](https://github.com/jackmoore/colorbox)<br />
 [html5boilerplate](https://github.com/h5bp/html5-boilerplate)<br />
 [jquery.swfobject](http://jquery.thewikies.com/swfobject/)<br />
@@ -44,7 +43,8 @@ Password: test<br />
 Requirements:
 ---------------------
 PHP 5.3<br />
-fsockopen ( else manually updating )
+fsockopen ( else manually updating )<br />
+<strong>Best working with chrome browser!</strong>
 
 Install
 ---------------------
@@ -83,7 +83,7 @@ You can search in the supersearch textfield like that:
 =myoption1;myoption2;myoption3
 
 these options exist now:
-> no_main ( excludes points with sub entries )
+> no_main ( excludes points with sub entries )<br />
 > main_points ( shows only points with sub entries )
 
 Templating:

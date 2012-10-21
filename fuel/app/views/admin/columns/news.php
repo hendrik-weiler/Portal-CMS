@@ -57,10 +57,24 @@
 		print '<div>';
 
 		print '<a href="' . Uri::create('admin/news/edit/' . $nav->id) . '">' . __('constants.edit') . '</a> ';
-		print '<a class="delete" href="' . Uri::create('admin/news/delete/' . $nav->id) . '">' . __('constants.delete') . '</a>';
+		print '<a data-id="' . $nav->id . '" class="delete" href="' . Uri::create('admin/news/delete/' . $nav->id) . '">' . __('constants.delete') . '</a>';
 
 		print '</div>';
 
 		print '</section>';
 	}
 ?>
+
+<script type="text/javascript">
+	var dialog = new pcms.dialog('.delete', {
+		title : _prompt.header,
+		text : _prompt.text,
+		confirm : _prompt.ok,
+		cancel : _prompt.cancel
+	});
+	dialog.onConfirm = function(helper, event) {
+		var id = $(event.initiator).attr('data-id');
+		helper.post_data(_url + 'admin/news/delete/' + id, {});
+	}
+	dialog.render(); 
+</script>

@@ -29,7 +29,7 @@
 		else
 			print '<a href="' . Uri::create('admin/sites/edit/' . $site->id) . '">' . __('constants.edit') . '</a> | ';
 
-		print '<a class="delete" href="' . Uri::create('admin/navigation/delete/' . $nav->id) . '">' . __('constants.delete') . '</a>';
+		print '<a data-id="' . $nav->id . '" class="delete" href="' . Uri::create('admin/navigation/delete/' . $nav->id) . '">' . __('constants.delete') . '</a>';
 
 		print '</div>';
 
@@ -103,7 +103,7 @@
 <div class="clearfix">
 	<?php print Form::label(__('navigation.image')); ?>
   <div class="input">
-	<?php if(!empty($image)): ?>
+	<?php if(!empty($image) && $image_exists): ?>
 	<img src="<?php print $image ?>" />
 	<?php endif; ?>
     <?php print Form::file('image'); ?>
@@ -213,3 +213,16 @@
 </div>
 
 <?php endif; ?>
+<script type="text/javascript">
+	var dialog = new pcms.dialog('.delete', {
+		title : _prompt.header,
+		text : _prompt.text,
+		confirm : _prompt.ok,
+		cancel : _prompt.cancel
+	});
+	dialog.onConfirm = function(helper, event) {
+		var id = $(event.initiator).attr('data-id');
+		helper.post_data(_url + 'admin/navigation/delete/' + id, {});
+	}
+	dialog.render(); 
+</script>

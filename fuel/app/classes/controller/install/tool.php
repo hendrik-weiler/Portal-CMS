@@ -70,6 +70,8 @@ class Controller_Install_Tool extends Controller
 		if(!Session::instance())
 			Response::redirect('admin/install');
 
+		Session::delete('lang_prefix');
+
 		if(file_exists(APPPATH . 'INSTALL_TOOL_DISABLED'))
 		{
 			print 'Install tool disabled';

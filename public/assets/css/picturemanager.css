@@ -1,0 +1,128 @@
+body,html {
+	overflow:hidden; 
+}
+
+.container {
+	margin:0;
+}
+
+.navigation {
+	float: left;
+	border-right: 1px solid #f9f9f9;
+}
+
+.navigation ul {
+	list-style: none;
+	margin:0;
+}
+
+.navigation a {
+	display: block;
+	padding: 5px;
+	padding-right: 0;
+	background: #f9f9f9;
+	width: 200px;
+	text-decoration: none;
+	color: black;
+	cursor: pointer;
+}
+
+.active,
+.navigation a:hover {
+	background: #0069D6 !important;
+	color: white !important;
+}
+
+.content {
+	float: left;
+	width: 662px;
+	padding: 15px;
+	padding-bottom: 0;
+	overflow:auto;
+}
+
+.file_uploader {
+	border-bottom: 1px solid #f9f9f9;
+}
+
+.picture_list {
+	list-style: none;
+	margin:0;
+	margin-top: 20px;
+}
+
+.picture_list li {
+  position: relative;
+  display: inline;
+}
+
+.picture_list img {
+  border:1px solid #f9f9f9;
+  padding:3px;
+}
+
+.picture_list img:hover {
+  border:1px solid #0069D6;
+  padding:3px;
+}
+
+.get_link,
+.delete_picture {
+  position: absolute;
+  display: block;
+  border:none;
+  padding:5px;
+  color:black !important;
+  text-decoration:none;
+  background: #f9f9f9;
+}
+
+.get_link:hover,
+.delete_picture:hover {
+  color: white !important;
+  background: #0069D6 !important;
+  text-decoration: none;
+}
+
+.get_link {
+	bottom: 0;
+	left: 0;
+}
+
+.delete_picture {
+	bottom: 0;
+	left: 40px;
+}
+
+/* ------------ prompt window ----------- */
+
+.overlay {
+  background: rgba(0,0,0,0.5);
+  position:absolute;
+  top:0;
+  left:0;
+  z-index: 1;
+}
+
+.prompt {
+  background: #f9f9f9;
+  padding: 15px;
+  position:absolute;
+  width: 250px;
+  margin-left: -125px;
+  top:0;
+  left:50%;
+  z-index: 2;
+}
+
+.prompt button {
+  width:110px;
+  margin: 10px 5px;
+  padding:5px;
+  background: #e9e9e9;
+}
+
+.prompt button:hover {
+  background: #0069D6;
+  color: white;
+}

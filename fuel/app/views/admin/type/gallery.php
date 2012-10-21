@@ -91,10 +91,14 @@
 	</div>
 
 	<div id="gallery_3_list" class="span6">
+		<?php
+			$gallery_width  = model_db_option::getKey('gallery_thumbs_width')->value;
+			$gallery_height = model_db_option::getKey('gallery_thumbs_height')->value;
+		?>
 		<h3>
 			<?php print __('types.3.image_header') ?>
 		</h3>
-		<p>
+		<ul class="picture_list" data-id="<?php print $id ?>">
 			<?php
 				if(empty($pictures))
 				{
@@ -104,16 +108,40 @@
 				{
 					foreach($pictures as $picture)
 					{
-						print '<div class="left">';
-
-						print '<div class="clearfix">';
-						print '<img class="left" src="' . Uri::create('uploads/' . Session::get('lang_prefix') . '/gallery/' . $id . '/thumbs/' . $picture) . '" />';
-						print '<a title="uploads/' . Session::get('lang_prefix') . '/gallery/' . $id . '/thumbs/' . $picture . '" class="pic_delete left" href="' . Uri::create('admin/content/gallery/delete/') . '">' . __('constants.delete') . '</a>';
-						print '</div>';
-						print '</div>';
+						print '<li style="overflow:hidden;">';
+						print '<a data-id="' . $id . '" data-src="' . $picture . '" class="gallery_pic_delete" href="' . Uri::create('admin/content/gallery/delete/') . '">' . __('constants.delete') . '</a>';
+						print '<img style="width:' . $gallery_width . 'px;height:' . $gallery_height . 'px;" data-src="' . $picture . '" src="' . Uri::create('uploads/' . Session::get('lang_prefix') . '/gallery/' . $id . '/thumbs/' . $picture) . '" />';
+						print '</li>';
 					}
 				}
 			?>
-		</p>
+		</ul>
 	</div>
 </div>
+<script type="text/javascript">
+	var dialog = new pcms.dialog('.gallery_pic_delete', {
+		title : _prompt.header,
+		text : _prompt.text,
+		confirm : _prompt.ok,
+		cancel : _prompt.cancel
+	});
+	dialog.onConfirm = function(helper, event) {
+		helper.post_data(_url + 'admin/content/gallery/delete', {
+			filename : $(event.initiator).attr('data-src'),
+			content_id : $(event.initiator).attr('data-id')
+		});
+	}
+	dialog.render(); 
+
+	$('.picture_list').sortable({
+		tolerance : 'pointer',
+		update: function(event, ui) {
+		var data = [];
+		$.each($('.picture_list img').not('.no_gal'),function(key,value) {
+			data[key] = $(this).attr('data-src');
+		});
+
+		$.post(_url + 'admin/content/gallery/' + $(this).attr('data-id') + '/order/update',{'order' : data});
+		}
+	});
+</script>

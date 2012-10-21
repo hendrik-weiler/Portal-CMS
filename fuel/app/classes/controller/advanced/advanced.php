@@ -137,7 +137,9 @@ class Controller_Advanced_Advanced extends Controller
 			}
 		}
 
-		$contents = model_db_content::find('all');
+		$contents = model_db_content::find('all', array(
+			'where' => array('type'=>3)
+		));
 
 		foreach($contents as $content)
 		{
@@ -230,6 +232,7 @@ class Controller_Advanced_Advanced extends Controller
 		model_db_news::setLangPrefix(Session::get('lang_prefix'));
 		model_db_content::setLangPrefix(Session::get('lang_prefix'));
 		model_db_navgroup::setLangPrefix(Session::get('lang_prefix'));
+		model_db_navigation::setLangPrefix(Session::get('lang_prefix'));
 		$this->data['title'] = 'Admin - ' . ucfirst(Uri::segment(2));
 		$this->id = $this->param('id');
 

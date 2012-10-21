@@ -41,6 +41,8 @@ return array(
 		),
 	),
 
+	'picturemanager_button' => 'Open picturemanager',
+
 	'news' => array(
 		'dateformat' => 'Y-m-d H:i',
 		'attachment' => array(

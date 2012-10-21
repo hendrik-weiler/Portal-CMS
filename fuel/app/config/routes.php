@@ -5,6 +5,14 @@ return array(
 
 	# -- admin/supersearch
 
+	'admin/content/picturemanager/own_pictures/delete_image' => 'picturemanager/picturemanager/own_pictures_delete',
+	'admin/picturemanager/own_pictures/add' => 'picturemanager/picturemanager/own_pictures_add',
+	'admin/picturemanager/own_pictures' => 'picturemanager/picturemanager/own_pictures',
+	'admin/picturemanager/galleries' => 'picturemanager/picturemanager/galleries',
+	'admin/picturemanager/news' => 'picturemanager/picturemanager/news',
+
+	# -- admin/supersearch
+
 	'admin/supersearch/all' => 'supersearch/supersearch/all',
 	'admin/supersearch/content' => 'supersearch/supersearch/content',
 	'admin/supersearch/sites' => 'supersearch/supersearch/sites',
@@ -38,6 +46,7 @@ return array(
 
 	# -- admin/content
 
+	'admin/content/gallery/:id/order/update' => 'pages/content/update_gal_order',
 	'admin/content/gallery/delete' => 'pages/content/delete_gal_picture',
 	'admin/content/order/update' => 'pages/content/order',
 	'admin/content/delete/:id' => 'pages/content/delete',
@@ -52,8 +61,8 @@ return array(
 	'admin/content/:id/edit/:content_id/type/8' => 'pages/content/type8',
 	'admin/content/:id/edit/:content_id/type/9' => 'pages/content/type9',
 	'admin/content/:id/edit/:content_id/type/10' => 'pages/content/type10',
-        'admin/content/:id/edit/:content_id/type/11' => 'pages/content/type11',
-        'admin/content/:id/edit/:content_id/type/12' => 'pages/content/type12',
+    'admin/content/:id/edit/:content_id/type/11' => 'pages/content/type11',
+    'admin/content/:id/edit/:content_id/type/12' => 'pages/content/type12',
 
 	'admin/content/add/:id' => 'pages/content/add',
 

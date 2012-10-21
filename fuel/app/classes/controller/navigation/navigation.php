@@ -142,15 +142,18 @@ class Controller_Navigation_Navigation extends Controller
 			$nav_point->show_sub = 0;
 			$nav_point->image_is_shown = Input::post('image_is_shown');
 
+			if(!empty($nav_point->parent))
+				self::_setSitesToNull($nav_point->parent);
+
+			$sort = DB::query('SELECT max(`sort`) + 1 as maxsort FROM ' . Session::get('lang_prefix') . '_navigation')->execute();
+			$sort = $sort->as_array();
+
+			$nav_point->sort = ($sort[0]['maxsort'] == null) ? 0 : $sort[0]['maxsort'];
+
+			$nav_point->save();
+
 			$last = model_db_navigation::find('last');
-			if(!is_object($last))
-			{
-				$query = DB::query("SHOW TABLE STATUS LIKE '" . Session::get('lang_prefix') . "_navigation'", DB::SELECT)->execute();
-				$result = $query->as_array();
-				$navigation_id = intval($result[0]['Auto_increment']);
-			}
-			else
-				$navigation_id = $last->id + 1;
+			$navigation_id = $last->id;
 
 			if(!is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images'))
 				File::create_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix'), 'navigation_images');
@@ -204,17 +207,9 @@ class Controller_Navigation_Navigation extends Controller
 				}
 			}
 
-			$nav_point->image = $file['saved_as'];
+			$last->image = $file['saved_as'];
 
-			if(!empty($nav_point->parent))
-				self::_setSitesToNull($nav_point->parent);
-
-			$sort = DB::query('SELECT max(`sort`) + 1 as maxsort FROM ' . Session::get('lang_prefix') . '_navigation')->execute();
-			$sort = $sort->as_array();
-
-			$nav_point->sort = ($sort[0]['maxsort'] == null) ? 0 : $sort[0]['maxsort'];
-
-			$nav_point->save();
+			$last->save();
 
 			$last_nav = model_db_navigation::find('last');
 
@@ -374,6 +369,7 @@ class Controller_Navigation_Navigation extends Controller
 
 		$data['mode'] = 'edit';
 		$data['image'] = Uri::create('uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $nav_point->id . '/preview/' . $nav_point->image);
+		$data['image_exists'] = is_file(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $nav_point->id . '/preview/' . $nav_point->image);
 		$data['image_is_shown'] = $nav_point->image_is_shown;
 
 		$this->data['content'] = View::factory('admin/columns/navigation',$data);

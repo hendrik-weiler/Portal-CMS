@@ -27,12 +27,21 @@ class model_db_accounts extends Orm\Model
 
 	protected static $_properties = array('id', 'username', 'password', 'session','language','admin','permissions');
 
-  public static function getCol($session,$col)
-  {
-    $account = model_db_accounts::find('first',array(
-      'where' => array('session' => $session),
-    ));
+	public static function getCol($session,$col)
+	{
+		$account = model_db_accounts::find('first',array(
+		  'where' => array('session' => $session),
+		));
 
-    return $account->$col;
-  }
+		return $account->$col;
+	}
+
+	public static function get_system_language()
+	{
+		$account = model_db_accounts::find('first',array(
+		  'where' => array('session' => Session::get('session_id')),
+		));
+
+		return str_replace(array('/','\\'), '', $account->language);
+	}
 }
