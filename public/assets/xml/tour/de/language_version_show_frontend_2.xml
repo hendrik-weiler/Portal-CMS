@@ -2,16 +2,16 @@
 <storyboard>
 	<tour label="Die Sprachversionen auf der Webseite zum auswählen darstellen." />
 	<steps>
-		<step target="#advanced ul.tabs li:eq(2)" condition="clicked">
+		<step live_target="#advanced ul.tabs li:eq(2)" condition="clicked">
 			<position_difference top="20" left="20" />
 			<text>Gehen Sie auf den "Module"-Tab.</text>
 		</step>
-		<step target="#advanced div.actions input#form_submit">
-			<position_difference top="-230" left="10" />
+		<step live_target="#advanced ul.inputs-list li:eq(4)">
+			<position_difference top="20" left="20" />
 			<text>Aktivieren Sie die "Sprachversion auswahl".</text>
 		</step>
-		<step target="#advanced div.actions input#form_submit">
-			<position_difference top="-140" left="60" />
+		<step live_target="#advanced div.actions input#form_submit">
+			<position_difference top="20" left="60" />
 			<text>Speichern sie die Änderungen. Die Sprachen werden nun angezeigt.</text>
 		</step>
 	</steps>

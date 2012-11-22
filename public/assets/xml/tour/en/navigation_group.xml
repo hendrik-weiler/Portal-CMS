@@ -2,20 +2,20 @@
 <storyboard>
 	<tour label="Create a new navigationgroup (for example Footer)" />
 	<steps>
-		<step target="#groups li:last" condition="clicked">
+		<step live_target=".tabs li:last" condition="clicked">
 			<position_difference top="20" left="20" />
 			<text>Press the plus to open the formular for creating a group.</text>
 		</step>
-		<step target="#groups li:last">
-			<position_difference top="20" left="150" />
+		<step target="form div label:first">
+			<position_difference top="-37" left="180" />
 			<text>Write down the title of the group.</text>
 		</step>
-		<step target="#groups li:last">
-			<position_difference top="20" left="180" />
+		<step live_target="form div label:first">
+			<position_difference top="-37" left="240" />
 			<text>With the "O" you confirm the creation.</text>
 		</step>
-		<step target="#groups li:last">
-			<position_difference top="20" left="220" />
+		<step live_target="form div label:first">
+			<position_difference top="-37" left="280" />
 			<text>If you want to cancel the process, press the "X" button.</text>
 		</step>
 	</steps>

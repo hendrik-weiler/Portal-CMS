@@ -10,8 +10,8 @@
 			<position_difference top="120" left="120" />
 			<text>In this area you can choose the navigationsgroups. They will be displayed in the given position inside the layout.</text>
 		</step>
-		<step target=".actions">
-			<position_difference top="200" left="120" />
+		<step target=".actions #form_submit">
+			<position_difference top="20" left="-60" />
 			<text>Save the settings.</text>
 		</step>
 	</steps>

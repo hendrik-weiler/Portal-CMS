@@ -76,6 +76,13 @@ pcms.tour = function()
 		targets = [];
 		xml.find('step').each(function(key, obj) {
 			var target = $(obj).attr('target');
+
+			if($(obj).attr('target') === undefined && $(obj).attr('live_target') !== undefined)
+				target = $(obj).attr('live_target');
+
+			if($(target).length == 0 && $(obj).attr('not_found_target') !== undefined)
+				target = $(obj).attr('not_found_target');
+
 			if($(target).length == 0) return;
 			var target_position = $(target).position();
 			if($(target).css('top') != 'auto')
@@ -87,7 +94,7 @@ pcms.tour = function()
 			position_left.push( target_position.left + parseInt($(obj).find('position_difference').attr('left')) );
 			texts.push( $(obj).find('text').text() );
 			conditions.push( $(obj).attr('condition') );
-			targets.push( $(obj).attr('target') );
+			targets.push( target );
 		});
 	}
 
@@ -116,9 +123,10 @@ pcms.tour = function()
 
 		if(live_target !== undefined)
 		{
+			live_target = $(storyboard).find('step').eq(number).attr('not_found_target') !== undefined ? target : live_target;
 			var new_target = $(live_target).position();
-			top = new_target.top;
-			left = new_target.left;
+			top = new_target.top + parseInt($(storyboard).find('step').eq(number).find('position_difference').attr('top'));
+			left = new_target.left + parseInt($(storyboard).find('step').eq(number).find('position_difference').attr('left'));
 		}
 
 		$(_cursor).animate({

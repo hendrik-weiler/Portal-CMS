@@ -84,7 +84,7 @@ return array(
 	),
 
 	'supersearch_results' => array(
-		'nothing_found' => 'Keine übereinstimmung gefunden.',
+		'nothing_found' => 'This search had no results.',
 		'main_point' => 'Mainpoint',
 		'sub_point' => 'Subordinate',
 		'normal_point' => 'Normalpoint',

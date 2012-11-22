@@ -7,7 +7,7 @@
 			<text>In diesem Menü können Sie Ihre gewünschte Sprache wählen.</text>
 		</step>
 		<step target="#form_submit">
-			<position_difference top="20" left="120" />
+			<position_difference top="20" left="40" />
 			<text>Zum Speichern drücken Sie auf diesen Button.</text>
 		</step>
 	</steps>

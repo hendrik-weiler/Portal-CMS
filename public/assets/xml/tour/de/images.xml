@@ -2,12 +2,12 @@
 <storyboard>
 	<tour label="Bildergrößen anpassen" />
 	<steps>
-		<step target=".span8">
-			<position_difference top="120" left="400" />
+		<step target=".span8 #form_news_thumbs_width">
+			<position_difference top="20" left="-120" />
 			<text>Hier können sie die Höhen und Breiten der Nachrichten Thumbnails einstellen.</text>
 		</step>
-		<step target=".span8">
-			<position_difference top="240" left="400" />
+		<step target=".span8 #form_gallery_thumbs_width">
+			<position_difference top="20" left="-120" />
 			<text>Hier können sie die Höhen und Breiten der Galerie Thumbnails einstellen.</text>
 		</step>
 		<step target="#form_submit">

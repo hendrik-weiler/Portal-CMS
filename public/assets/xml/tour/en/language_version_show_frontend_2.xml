@@ -2,16 +2,16 @@
 <storyboard>
 	<tour label="Display a list of all available website languages on the website" />
 	<steps>
-		<step target="#advanced ul.tabs li:eq(2)" condition="clicked">
+		<step live_target="#advanced ul.tabs li:eq(2)" condition="clicked">
 			<position_difference top="20" left="20" />
 			<text>Go to the "Modul"-Tab.</text>
 		</step>
-		<step target="#advanced div.actions input#form_submit">
-			<position_difference top="-230" left="10" />
+		<step live_target="#advanced ul.inputs-list li:eq(4)">
+			<position_difference top="20" left="20" />
 			<text>Activate the "Language selection".</text>
 		</step>
-		<step target="#advanced div.actions input#form_submit">
-			<position_difference top="-140" left="60" />
+		<step live_target="#advanced div.actions input#form_submit">
+			<position_difference top="20" left="60" />
 			<text>Save the settings. The selection is now visible on the website.</text>
 		</step>
 	</steps>

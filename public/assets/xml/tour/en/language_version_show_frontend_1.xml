@@ -10,7 +10,7 @@
 			<position_difference top="10" left="320" />
 			<text>Drag and drop the entries to the order you like it.</text>
 		</step>
-		<step target=".tabs li:eq(5)" redirect_by_click="admin/advanced#tour=language_version_show_frontend_2">
+		<step live_target=".tabs li:eq(5)" redirect_by_click="admin/advanced#tour=language_version_show_frontend_2">
 			<position_difference top="20" left="60" />
 			<text>Open the "Advanced settings".</text>
 		</step>

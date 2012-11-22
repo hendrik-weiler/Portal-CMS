@@ -52,8 +52,9 @@
 	}
 	link_dialog.onInitiate = function(helper, event) {
 		var text = $('<input style="width:240px" value="" />');
-		var index = $('.picture_list li a').index(event.currentTarget);
+		var index = $('.picture_list li a.get_link').index(event.currentTarget);
 
+		console.log( $('.picture_list li').eq(index).find('img').attr('src'), index );
 		$(text).attr('value',$('.picture_list li').eq(index).find('img').attr('src').replace('thumbs','original'));
 		helper.set_new_content({
 			text : text
