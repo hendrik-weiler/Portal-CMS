@@ -52,12 +52,12 @@ class Controller_Pages_Pages extends Controller
 			$num = Uri::segment(4);
 			if(!empty($num))
 			{
-				$nav = model_db_navigation::find(Uri::segment(4));
+				$nav = model_db_site::find(Uri::segment(4));
 				$id = $nav->group_id;
 			}
 			else
 			{
-				$nav = model_db_navigation::find('first');
+				$nav = model_db_site::find('first');
 				$id = $nav->group_id;
 			}
 		}	

@@ -401,11 +401,13 @@ class Controller_Navigation_Navigation extends Controller
 
 		model_permission::removeNavigationFromPermissionList($this->id);
 
-		$nav_point->delete();
+		
 
 		$site_point = model_db_site::find('first',array(
-			'where' => array('label' => $nav_point->label)
+			'where' => array('navigation_id' => $nav_point->id)
 		));
+
+		$nav_point->delete();
 
         $lid = model_db_language::prefixToId($lprefix);
         

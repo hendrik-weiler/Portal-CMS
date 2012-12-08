@@ -18,17 +18,14 @@
  *
  * @author     Hendrik Weiler
  * @license    http://www.gnu.org/licenses/gpl.html
- * @copyright  2012 Hendrik Weiler
+ * @copyright  2011 Hendrik Weiler
  */
-class model_about 
+class model_helper_content_template
 {
-	public static $version = 1.03;
-
-	public static $status = '';
-
-	public static function show_version()
+	public static function parse_template($content)
 	{
-		$version = number_format(static::$version,3);
-		return '<strong>Version:</strong> ' . $version . ' ' . static::$status;
+		preg_match_all('#(\$tpl_[\w]+)#i', $content, $result);
+
+		return $result[0];
 	}
 }

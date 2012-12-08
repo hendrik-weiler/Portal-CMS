@@ -64,6 +64,10 @@ return array(
     'admin/content/:id/edit/:content_id/type/11' => 'pages/content/type11',
     'admin/content/:id/edit/:content_id/type/12' => 'pages/content/type12',
 
+    'admin/content/:id/edit/:content_id/type/13' => 'pages/content/type13',
+    'admin/content/:id/edit/:content_id/type/13/edit' => 'pages/content/type13/edit',
+    'admin/content/:id/edit/:content_id/type/13/preview' => 'pages/content/type13/preview',
+
 	'admin/content/add/:id' => 'pages/content/add',
 
 	# -- admin/news
@@ -128,6 +132,7 @@ return array(
 	'admin/update/version/:lang' => 'version/update',
 
 	'admin/login' => 'login/login',
+	'admin/clear_cache' => 'login/clear_cache',
 	'admin/logout' => 'login/logout',
 	'admin' => 'login/index',
 

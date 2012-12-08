@@ -72,6 +72,7 @@ return array(
 		'settings' => 'Benutzereinstellungen',
 		'advanced' => 'Erweitere einstellungen',
 		'logout' => 'Abmelden',
+		'clear_cache' => 'Cache leeren',
 	),
 
 	'supersearch' => array(
@@ -122,6 +123,7 @@ return array(
 			10 => 'Flash',
             11 => 'HTML',
             12 => 'Plugin',
+            13 => 'Template',
 		),
 		'txtcon' => 'Textcontainer',
 		'cl' => 'Inhalts-verlinkung',
@@ -188,7 +190,14 @@ return array(
             'placeholder_name' => 'Platzhalter Name',
             'placeholder_text' => 'Platzhalter Text',
             'placeholder_delete' => 'Platzhalter löschen',
-        )
+        ),
+        '13' => array(
+			'template' => 'Wähle ein Template',
+			'preview' => 'Vorschau',
+			'info' => 'Speichere das jetzige Template um eine Vorschau zu erhalten.',
+			'submit' => 'Speichern',
+			'back' => 'Zurück zur Übersicht',
+		),
 	),
 
 	'sites' => array(

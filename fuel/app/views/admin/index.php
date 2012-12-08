@@ -53,14 +53,17 @@
     <header>
       <div class="userarea row">
         <div class="user span3"><strong><?php print __('constants.user') . ':</strong> ' . model_db_accounts::getCol(Session::get('session_id'),'username') ?></div>  
-        <div class="span11 supersearch">
+        <div class="span10 supersearch">
           <div class="row">
             <div class="span2">Supersearch</div>
             <div class="span4"><?php print Form::select('supersearch_cat',0,Controller_Supersearch_Supersearch::get_supersearch_columns($permission)) ?></div>
             <div class="span4"><?php print Form::input('supersearch_input','',array('class'=>'large')) ?></div>
           </div>
         </div>
-        <div class="logout span2"><a href="<?php print Uri::create('admin/logout'); ?>"><?php print __('nav.logout') ?></a></div>
+        <div class="logout span3">
+          <a style="padding-right:10px" href="<?php print Uri::create('admin/clear_cache?return=' . Uri::current()); ?>"><?php print __('nav.clear_cache') ?></a>
+          <a href="<?php print Uri::create('admin/logout'); ?>"><?php print __('nav.logout') ?></a>
+        </div>
       </div>
 
       <div class="row logo_lang">
@@ -126,9 +129,6 @@
         <?php print $content; ?>
       </section>
     </div>
-    <footer>
-
-    </footer>
   </div> <!--! end of #container -->
 
   <!-- scripts concatenated and minified via ant build script-->

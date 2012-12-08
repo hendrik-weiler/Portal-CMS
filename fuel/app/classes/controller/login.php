@@ -13,9 +13,17 @@ class Controller_Login extends Controller
 
 
 
-		if(model_auth::check() && Uri::segment(2) != 'logout')
+		if(model_auth::check() && Uri::segment(2) != 'logout' && Uri::segment(2) != 'clear_cache')
 			Response::redirect('admin/navigation');
 
+	}
+
+	public function action_clear_cache()
+	{
+		File::delete_dir(DOCROOT . 'cache',true);
+		File::create_dir(DOCROOT, 'cache');
+
+		Response::redirect(Input::get('return'));
 	}
 
 	public function action_index()

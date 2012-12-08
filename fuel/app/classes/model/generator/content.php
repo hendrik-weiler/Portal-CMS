@@ -214,6 +214,29 @@ class model_generator_content extends model_db_site
             else
                 $return .= View::factory('public/template/plugin',$data);
 			break;
+
+			case 13:
+
+			$data = array();
+
+			$content->text == '' and $content->text = '[]';
+			$data += Format::forge($content->text,'json')->to_array();
+			$data = array_map(function($key) {
+				return str_replace(array('\"',"\'"),array('"',"'"),$key);
+			}, $data);
+
+			$filepath = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/custom/' . $content->label;
+			
+            if(file_exists($filepath ) && !is_dir($filepath))
+            {
+            	$return .= View::factory($filepath,$data);
+            }
+            else
+            	$return .= '<strong>' . $content->label . '</strong> not found.';
+
+			break;
+
+
 			}
 
 			$return .= '</div>';
@@ -483,7 +506,7 @@ class model_generator_content extends model_db_site
                 }
 
 		$data['pictures'] = $pictures;
-		$data['group'] = 'group_' . $content->id;
+		$data['group'] = 'group_' . model_generator_preparer::$lang . '_' . $content->id;
 		if($content->pictures == 'lightbox')
 		{
                     if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/gallery_lightbox.php'))
@@ -581,6 +604,7 @@ class model_generator_content extends model_db_site
 
 	public static function renderContent($contentname,$lang='auto')
 	{
+
 		if(!model_generator_module::$content)
 			return;
 			

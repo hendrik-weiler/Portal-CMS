@@ -72,6 +72,7 @@ return array(
 		'settings' => 'User settings',
 		'advanced' => 'Advanced settings',
 		'logout' => 'Logout',
+		'clear_cache' => 'Clear cache',
 	),
 
 	'supersearch' => array(
@@ -122,6 +123,7 @@ return array(
 			10 => 'Flash',
             11 => 'HTML',
             12 => 'Plugin',
+            13 => 'Template',
 		),
 		'txtcon' => 'Textcontainer',
 		'cl' => 'Content-linking',
@@ -188,7 +190,14 @@ return array(
             'placeholder_name' => 'Placeholder name',
             'placeholder_text' => 'Placeholder text',
             'placeholder_delete' => 'Delete placeholder',
-        )
+        ),
+		'13' => array(
+			'template' => 'Choose a template',
+			'preview' => 'Preview',
+			'info' => 'Save the current template to get a preview',
+			'submit' => 'Save',
+			'back' => 'Back to overview',
+		),
 	),
 
 	'sites' => array(
