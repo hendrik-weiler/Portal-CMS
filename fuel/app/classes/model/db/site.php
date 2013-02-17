@@ -48,6 +48,17 @@ class model_db_site extends Orm\Model
   
   public static function getLayoutFromFolder()
   {
+    if( ! file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/templates') )
+    {
+        foreach(File::read_dir(LAYOUTPATH,1) as $folder => $x)
+        {
+          model_db_option::getKey('layout')->value = str_replace(array(DS, '\\'), '', $folder);
+          model_db_option::getKey('layout')->save();
+        }
+        
+    }
+
+
     $return = array();
     foreach(File::read_dir(
             LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/templates',

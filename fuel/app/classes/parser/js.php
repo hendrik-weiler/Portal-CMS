@@ -38,9 +38,12 @@ class Js
       {
         $content[$key] = trim($value);
       }
+      $content = implode('',$content);
+    }    
+    else
+    {
+      $content = implode("\n",$content);
     }
-
-    $content = implode('',$content);
 
     return $content;
   }

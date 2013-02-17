@@ -333,6 +333,8 @@ return array(
 			'no_updates' => 'Es sind keine Updates zurzeit vorhanden.',
 			'update_not_available' => 'Noch nicht verfügbar',
 
+			'no_update_able' => 'Der Updateservice ist zurzeit nicht erreichbar.',
+
 			'dateformat' => 'd.m.Y',
 
 			'success' => 'Das Update war erfolgreich.',

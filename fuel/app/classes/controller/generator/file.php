@@ -116,7 +116,7 @@ class Controller_Generator_File extends Controller
         $info = pathinfo($path);
 
         if($info['extension'] == 'js')
-          $this->response->body .= Parser\Js::parse($path,'min');
+          $this->response->body .= Parser\Js::parse($path,'full');
       }
     }
     else

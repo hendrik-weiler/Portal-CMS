@@ -26,8 +26,8 @@ class model_generator_sub_sites extends model_db_navigation
 	{
 		$returnObj = new \stdClass;
 
-		if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/subsites_outer.php'))
-			$outerSub = View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/subsites_outer.php');
+		if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/subsites_outer.php'))
+			$outerSub = View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/subsites_outer.php');
 		else
 			$outerSub = View::factory('public/template/subsites_outer');
 
@@ -83,8 +83,8 @@ class model_generator_sub_sites extends model_db_navigation
 			if($navigation->url_title == $current_nav->url_title)
 				$data['active_class'] = 'active_' . $site->group_id;
 
-			if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/subsites_inner.php'))
-				$innerSub .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/cms_template/subsites_inner.php',$data);
+			if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/subsites_inner.php'))
+				$innerSub .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/subsites_inner.php',$data);
 			else
 				$innerSub .= View::factory('public/template/subsites_inner',$data);
 		}

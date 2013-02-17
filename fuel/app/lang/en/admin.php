@@ -335,6 +335,8 @@ return array(
 
 			'dateformat' => 'Y-m-d',
 
+			'no_update_able' => 'The Updateservice is currently not available.',
+
 			'success' => 'The update was successfull.',
 			'failure' => 'Problems occured while updating!',
 

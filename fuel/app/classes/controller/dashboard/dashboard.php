@@ -44,10 +44,16 @@ class Controller_Dashboard_Dashboard extends Controller
 	public function action_index()
 	{
 		$data = array();
-
-		$update = new Controller_Advanced_Update($this->request, $this->response);
-		$update->before();
-		$data['new_updates'] = $update->check_for_new_updates();
+		try 
+		{
+			$update = new Controller_Advanced_Update($this->request, $this->response);
+			$update->before();
+			$data['new_updates'] = @$update->check_for_new_updates();
+		}
+		catch(Exception $e)
+		{
+			$data['new_updates'] = array();
+		}
 
 		$data['permissions'] = $this->data['permission'];
 		$this->data['content'] = View::factory('admin/columns/dashboard',$data);

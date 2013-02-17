@@ -82,7 +82,7 @@ class Controller_Pages_Content_Type13 extends Controller
 
 		if(Input::post('back') != '')
 		{
-			Response::redirect('admin/sites/edit/' . $this->id);
+			Response::redirect('admin/sites/edit/' . Uri::segment(3));
 		}
 
 		if(!is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/template'))
@@ -110,7 +110,7 @@ class Controller_Pages_Content_Type13 extends Controller
 
 			foreach(Upload::get_files() as $file)
 			{
-			    $variables[$file['field']] = Uri::create('uploads/' . Session::get('lang_prefix') . '/template/' . $this->content_id . '/' . $file['saved_as']);
+			    $variables[$file['field']] = ('uploads/' . Session::get('lang_prefix') . '/template/' . $this->content_id . '/' . $file['saved_as']);
 			}
 		}
 

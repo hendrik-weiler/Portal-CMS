@@ -224,6 +224,7 @@ class model_generator_content extends model_db_site
 			$data = array_map(function($key) {
 				return str_replace(array('\"',"\'"),array('"',"'"),$key);
 			}, $data);
+			$data['content_id'] = $content->id;
 
 			$filepath = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/custom/' . $content->label;
 			

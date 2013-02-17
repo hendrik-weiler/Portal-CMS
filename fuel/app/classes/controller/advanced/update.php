@@ -86,12 +86,21 @@ class Controller_Advanced_Update extends Controller
 	public function check_for_new_updates()
 	{
 		$results = array();
+		$data['no_request_able'] = false;
 
 		if($this->fsock_able)
 		{
-			$req = new \Sutra\sHTTPRequest('http://' . $this->_base_url . '/' . '/updates.xml', 'GET');
-			$req_result = $req->getData();
-			$data = Format::forge($req_result,'xml')->to_array();
+			try
+			{
+				$req = new \Sutra\sHTTPRequest('http://' . $this->_base_url . '/' . '/updates.xml', 'GET');
+				$req_result = @$req->getData();
+				$data = Format::forge($req_result,'xml')->to_array();
+			}
+			catch(Exception $e)
+			{
+				$data = array();
+				$data['no_request_able'] = true;
+			}
 
 			if(isset($data['updates']['update']['version']))
 			{
@@ -128,13 +137,23 @@ class Controller_Advanced_Update extends Controller
 
 		$data['update_list'] = array();
 
+		$data['no_request_able'] = false;
+
 		$data['user_lang'] = str_replace(array('/','\\'),'',model_db_accounts::getCol(Session::get('session_id'),'language'));
 
 		if($this->fsock_able)
 		{
-			$req = new \Sutra\sHTTPRequest('http://' . $this->_base_url . '/' . '/updates.xml', 'GET');
-    		$results = $req->getData();
-			$data['update_list'] = Format::forge($results,'xml')->to_array();
+			try
+			{
+				$req = new \Sutra\sHTTPRequest('http://' . $this->_base_url . '/' . '/updates.xml', 'GET');
+	    		$results = @$req->getData();
+				$data['update_list'] = Format::forge($results,'xml')->to_array();
+			}
+			catch(Exception $e)
+			{
+				$data['update_list'] = array();
+				$data['no_request_able'] = true;
+			}
 
 			if(isset($data['update_list']['updates']['update']['version']))
 			{

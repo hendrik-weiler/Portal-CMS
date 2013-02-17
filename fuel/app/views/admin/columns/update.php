@@ -6,14 +6,16 @@
   <div class="row">
   </div>
 
-  <?php if(!is_array($update_list['message']) && !empty($update_list['message'])): ?>
+  <?php if($no_request_able || !is_array($update_list['message']) && !empty($update_list['message'])): ?>
   <div class="message row">
     <?php 
 
-      $message = $update_list['message']['default'];
+      if(!$no_request_able) $message = $update_list['message']['default'];
 
-      if(isset($update_list['message'][$user_lang]))
+      if(!$no_request_able && isset($update_list['message'][$user_lang]))
         $message = $update_list['message'][$user_lang];
+
+      if($no_request_able) $message = __('advanced.updater.no_update_able');
 
       print $message; 
     ?>

@@ -1,5 +1,5 @@
 <script type="text/javascript" src="<?php print Uri::create('assets/js/tiny_mce/tiny_mce.js'); ?>"></script>
-<?php print Form::open(array('action'=>'admin/content/1/edit/' . Uri::segment(5) . '/type/13/edit','enctype'=>'multipart/form-data')) ?>
+<?php print Form::open(array('action'=>'admin/content/' . Uri::segment(3) . '/edit/' . Uri::segment(5) . '/type/13/edit','enctype'=>'multipart/form-data')) ?>
 <div class="span7">
     <div class="clearfix">
       <?php print Form::label(__('types.13.template')); ?>
@@ -56,8 +56,9 @@ tinyMCE.init({
   theme : "advanced",
   mode : "textareas",
   theme_advanced_toolbar_location : "top",
-  theme_advanced_buttons1 : "bold,italic,underline,strikethrough,forecolor,separator,justifyleft,justifycenter,justifyright,justifyfull,separator,outdent,indent,blockquote",
-  plugins : 'safari,inlinepopups',
+  theme_advanced_buttons1 : "formatselect,fontsizeselect,bold,italic,underline,strikethrough,forecolor,separator,justifyleft,justifycenter,justifyright,justifyfull",
+  theme_advanced_buttons2 : "outdent,indent,blockquote,link,numlist,bullist,code,fullscreen",
+  plugins : 'safari,inlinepopups,fullscreen',
   theme_advanced_buttons1_add : "emotions",
   language : '<?php print Session::get('lang_prefix') ?>'
 });
