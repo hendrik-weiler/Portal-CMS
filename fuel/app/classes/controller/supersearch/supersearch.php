@@ -277,7 +277,7 @@ class Controller_Supersearch_Supersearch extends Controller
 	private function _generate_content_results()
 	{
 		$results = model_db_content::find('all',array(
-			'where' => array(array('label','like','%' . $this->searchterms[0] . '%'))
+			'where' => array(array('label','like','%' . $this->searchterms[0] . '%'),array('type','!=',4))
 		));
 
 		return $this->_filter_db_results($results,array('label'));

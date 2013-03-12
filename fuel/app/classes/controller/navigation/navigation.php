@@ -105,7 +105,15 @@ class Controller_Navigation_Navigation extends Controller
 
 		if(preg_match('#admin/navigation/([0-9]+)#i',Uri::current()) || Uri::segment(3) == '')
 		{
-			$search = model_db_navgroup::find('first',array('where'=>array('id'=>Uri::segment(3))));
+			try {
+
+				$search = model_db_navgroup::find('first',array('where'=>array('id'=>Uri::segment(3))));
+
+			}
+			catch(Exception $e)
+			{
+				Controller_Language_Language::add_language(Session::get('lang_prefix'),'',true);
+			}
 
 			if(empty($search))
 			{

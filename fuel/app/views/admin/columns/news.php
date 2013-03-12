@@ -20,9 +20,19 @@
 <hr />
 
 <?php
-	$news = model_db_news::find('all',array(
-		'order_by' => array('creation_date'=>'DESC')
-	));
+
+	try
+	{
+
+		$news = model_db_news::find('all',array(
+			'order_by' => array('creation_date'=>'DESC')
+		));
+
+	}
+	catch(Exception $e)
+	{
+		Controller_Language_Language::add_language(Session::get('lang_prefix'),'',true);
+	}
 
 	if(empty($news))
 	{

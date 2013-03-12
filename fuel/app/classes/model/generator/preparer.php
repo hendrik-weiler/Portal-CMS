@@ -163,7 +163,11 @@ class model_generator_preparer extends model_db_site
 		));
 
 		if(empty($langSearch))
-			$langSearch = model_db_language::find('first');
+		{
+			$langSearch = model_db_language::find('first',array(
+				'order_by' => array('sort'=>'ASC')
+			));
+		}	
 		
 		self::setLangPrefix($langSearch->prefix);
 		model_db_navigation::setLangPrefix($langSearch->prefix);

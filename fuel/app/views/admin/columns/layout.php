@@ -28,9 +28,19 @@
 
           foreach($settings['components'] as $key => $value)
           {
-            $search = model_db_navgroup::find('first',array(
-              'where' => array('title'=>$value)
-            ));
+
+            try
+            {
+
+              $search = model_db_navgroup::find('first',array(
+                'where' => array('title'=>$value)
+              ));
+            }
+            catch(Exception $e)
+            {
+              Controller_Language_Language::add_language(Session::get('lang_prefix'),'',true);
+            }
+
             $choose = empty($search) ? 0 : $search->id;
             print '<div style="padding:10px; 0">' . $key . '</div>';
             print Form::select($key,$choose,array(0=>__('constants.not_set')) + model_db_navgroup::asSelectBox());

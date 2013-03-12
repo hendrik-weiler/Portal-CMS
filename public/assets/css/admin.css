@@ -135,6 +135,14 @@ body {
   cursor: move;
 }
 
+#language_list div.startlanguage {
+  background: yellow;
+}
+
+#language_list strong.startlanguage-text {
+  padding-left: 500px;
+}
+
 .ui-sortable-helper {
   border:1px dashed red !important;
 }
@@ -595,3 +603,35 @@ body {
   padding: 10px;
 }
 
+/* ------------ prompt window ----------- */
+
+#overlay {
+  background: rgba(0,0,0,0.5);
+  position:absolute;
+  top:0;
+  left:0;
+  z-index: 1;
+}
+
+#prompt {
+  background: #f9f9f9;
+  padding: 15px;
+  position:absolute;
+  width: 250px;
+  margin-left: -125px;
+  top:0;
+  left:50%;
+  z-index: 2;
+}
+
+#prompt button {
+  width:110px;
+  margin: 10px 5px;
+  padding:5px;
+  background: #e9e9e9;
+}
+
+#prompt button:hover {
+  background: #0069D6;
+  color: white;
+}

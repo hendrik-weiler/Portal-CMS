@@ -91,8 +91,21 @@ class model_generator_content extends model_db_site
 			$return = '';
 
 			$style = model_db_content::genStyleFromClassname($content->classname);
+
+			$data_inline_edit_content_id = '';
+			$data_inline_edit_site_id = '';
+			$data_inline_edit_type_id = '';
+			if(model_db_option::getKey('inline_edit')->value && model_auth::check())
+			{
+				if($content->type != 4)
+				{
+					$data_inline_edit_content_id = ' data-inline-edit-content-id="' . $content->id . '"';
+					$data_inline_edit_site_id = ' data-inline-edit-site-id="' . $content->site_id . '"';
+					$data_inline_edit_type_id = ' data-inline-edit-type-id="' . $content->type . '"';
+				}
+			}
 				
-			$return .= '<div class="width_' . $style->type . '" ' . $style->style . '>';
+			$return .= '<div class="width_' . $style->type . '" ' . $style->style . $data_inline_edit_content_id . $data_inline_edit_site_id . $data_inline_edit_type_id . '>';
 			switch($content->type)
 			{
 				case 7:

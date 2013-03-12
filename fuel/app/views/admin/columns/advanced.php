@@ -68,6 +68,21 @@
 			</div>
 		<div class="span7">
 			<h3>
+				<?php print __('advanced.header.help') ?>
+			</h3>
+			  <div class="clearfix">
+			   <?php print Form::label(__('advanced.header.inline_edit')); ?>
+			   <div class="input">
+			   	  <?php 
+			   	  $checked = array();
+			   	  $value = 1;
+			   	  if($inline_edit == 1) $checked = array('checked'=>'checked');
+			   	  ?>
+			      <?php print Form::checkbox('inline_edit',1, $checked); ?>
+			    </div>
+			  </div>
+
+			<h3>
 				<?php print __('advanced.header.news') ?>
 			</h3>
 			<h4>

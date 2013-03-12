@@ -39,7 +39,9 @@ class Controller_Advanced_Advanced extends Controller
 		# assets
 		'asset_jquery','asset_modernizr','asset_colorbox','asset_nivo_slider','asset_swfobject','asset_custom',
 		# navigation images
-		'navigation_image_width','navigation_image_height'
+		'navigation_image_width','navigation_image_height',
+		# help options
+		'inline_edit'
 	);
 
 	private static $defaultValue = array(
@@ -70,7 +72,9 @@ class Controller_Advanced_Advanced extends Controller
 		'asset_custom' => 1,
 		# navigation images
 		'navigation_image_width' => 60,
-		'navigation_image_height' => 60
+		'navigation_image_height' => 60,
+		# help options
+		'inline_edit' => 0
 	);
 
 	private static $minValue = array(
@@ -100,7 +104,9 @@ class Controller_Advanced_Advanced extends Controller
 		'asset_custom' => 0,
 		# navigation images
 		'navigation_image_width' => 10,
-		'navigation_image_height' => 10
+		'navigation_image_height' => 10,
+		# help options
+		'inline_edit' => 0
 	);
 
 	private static function _resizeAllPictures()
@@ -197,7 +203,7 @@ class Controller_Advanced_Advanced extends Controller
 					$test->value = $value;
 					$test->save();
 				}
-				else if(preg_match('#(module_|asset_)#i',$option) && empty($value))
+				else if(preg_match('#(module_|asset_|inline_edit)#i',$option) && empty($value))
 				{
 					$test->value = 0;
 					$test->save();
@@ -215,6 +221,14 @@ class Controller_Advanced_Advanced extends Controller
 			$row = model_db_option::find('first',array(
 				'where' => array('key' => $option)
 			));
+
+			if(!is_object($row))
+			{
+				$row = new model_db_option();
+				$row->key = $option;
+				$row->value = static::$minValue[$option];
+				$row->save();
+			}
 
 			$return[$option] = $row->value;
 		}

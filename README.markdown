@@ -1,6 +1,6 @@
 Portal Content Management System
 ====================
-#### v: 1.031
+#### v: 1.032
 
 Build on [Fuel Framework](https://github.com/fuel/fuel)<br />
 Using:<br />
@@ -46,7 +46,7 @@ PHP 5.3<br />
 fsockopen ( else manually updating )<br />
 
 
-Tested in:
+Backend Tested in:
 ---------------------
 - Chrome
 - Opera

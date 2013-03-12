@@ -257,7 +257,8 @@ return array(
 			'lang_prefix' => 'Prefix(e.g. de,en)',
 			'add_button' => 'Add new language',
 			'edit_button' => 'Edit language'
-		)
+		),
+		'startlanguage' => 'This is the startlanguage',
 	),
 
 	'advanced' => array(
@@ -272,7 +273,9 @@ return array(
 		'header' => array(
 			'thumbnails' => 'Sizes of thumbnails',
 			'news' => 'News options',
-			'accounts' => 'Accounts & Permissions'
+			'accounts' => 'Accounts & Permissions',
+			'help' => 'Help options',
+			'inline_edit' => 'Website direct edit mode'
 		),
 		'layout' => array(
 			'wait' => 'Please wait....',

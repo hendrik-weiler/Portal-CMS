@@ -25,16 +25,24 @@ if(/admin\/language/.test(window.location.href))
 		data : []
 	});
 
-	$('#language_list').sortable({
-		update: function(event, ui) {
+	$('#language_list').sortable();
+	$('#language_list').bind('sortupdate',function(event, ui) {
 			var data = [];
 			$.each($('#language_list div'),function(key,value) {
 				data[key] = $(this).attr('id');
 			});
 
 			$.post(_url + 'admin/language/order/update',{'order' : data});
-		}
+
+			$('#language_list div').removeClass('startlanguage');
+			$('#language_list div').eq(0).addClass('startlanguage');
+			var ltext = $('#language_list strong.startlanguage-text').clone();
+			$('#language_list strong.startlanguage-text').remove();
+			$('#language_list div').eq(0).append(ltext);
 	});
+
+	$('#language_list div').eq(0).addClass('startlanguage');
+	$('#language_list').trigger('sortupdate');
 }
 
 if(/admin\/navigation/.test(window.location.href))

@@ -64,9 +64,63 @@ class Controller_Language_Language extends Controller
 		}
 	}
 
+	public static function add_language($prefix, $label, $error_fix_mode = false)
+	{
+
+		empty($label) and $label = $prefix;
+
+		if(!$error_fix_mode)
+		{
+
+			$search = model_db_language::find('first',array(
+				'where' => array('prefix'=>$prefix)
+			));
+
+			if(!empty($search))
+				Response::redirect('admin/language');
+
+		}
+
+		DB::query('CREATE TABLE `' . $prefix . '_site` LIKE `dummy_site`')->execute();
+		DB::query('CREATE TABLE `' . $prefix . '_content` LIKE `dummy_content`')->execute();
+		DB::query('CREATE TABLE `' . $prefix . '_navigation` LIKE `dummy_navigation`')->execute();
+		DB::query('CREATE TABLE `' . $prefix . '_news` LIKE `dummy_news`')->execute();
+		DB::query('CREATE TABLE `' . $prefix . '_navigation_group` LIKE `dummy_navigation_group`')->execute();
+
+		model_db_navgroup::setLangPrefix($prefix);
+		$group = new model_db_navgroup();
+		$group->title = 'Main';
+		$group->save();
+
+		$sort = DB::query('SELECT max(`sort`) + 1 as maxsort FROM languages')->execute();
+		$sort = $sort->as_array();
+
+		if(!$error_fix_mode)
+		{
+
+			$row = new model_db_language();
+			$row->prefix = $prefix;
+			$row->label = $label;
+			$row->sort = ($sort['maxsort'] == null) ? 0 : $sort['maxsort'];
+			$row->save();
+
+		}
+
+		if(is_dir(DOCROOT . 'uploads/' . $prefix))
+			File::delete_dir(DOCROOT . 'uploads/' . $prefix);
+
+		File::create_dir(DOCROOT . 'uploads/' , $prefix,0775);
+		File::create_dir(DOCROOT . 'uploads/' . $prefix , '/content', 0775);
+		File::create_dir(DOCROOT . 'uploads/' . $prefix , '/news',0775);
+		File::create_dir(DOCROOT . 'uploads/' . $prefix , '/gallery',0775);
+		File::create_dir(DOCROOT . 'uploads/' . $prefix , '/flash',0775);
+
+		model_permission::addLangToPermissionList($prefix);
+
+	}
+
 	public function action_add()
 	{
-		$row = new model_db_language();
 		$prefix = Input::post('prefix');
 
 		if(isset($_POST['submit']))
@@ -80,42 +134,7 @@ class Controller_Language_Language extends Controller
 				Response::redirect('admin/language');
 			}
 
-			$search = model_db_language::find('first',array(
-				'where' => array('prefix'=>Input::post('prefix'))
-			));
-
-			if(!empty($search))
-				Response::redirect('admin/language');
-
-			DB::query('CREATE TABLE `' . $prefix . '_site` LIKE `dummy_site`')->execute();
-			DB::query('CREATE TABLE `' . $prefix . '_content` LIKE `dummy_content`')->execute();
-			DB::query('CREATE TABLE `' . $prefix . '_navigation` LIKE `dummy_navigation`')->execute();
-			DB::query('CREATE TABLE `' . $prefix . '_news` LIKE `dummy_news`')->execute();
-			DB::query('CREATE TABLE `' . $prefix . '_navigation_group` LIKE `dummy_navigation_group`')->execute();
-
-			model_db_navgroup::setLangPrefix($prefix);
-			$group = new model_db_navgroup();
-			$group->title = 'Main';
-			$group->save();
-
-			$sort = DB::query('SELECT max(`sort`) + 1 as maxsort FROM languages')->execute();
-			$sort = $sort->as_array();
-
-			$row->prefix = $prefix;
-			$row->label = Input::post('label');
-			$row->sort = ($sort['maxsort'] == null) ? 0 : $sort['maxsort'];
-			$row->save();
-
-			if(is_dir(DOCROOT . 'uploads/' . $prefix))
-				File::delete_dir(DOCROOT . 'uploads/' . $prefix);
-
-			File::create_dir(DOCROOT . 'uploads/' , $prefix,0775);
-			File::create_dir(DOCROOT . 'uploads/' . $prefix , '/content', 0775);
-			File::create_dir(DOCROOT . 'uploads/' . $prefix , '/news',0775);
-			File::create_dir(DOCROOT . 'uploads/' . $prefix , '/gallery',0775);
-			File::create_dir(DOCROOT . 'uploads/' . $prefix , '/flash',0775);
-
-			model_permission::addLangToPermissionList($prefix);
+			static::add_language($prefix, Input::post('label'));
 
 			Response::redirect('admin/language');
 		}

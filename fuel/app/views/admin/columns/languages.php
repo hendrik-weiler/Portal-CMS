@@ -46,6 +46,8 @@ print Form::close();
 		'order_by' => array('sort'=>'ASC')
 	));
 
+	$count = 0;
+
 	foreach($languages as $lang)
 	{
 		print '<div id="' . $lang['id'] . '">';
@@ -57,7 +59,12 @@ print Form::close();
 		if(count($languages) > 1)
 			print ' <a class="delete" href="' . Uri::create('admin/language/delete/' . $lang['id']) . '">' . __('constants.delete') . '</a>';
 
+		if($count == 0)
+			print '<strong class="startlanguage-text">' . __('languages.startlanguage') . '</strong>';
+
 		print '</div>';
+
+		$count++;
 	}
 
 ?>
