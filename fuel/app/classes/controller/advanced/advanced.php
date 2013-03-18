@@ -282,6 +282,8 @@ class Controller_Advanced_Advanced extends Controller
 		$data = file_get_contents($path);
 		$info = pathinfo($path);
 
+		$info['extension'] == 'jpg' and $info['extension'] = 'jpeg';
+
 		$this->response->set_header('Content-Type','image/' . $info['extension']);
 		$this->response->body = $data;
 	}

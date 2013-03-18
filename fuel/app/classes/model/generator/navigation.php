@@ -67,12 +67,24 @@ class model_generator_navigation extends model_db_navigation
 		
 		foreach($data as $nav)
 		{
+
+			empty($nav->parameter) and $nav->parameter = '[]';
+			$parameter = Format::forge($nav->parameter,'json')->to_array();
+			!isset($parameter['description']) and $parameter['description'] = '';
+			!isset($parameter['use_default_styles']) and $parameter['use_default_styles'] = 1;
+			!isset($parameter['text_color']) and $parameter['text_color'] = '#FFFFFF';
+			!isset($parameter['background_color']) and $parameter['background_color'] = '#000000';
+
 			$result[$nav->id] = array(
 				'id' => $nav->id,
 				'label' => $nav->label,
 				'url_title' => $nav->url_title,
 				'image' => $nav->image,
-				'image_is_shown' => $nav->image_is_shown
+				'image_is_shown' => $nav->image_is_shown,
+				'description' => $parameter['description'],
+				'use_default_styles' => $parameter['use_default_styles'],
+				'text_color' => $parameter['text_color'],
+				'background_color' => $parameter['background_color'],
 			);
 
 			if(Uri::segment(2) == $nav->url_title || Uri::segment(3) == $nav->url_title
@@ -116,6 +128,10 @@ class model_generator_navigation extends model_db_navigation
 			$data['image'] = Uri::create('uploads/' . Uri::segment(1) . '/navigation_images/' . $nav['id'] . '/thumbs/' . $nav['image']);
 			$data['image_exists'] = is_file(DOCROOT . 'uploads/' . Uri::segment(1) . '/navigation_images/' . $nav['id'] . '/preview/' . $nav['image']);
 			$data['image_is_shown'] = $nav['image_is_shown'];
+			$data['description'] = $nav['description'];
+			$data['use_default_styles'] = $nav['use_default_styles'];
+			$data['text_color'] = $nav['text_color'];
+			$data['background_color'] = $nav['background_color'];
 			$data['link'] = Uri::create(model_generator_preparer::$lang . '/' . $nav['url_title']);
 			if(isset($nav['sub']))
 			{
@@ -165,6 +181,10 @@ class model_generator_navigation extends model_db_navigation
 					$subData['image'] = Uri::create('uploads/' . Uri::segment(1) . '/navigation_images/' . $sub['id'] . '/thumbs/' . $sub['image']);
 					$subData['image_exists'] = is_file(DOCROOT . 'uploads/' . Uri::segment(1) . '/navigation_images/' . $sub['id'] . '/preview/' . $sub['image']);
 					$subData['image_is_shown'] = $sub['image_is_shown'];
+					$subData['description'] = $sub['description'];
+					$subData['use_default_styles'] = $sub['use_default_styles'];
+					$subData['text_color'] = $sub['text_color'];
+					$subData['background_color'] = $sub['background_color'];
 						
 					if($sub['active'] == true)
 						$subData['active_class'] = 'active_' . $group_id;

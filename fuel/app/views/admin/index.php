@@ -17,6 +17,7 @@
   <!-- CSS concatenated and minified via ant build script-->
   <link rel="stylesheet" href="<?php print Uri::create('assets/css/bootstrap.min.css') ?>">
   <link rel="stylesheet" href="<?php print Uri::create('assets/css/admin.css') ?>">
+  <link rel="stylesheet" href="<?php print Uri::create('assets/css/spectrum.css') ?>">
   <link rel="stylesheet" href="<?php print Uri::create('assets/css/elrte/smoothness/jquery-ui-1.8.13.custom.css') ?>">
   <!-- end CSS-->
 
@@ -27,6 +28,7 @@
   <?php print Asset\Manager::get('js->include->4_swfobject->swfobject') ?>
   <?php print Asset\Manager::get('js->dialog->dialog') ?>
   <?php print Asset\Manager::get('js->picturemanager->picturemanager') ?>
+  <?php print Asset\Manager::get('js->libs->spectrum') ?>
 
   <script>
     var _prompt = {

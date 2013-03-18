@@ -564,6 +564,9 @@ class Controller_Pages_Content extends Controller
 		if(is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash/' . $this->id))
 			File::delete_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash/' . $this->id);
 
+		if(is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/video/' . $this->id))
+			File::delete_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/video/' . $this->id);
+
 		Response::redirect('admin/sites/edit/' . $delete->site_id);
 	}
 

@@ -141,7 +141,8 @@ class Controller_Advanced_Update extends Controller
 
 		$data['user_lang'] = str_replace(array('/','\\'),'',model_db_accounts::getCol(Session::get('session_id'),'language'));
 
-		if($this->fsock_able)
+		//if($this->fsock_able)
+		if(false)
 		{
 			try
 			{

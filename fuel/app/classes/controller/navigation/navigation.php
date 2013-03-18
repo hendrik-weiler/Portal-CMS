@@ -129,9 +129,13 @@ class Controller_Navigation_Navigation extends Controller
 		$data['label'] = '';
 		$data['parent'] = 0;
 		$data['show_sub'] = 0;
-                $data['group_id'] = 0;
+        $data['group_id'] = 0;
 		$data['parent_array'] = $this->_getParentArray();		
 		$data['mode'] = 'add';
+		$data['use_default_styles'] = 1;
+		$data['description'] = '';
+		$data['text_color'] = '#000000';
+		$data['background_color'] = '#FFFFFF';
 		
 		$this->data['content'] = View::factory('admin/columns/navigation',$data);
 	}
@@ -149,6 +153,15 @@ class Controller_Navigation_Navigation extends Controller
 			$nav_point->parent = Input::post('parent');
 			$nav_point->show_sub = 0;
 			$nav_point->image_is_shown = Input::post('image_is_shown');
+
+			$nav_point->parameter = json_encode(array(
+
+				'text_color' => Input::post('text_color'),
+				'use_default_styles' => Input::post('use_default_styles') != '',
+				'background_color' => Input::post('background_color'),
+				'description' => Input::post('description'), 
+
+			));
 
 			if(!empty($nav_point->parent))
 				self::_setSitesToNull($nav_point->parent);
@@ -259,6 +272,15 @@ class Controller_Navigation_Navigation extends Controller
             $nav_point->group_id = Input::post('group_id');
             $nav_point->show_sub = Input::post('show_sub');
             $nav_point->show_in_navigation = Input::post('show_in_navigation') != '';
+
+			$nav_point->parameter = json_encode(array(
+
+				'text_color' => Input::post('text_color'),
+				'use_default_styles' => Input::post('use_default_styles') != '',
+				'background_color' => Input::post('background_color'),
+				'description' => Input::post('description'), 
+
+			));
 
             $site_point = model_db_site::find('first',array(
             	'where' => array('navigation_id' => $nav_point->id)
@@ -379,6 +401,14 @@ class Controller_Navigation_Navigation extends Controller
 		$data['image'] = Uri::create('uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $nav_point->id . '/preview/' . $nav_point->image);
 		$data['image_exists'] = is_file(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $nav_point->id . '/preview/' . $nav_point->image);
 		$data['image_is_shown'] = $nav_point->image_is_shown;
+
+		empty($nav_point->parameter) and $nav_point->parameter = '[]';
+		$parameter = Format::forge($nav_point->parameter,'json')->to_array();
+
+		$data['use_default_styles'] = !isset($parameter['use_default_styles']) ? 1 : $parameter['use_default_styles'];
+		$data['description'] = !isset($parameter['description']) ? '' : $parameter['description'];
+		$data['text_color'] = !isset($parameter['text_color']) ? '#000000' : $parameter['text_color'];
+		$data['background_color'] = !isset($parameter['background_color']) ? '#FFFFFF' : $parameter['background_color'];
 
 		$this->data['content'] = View::factory('admin/columns/navigation',$data);
 	}

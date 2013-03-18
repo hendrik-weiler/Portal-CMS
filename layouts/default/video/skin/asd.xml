@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<flvvideoplayer>
+ <color_text>#FFFFFF</color_text>
+ <color_seekbar>###ff0000</color_seekbar>
+ <color_loadingbar>#828282</color_loadingbar>
+ <color_seekbarbg>#333333</color_seekbarbg>
+ <color_button_out>#333333</color_button_out>
+ <color_button_over>#000000</color_button_over>
+ <color_button_highlight>#ffffff</color_button_highlight>
+</flvvideoplayer>

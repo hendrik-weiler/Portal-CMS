@@ -55,10 +55,10 @@ class model_generator_content extends model_db_site
 						$data = array();
 						$data['entries'] = self::_showMultipleNews($news);
 
-                                                if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/news_archive.php'))
-                                                        return View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/news_archive.php',$data);
+                        if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/news_archive.php'))
+                                return View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/news_archive.php',$data);
 						else
-                                                        return View::factory('public/template/news_archive',$data);
+                            return View::factory('public/template/news_archive',$data);
 				}
 				$news = model_db_news::find(Uri::segment(3));
 
@@ -133,13 +133,20 @@ class model_generator_content extends model_db_site
 
 					$col_1 = model_db_content::find($cols['col_1']);
 					$data = array();
-					$data['text'] = self::_viewContent($col_1);
-					$data['group'] = 'group_' . model_generator_preparer::$lang . '_' . $content->id;
-                                        
-                                        if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/1columns.php'))
-                                            $return .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/1columns.php',$data);
-                                        else
-                                            $return .= View::factory('public/template/1columns',$data);
+					if($col_1 != 0)
+					{
+						$data['text'] = '';
+						$data['group'] = 'group_' . model_generator_preparer::$lang . '_' . $content->id;
+						if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/content_reference_1column.php'))
+	                    {
+							$data['text'] = self::_viewContent($col_1);
+	                    	$return .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/content_reference_1column.php',$data);
+	                    }    
+	                    else
+	                    {
+	                    	$return .= View::factory('public/template/content_reference_1column',$data);
+	                    }   
+                    }
 					break;
 				case 8:
 					$cols = Format::factory($content->refer_content_id,'json')->to_array();
@@ -147,14 +154,16 @@ class model_generator_content extends model_db_site
 					$col_1 = model_db_content::find($cols['col_1']);
 					$col_2 = model_db_content::find($cols['col_2']);
 					$data = array();
-					$data['text'] = self::_viewContent($col_1);
-					$data['text2'] = self::_viewContent($col_2);
+					$data['text'] = '';
+					$data['text2'] = '';
+					$cols['col_1'] != 0 and $data['text'] = self::_viewContent($col_1);
+					$cols['col_2'] != 0 and $data['text2'] = self::_viewContent($col_2);
 					$data['group'] = 'group_' . model_generator_preparer::$lang . '_' . $content->id;
 					
-                                        if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/2columns.php'))
-                                            $return .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/2columns.php',$data);
-                                        else
-                                            $return .= View::factory('public/template/2columns',$data);
+                    if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/content_reference_2column.php'))
+                        $return .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/content_reference_2column.php',$data);
+                    else
+                        $return .= View::factory('public/template/content_reference_2column',$data);
 					break;
 				case 9:
 					$cols = Format::factory($content->refer_content_id,'json')->to_array();
@@ -163,15 +172,18 @@ class model_generator_content extends model_db_site
 					$col_2 = model_db_content::find($cols['col_2']);
 					$col_3 = model_db_content::find($cols['col_3']);
 					$data = array();
-					$data['text'] = self::_viewContent($col_1);
-					$data['text2'] = self::_viewContent($col_2);
-					$data['text3'] = self::_viewContent($col_3);
+					$data['text'] = '';
+					$data['text2'] = '';
+					$data['text3'] = '';
+					$data['text'] != 0 and $data['text'] = self::_viewContent($col_1);
+					$data['text2'] != 0 and $data['text2'] = self::_viewContent($col_2);
+					$data['text3'] != 0 and $data['text3'] = self::_viewContent($col_3);
 					$data['group'] = 'group_' . model_generator_preparer::$lang . '_' . $content->id;
                                         
-                                        if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/3columns.php'))
-                                            $return .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/3columns.php',$data);
+                                        if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/content_reference_3column.php'))
+                                            $return .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/content_reference_3column.php',$data);
                                         else
-                                            $return .= View::factory('public/template/3columns',$data);
+                                            $return .= View::factory('public/template/content_reference_3column',$data);
 					break;
 				case 10:
                                         $return .= self::_viewFlash($content);
@@ -247,6 +259,90 @@ class model_generator_content extends model_db_site
             }
             else
             	$return .= '<strong>' . $content->label . '</strong> not found.';
+
+			break;
+
+			case 14:
+
+			$content->parameter == '' and $content->parameter = '[]';
+			$data = Format::forge($content->parameter,'json')->to_array();
+
+			$data['content_id'] = $content->id;
+			$data['title'] = $content->label;
+
+			if(!isset($data['video_name'])) $data['video_name'] = '';
+			if(!isset($data['video_preview'])) $data['video_preview'] = '';
+			if(!isset($data['video_file'])) $data['video_file'] = '';
+
+			if(!isset($data['color_text']))
+			{
+				$data['color_text'] = '#FFFFFF';
+				$data['color_seekbar'] = '#13ABEC';
+				$data['color_loadingbar'] = '#828282';
+				$data['color_seekbarbg'] = '#333333';
+				$data['color_button_out'] = '#333333';
+				$data['color_button_over'] = '#000000';
+				$data['color_button_highlight'] = '#ffffff';
+			}
+
+			if(!isset($data['autohide']))
+			{
+				$data['autohide'] = 0;	
+			}
+
+			if(!isset($data['autoplay']))
+			{
+				$data['autoplay'] = 0;	
+			}
+
+			if(!isset($data['fullscreen']))
+			{
+				$data['fullscreen'] = 0;	
+			}
+
+			if(!isset($data['height']))
+			{
+				$data['height'] = 300;
+			}
+
+			if(!isset($data['width']))
+			{
+				$data['width'] = 600;
+			}
+
+			if($data['video_name'] != 'none')
+			{
+				$data['filepath'] = Uri::create('player/serve/video/' . $data['video_name']);
+			}
+
+			if($data['video_file'] != '')
+			{
+				if(model_generator_preparer::$lang == '') model_generator_preparer::$lang = Session::get('lang_prefix');
+				$data['filepath'] = Uri::create('uploads/' . model_generator_preparer::$lang . '/video/' . $content->id . '/' . $data['video_file']);
+			}
+
+			$data['filepath'] .= '?' . time();
+
+			$data['previewpath'] = '';
+			if($data['video_preview'] != '')
+			{
+				if(model_generator_preparer::$lang == '') model_generator_preparer::$lang = Session::get('lang_prefix');
+				$data['previewpath'] = Uri::create('uploads/' . model_generator_preparer::$lang . '/video/' . $content->id . '/' . $data['video_preview']);
+			}
+
+			if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/player.swf'))
+			{
+				$data['videoplayerpath'] = Uri::create('player/serve/player'); 
+			}
+			else
+			{
+				$data['videoplayerpath'] = Uri::create('assets/swf/player.swf');
+			}
+
+            if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/flvvideoplayer.php'))
+                $return .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/flvvideoplayer.php',$data);
+            else
+                $return .= View::factory('public/template/flvvideoplayer',$data);
 
 			break;
 

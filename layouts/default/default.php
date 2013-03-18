@@ -13,7 +13,7 @@
 
   <!-- CSS concatenated and minified via ant build script-->
   <?php print asset_manager_insert('css') ?>
-  <?php print asset_manager_get_group('js->include->jquery') ?>
+  <?php print asset_manager_insert('js'); ?>
   <!-- end CSS-->
 </head>
 
@@ -40,7 +40,6 @@
     </footer>
   </div>
 
-  <?php print asset_manager_insert('js'); ?>
   <?php print seo('analytics'); ?>
 
   <!--[if lt IE 7 ]>

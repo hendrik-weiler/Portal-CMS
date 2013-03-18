@@ -6,13 +6,15 @@
   <div class="row">
   </div>
 
+  <div class="message row hide">
+    <?php print __('advanced.updater.no_update_able'); ?>
+  </div>
+
   <?php if(Input::get('result') != ''): ?>
   <div class="result message <?php print Input::get('result') ?> row">
     <?php print __('advanced.updater.' . Input::get('result')) ?>
   </div>
   <?php endif; ?>
-
-  <div class="message row"></div>
 
   <div class="update head row">
     <div class="release_date span3"><?php print __('advanced.updater.release_date') ?></div>
@@ -95,6 +97,9 @@ $.ajax({
 
         $('.results').append(new_row);
       });
+    },
+    error : function() {
+      $('div.message.hide').show();
     }
 });
 

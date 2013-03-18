@@ -109,7 +109,7 @@ class Controller_Pages_Pages extends Controller
 		$data['navigation_id'] = 0;
                 $data['site_id'] = 0;
 		$data['mode'] = 'add';
-		
+
 		$this->data['content'] = View::factory('admin/columns/sites',$data);
 	}
 
@@ -227,6 +227,16 @@ class Controller_Pages_Pages extends Controller
 			}
 			$real_nav_point->image = empty($image_file) ? $real_nav_point->image : $image_file;
 			$real_nav_point->image_is_shown = Input::post('image_is_shown');
+
+			$real_nav_point->parameter = json_encode(array(
+
+				'text_color' => Input::post('text_color'),
+				'use_default_styles' => Input::post('use_default_styles') != '',
+				'background_color' => Input::post('background_color'),
+				'description' => Input::post('navi_description'), 
+
+			));
+
 			$real_nav_point->save();
 
 			$nav_point->keywords = Input::post('keywords');
@@ -262,6 +272,14 @@ class Controller_Pages_Pages extends Controller
 		$data['parent'] = $navigation->parent;
 		$data['show_sub'] = $navigation->show_sub;
 		$data['show_in_navigation'] = $navigation->show_in_navigation;
+
+		empty($navigation->parameter) and $navigation->parameter = '[]';
+		$parameter = Format::forge($navigation->parameter,'json')->to_array();
+
+		$data['navi_description'] = !isset($parameter['description']) ? '' : $parameter['description'];
+		$data['use_default_styles'] = !isset($parameter['use_default_styles']) ? 1 : $parameter['use_default_styles'];
+		$data['text_color'] = !isset($parameter['text_color']) ? '#FFFFFF' : $parameter['text_color'];
+		$data['background_color'] = !isset($parameter['background_color']) ? '#000000' : $parameter['background_color'];
 
 		$site = model_db_navigation::find('first',array(
 			'where' => array('parent'=>$navigation->id)
@@ -304,6 +322,9 @@ class Controller_Pages_Pages extends Controller
 
 			if(is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash/' . $content->id))
 				File::delete_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash/' . $content->id);
+
+			if(is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/video/' . $content->id))
+				File::delete_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/video/' . $content->id);
 		}
 
 		Response::redirect('admin/sites');

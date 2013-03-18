@@ -92,6 +92,13 @@
 </div>
 
 <div class="clearfix">
+  <?php print Form::label(__('navigation.description')); ?>
+  <div class="input">
+    <?php print Form::textarea('description',$description,array('style'=>'width:100%;height:120px;')); ?>
+  </div>
+</div>
+
+<div class="clearfix">
   <?php print Form::label(__('navigation.show_in_navigation')); ?>
   <div class="input">
   	<?php if(Uri::segment(3) != 'edit') $show_in_navigation = 1; ?>
@@ -99,6 +106,8 @@
     <?php print Form::checkbox('show_in_navigation',1,$check); ?>
   </div>
 </div>
+
+<hr>
 
 <div class="clearfix">
 	<?php print Form::label(__('navigation.image')); ?>
@@ -119,6 +128,30 @@
   </div>
 </div>
 
+<div class="clearfix">
+  <?php print Form::label(__('navigation.use_default_styles')); ?>
+  <div class="input">
+  	<?php $check = empty($use_default_styles) ? array() : array('checked'=>'checked'); ?>
+    <?php print Form::checkbox('use_default_styles',1,$check); ?>
+  </div>
+</div>
+
+<div class="clearfix">
+  <?php print Form::label(__('navigation.text_color')); ?>
+  <div class="input">
+    <?php print Form::input('text_color',$text_color); ?>
+  </div>
+</div>
+
+<div class="clearfix">
+  <?php print Form::label(__('navigation.background_color')); ?>
+  <div class="input">
+    <?php print Form::input('background_color',$background_color); ?>
+  </div>
+</div>
+
+<hr>
+
 <?php if(Uri::segment(3) == 'edit'): ?>
 <div class="clearfix">
     <?php print Form::label(__('navigation.nav_group')); ?>
@@ -133,7 +166,7 @@
 <?php endif; ?>
 
 
-<?php if(Uri::segment(3) == 'edit' && $show_sub_field): ?>
+<?php  Migrate::latest();if(Uri::segment(3) == 'edit' && $show_sub_field): ?>
 <?php print Form::label(__('navigation.show_sub')); ?>
 <div class="clearfix">
   <div class="input">
@@ -225,4 +258,24 @@
 		helper.post_data(_url + 'admin/navigation/delete/' + id, {});
 	}
 	dialog.render(); 
+
+	$('input[name=text_color],input[name=background_color]').spectrum({
+		color : $(this).attr('value'),
+		showButtons: false,
+		showInput: true,
+		move : function(color) {
+			var c = color.toHexString();
+			var color = c;
+
+			if(c.length == 4) {
+				color = '#';
+				for (var i = 0; i < c.length; i++) {
+					color += c[i] + c[i];
+				};
+			}
+
+
+			$(this).attr('value',color);
+		}
+	});
 </script>

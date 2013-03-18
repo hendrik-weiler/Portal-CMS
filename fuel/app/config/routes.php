@@ -68,6 +68,11 @@ return array(
     'admin/content/:id/edit/:content_id/type/13/edit' => 'pages/content/type13/edit',
     'admin/content/:id/edit/:content_id/type/13/preview' => 'pages/content/type13/preview',
 
+    'admin/content/:id/edit/:content_id/type/14' => 'pages/content/type14',
+    'admin/content/:id/edit/:content_id/type/14/edit' => 'pages/content/type14/edit',
+    'admin/content/:id/edit/:content_id/type/14/preview' => 'pages/content/type14/preview',
+    'admin/content/:id/edit/:content_id/type/14/save/skin/:skinname' => 'pages/content/type14/save_skin',
+
 	'admin/content/add/:id' => 'pages/content/add',
 
 	# -- admin/news
@@ -139,6 +144,9 @@ return array(
 	# -- frontend
 
 	'layout/picture/:path' => 'advanced/advanced/layout_image',
+	'player/serve/video/:videoname' => 'pages/content/type14/serve_video',
+	'player/serve/skin/:skinname' => 'pages/content/type14/serve_skin',
+	'player/serve/player' => 'pages/content/type14/serve_player',
 
 	'sitemap.xml' => 'sitemap/index',
 	'parse/file/:path' => 'generator/file/index',

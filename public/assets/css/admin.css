@@ -635,3 +635,19 @@ body {
   background: #0069D6;
   color: white;
 }
+
+/* ------------ content: flvvideoplayer ----------- */
+
+.flvvideoplayer div.preview {
+  border: 1px solid black;
+}
+
+.flvvideoplayer div.preview h2 {
+  padding-left: 8px;
+}
+
+.flvvideoplayer div.preview iframe {
+  width: 100%;
+  height: 300px;
+  border: none;
+}

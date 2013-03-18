@@ -41,6 +41,8 @@ pcms.dialog = function(selector, options)
 	var _cancel = $('<button></button>');
 	var _options = options;
 
+	this.html = null;
+
 	function dialog()
 	{
 		$.pcms_dialog_instances+=1;
@@ -109,6 +111,7 @@ pcms.dialog = function(selector, options)
 			position : 'fixed',
 			display : 'none'
 		});
+
 	}
 
 	this.initiator = null;
@@ -122,6 +125,12 @@ pcms.dialog = function(selector, options)
 	{
 		dialog_helper.cancel_dialog();
 	}
+
+	this.onValidation = function(dialog_helper, event) {
+		return 1;
+	} 
+
+	this.onValidationFail = function(dialog_helper, event) {}
 
 	this.onInitiate = function(dialog_helper, event) {}
 	
@@ -138,8 +147,16 @@ pcms.dialog = function(selector, options)
 
 		dialog();
 
+		self.html = $(box);
+
 		$(box).find('button').eq(0).click(function(e) {
-			self.onConfirm(dialog_helper, self, e, _options);
+			self.isValidated = self.onValidation(dialog_helper, self);
+			if(self.isValidated) {
+				self.onConfirm(dialog_helper, self, e, _options);
+			}
+			else {
+				self.onValidationFail(dialog_helper, self);
+			}
 		});
 
 		$(box).find('button').eq(1).click(function(e) {

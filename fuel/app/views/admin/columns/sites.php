@@ -90,6 +90,40 @@
   </div>
 </div>
 
+<?php print Form::label(__('navigation.parent')); ?>
+<div class="clearfix">
+  <div class="input">
+    <?php 
+    if(empty($parent_array))
+    {
+    	Response::redirect('admin/navigation');
+    	exit;
+    }
+    print Form::select('parent',$parent,$parent_array); 
+    ?>
+  </div>
+</div>
+
+<div class="clearfix">
+    <?php print Form::label(__('navigation.nav_group')); ?>
+    <div class="input">
+    <?php 		
+                        $select_data = model_db_navgroup::asSelectBox();
+
+                        print Form::select('group_id',$group_id,$select_data);
+                ?>
+        </div>
+</div>
+
+<hr />
+
+<div class="clearfix">
+  <?php print Form::label(__('navigation.description')); ?>
+  <div class="input">
+    <?php print Form::textarea('navi_description',$navi_description,array('style'=>'width:100%;height:120px;')); ?>
+  </div>
+</div>
+
 <div class="clearfix">
 	<?php print Form::label(__('navigation.image')); ?>
   <div class="input">
@@ -110,29 +144,27 @@
 </div>
 
 <div class="clearfix">
-    <?php print Form::label(__('navigation.nav_group')); ?>
-    <div class="input">
-    <?php 		
-                        $select_data = model_db_navgroup::asSelectBox();
-
-                        print Form::select('group_id',$group_id,$select_data);
-                ?>
-        </div>
-</div>
-
-<?php print Form::label(__('navigation.parent')); ?>
-<div class="clearfix">
+  <?php print Form::label(__('navigation.use_default_styles')); ?>
   <div class="input">
-    <?php 
-    if(empty($parent_array))
-    {
-    	Response::redirect('admin/navigation');
-    	exit;
-    }
-    print Form::select('parent',$parent,$parent_array); 
-    ?>
+  	<?php $check = empty($use_default_styles) ? array() : array('checked'=>'checked'); ?>
+    <?php print Form::checkbox('use_default_styles',1,$check); ?>
   </div>
 </div>
+
+<div class="clearfix">
+  <?php print Form::label(__('navigation.text_color')); ?>
+  <div class="input">
+    <?php print Form::input('text_color',$text_color); ?>
+  </div>
+</div>
+
+<div class="clearfix">
+  <?php print Form::label(__('navigation.background_color')); ?>
+  <div class="input">
+    <?php print Form::input('background_color',$background_color); ?>
+  </div>
+</div>
+
 <?php print Form::hidden('id',Uri::segment(3)) ?>
 
 	<div class="actions">
@@ -171,6 +203,7 @@
                 11 => __('content.type.11'),
                 //12 => __('content.type.12'),
                 13 => __('content.type.13'),
+                14 => __('content.type.14'),
 	 		),array('style'=>'width:210px;'));
 
 			print Form::submit('addContent',__('content.add_button'),array('class'=>'btn')) . ' ';
@@ -241,7 +274,7 @@
 
 			print '<strong>' . __('content.type.' . $nav->type) . '</strong>: <br />';
 
-			if(in_array($nav->type,array(1,2,3,6,7,10,11,12,13)))
+			if(in_array($nav->type,array(1,2,3,6,7,10,11,12,13,14)))
 			{
 				print empty($nav->label) ? '&nbsp;' : $nav->label;
 			}
@@ -262,7 +295,7 @@
 
 			print '<div>';
 
-			if(in_array($nav->type,array(1,2,3,5,6,7,8,9,10,11,12,13)))
+			if(in_array($nav->type,array(1,2,3,5,6,7,8,9,10,11,12,13,14)))
 				print '<a href="' . Uri::create('admin/content/' . $id . '/edit/' . $nav->id . '/type/' . $nav->type) . '">' . __('constants.edit') . '</a> ';
 				
 			print '<a data-id="' . $nav->id . '" class="delete" href="' . Uri::create('admin/content/delete/' . $nav->id) . '">' . __('constants.delete') . '</a>';
@@ -306,4 +339,24 @@ var _confirm_count_multiple = "<?php print __('content.confirm_count_multiple');
 		helper.post_data(_url + 'admin/content/delete/' + id, {});
 	}
 	dialog.render(); 
+
+	$('input[name=text_color],input[name=background_color]').spectrum({
+		color : $(this).attr('value'),
+		showButtons: false,
+		showInput: true,
+		move : function(color) {
+			var c = color.toHexString();
+			var color = c;
+
+			if(c.length == 4) {
+				color = '#';
+				for (var i = 0; i < c.length; i++) {
+					color += c[i] + c[i];
+				};
+			}
+
+
+			$(this).attr('value',color);
+		}
+	});
 </script>

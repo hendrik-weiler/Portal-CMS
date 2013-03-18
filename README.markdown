@@ -1,6 +1,6 @@
 Portal Content Management System
 ====================
-#### v: 1.032
+#### v: 1.033
 
 Build on [Fuel Framework](https://github.com/fuel/fuel)<br />
 Using:<br />
@@ -12,6 +12,7 @@ Using:<br />
 [pie](https://github.com/lojjic/PIE)<br />
 [jquery.hotkeys](http://github.com/jeresig/jquery.hotkeys)<br />
 [sutra](https://github.com/Tatsh/sutra)<br />
+[spectrum](https://github.com/bgrins/spectrum)<br />
 
 Features:
 ---------------------
@@ -25,6 +26,7 @@ Features:
 * Flash (using jquery.swfobject plugin with picture replacement)
 * Simple contactform
 * Gallery ( slideshow, thumbnail and customizeable)
+* FLV Video Player
 * Content Stacking ( multiple contents in 1 page )
 * Multi-Account
 * Simple Permission System
@@ -110,6 +112,7 @@ print content(); //Prints site contents out
 print show_sub_navigation($content) // prints out the content with sidebar (if in navigationpoint set to active)
 print content_single($id_or_name,$language); // Render a single content
 print content_site($id_or_name,$language); // Render a single site
+print get_sub_navigation() // Displays subnavigation
 print language_switcher(); //Prints a list of language versions out
 
 //prints out all assets from the include area (public/assets/)
@@ -160,6 +163,9 @@ obj site
     $hover = "#cc0005"
   end
 end
+
+; this link will serve a image from the layout folder
+$background = DOCROOT/server/layout/assets/img/bg.png
 
 ; below is the closing tag
 &lt;*/

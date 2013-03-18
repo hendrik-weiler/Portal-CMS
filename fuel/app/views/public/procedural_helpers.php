@@ -50,6 +50,11 @@ function layout_image($filename)
 	return '<img src="' . Uri::create('server/layout/' . $filename) . '" alt="layout_' . $filename . '" />';
 }
 
+function get_sub_navigation()
+{
+  return model_generator_sub_sites::get_html();
+}
+
 function show_sub_navigation($content)
 {
   return model_generator_sub_sites::render($content);

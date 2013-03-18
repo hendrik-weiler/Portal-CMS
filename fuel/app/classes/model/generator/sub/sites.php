@@ -22,7 +22,7 @@
  */
 class model_generator_sub_sites extends model_db_navigation
 {
-	private static function _render_sub_navigation()
+	private static function _render_sub_navigation($ignore_rules = false)
 	{
 		$returnObj = new \stdClass;
 
@@ -54,8 +54,15 @@ class model_generator_sub_sites extends model_db_navigation
 			'order_by' => array('sort'=>'ASC')
 		));
 
-		if(count($navigations) == 0 || $main_nav->show_sub == 0)
+		if(count($navigations) == 0)
+		{
 			return false;
+		}
+
+		if($main_nav->show_sub == 0 && $ignore_rules == false)
+		{
+			return false;
+		}
 
 		$innerSub = '';
 
@@ -94,6 +101,18 @@ class model_generator_sub_sites extends model_db_navigation
 		if(empty($innerSub)) return false;
 
 		return $returnObj;
+	}
+
+	public static function get_html()
+	{
+		$sub_navigation = static::_render_sub_navigation(true);
+
+		$html = '';
+		if(is_object($sub_navigation))
+		{
+		 	$html = $sub_navigation->body;
+		}
+		return $html;
 	}
 
 	public static function render($content)
