@@ -145,6 +145,13 @@ class Controller_Pages_Pages extends Controller
 		}
 	}
 
+	public static function update_site($site_id)
+	{
+		$site = model_db_site::find($site_id);
+		$site->changed = date('Y-m-d H:i:s',time());
+		$site->save();
+	}
+
 	public function action_edit()
 	{		
 		$perm = model_permission::getNavigationRights();
@@ -168,6 +175,7 @@ class Controller_Pages_Pages extends Controller
 			$nav_point->url_title = model_generator_seo::friendly_title($nav_point->label);
 			$nav_point->redirect = Input::post('redirect');
 			$nav_point->site_title = Input::post('site_title');
+			$nav_point->changed = date('Y-m-d H:i:s',time());
 
 			$real_nav_point = model_db_navigation::find($nav_point->navigation_id);
 			if($nav_point->navigation_id != 0)
@@ -245,6 +253,8 @@ class Controller_Pages_Pages extends Controller
 			$nav_point->description = Input::post('description');
 			$nav_point->group_id = Input::post('group_id');
 			$nav_point->save();
+
+			Controller_Login::clear_cache();
                         
             if(Input::post('landing_page') == 1)
                 $this->_set_landing_page($nav_point->id);
@@ -360,6 +370,8 @@ class Controller_Pages_Pages extends Controller
 			$content->classname = $class_id;
 			$content->save();
 		}
+
+		Controller_Login::clear_cache();
 
 		return true;
 	}

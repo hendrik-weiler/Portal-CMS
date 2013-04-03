@@ -4,18 +4,9 @@
   <div id="flash_<?php print $group; ?>"></div>
   <script>
   $(function() {
-   if($.flash.available)
-   {
-     $('#flash_<?php print $group; ?>').flash(
-      {
-        swf: '<?php print $swfPath; ?>',
-        flashvars: <?php print $params; ?>,
-        wmode : '<?php print $wmode; ?>',
-        height : <?php print $height; ?>,
-        width : <?php print $width; ?>
-      }
-    );
+   
+    swfobject.embedSWF("<?php print $swfPath ?>", "flash_<?php print $group; ?>", "<?php print $width ?>", "<?php print $height ?>", "9.0.0","<?php print Uri::create("assets/swf/expressInstall.swf") ?>",<?php print $params; ?>, {wmode : "<?php print $wmode; ?>"});
     $('#<?php print $group; ?>_picture').hide();
-   }
+   
   });
   </script>

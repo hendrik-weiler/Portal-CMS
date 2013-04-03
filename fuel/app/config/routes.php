@@ -3,7 +3,7 @@ return array(
 	'_root_'  => 'public/index',  // The default route
 	'_404_'   => 'welcome/404',    // The main 404 route
 
-	# -- admin/supersearch
+	# -- admin/picturemanager
 
 	'admin/content/picturemanager/own_pictures/delete_image' => 'picturemanager/picturemanager/own_pictures_delete',
 	'admin/picturemanager/own_pictures/add' => 'picturemanager/picturemanager/own_pictures_add',
@@ -130,6 +130,8 @@ return array(
 	'admin/install/3' => 'install/tool/step3',
 
 	# -- admin
+
+	'admin/inlineedit/lang/change/:lang' => 'inlineedit/change_language',
 
 	'elfinder/connector' => 'elfinder/connector',
 	'elfinder/(:any)' => 'elfinder/connector$1',

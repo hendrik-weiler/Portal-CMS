@@ -16,28 +16,36 @@
   <?php print asset_manager_insert('js'); ?>
   <!-- end CSS-->
 </head>
+<?php //var_dump(get_public_variables()); ?>
 
-<body>
-  <div id="container">
-    <header>
-      <section id="top">
-        <figure class="left banner">
-          <a href="<?php print \Uri::create('/' . model_generator_preparer::$lang) ?>"><?php print asset_manager_get('img->admin->logo'); ?></a>
-        </figure>
-        <div class="right language">
-          <?php print language_switcher(); ?>
-        </div>
-        <nav class="right navi clearfix">
-          <?php print navigation($Main_navigation); ?>
-        </nav>
-      </section>
-    </header>
-    <div class="clearfix" id="main" role="main">   
-          <?php print show_sub_navigation(content()); ?>
+<body <?php ($navigation_background_color != 'transparent') and print 'style="border-top: 5px solid ' . $navigation_background_color .'"'; ?>>
+
+  <div class="container">
+    <div class="header row">
+      <div class="logo span4">
+        <a href="<?php print \Uri::create('/' . model_generator_preparer::$lang) ?>"><?php print asset_manager_get('img->admin->logo'); ?></a>
+      </div>
+      <div class="language span8">
+        <?php print language_switcher(); ?>
+      </div>
     </div>
-    <footer>
-      <?php print navigation($Footer); ?>
-    </footer>
+    <div class="navigation row" <?php ($navigation_background_color != 'transparent') and print 'style="background: ' . $navigation_background_color .'"'; ?>>
+      <?php print navigation($Main_navigation); ?>
+    </div>
+    <div class="subnavigation row" <?php ($navigation_background_color != 'transparent') and print 'style="border-bottom:3px solid ' . $navigation_background_color .'"'; ?>>
+      <?php print get_sub_navigation(); ?>
+    </div>
+    <div class="content row">
+      <?php print show_sub_navigation(content()); ?>
+    </div>
+    <div class="footer row" <?php ($navigation_background_color != 'transparent') and print 'style="border-top: 5px solid ' . $navigation_background_color .'"'; ?>>
+      <div class="span8">
+        © <?php print date('Y') ?>, mysite.com
+      </div>
+      <div class="span4">
+         <?php print navigation($Footer); ?>
+      </div>
+    </div>
   </div>
 
   <?php print seo('analytics'); ?>

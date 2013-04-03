@@ -31,111 +31,270 @@ class model_generator_preparer extends model_db_site
 
 	public static $sub;
 
+	public static $mainLang = '';
+
 	public static $currentSite;
+
+	public static $currentMainNav = null;
+
+	public static $currentSubNav = null;
+
+	public static $isMainLanguage = false;
+
+	public static $publicVariables = array();
+
+	public static function addPublicVariables($array)
+	{
+		static::$publicVariables = array_merge(static::$publicVariables, $array);
+	}
 
 	private static function _redirect_to_start()
 	{
-		Response::redirect(static::$lang);
+		if(static::$isMainLanguage)
+		{
+			if(Uri::segment(1) != 'news')
+			Response::redirect('/');
+		}
+		else
+		{
+			if(empty(static::$lang))
+			{
+				Response::redirect('/');
+			}
+			else
+			{
+				if(Uri::segment(2) != 'news')
+				Response::redirect(static::$lang);
+			}
+		}
+		
+	}
+
+	private static function _get_first_site()
+	{
+		$site = null;
+
+		$lprefix = static::$lang;
+		$lprefix == null and $lprefix = static::$mainLang;
+
+        $lid = model_db_language::prefixToId($lprefix);
+
+        $landing_page = model_db_option::getKey('landing_page');
+
+        empty($landing_page->value) and $landing_page->value = '[]';
+        $format = Format::forge($landing_page->value,'json')->to_array();
+
+        if(isset($format[$lid]) && $format[$lid] != 0)
+        {
+            $site = model_db_site::find($format[$lid]);
+        }
+        else
+        {
+        	$nav = model_db_navigation::find('first',array(
+        		'order_by' => array('sort'=>'ASC')
+        	));
+
+        	$sub = model_db_navigation::find('first',array(
+        		'where' => array('parent'=>$nav->id),
+        		'order_by' => array('sort'=>'ASC')
+        	));
+
+        	if(is_object($sub))
+        	{
+        		$id = $sub->id;
+        	}
+
+        	$id = $nav->id;
+
+        	$site = model_db_site::find('first',array(
+        		'where' => array('navigation_id'=>$id)
+        	));
+        }
+    
+        $parents = static::getParentsFromSite($site);
+
+        if(empty($parents['sub']))
+        {
+        	static::$currentMainNav = $parents['main'];
+        }
+        else
+        {
+        	static::$currentMainNav = $parents['main'];
+        	static::$currentSubNav = $parents['sub'];
+        }
+
+        return $site;
+	}
+
+	private static function _get_site_with_main_without_lang()
+	{
+		$site = null;
+
+		$main = model_db_navigation::find('first',array(
+			'where' => array('url_title'=>self::$lang)
+		));
+
+		if(!empty($main))
+		{
+			$site = self::find('first',array(
+				'where' => array('navigation_id'=>$main->id)
+			));
+
+			static::$currentMainNav = $main;
+		}
+
+		return $site;
+	}
+
+	private static function _get_site_with_main_with_lang()
+	{
+		$site = null;
+
+		$main = model_db_navigation::find('first',array(
+			'where' => array('url_title'=>self::$main)
+		));
+
+		if(!empty($main))
+		{
+			$site = self::find('first',array(
+				'where' => array('navigation_id'=>$main->id)
+			));
+
+			static::$currentMainNav = $main;
+		}
+
+		return $site;
+	}
+
+	private static function _get_site_with_mainsub_without_lang()
+	{
+		$site = null;
+
+		$main = model_db_navigation::find('first',array(
+			'where' => array('url_title'=>self::$lang)
+		));
+
+		if(!empty($main))
+		{
+			$sub = model_db_navigation::find('first',array(
+				'where' => array('url_title'=>self::$main)
+			));
+
+			if(!empty($sub))
+			{
+				$site = self::find('first',array(
+					'where' => array('navigation_id'=>$sub->id)
+				));
+
+				static::$currentSubNav = $sub;
+			}
+
+			static::$currentMainNav = $main;
+		}
+
+		return $site;
+	}
+
+	private static function _get_site_with_submain_with_lang()
+	{
+		$site = null;
+
+		if(self::$main != 'news') 
+		{
+            $mains = model_db_navigation::find('all',array(
+                    'where' => array('url_title'=>self::$main)
+            ));
+
+            $correctMain = null;
+
+            foreach ($mains as $main) 
+            {
+                $sub = model_db_navigation::find('first',array(
+                        'where' => array('parent'=>$main->id, 'url_title'=>self::$sub)
+                ));
+                if(!empty($sub)) {
+                	$correctMain = $main;
+                	break;
+                }
+            }
+
+            static::$currentMainNav = $main;
+
+            if(!empty($main) && !empty($sub))
+            {
+
+                if($sub->parent == $main->id)
+                {
+                    $site = self::find('first',array(
+                            'where' => array('navigation_id'=>$sub->id)
+                    ));
+
+                  	static::$currentSubNav = $sub;
+                }
+            }
+		}
+
+		return $site;
 	}
 
 	private static function _getActualSite()
 	{
-		if(empty(self::$main))
-		{
-			$main = model_db_navigation::find('first',array(
-				'order_by' => array('sort'=>'ASC')
-			));
-			
-			if(!empty($main))
-			{
-				$site = self::find('first',array(
-					'where' => array('navigation_id'=>$main->id)
-				));
-			}
 
-			if(empty($site))
-			{
-				$site = self::find('first',array(
-					'order_by' => array('sort'=>'ASC')
-				));
-			}
-		}  
-
-        if(empty(self::$main) && empty(self::$sub))
+        if(empty(self::$lang) && empty(self::$main) && empty(self::$sub))
         {
-            $lprefix = Uri::segment(1);
-            if(empty($lprefix))
-            {
-                $lang = model_db_language::find('first');
-                $lprefix = $lang->prefix;
-            }
 
-            $lid = model_db_language::prefixToId($lprefix);
+            $site = static::_get_first_site();
 
-            $landing_page = model_db_option::getKey('landing_page');
-
-            $format = Format::forge($landing_page->value,'json')->to_array();
-
-            if(isset($format[$lid]) && $format[$lid] != 0)
-            {
-                $site = model_db_site::find($format[$lid]);
-            }
-        
-            $parents = static::getParentsFromSite($site);
-
-            if(empty($parents['sub']))
-            	Response::redirect(static::$lang . '/' . $parents['main']->url_title);
-            else
-            	Response::redirect(static::$lang . '/' . $parents['main']->url_title . '/' . $parents['sub']->url_title);
         }
 
-		if(!empty(self::$main) && empty(self::$sub))
+        if(!empty(self::$lang) && empty(self::$main) && empty(self::$sub))
+        {
+        	if(static::$isMainLanguage)
+        	{
+        		$site = static::_get_site_with_main_without_lang();
+        	}
+        	else
+        	{
+        		$site = static::_get_first_site();
+        	}
+        }
+
+		if(!empty(self::$lang) && !empty(self::$main) && empty(self::$sub))
 		{
-			$main = model_db_navigation::find('first',array(
-				'where' => array('url_title'=>self::$main)
-			));
 
-			if(empty($main)) static::_redirect_to_start();
+        	if(static::$isMainLanguage)
+        	{
+        		$site = static::_get_site_with_mainsub_without_lang();
+        	}
+        	else
+        	{
+        		$site = static::_get_site_with_main_with_lang();
+        	}
 
-			if(!empty($main))
+		}
+
+		if(!empty(self::$lang) && !empty(self::$main) && !empty(self::$sub))
+		{
+			if(static::$isMainLanguage)
 			{
-				$site = self::find('first',array(
-					'where' => array('navigation_id'=>$main->id)
-				));
+
+			}
+			else
+			{
+				$site = static::_get_site_with_submain_with_lang();
 			}
 		}
 
-		if(!empty(self::$main) && !empty(self::$sub))
+		if(!is_object(static::$currentSubNav))
 		{
-			if(self::$main != 'news') 
-			{
-                $mains = model_db_navigation::find('all',array(
-                        'where' => array('url_title'=>self::$main)
-                ));
+			static::$currentSubNav = new stdClass;
+			static::$currentSubNav->url_title = '';
+		}
 
-                if(empty($mains)) static::_redirect_to_start();
-
-                foreach ($mains as $main) 
-                {
-	                $sub = model_db_navigation::find('first',array(
-	                        'where' => array('parent'=>$main->id, 'url_title'=>self::$sub)
-	                ));
-	                if(!empty($sub)) break;
-                }
-
-                if(empty($sub)) static::_redirect_to_start();
-
-                if(!empty($main) && !empty($sub))
-                {
-
-                    if($sub->parent == $main->id)
-                    {
-                        $site = self::find('first',array(
-                                'where' => array('navigation_id'=>$sub->id)
-                        ));
-                    }
-                }
-			}
+		if(!is_object(static::$currentMainNav))
+		{
+			static::$currentMainNav = new stdClass;
+			static::$currentMainNav->url_title = '';
 		}
 
 		if(isset($site))
@@ -145,7 +304,7 @@ class model_generator_preparer extends model_db_site
 		}
 		else
 		{
-                        self::$currentSite = null;
+            static::_redirect_to_start();
 			return false;
 		}
 	}
@@ -155,6 +314,19 @@ class model_generator_preparer extends model_db_site
 		self::$lang = Uri::segment(1);
 		self::$main = Uri::segment(2);
 		self::$sub = Uri::segment(3);
+
+		$langs = model_db_language::find('all');
+		static::$isMainLanguage = true;
+		foreach ($langs as $lang) {
+			if($lang->prefix == self::$lang)
+			{
+				static::$isMainLanguage = false;
+			}
+			if($lang->sort == 0)
+			{
+				static::$mainLang = $lang->prefix;
+			}
+		}
 
 		# Parser\Htaccess::check();
 
@@ -168,13 +340,17 @@ class model_generator_preparer extends model_db_site
 				'order_by' => array('sort'=>'ASC')
 			));
 		}	
+
+		if(static::$isMainLanguage)
+		{
+			$langSearch->prefix = static::$mainLang;
+		}
 		
 		self::setLangPrefix($langSearch->prefix);
 		model_db_navigation::setLangPrefix($langSearch->prefix);
 		model_db_content::setLangPrefix($langSearch->prefix);
 		model_db_news::setLangPrefix($langSearch->prefix);
 		model_db_navgroup::setLangPrefix($langSearch->prefix);
-		self::$lang = $langSearch->prefix;
 
 		self::$options = Controller_Advanced_Advanced::getOptions();
 
@@ -183,6 +359,30 @@ class model_generator_preparer extends model_db_site
 		Lang::load('frontend');
 
 		self::_getActualSite();
+
+		// Adding public variables
+		$data = array();
+		$parameter = array();
+		$data['current_language'] = (static::$isMainLanguage) ? static::$mainLang : static::$lang;
+
+		if(is_object(model_generator_preparer::$currentSite))
+		{
+			$data['content_count'] = count(model_db_content::find('all',array(
+				'where' => array('site_id'=>model_generator_preparer::$currentSite->id)
+			)));
+
+			
+			if(property_exists(static::$currentSubNav, 'parameter'))
+			{
+				$parameter = Format::forge(static::$currentSubNav->parameter,'json')->to_array();
+			}
+			else
+			{
+				$parameter = Format::forge(static::$currentMainNav->parameter,'json')->to_array();
+			}
+		}
+
+		static::addPublicVariables($data + $parameter);
 	}
 
 	public static function getParentsFromSite($site)

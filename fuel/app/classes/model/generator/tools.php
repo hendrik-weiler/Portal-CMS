@@ -42,11 +42,31 @@ class model_generator_tools extends model_db_site
 		{
 			$data = array();
 			$data['label'] = stripslashes($lang->label);
-			$data['link'] = Uri::create($lang->prefix);
-			if(model_generator_preparer::$lang == $lang->prefix)
-				$data['active'] = 'class="active_language"';
+
+			if(model_generator_preparer::$mainLang == $lang->prefix)
+			{
+				$data['link'] = Uri::create('/');
+			}
 			else
-				$data['active'] = '';
+			{
+				$data['link'] = Uri::create($lang->prefix);
+			}
+
+			if(model_generator_preparer::$isMainLanguage)
+			{
+				if(model_generator_preparer::$mainLang == $lang->prefix)
+					$data['active'] = 'class="active_language"';
+				else
+					$data['active'] = '';
+			}
+			else
+			{
+				if(model_generator_preparer::$lang == $lang->prefix)
+					$data['active'] = 'class="active_language"';
+				else
+					$data['active'] = '';
+			}
+
 
 	        if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/languages_inner.php'))
 	            $inner .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/languages_inner.php',$data);

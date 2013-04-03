@@ -68,6 +68,20 @@
 			</div>
 		<div class="span7">
 			<h3>
+				<?php print __('advanced.header.general') ?>
+			</h3>
+			  <div class="clearfix">
+			   <?php print Form::label(__('advanced.header.site_caching')); ?>
+			   <div class="input">
+			   	  <?php 
+			   	  $checked = array();
+			   	  $value = 1;
+			   	  if($site_caching == 1) $checked = array('checked'=>'checked');
+			   	  ?>
+			      <?php print Form::checkbox('site_caching',1, $checked); ?>
+			    </div>
+			  </div>
+			<h3>
 				<?php print __('advanced.header.help') ?>
 			</h3>
 			  <div class="clearfix">

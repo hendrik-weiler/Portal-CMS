@@ -161,6 +161,8 @@ class Controller_Pages_Content_Type14 extends Controller
 			Response::redirect('admin/sites/edit/' . Uri::segment(3));
 		}
 
+		Controller_Pages_Pages::update_site($this->content->site_id);
+		
 		$old_data = Format::forge($this->content->parameter, 'json')->to_array();
 
 		$data = array(

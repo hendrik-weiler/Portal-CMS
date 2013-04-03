@@ -26,8 +26,8 @@ $(function() {
 			var content_id = $(this).attr('data-content-id');
 			var site_id = $(this).attr('data-site-id');
 			var type_id = $(this).attr('data-type-id');
-			var url = 'admin/content/' + site_id + '/edit/' + content_id + '/type/' + type_id;
-			window.open(url, '_blank');
+			var redirect_url = '?redirect=' + base_url + 'admin/content/' + site_id + '/edit/' + content_id + '/type/' + type_id;
+			window.open(base_url + 'admin/inlineedit/lang/change/' + current_language + redirect_url, '_blank');
 			window.focus();
 		});
 		$(this).append(button);

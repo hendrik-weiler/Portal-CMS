@@ -24,8 +24,16 @@
     			!isset( ${str_replace('$','',$variable)} ) and ${str_replace('$','',$variable)} = '';
     			print Form::textarea(str_replace('$', '', $variable),
                     str_replace(array('\"',"\'"),array('"',"'"),${str_replace('$','',$variable)})
-                    , array('style'=>'width:100%'));
+                    , array('style'=>'width:100%','class'=>'mceEditor'));
     		}
+
+        if(preg_match('#(\$tpl_rawtext_[\w]+)#i', $variable))
+        {
+          !isset( ${str_replace('$','',$variable)} ) and ${str_replace('$','',$variable)} = '';
+          print Form::textarea(str_replace('$', '', $variable),
+                    str_replace(array('\"',"\'"),array('"',"'"),${str_replace('$','',$variable)})
+                    , array('style'=>'width:100%'));
+        }
     	}
     }
 
@@ -54,6 +62,7 @@
 <script type="text/javascript">
 tinyMCE.init({
   theme : "advanced",
+  editor_selector : "mceEditor",
   mode : "textareas",
   theme_advanced_toolbar_location : "top",
   theme_advanced_buttons1 : "formatselect,fontsizeselect,bold,italic,underline,strikethrough,forecolor,separator,justifyleft,justifycenter,justifyright,justifyfull",

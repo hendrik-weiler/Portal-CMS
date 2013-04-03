@@ -1,5 +1,5 @@
 <div style="margin-bottom:10px;">
-<a href="<?php print Uri::create(model_generator_preparer::$lang . '/') ?>">News</a> » <a href="<?php print Uri::current(); ?>"><?php print $title; ?></a>
+<a href="javascript:history.go(-1)">News</a> » <a href="<?php print Uri::current(); ?>"><?php print $title; ?></a>
 </div>
 
 <article class="news">

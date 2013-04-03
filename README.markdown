@@ -1,14 +1,18 @@
 Portal Content Management System
 ====================
-#### v: 1.033
+#### v: 1.035
 
+Stable versions:
+---------------------
+[Download a copy of 1.35](http://portalcms.hendrikweiler.com/pcms-1.35.zip)<br />
+<br />
 Build on [Fuel Framework](https://github.com/fuel/fuel)<br />
 Using:<br />
 [Nivo-Slider](https://github.com/gilbitron/Nivo-Slider)<br />
 [tinymce](https://github.com/tinymce)<br />
 [colorbox](https://github.com/jackmoore/colorbox)<br />
 [html5boilerplate](https://github.com/h5bp/html5-boilerplate)<br />
-[jquery.swfobject](http://jquery.thewikies.com/swfobject/)<br />
+[swfobject](https://code.google.com/p/swfobject/)<br />
 [pie](https://github.com/lojjic/PIE)<br />
 [jquery.hotkeys](http://github.com/jeresig/jquery.hotkeys)<br />
 [sutra](https://github.com/Tatsh/sutra)<br />
@@ -50,6 +54,7 @@ fsockopen ( else manually updating )<br />
 
 Backend Tested in:
 ---------------------
+- Safari
 - Chrome
 - Opera
 - Firefox
@@ -124,6 +129,8 @@ print layout_image('image.jpg') // display a picture from a layout (img folder f
 
 print asset_manager_get('js->include->modernizr'); // searches in include path after %modernizr% and prints it out
 print asset_manager_get('img->admin->logo'); // searches in the img path after the portal logo and prints it out
+
+var_dump(get_public_variables()); // Receive all to public open variables like (current navigation text-color and background, current content count, current language prefix, etc..)
 </pre>
 
 Layouts:
@@ -202,11 +209,20 @@ name = Picturebox
 picture = $sitename[jpg]
 </pre>
 
+How to use the template-content-type:
+---------------------
+After you have created a template.php file located in "root/layouts/yourlayout/custom_templates/custom" you can write down your markup.<br>
+Inside this file you can easily print out some predefined variables:<br>
+- @$tpl_text_mytext1 (adds a textfield with wysiwig editor in the backend)
+- @$tpl_rawtext_myrawtext1 (adds a textfield without wysiwig editor in the backend)
+- @$tpl_file_myfile (adds a field for uploading a file in the backend)
+The last part of these variablenames are variable themself. So you can change it for whatever description.
+
 Troubleshooting:
 ---------------------
 
 ##### Why do i get a redirection error if i want to take a look at my site?
-You must create a navigation with a site + content in it first. Then the first navigation will be displayed as default.
+You must create a navigationpoint with a content in it first. Then the first navigation will be displayed as default.
 
 ##### Why do i get an error when im updating?
 You have to set the complete folder in mode 777.<br />

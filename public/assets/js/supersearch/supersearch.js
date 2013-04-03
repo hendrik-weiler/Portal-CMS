@@ -85,9 +85,13 @@ pcms.supersearch = function()
 	function _get_results(type)
 	{
 		$.get(_base_url + 'admin/supersearch/' + type, options_for_ajax,function(data) {
+			current_index = -1;
 			_create_selector(data);
 			_update_selection();
-			_set_link_events($(data).find('a[href*=open-supersearch]'));
+			_set_link_events($(document).find('div.supersearch-container a[href*="open-supersearch"]'));
+			$(document).on('mouseover','div.supersearch-container a',function() {
+				current_index = $(document).find('div.supersearch-container a').index(this);
+			});
 		});
 	}
 
@@ -95,12 +99,12 @@ pcms.supersearch = function()
 	{
 		_set_variables($(element).attr('href'));
 		_get_results(type);
-		$('body').scrollTop(0);
+		$("html,body").animate({ scrollTop: 0 }, "slow");
 	}
 
 	function _set_link_events(selector)
 	{
-		selector.live('click',function(e) {
+		selector.on('click',function(e) {
 			e.preventDefault();
 			_link_action($(this));
 		});
@@ -108,7 +112,7 @@ pcms.supersearch = function()
 
 	function _input_action(e)
 	{
-		if(e.keyCode == 13)
+		if(e.keyCode == 13 || e.keyCode == 27)
 			return false;
 
 		$(selector_html).fadeIn();
@@ -170,7 +174,8 @@ pcms.supersearch = function()
 			$('#form_supersearch_input').val('').focus();
 		});
 
-		$('body ,body *').not(not_in).bind('keyup','down', function() {
+		$('body ,body *').not(not_in).bind('keyup','down', function(e) {
+
 			if(is_shown)
 			{
 				current_index++;
@@ -214,15 +219,32 @@ pcms.supersearch = function()
 				}
 			}
 		});
+/*
+		$('body ,body *').bind('keyup','esc', function() {
+			if(is_shown) {
+				$(selector_html).fadeOut();
+				is_shown = false;
+			}
+		});
+*/
 	}
 
 	function supersearch()
 	{
 		$(function() {
 			_current_lang_version = _supersearch_lang_version;
-			_set_link_events($('a[href*=open-supersearch]'));
+			_set_link_events($('a[href*="open-supersearch"]'));
 
 			$('#form_supersearch_input').bind('keyup',_input_action);
+			
+			$(document).on('click',':not(.supersearch-container)',function(e) {
+				e.stopPropagation();
+				if(is_shown) {
+					$(selector_html).fadeOut();
+					is_shown = false;
+				}
+			});
+
 		});
 	}
 

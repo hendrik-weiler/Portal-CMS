@@ -54,46 +54,53 @@ var row = $('<div class="update row">' +
   '</div>');
 
 $.ajax({
-    url: _base_url + '/updates.xml',
-    type: 'GET',
-    dataType: 'xml',
-    success: function(data) { 
+    url: _base_url + '/updates.js',
+    dataType: 'jsonp',
+    complete: function(data) { 
+
+      console.log(updates);
 
       $('.results').html('');
 
-      if($(data).find('message').text().trim() != '')
+      if(updates.updater_content.message.default != "")
       {
         var lang = _current_lang;
-        if($(data).find('message').find(_current_lang).length == 0)
+        if(!updates.updater_content.message[_current_lang])
           lang = 'default';
 
-        $('.message').html($(data).find('message').find(lang).text());
+        $('.message').html(updates.updater_content.message[lang]);
       }  
       else
         $('.message').remove();
 
-      $.each($(data).find('update'), function(key, obj) {
+      $.each(updates.updater_content.updates.update, function(key, obj) {
 
         var new_row = $(row).clone();
 
-        if($(obj).find('release_date').text() == '')
-          $(obj).find('release_date').text('&nbsp;');
+        if(obj.release_date == '')
+          obj.release_date = '&nbsp;';
 
-        $(new_row).find('.release_date').html($(obj).find('release_date').text());
+        $(new_row).find('.release_date').html(obj.release_date);
 
-        $(new_row).find('.version').html($(obj).find('version').text());
+        $(new_row).find('.version').html(obj.version);
 
-        if($(obj).find('description').find(_current_lang).length == 0)
+        if(!obj.description[_current_lang])
           _current_lang = 'default';
 
-        $(new_row).find('.description').html($(obj).find('description').find(_current_lang).text());
+        $(new_row).find('.description').html(obj.description[_current_lang]);
 
-        if($(obj).find('released').text() == '0')
+        if(obj.released == '0')
           $(new_row).find('.update-action a').attr('href','#').addClass('disabled').html(_lang_not_ready_yet);
-        else if(_current_version >= parseFloat($(obj).find('version').text()))
+        else if(_current_version >= parseFloat(obj.version))
           $(new_row).find('.update-action a').remove();
         else 
-          $(new_row).find('.update-action a').attr('href',_base_url + '/' + $(obj).find('filename').text()).html(_lang_update + $(obj).find('version').text());
+          $(new_row).find('.update-action a').attr('href',_base_url + '/' + obj.filename).html(_lang_update + obj.version);
+
+        $(new_row).find('.update-action a').click(function(e) {
+          if($(this).attr('href') == '#') {
+            e.preventDefault();
+          }
+        });
 
         $('.results').append(new_row);
       });

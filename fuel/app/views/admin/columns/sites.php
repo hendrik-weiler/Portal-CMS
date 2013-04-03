@@ -44,8 +44,9 @@
             $lprefix = Session::get('lang_prefix');
             
             $lid = model_db_language::prefixToId($lprefix);
-            
+
             $landing_page = model_db_option::getKey('landing_page');
+            $landing_page->value == '' and $landing_page->value = '[]';
             
             $format = Format::forge($landing_page->value,'json')->to_array();
              $checked = isset($format[$lid]) && $format[$lid] == Uri::segment(4) ? array('checked'=>'checked') : array(); ?>
@@ -328,6 +329,9 @@ var _confirm_count_multiple = "<?php print __('content.confirm_count_multiple');
 </div>
 <script type="text/javascript" src="<?php print Uri::create('assets/js/split_box.js') ?>"></script>
 <script type="text/javascript">
+	var _site_id = "<?php print Uri::segment(4) ?>";
+
+
 	var dialog = new pcms.dialog('.delete', {
 		title : _prompt.header,
 		text : _prompt.text,

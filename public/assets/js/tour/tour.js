@@ -162,9 +162,9 @@ pcms.tour = function()
 			}
 			if(condition == 'clicked' || condition == 'rightclicked')
 			{
-				$(target).live('mousedown',function(e) {
+				$(target).on('mousedown',function(e) {
 					e.preventDefault();
-					switch (event.which) 
+					switch (e.which) 
 					{
 						case 1:
 						if(condition == 'clicked')

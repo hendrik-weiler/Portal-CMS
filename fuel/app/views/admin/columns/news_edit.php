@@ -58,11 +58,12 @@
 
 	print '</div>';
 ?>
-<div class="span16" style="margin-bottom:20px;">
+<div class="row" style="margin-bottom:20px;">
   <div class="picturemanager-button"><?php print Lang::get('picturemanager_button') ?></div>
 </div>
+<div class="row">
 <?php print Form::textarea('editor',$text,array('style'=>'width:100%;height:400px;')); ?>
-
+</div>
 <div>
 	<h3><?php print __('news.attachment.header'); ?></h3>
 	<div class="clearfix">

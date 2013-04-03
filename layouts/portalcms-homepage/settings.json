@@ -1,0 +1,16 @@
+{
+  "name":"Portal CMS Homepage",
+  "description":{
+    "default":"The Homepage of PortalCMS.",
+    "de":"Die Homepage von PortalCMS."
+  },
+  "preview":"icon.jpg",
+  "assets":[
+    "assets/css/layout.css",
+    "assets/js/navigation.js"
+  ],
+  "components":{
+    "Main_navigation":"Main",
+    "Footer":"Footer"
+  }
+}

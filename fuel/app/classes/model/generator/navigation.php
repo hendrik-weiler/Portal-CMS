@@ -87,8 +87,19 @@ class model_generator_navigation extends model_db_navigation
 				'background_color' => $parameter['background_color'],
 			);
 
-			if(Uri::segment(2) == $nav->url_title || Uri::segment(3) == $nav->url_title
-				|| isset($startsite['sub']->url_title) && $startsite['sub']->url_title == $nav->url_title || $startsite['main']->url_title == $nav->url_title)
+			if(!is_object(model_generator_preparer::$currentSubNav))
+			{
+				model_generator_preparer::$currentSubNav = new stdClass;
+				model_generator_preparer::$currentSubNav->url_title = '';
+			}
+
+			if(!is_object(model_generator_preparer::$currentMainNav))
+			{
+				model_generator_preparer::$currentMainNav = new stdClass;
+				model_generator_preparer::$currentMainNav->url_title = '';
+			}
+
+			if(model_generator_preparer::$currentSubNav->url_title == $nav->url_title || model_generator_preparer::$currentMainNav->url_title == $nav->url_title)
 				$result[$nav->id]['active'] = true;
 			else
 				$result[$nav->id]['active'] = false;
@@ -132,13 +143,35 @@ class model_generator_navigation extends model_db_navigation
 			$data['use_default_styles'] = $nav['use_default_styles'];
 			$data['text_color'] = $nav['text_color'];
 			$data['background_color'] = $nav['background_color'];
-			$data['link'] = Uri::create(model_generator_preparer::$lang . '/' . $nav['url_title']);
+			$data['content_count'] = count(model_db_content::find('all',array(
+				'where' => array('site_id'=>$search->id)
+			)));
+
+			if(model_generator_preparer::$isMainLanguage)
+			{
+				$data['link'] = Uri::create($nav['url_title']);
+			}
+			else
+			{
+				$data['link'] = Uri::create(model_generator_preparer::$lang . '/' . $nav['url_title']);
+			}
+			
 			if(isset($nav['sub']))
 			{
-				if(isset($nav['sub'][0]))
-					$data['link'] = Uri::create(model_generator_preparer::$lang . '/' . $nav['url_title'] . '/' . $nav['sub'][0]['url_title']);
+				if(model_generator_preparer::$isMainLanguage)
+				{
+					if(isset($nav['sub'][0]))
+						$data['link'] = Uri::create($nav['url_title'] . '/' . $nav['sub'][0]['url_title']);
+					else
+						$data['link'] = Uri::create($nav['url_title']);
+				}
 				else
-					$data['link'] = Uri::create(model_generator_preparer::$lang . '/' . $nav['url_title']);
+				{
+					if(isset($nav['sub'][0]))
+						$data['link'] = Uri::create(model_generator_preparer::$lang . '/' . $nav['url_title'] . '/' . $nav['sub'][0]['url_title']);
+					else
+						$data['link'] = Uri::create(model_generator_preparer::$lang . '/' . $nav['url_title']);
+				}
 			}
 			
 			if(!empty($search->redirect)) 
@@ -176,7 +209,16 @@ class model_generator_navigation extends model_db_navigation
 					$subData['active_class'] = '';
 					$subData['target'] = '_self';
 					$subData['label'] = $sub['label'];
-					$subData['link'] = Uri::create(model_generator_preparer::$lang . '/' . $nav['url_title'] . '/' . $sub['url_title']);
+
+					if(model_generator_preparer::$isMainLanguage)
+					{
+						$subData['link'] = Uri::create($nav['url_title'] . '/' . $sub['url_title']);
+					}
+					else
+					{
+						$subData['link'] = Uri::create(model_generator_preparer::$lang . '/' . $nav['url_title'] . '/' . $sub['url_title']);
+					}
+
 					$subData['target'] = '_self';
 					$subData['image'] = Uri::create('uploads/' . Uri::segment(1) . '/navigation_images/' . $sub['id'] . '/thumbs/' . $sub['image']);
 					$subData['image_exists'] = is_file(DOCROOT . 'uploads/' . Uri::segment(1) . '/navigation_images/' . $sub['id'] . '/preview/' . $sub['image']);
@@ -185,6 +227,9 @@ class model_generator_navigation extends model_db_navigation
 					$subData['use_default_styles'] = $sub['use_default_styles'];
 					$subData['text_color'] = $sub['text_color'];
 					$subData['background_color'] = $sub['background_color'];
+					$subData['content_count'] = count(model_db_content::find('all',array(
+						'where' => array('site_id'=>$search->id)
+					)));
 						
 					if($sub['active'] == true)
 						$subData['active_class'] = 'active_' . $group_id;

@@ -81,6 +81,8 @@ class Controller_Pages_Content extends Controller
 			$content->type = Input::post('type');
 			$content->save();
 
+			Controller_Pages_Pages::update_site($this->id);
+
 			Response::redirect('admin/sites/edit/' . $this->id);
 		}
 	}    
@@ -94,6 +96,9 @@ class Controller_Pages_Content extends Controller
 			$content->label = Input::post('label');
 			$content->text = stripslashes(Input::post('editor'));
 			$content->save();
+
+			Controller_Pages_Pages::update_site($this->id);
+			Controller_Login::clear_cache();
 		}
 
 		if(isset($_POST['back']))
@@ -118,6 +123,8 @@ class Controller_Pages_Content extends Controller
 			$content->text = stripslashes(Input::post('editor'));
 			$content->text2 = stripslashes(Input::post('editor2'));
 			$content->save();
+
+			Controller_Pages_Pages::update_site($this->id);
 		}
 
 		if(isset($_POST['back']))
@@ -144,6 +151,8 @@ class Controller_Pages_Content extends Controller
 			$content->text2 = stripslashes(Input::post('editor2'));
 			$content->text3 = stripslashes(Input::post('editor3'));
 			$content->save();
+
+			Controller_Pages_Pages::update_site($this->id);
 		}
 
 		if(isset($_POST['back']))
@@ -175,6 +184,8 @@ class Controller_Pages_Content extends Controller
 			$content->form = Format::factory( $data)->to_json();
 
 			$content->save();
+
+			Controller_Pages_Pages::update_site($this->id);
 		}
 
 		if(isset($_POST['back']))
@@ -216,6 +227,8 @@ class Controller_Pages_Content extends Controller
 				$nr = '/' . Input::post('nr');
 
 			$content->pictures = Input::post('mode') . $nr;
+
+			Controller_Pages_Pages::update_site($this->id);
 
 			$config = array(
 			    'path' => DOCROOT.'uploads/' . Session::get('lang_prefix') . '/gallery/' . $content->id . '/original',
@@ -301,6 +314,8 @@ class Controller_Pages_Content extends Controller
 			$content->refer_content_id = $y;
 			$content->save();
 
+			Controller_Pages_Pages::update_site($this->id);
+
 			Response::redirect(Uri::current());
 		}
 		$data = array();
@@ -321,6 +336,8 @@ class Controller_Pages_Content extends Controller
 		}
 		if(isset($_POST['submit']))
 		{
+			Controller_Pages_Pages::update_site($this->id);
+
 			$x = array(
 				'col_1'=>Input::post('col_1'),
 				'col_2'=>Input::post('col_2'),
@@ -351,6 +368,8 @@ class Controller_Pages_Content extends Controller
 		}
 		if(isset($_POST['submit']))
 		{
+			Controller_Pages_Pages::update_site($this->id);
+
 			$x = array(
 				'col_1'=>Input::post('col_1'),
 				'col_2'=>Input::post('col_2'),
@@ -383,6 +402,7 @@ class Controller_Pages_Content extends Controller
 		}
 		if(isset($_POST['submit']))
 		{
+			Controller_Pages_Pages::update_site($this->id);
 
 			if(!is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash'))
 			{
@@ -467,6 +487,8 @@ class Controller_Pages_Content extends Controller
 
 		if(isset($_POST['submit']))
 		{
+			Controller_Pages_Pages::update_site($this->id);
+
 			$placeholder_name = Input::post('placeholder_name');
 			$placeholder_text = Input::post('placeholder_text');
 			$parameter = array();
@@ -529,6 +551,8 @@ class Controller_Pages_Content extends Controller
 
 		if(isset($_POST['submit']))
 		{
+			Controller_Pages_Pages::update_site($this->id);
+
 			$params['active'] = Input::post('active_plugin');
 			!isset($params['options']) and $params['options'] = array();
 			$content->parameter = json_encode($params);
@@ -567,6 +591,8 @@ class Controller_Pages_Content extends Controller
 		if(is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/video/' . $this->id))
 			File::delete_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/video/' . $this->id);
 
+		Controller_Pages_Pages::update_site($this->id);
+
 		Response::redirect('admin/sites/edit/' . $delete->site_id);
 	}
 
@@ -583,6 +609,8 @@ class Controller_Pages_Content extends Controller
 			File::delete($path . '/big/' . $file);
 			File::delete($path . '/thumbs/' . $file);
 		}
+
+
 
 		$pictures = json_decode($content->parameter,true);
 		$content->parameter = array_filter($pictures, function($value) use ($file) {
@@ -602,6 +630,8 @@ class Controller_Pages_Content extends Controller
 
 		$content->parameter = json_encode($order);
 		$content->save();
+
+		Controller_Pages_Pages::update_site(Input::post('site_id'));
 	}
 
 	public function action_order()
@@ -614,6 +644,7 @@ class Controller_Pages_Content extends Controller
 			$row->sort = $position;
 			$row->save();
 		}
+		Controller_Pages_Pages::update_site(Input::post('site_id'));
 	}
 
 	public function after($response)

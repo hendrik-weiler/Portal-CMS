@@ -59,3 +59,8 @@ function show_sub_navigation($content)
 {
   return model_generator_sub_sites::render($content);
 }
+
+function get_public_variables()
+{
+  return model_generator_preparer::$publicVariables;
+}

@@ -133,6 +133,8 @@
 	}
 	dialog.render(); 
 
+	var _site_id = "<?php print Uri::segment(3) ?>";
+
 	$('.picture_list').sortable({
 		tolerance : 'pointer',
 		update: function(event, ui) {
@@ -141,7 +143,7 @@
 			data[key] = $(this).attr('data-src');
 		});
 
-		$.post(_url + 'admin/content/gallery/' + $(this).attr('data-id') + '/order/update',{'order' : data});
+		$.post(_url + 'admin/content/gallery/' + $(this).attr('data-id') + '/order/update',{'order' : data, 'site_id' : _site_id});
 		}
 	});
 </script>

@@ -144,6 +144,8 @@ class Controller_Navigation_Navigation extends Controller
 	{
 		if(isset($_POST['submit']))
 		{	
+			Controller_Login::clear_cache();
+			
 			$label = Input::post('label');
 			$nav_point = new model_db_navigation();
 			$nav_point->label = (empty($label)) ? __('constants.untitled_element') : $label;
@@ -286,6 +288,8 @@ class Controller_Navigation_Navigation extends Controller
             	'where' => array('navigation_id' => $nav_point->id)
             ));
             $site_point->label = Input::post('label');
+            Controller_Pages_Pages::update_site($site_point->id);
+            Controller_Login::clear_cache();
             
    			if(is_object($site_point))
             {
@@ -424,6 +428,8 @@ class Controller_Navigation_Navigation extends Controller
 		model_db_navigation::setLangPrefix($lprefix);
 		model_db_navgroup::setLangPrefix($lprefix);
 
+		Controller_Login::clear_cache();
+
 		
 		$nav_point = model_db_navigation::find($this->id);
 
@@ -462,7 +468,7 @@ class Controller_Navigation_Navigation extends Controller
 
 		foreach($contents as $content)
 		{
-			#$content->delete();
+			$content->delete();
 			if(is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $content->id))
 				File::delete_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $content->id);
 
@@ -492,6 +498,8 @@ class Controller_Navigation_Navigation extends Controller
 			if($row->parent == 0)
 				$last_main_entry = $id;
 		}
+
+        Controller_Login::clear_cache();
 	}
 
 	public function action_group_delete()
@@ -532,6 +540,8 @@ class Controller_Navigation_Navigation extends Controller
 				$site->save();
 			}
 		}
+
+		Controller_Login::clear_cache();
 
 		$this->response->body = 'true';
 	}

@@ -102,6 +102,9 @@
 
     </header>
     <div id="main" role="main">
+      <noscript>
+        <div class="well"><?php print __('nojavascript'); ?></div>
+      </noscript>
       <nav class="clearfix">
         <ul class="tabs">
           <li <?php print (Uri::segment(2) == 'dashboard') ? 'class="active"' : '' ?>><a href="<?php print Uri::create('admin/dashboard'); ?>"><?php print __('nav.dashboard') ?></a></li>

@@ -2,7 +2,7 @@
 
 	<h2><?php print $title ?></h2>
 
-	<div class="video"></div>
+	<div id="player_<?php print $content_id ?>_video"></div>
 	<script type="text/javascript">
 	var flashvars = {};
 	flashvars.image = "<?php print $previewpath ?>";	
@@ -32,15 +32,7 @@
 	var attributes = {};
 	attributes.align = "middle";
 
-	$('.player_<?php print $content_id ?> div.video').flash({
-		swf: "<?php print $videoplayerpath ?>",
-		height: <?php print $height ?>,
-		width: <?php print $width ?>,
-		allowfullscreen : "true",
-		allowscriptaccess : "always",
-		flashvars : flashvars,
-		attributes : attributes
-	});
+	swfobject.embedSWF("<?php print $videoplayerpath ?>", "player_<?php print $content_id ?>_video", "<?php print $width ?>", "<?php print $height ?>", "9.0.0","<?php print Uri::create("assets/swf/expressInstall.swf") ?>", flashvars, params, attributes);
 	
 
 	</script>

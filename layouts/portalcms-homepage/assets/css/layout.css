@@ -1,0 +1,256 @@
+/*>
+  $float = left
+  $pie = "behavior:url(PIEPATH)"
+<*/
+
+body {
+  font-family: 'Arial';
+  font-size: 14px;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.banner {
+  width: 70%;
+}
+
+.language {
+  width: 19%;
+}
+
+.navi {
+  width: 100%;
+}
+
+.clearfix {
+  clear: both;
+}
+
+#container {
+  width:960px;
+  margin:auto;
+  margin-top:50px;
+  background: #f0f0f0;
+  border-radius: 10px;
+  padding: 15px;
+  $pie
+}
+
+#main {
+  overflow: hidden;
+}
+
+.navi {
+  border-bottom: 1px solid #fefefe;
+ border-top: 1px solid #fefefe;
+  background: #d8d8d8;
+  overflow: hidden;
+  height: auto;
+}
+
+.navi ul {
+  list-style:none;
+}
+
+.navi a {
+  float:left;
+  padding:5px 10px;
+  background: #d8d8d8;
+  text-decoration:none;
+  color:black;
+}
+
+.navi a:hover,
+.active_1 {
+  background: #f0f0f0 !important;
+}
+
+.navi ul li ul {
+  border-bottom: 1px solid #fefefe;
+ border-top: 1px solid #fefefe;
+  background: black;
+  padding: 0;
+  margin:0;
+}
+.navi ul li ul a {
+  clear: left;
+  width: 100%;
+}
+
+
+.side {
+  float:$float;
+  width:180px;
+  border-right:1px solid #3193c7;
+}
+
+.side ul {
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+
+.side a {
+  display:block;
+  padding:8px 8px;
+  background: #cef0ff;
+  border:1px solid #38a8db;
+  text-decoration:none;
+  color:white;
+}
+
+.side a:hover {
+  background: #cef0ff;
+  border:1px solid #2a578b;
+}
+
+.text {
+  float:$float;
+  width:730px;
+  padding-left:10px;
+}
+
+footer {
+  border-top:1px solid #fefefe;
+  background: #d8d8d8;
+  padding: 5px 0;
+  text-align:right;
+  font-size: 12px;
+  border-radius: 0 0 10px 10px;
+  $pie
+}
+
+footer ul {
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+
+footer li {
+  display:inline;
+  padding: 5px 10px;
+}
+
+footer ul ul {
+  display: none;
+}
+
+footer a {
+  text-decoration:none;
+  color: black;
+}
+
+footer a:hover,
+.active_2 {
+  text-decoration:underline;
+}
+
+.language_selection {
+  background: #d8d8d8;
+  border-radius: 15px;
+  padding: 5px;
+  list-style: none;
+  overflow: hidden;
+  text-align: center;
+  $pie
+}
+
+.language_selection a {
+  float: left;
+  padding: 5px;
+  color: black;
+  text-decoration: none;
+}
+
+.language_selection a:hover,
+.active_language {
+  text-decoration: underline !important;
+}
+
+.contactform input {
+  width: 450px;
+  display: block;
+  padding:5px;
+  background: white;
+  color: black;
+  border: 1px solid #ccc;
+}
+
+.contactform .error {
+  border: 1px solid #CD3700;
+  background: #8B2500;
+  color: white;
+}
+
+.contactform .success {
+  border: 1px solid #00CD66;
+  padding: 5px;
+  width: 450px;
+  background: #00EE76;
+}
+
+.contactform textarea {
+  width: 450px;
+  height: 200px;
+  background: white;
+  display: block;
+  padding:5px;
+}
+
+.content {
+  padding: 20px 0;
+  width: 100%;
+}
+
+.sub_navigation_left {
+  width: 25%;
+  float: left;
+ padding: 20px 0;
+}
+
+.sub_navigation_right {
+  width: 25%;
+  float: right;
+ padding: 20px 0;
+}
+
+.sub_navigation_left ul,
+.sub_navigation_right ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.sub_navigation_left ul li a,
+.sub_navigation_right ul li a {
+  display: block;
+  background: #f0f0f0;
+  border-bottom: 1px solid #fefefe;
+  width: 80%;
+  color: black;
+  text-decoration: none;
+  padding: 5px;
+}
+
+.sub_navigation_left ul li a:hover,
+.sub_navigation_left ul li a.active_1,
+.sub_navigation_left ul li a.active_2,
+.sub_navigation_right ul li a:hover,
+.sub_navigation_right ul li a.active_1,
+.sub_navigation_right ul li a.active_2 {
+  display: block;
+  background: #D8D8D8 !important;
+  color: black;
+  width: 80%;
+}
+
+.sub_navigation_content {
+  width: 75%;
+  float: left;
+}

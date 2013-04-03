@@ -42,6 +42,7 @@ return array(
 	),
 
 	'picturemanager_button' => 'Open picturemanager',
+	'nojavascript' => 'At this point you need javascript activated to use all features. <a target="_blank" href="http://www.activatejavascript.org/">Learn how to activate javascript!</a>',
 
 	'news' => array(
 		'dateformat' => 'Y-m-d H:i',
@@ -315,7 +316,9 @@ return array(
 			'news' => 'News options',
 			'accounts' => 'Accounts & Permissions',
 			'help' => 'Help options',
-			'inline_edit' => 'Website direct edit mode'
+			'inline_edit' => 'Website direct edit mode',
+			'general' => 'General',
+			'site_caching' => 'Website caching',
 		),
 		'layout' => array(
 			'wait' => 'Please wait....',

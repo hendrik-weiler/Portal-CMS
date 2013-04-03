@@ -38,6 +38,22 @@ class model_generator_layout
     self::$assets = $settings['assets'];
 
     $data = $settings['components'];
+
+    if(is_object(model_generator_preparer::$currentSite))
+    {
+      $current_navigation = model_db_navigation::find(model_generator_preparer::$currentSite->navigation_id);
+    }
+    else
+    {
+      $current_navigation = new model_db_navigation();
+      $current_navigation->parameter = '';
+    }
+    empty($current_navigation->parameter) and $current_navigation->parameter = '[]';
+    $parameter = Format::forge($current_navigation->parameter,'json')->to_array();
+    $use_default_styles = true;
+    (isset($parameter['use_default_styles']) && !$parameter['use_default_styles']) and $use_default_styles = false;
+    $data['navigation_background_color'] = (empty($parameter['background_color']) || $use_default_styles) ? 'transparent' : $parameter['background_color'];
+    $data['navigation_text_color'] = (empty($parameter['text_color']) || $use_default_styles) ? 'transparent' : $parameter['text_color'];
     
     if(!empty(model_generator_preparer::$currentSite->template) && model_generator_preparer::$currentSite->template != 'default')
     {

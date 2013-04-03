@@ -29,20 +29,32 @@ class model_generator_content extends model_db_site
 
 	private static $_width_counter = 0;
 
+	private static $_styleCounter = 0;
+
 	private static function _viewSite($site,$directly=false)
 	{
+
 		if(!$directly)
 		{
-			if($site == null && Uri::segment(2) != 'news')
+			$segment2 = 2;
+			$segment3 = 3;
+			if(model_generator_preparer::$isMainLanguage)
+			{
+				$segment2 = 1;
+				$segment3 = 2;
+			}
+
+			if($site == null && Uri::segment($segment2) != 'news')
 				return false;
 				
-			if(Uri::segment(2) == 'news' && !self::$_renderSpecial)
+
+			if(Uri::segment($segment2) == 'news' && !self::$_renderSpecial)
 			{
-				if(Uri::segment(3) == '')
+				if(Uri::segment($segment3) == '')
 				{
 					Response::redirect(model_generator_preparer::$lang);
 				}
-				if(Uri::segment(3) == 'archive')
+				if(Uri::segment($segment3) == 'archive')
 				{
 						$options = model_generator_preparer::$options;
 
@@ -56,13 +68,13 @@ class model_generator_content extends model_db_site
 						$data['entries'] = self::_showMultipleNews($news);
 
                         if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/news_archive.php'))
-                                return View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/news_archive.php',$data);
+                            return View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/news_archive.php',$data);
 						else
                             return View::factory('public/template/news_archive',$data);
 				}
-				$news = model_db_news::find(Uri::segment(3));
+				$news = model_db_news::find(Uri::segment($segment3));
 
-                if(empty($news))
+              	if(empty($news))
 					Response::redirect(model_generator_preparer::$lang);
 					
 				return self::_showSingleNews($news,true);
@@ -92,6 +104,22 @@ class model_generator_content extends model_db_site
 
 			$style = model_db_content::genStyleFromClassname($content->classname);
 
+			$styleClasses = array(
+				' first',
+				' second',
+				' third',
+				' fourth'
+			);
+
+			if(static::$_styleCounter == 2 && $style->type == 50
+				|| static::$_styleCounter == 3 && $style->type == 33
+				|| static::$_styleCounter == 4 && $style->type == 25
+				|| static::$_width_counter == 0
+				|| $style->type == 100)
+			{
+				static::$_styleCounter = 0;
+			}
+
 			$data_inline_edit_content_id = '';
 			$data_inline_edit_site_id = '';
 			$data_inline_edit_type_id = '';
@@ -105,7 +133,7 @@ class model_generator_content extends model_db_site
 				}
 			}
 				
-			$return .= '<div class="width_' . $style->type . '" ' . $style->style . $data_inline_edit_content_id . $data_inline_edit_site_id . $data_inline_edit_type_id . '>';
+			$return .= '<div class="width_' . $style->type . $styleClasses[static::$_styleCounter] . '" ' . $style->style . $data_inline_edit_content_id . $data_inline_edit_site_id . $data_inline_edit_type_id . '>';
 			switch($content->type)
 			{
 				case 7:
@@ -133,13 +161,12 @@ class model_generator_content extends model_db_site
 
 					$col_1 = model_db_content::find($cols['col_1']);
 					$data = array();
-					if($col_1 != 0)
+					if(is_object($col_1))
 					{
-						$data['text'] = '';
+						$data['text'] = self::_viewContent($col_1);
 						$data['group'] = 'group_' . model_generator_preparer::$lang . '_' . $content->id;
 						if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/content_reference_1column.php'))
 	                    {
-							$data['text'] = self::_viewContent($col_1);
 	                    	$return .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/content_reference_1column.php',$data);
 	                    }    
 	                    else
@@ -175,9 +202,9 @@ class model_generator_content extends model_db_site
 					$data['text'] = '';
 					$data['text2'] = '';
 					$data['text3'] = '';
-					$data['text'] != 0 and $data['text'] = self::_viewContent($col_1);
-					$data['text2'] != 0 and $data['text2'] = self::_viewContent($col_2);
-					$data['text3'] != 0 and $data['text3'] = self::_viewContent($col_3);
+					$cols['col_1'] != 0 and $data['text'] = self::_viewContent($col_1);
+					$cols['col_2'] != 0 and $data['text2'] = self::_viewContent($col_2);
+					$cols['col_3'] != 0 and $data['text3'] = self::_viewContent($col_3);
 					$data['group'] = 'group_' . model_generator_preparer::$lang . '_' . $content->id;
                                         
                                         if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/content_reference_3column.php'))
@@ -321,6 +348,7 @@ class model_generator_content extends model_db_site
 				$data['filepath'] = Uri::create('uploads/' . model_generator_preparer::$lang . '/video/' . $content->id . '/' . $data['video_file']);
 			}
 
+			!isset($data['filepath']) and $data['filepath'] = '';
 			$data['filepath'] .= '?' . time();
 
 			$data['previewpath'] = '';
@@ -351,6 +379,7 @@ class model_generator_content extends model_db_site
 
 			$return .= '</div>';
 
+			static::$_styleCounter++;
 			static::$_width_counter += $style->value;
 			if(static::$_width_counter >= 96)
 			{
@@ -398,6 +427,8 @@ class model_generator_content extends model_db_site
 		$dimensions = explode(';',$content->dimensions);
 		$data['height'] = (!isset($dimensions[1])) ? 640 : $dimensions[0];
 		$data['width'] = (!isset($dimensions[1])) ? 480 : $dimensions[1];
+
+		model_generator_preparer::$isMainLanguage and model_generator_preparer::$lang = model_generator_preparer::$mainLang;
 
 		$path = 'uploads/' . model_generator_preparer::$lang . '/flash/' . $content->id . '/';
 		$data['picture'] = Uri::create($path . $content->pictures);
@@ -522,10 +553,10 @@ class model_generator_content extends model_db_site
 			if($full_view)
 			{
 				$html = '';
-                                if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/news_full.php'))
-                                    $html .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/news_full.php',$data);
-                                else
-                                    $html .= View::factory('public/template/news_full',$data);
+                if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/news_full.php'))
+                    $html .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/news_full.php',$data);
+                else
+                    $html .= View::factory('public/template/news_full',$data);
 				
 				if(!empty($new->attachment) || $new->attachment != 0)
 					$html .= self::_viewSite(model_db_site::find($new->attachment),true);
@@ -585,6 +616,9 @@ class model_generator_content extends model_db_site
 
 		self::$_tempLang = !empty(self::$_tempLang) ? self::$_tempLang : model_generator_preparer::$lang;
 
+		$data['slideshow_height'] = 0;
+		$data['slideshow_width'] = 0;
+
 		if(is_dir(DOCROOT . 'uploads/' . self::$_tempLang . '/gallery/' . $content->id)
 			&& is_dir(DOCROOT . 'uploads/' . self::$_tempLang . '/gallery/' . $content->id . '/thumbs')
 			&& is_dir(DOCROOT . 'uploads/' . self::$_tempLang . '/gallery/' . $content->id . '/original'))
@@ -597,6 +631,8 @@ class model_generator_content extends model_db_site
                         $data['slideshow_height'] = $info[1];
                         $data['slideshow_width'] = $info[0];
                     }
+
+                    $images = Format::forge($content->parameter,'json')->to_array();
 
                     foreach($images as $pic)
                     {
@@ -623,6 +659,8 @@ class model_generator_content extends model_db_site
                         $path = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/gallery_lightbox.php';
                     else
                         $path = 'public/template/gallery_lightbox';
+
+
                 }
 		else if($content->pictures == 'slideshow')
 		{
@@ -652,16 +690,24 @@ class model_generator_content extends model_db_site
 		
 		$current_site = model_generator_preparer::$currentSite;
 
-                if($current_site == null && Uri::segment(2) != 'news')
-                {
-                    return View::forge('public/errors/error_no_site');
-                }
+		$segment2 = 2;
+		$segment3 = 3;
+		if(model_generator_preparer::$isMainLanguage)
+		{
+			$segment2 = 1;
+			$segment3 = 2;
+		}
+
+        if($current_site == null && Uri::segment($segment2) != 'news')
+        {
+            return View::forge('public/errors/error_no_site');
+        }
                 
 		$site = self::_viewSite($current_site);
 
-                model_db_content::setLangPrefix(model_generator_preparer::$lang);
-                if(is_object($current_site) && count(model_db_content::find('first',array('where'=>array('site_id'=>$current_site->id)))) == 0 && Uri::segment(2) != 'news')
-                    return View::forge('public/errors/error_no_content');
+        model_db_content::setLangPrefix(model_generator_preparer::$lang);
+        if(is_object($current_site) && count(model_db_content::find('first',array('where'=>array('site_id'=>$current_site->id)))) == 0 && Uri::segment(2) != 'news')
+            return View::forge('public/errors/error_no_content');
                
 		if(!$site && $site != '')
             Response::redirect(model_generator_preparer::$lang);
@@ -690,9 +736,20 @@ class model_generator_content extends model_db_site
 		}
 
 		if($lang == 'auto')
-			self::$_tempLang = model_generator_preparer::$lang;
+		{
+			if(model_generator_preparer::$isMainLanguage)
+			{
+				self::$_tempLang = model_generator_preparer::$mainLang;
+			}
+			else
+			{
+				self::$_tempLang = model_generator_preparer::$lang;
+			}
+		}	
 		else 
+		{
 			self::$_tempLang = $lang;
+		}	
 
 		self::$_renderSpecial = true;
 			
@@ -733,10 +790,22 @@ class model_generator_content extends model_db_site
 			);
 		}
 
+
 		if($lang == 'auto')
-			self::$_tempLang = model_generator_preparer::$lang;
-		else
+		{
+			if(model_generator_preparer::$isMainLanguage)
+			{
+				self::$_tempLang = model_generator_preparer::$mainLang;
+			}
+			else
+			{
+				self::$_tempLang = model_generator_preparer::$lang;
+			}
+		}	
+		else 
+		{
 			self::$_tempLang = $lang;
+		}	
 
 		self::$_renderSpecial = true;
 

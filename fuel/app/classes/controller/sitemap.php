@@ -23,17 +23,10 @@
 class Controller_Sitemap extends Controller
 {
 
-    private static function _asd()
-    {
-
-
-            
-
-    }
 
   public function action_index()
   {
-    #$this->response->set_header('Content-Type', 'text/xml; charset=utf-8');
+    $this->response->set_header('Content-Type', 'text/xml; charset=utf-8');
 
     $sitemap = new SimpleXMLElement("<urlset></urlset>");
     $sitemap->addAttribute('xmlns', 'http://www.google.com/schemas/sitemap/0.90');

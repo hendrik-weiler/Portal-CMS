@@ -38,8 +38,6 @@
 
 ?>
 
-
-
 <script type="template" id="addnav_tpl">
 	<li>
 		<?php print Form::input('group_title','',array('class'=>'medium')); ?>
@@ -65,6 +63,8 @@
 	<?php print __('navigation.' . $mode . '_header'); ?>
 </h3>
 
+<!-- <img id="rightclick_navigation" src="<?php print Uri::create('assets/img/admin/rightclick.png') ?>" alt="Rightclickable"> -->
+
 <ul id="groups" class="tabs">
 	<?php
 		$navi_groups = model_db_navgroup::find('all');
@@ -84,7 +84,6 @@
 ?>
 
 <div class="clearfix">
-	<img id="rightclick_navigation" src="<?php print Uri::create('assets/img/admin/rightclick.png') ?>" alt="Rightclickable">
   <?php print Form::label(__('navigation.label')); ?>
   <div class="input">
     <?php print Form::input('label',$label); ?>
@@ -166,7 +165,7 @@
 <?php endif; ?>
 
 
-<?php  Migrate::latest();if(Uri::segment(3) == 'edit' && $show_sub_field): ?>
+<?php if(Uri::segment(3) == 'edit' && $show_sub_field): ?>
 <?php print Form::label(__('navigation.show_sub')); ?>
 <div class="clearfix">
   <div class="input">

@@ -85,6 +85,8 @@ class Controller_Pages_Content_Type13 extends Controller
 			Response::redirect('admin/sites/edit/' . Uri::segment(3));
 		}
 
+		Controller_Pages_Pages::update_site($this->content->site_id);
+
 		if(!is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/template'))
 			File::create_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') , 'template');
 
@@ -117,7 +119,8 @@ class Controller_Pages_Content_Type13 extends Controller
 
 		foreach ($_POST as $key => $value) 
 		{
-    		if(preg_match('#(tpl_text_[\w]+)#i', $key))
+    		if(preg_match('#(tpl_text_[\w]+)#i', $key)
+    			|| preg_match('#(tpl_rawtext_[\w]+)#i', $key))
     		{
     			$variables[$key] = Input::post($key);
     		}

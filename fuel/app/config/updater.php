@@ -2,6 +2,6 @@
 
 return array(
 
-	'url' => 'updates.portalcms.hendrikweiler.com',
+	'url' => 'updates-portalcms.hendrikweiler.com',
 
 );

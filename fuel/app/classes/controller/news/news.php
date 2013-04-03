@@ -62,6 +62,8 @@ class Controller_News_News extends Controller
 			$new->attachment = '';
 			$new->save();
 
+			Controller_Login::clear_cache();
+
 			Response::redirect('admin/news');
 		}
 	}
@@ -76,6 +78,8 @@ class Controller_News_News extends Controller
 			$news->title = Input::post('title');
 			$news->text = stripslashes(Input::post('editor'));
 			$news->attachment = Input::post('attachment');
+
+			Controller_Login::clear_cache();
 
 
 		if(!is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/news/' . $news->id))
@@ -151,10 +155,13 @@ class Controller_News_News extends Controller
 	public function action_delete()
 	{
 		$news = model_db_news::find($this->id);
-		$news->delete();
 
 		if(is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/news/' . $news->id))
 			File::delete_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/news/' . $news->id);
+
+		$news->delete();
+
+		Controller_Login::clear_cache();
 
 		Response::redirect('admin/news');
 	}

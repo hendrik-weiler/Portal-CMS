@@ -42,6 +42,7 @@ return array(
 	),
 
 	'picturemanager_button' => 'Öffne Bildmanager',
+	'nojavascript' => 'Ab hier wird javascript benötigt um alles korrekt nutzen zu können. <a target="_blank" href="http://www.activatejavascript.org/">So aktiviere ich mein Javascript!</a>',
 
 	'news' => array(
 		'dateformat' => 'd.m.Y H:i',
@@ -315,7 +316,9 @@ return array(
 			'news' => 'Nachrichtenoptionen',
 			'accounts' => 'Benutzerkonten & Rechte',
 			'help' => 'Hilfsoptionen',
-			'inline_edit' => 'Webseiten direkt bearbeitungsmodus'
+			'inline_edit' => 'Webseiten direkt bearbeitungsmodus',
+			'general' => 'Allgemein',
+			'site_caching' => 'Website caching',
 		),
 		'layout' => array(
 			'wait' => 'Bitte warten...',

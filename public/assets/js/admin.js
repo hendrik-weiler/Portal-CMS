@@ -58,7 +58,7 @@ if(/admin\/navigation/.test(window.location.href))
 		}
 	});
 
-	$('#addnav').live('click',function(e) {
+	$('#addnav').on('click',function(e) {
 		e.preventDefault();
 		var nav_group = $('#addnav_tpl').html();
 		$(this).parent().html(nav_group);
@@ -68,7 +68,7 @@ if(/admin\/navigation/.test(window.location.href))
 
 	$.curnav = 0;
 
-	$('#groups li').live('mousedown',function(e) {
+	$('#groups li').on('mousedown',function(e) {
 		if(e.which == 3 && $(this).find('a').attr('id') != 'addnav' && $(this).find('input').length == 0)
 		{
 			e.preventDefault();
@@ -99,7 +99,7 @@ if(/admin\/navigation/.test(window.location.href))
 		});
 	});
 
-	$('#rename_group').live('click',function(e) {
+	$('#rename_group').on('click',function(e) {
 		e.preventDefault();
 
 		var li = $('#groups li').eq($.curnav);
@@ -129,7 +129,7 @@ if(/admin\/navigation/.test(window.location.href))
 
 	/* ----------------------------------------------- */
 
-	$('#submit_group').live('click',function(e) {
+	$('#submit_group').on('click',function(e) {
 		e.preventDefault();
 		var title = $('input[name=group_title]').val();
                 if(title != '')
@@ -148,7 +148,7 @@ if(/admin\/navigation/.test(window.location.href))
                 }
 	});
 
-	$('#submit_cancel').live('click',function(e) {
+	$('#submit_cancel').on('click',function(e) {
 		e.preventDefault();
 		$(this).parent().parent().html('<a id="addnav" href="#">+</a>');
 	});
@@ -174,7 +174,7 @@ if(/admin\/sites(\/edit\/[0-9]+)?/.test(window.location.href))
 				data[key] = $(this).attr('id');
 			});
 
-			$.post(_url + 'admin/content/order/update',{'order' : data});
+			$.post(_url + 'admin/content/order/update',{'order' : data, 'site_id' : _site_id});
 		}
 	});
 }

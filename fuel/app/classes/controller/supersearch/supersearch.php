@@ -52,7 +52,15 @@ class Controller_Supersearch_Supersearch extends Controller
 		Lang::load('tasks');
 		Lang::load('frontend');
 
-		$this->searchterms = explode(' ', str_replace('*','',Input::get('searchterm')));
+		$searchterm = str_replace('*','',Input::get('searchterm'));
+		// Replace regex special characters
+		$searchterm = str_replace(array(
+			'(',')','+','[',']','{','}','^','$'
+		), array(
+			'\(','\)','\+','\[','\]','\{','\}','\^','\$'
+		), $searchterm);
+
+		$this->searchterms = explode(' ', $searchterm);
 
 		$this->type = Input::get('type');
 		$this->hash_value = Input::get('hash') == '' ? '' : '#' . Input::get('hash');

@@ -32,9 +32,9 @@ return array(
 		'type'			=> 'mysql',
 		'connection'	=> array(
 			'hostname'   => 'localhost',
-			'database'   => 'portalcms1',
-			'username'   => 'root',
-			'password'   => '',
+			'database'   => '',
+			'username'   => 'Username',
+			'password'   => 'Password',
 			'persistent' => false,
 		),
 		'table_prefix' => '',

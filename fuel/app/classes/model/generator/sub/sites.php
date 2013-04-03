@@ -31,9 +31,18 @@ class model_generator_sub_sites extends model_db_navigation
 		else
 			$outerSub = View::factory('public/template/subsites_outer');
 
-		$main_navs = static::find('all',array(
-			'where' => array('url_title' => model_generator_preparer::$main,'parent'=>0)
-		));
+		if(model_generator_preparer::$isMainLanguage)
+		{
+			$main_navs = static::find('all',array(
+				'where' => array('url_title' => model_generator_preparer::$lang,'parent'=>0)
+			));
+		}
+		else
+		{
+			$main_navs = static::find('all',array(
+				'where' => array('url_title' => model_generator_preparer::$main,'parent'=>0)
+			));
+		}
 
 		if(empty($main_navs))
 			return false;

@@ -41,7 +41,9 @@ class Controller_Advanced_Advanced extends Controller
 		# navigation images
 		'navigation_image_width','navigation_image_height',
 		# help options
-		'inline_edit'
+		'inline_edit',
+		# general
+		'site_caching',
 	);
 
 	private static $defaultValue = array(
@@ -74,7 +76,9 @@ class Controller_Advanced_Advanced extends Controller
 		'navigation_image_width' => 60,
 		'navigation_image_height' => 60,
 		# help options
-		'inline_edit' => 0
+		'inline_edit' => 0,
+		# general
+		'site_caching' => 0,
 	);
 
 	private static $minValue = array(
@@ -199,11 +203,16 @@ class Controller_Advanced_Advanced extends Controller
 				{
 					if(preg_match('#^[0-9]+$#i',$value) && $value < self::$minValue[$option])
 						$value = self::$minValue[$option];
+
+					if(preg_match('#(site_caching)#i',$option))
+					{
+						Controller_Login::clear_cache();
+					}
 						
 					$test->value = $value;
 					$test->save();
 				}
-				else if(preg_match('#(module_|asset_|inline_edit)#i',$option) && empty($value))
+				else if(preg_match('#(module_|asset_|inline_edit|site_caching)#i',$option) && empty($value))
 				{
 					$test->value = 0;
 					$test->save();
@@ -297,6 +306,8 @@ class Controller_Advanced_Advanced extends Controller
 		$layout = model_db_option::getKey('layout');
 		$layout->value = $name;
 		$layout->save();
+
+		Controller_Login::clear_cache();
 	}
 
 	public function action_layout_edit()
