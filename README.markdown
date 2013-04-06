@@ -1,6 +1,6 @@
 Portal Content Management System
 ====================
-#### v: 1.035
+#### v: 1.036 dev
 
 Stable versions:
 ---------------------
@@ -145,6 +145,11 @@ Writing CSS:
 Portal CMS comes with a light sass,less,stylus-like scripting system.<br />
 *Notice:* The script will be parsed line for line so you cant comment after a variable definition. Everything in the code below is valid. There can be multiple scripts at any place like in php.
 
+*New (as of 1.36):* You have now the possibility to add a script attribute to everything (example shown below). Inside that script closure you can freely write javascript (in combination with jquery and all other added javascript files from the layout!).<br />
+Keywords:<br />
+self = The selector you are inside (.footer, body, p)<br />
+*Notice:* Up until now you have to refresh the site twice to get the written javascript affecting the site
+
 #### Syntax:
 <pre>
 /*&gt;
@@ -185,8 +190,19 @@ body {
   background-color: site.$bg;
 }
 
+/* script without selector */
+script : {
+  /* its like im in a normal javascript file */
+}
+
 nav:hover {
   color: site.navigation.$hover;
+  script : {
+    /* a comment, single line comments wont work */
+    self.animate({
+      background : 'black'
+    },1000);
+  }
 }
 
 p:after {

@@ -37,6 +37,23 @@ class model_generator_layout
     self::$name = $layout->value;
     self::$assets = $settings['assets'];
 
+    // Add js files generated from css
+    foreach (self::$assets as $file) 
+    {
+      if(preg_match('#.css#i', $file))
+      {
+        $file = pathinfo(LAYOUTPATH . '/' . $layout->value . '/' . $file);
+
+        $jsParsedFile = 'assets/js/' . $file['filename'] . '_css_parsed.js';
+
+        if(file_exists(LAYOUTPATH . '/' . $layout->value . '/' . $jsParsedFile))
+        {
+          self::$assets[] = $jsParsedFile;
+        }
+        
+      }
+    }
+
     $data = $settings['components'];
 
     if(is_object(model_generator_preparer::$currentSite))

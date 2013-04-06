@@ -6,6 +6,13 @@
   $defaultColor = #00c7ff
 <*/
 
+/* global script without selector */
+script : {
+
+  
+
+}
+
 body {
   font-family: 'Arial';
   font-size: 12px;
@@ -15,6 +22,7 @@ body {
 body,
 .footer {
   border-top: 5px solid $defaultColor;
+
 }
 
 .subnavigation {
@@ -63,6 +71,11 @@ body,
   background: #efefef;
   text-decoration: none;
   cursor: pointer;
+  script : {
+    $(this).animate({
+      backgroundColor : '#ccc7ff'
+    });
+  };
 }
 
 .active_1 a,

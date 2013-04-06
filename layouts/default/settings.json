@@ -7,8 +7,7 @@
   "preview":"icon.jpg",
   "assets":[
     "assets/css/bootstrap.min.css",
-    "assets/css/layout.css",
-    "assets/js/navigation.js"
+    "assets/css/layout.css"
   ],
   "components":{
     "Main_navigation":"Main",
