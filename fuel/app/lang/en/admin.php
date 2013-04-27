@@ -66,7 +66,7 @@ return array(
 	),
 
 	'nav' => array(
-		'dashboard' => 'Actionarea',
+		'dashboard' => 'Helpdesk',
 		'navigation' => 'Navigation',
 		'news' => 'News',
 		'language' => 'Languages',

@@ -1,9 +1,10 @@
 Portal Content Management System
 ====================
-#### v: 1.036 dev
+#### v: 1.036
 
 Stable versions:
 ---------------------
+[Download a copy of 1.36](http://portalcms.hendrikweiler.com/pcms-1.36.zip)<br />
 [Download a copy of 1.35](http://portalcms.hendrikweiler.com/pcms-1.35.zip)<br />
 <br />
 Build on [Fuel Framework](https://github.com/fuel/fuel)<br />
@@ -250,6 +251,17 @@ Inside this file you can easily print out some predefined variables:<br>
 - @$tpl_rawtext_myrawtext1 (adds a textfield without wysiwig editor in the backend)
 - @$tpl_file_myfile (adds a field for uploading a file in the backend)
 The last part of these variablenames are variable themself. So you can change it for whatever description.
+
+Example:<br>
+<pre>
+&lt;ul&gt;
+  &lt;li&gt;&lt;?php print @$tpl_rawtext_myrawtext1 ?&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;?php print @$tpl_rawtext_myrawtext2 ?&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;?php print @$tpl_rawtext_myrawtext3 ?&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;?php print @$tpl_rawtext_myrawtext4 ?&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;?php print @$tpl_rawtext_myrawtext5 ?&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
 
 Troubleshooting:
 ---------------------

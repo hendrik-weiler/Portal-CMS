@@ -23,7 +23,7 @@ class version_1013 extends \Update\Migration
 
         \DBUtil::add_fields($lang . '_navigation', array(
             'image' => array('type' => 'text','null' => true),
-            'image_is_shown' => array('type' => 'int', 'constraint' => 1,'default' => 1),
+            'image_is_shown' => array('type' => 'int', 'constraint' => 1,'default' => 1,'null' => true),
         ));
 	}
 

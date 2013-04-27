@@ -54,7 +54,21 @@ class Controller_Pages_Content_Type13 extends Controller
 	{
 		$data = array();
 
-		$template_folder = \File::read_dir(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/custom',1);
+		$template_path = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value;
+
+		$content_template_path =  $template_path . '/content_templates';
+
+		$custom_path = $content_template_path . '/custom';
+
+		if(!is_dir($content_template_path)) {
+			File::create_dir($template_path, 'content_templates', 0777);
+		}
+
+		if(!is_dir($custom_path)) {
+			File::create_dir($content_template_path, 'custom', 0777);
+		}
+
+		$template_folder = \File::read_dir($custom_path,1);
 		$data['templates'] = array();
 		foreach ($template_folder as $r)
 		  $data['templates'][$r] = $r;

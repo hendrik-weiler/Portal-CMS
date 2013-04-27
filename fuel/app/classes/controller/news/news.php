@@ -64,7 +64,7 @@ class Controller_News_News extends Controller
 
 			Controller_Login::clear_cache();
 
-			Response::redirect('admin/news');
+			Response::redirect('admin/news/edit/' . model_db_news::find('last')->id);
 		}
 	}
 

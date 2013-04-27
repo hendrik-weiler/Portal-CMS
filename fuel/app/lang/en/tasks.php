@@ -2,7 +2,7 @@
 
 return array(
 
-	'header' => 'What would you like to do?',
+	'header' => 'Type in what you want to know!',
 	'take_tour' => 'Learn how',
 	'short_cut' => 'To the place',
 	'filter' => 'Filter:',

@@ -2,7 +2,7 @@
 
 return array(
 
-	'header' => 'Was wollen Sie tun?',
+	'header' => 'Was möchtest du erfahren?',
 	'take_tour' => 'Erfahre wie',
 	'short_cut' => 'Zum Einsatzort',
 	'filter' => 'Filter:',
