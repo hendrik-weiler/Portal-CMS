@@ -50,6 +50,7 @@ Requirements:
 ---------------------
 PHP 5.3<br />
 fsockopen ( else manually updating )<br />
+mod_rewrite
 
 
 Backend Tested in:
@@ -64,12 +65,28 @@ Install
 ---------------------
 > 1. Download the files
 > 2. Extract them into your root folder on your webserver
-> 3. Install throught he install tool (http://localhost/projectname/public/admin/install)
+> 3. Install throught he install tool (http://domain/admin/install)
 
 if you get message like "install tool disabled" go to "yoursitefolder/fuel/app/" and delete the file : "INSTALL_TOOL_DISABLED"
 
-Follow all three steps and login into (http://localhost/projectname/public/admin).<br />
+Follow all three steps and login into (http://domain/admin).<br />
 *Notice*: you might have to create the bare database yourself.
+
+You need to setup a virtual server, if you are working locally:<br>
+Windows: [http://www.uwamp.com](Uwamp)<br>
+OSX: [http://www.mamp.info/de/mamp-pro/](Mamp Pro)<br>
+
+If you set the destinated path, make sure your path includes the public folder at the end
+(/projectname/public).
+
+Snippet for inside of the httpd-vhosts.conf:<br>
+<pre>
+<VirtualHost *:80>
+  ServerName portalcms.hendrikweiler.com
+  SetEnv FUEL_ENV production
+  DocumentRoot "/sites/portalcms.hendrikweiler.com/public"
+</VirtualHost>
+</pre>
 
 Actionarea:
 ---------------------
