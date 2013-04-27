@@ -81,11 +81,11 @@ If you set the destinated path, make sure your path includes the public folder a
 
 Snippet for inside of the httpd-vhosts.conf:<br>
 <pre>
-\<VirtualHost *:80\>
+&lt;VirtualHost *:80&gt;
   ServerName portalcms.hendrikweiler.com
   SetEnv FUEL_ENV production
   DocumentRoot "/sites/portalcms.hendrikweiler.com/public"
-\<\/VirtualHost\>
+&lt;/VirtualHost&gt;
 </pre>
 
 Actionarea:
