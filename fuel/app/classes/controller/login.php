@@ -65,8 +65,8 @@ class Controller_Login extends Controller
 	public function action_login()
 	{
 		$val = Validation::factory('my_validation');
-		$val->add_field('username', Input::post('username'), 'required|min_length[3]|max_length[15]');
-		$val->add_field('password', Input::post('password'), 'required|min_length[3]|max_length[10]');
+		$val->add_field('username', Input::post('username'), 'required|min_length[3]|max_length[100]');
+		$val->add_field('password', Input::post('password'), 'required|min_length[3]|max_length[100]');
 
 		$this->data['username'] = Input::post('username');
 
