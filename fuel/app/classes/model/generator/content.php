@@ -278,6 +278,20 @@ class model_generator_content extends model_db_site
 			}, $data);
 			$data['content_id'] = $content->id;
 
+			foreach ($data as $key => $value) {
+				if(preg_match('#(tpl_siteselector_[\w]+)#i', $key)) {
+					$nav = model_db_navigation::find($value);
+					$data[$key] = array();
+					$data[$key]['label'] = $nav->label;
+					$data[$key]['url'] = $nav->generateUrl();
+					if(!is_object($nav)) {
+						$data[$key] = array();
+						$data[$key]['label'] = '';
+						$data[$key]['url'] = '';
+					}
+				}
+			}
+
 			$filepath = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/custom/' . $content->label;
 			
             if(file_exists($filepath ) && !is_dir($filepath))
@@ -760,7 +774,7 @@ class model_generator_content extends model_db_site
 
 		$site = self::_viewSite($current_site);
 
-		if(!$site)
+		if(!$site && $site != '')
 			$site = 'Site couldnt be found.';
 
 		self::$_tempLang = model_generator_preparer::$lang;

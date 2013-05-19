@@ -82,6 +82,8 @@ class Cache
 		$filename = str_replace('.cache','',$filename);
 
 		$path = DOCROOT . 'cache/';
+
+		if(!is_dir($path)) \File::create_dir(DOCROOT, 'cache');
 		
 		if(!file_exists($path))
 			\File::create($path,$filename . '.cache',$content);

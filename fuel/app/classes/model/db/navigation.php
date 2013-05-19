@@ -60,4 +60,24 @@ class model_db_navigation extends Orm\Model
 
 		return $result;
 	}
+
+	public function generateUrl()
+	{
+
+		$lang = explode('_',static::$_table_name);
+		$lang = $lang[0];
+
+		$main = $this->url_title . '/';
+		$sub = '';
+		if($this->parent != 0) {
+			$sub = static::find($this->parent)->url_title;
+		}
+
+		$url = Uri::create($lang . '/' . $main . $sub);
+		if(model_generator_preparer::$isMainLanguage) {
+			$url = Uri::create($main . $sub);
+		}
+
+		return $url;
+	}
 }

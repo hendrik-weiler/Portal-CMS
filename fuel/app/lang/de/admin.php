@@ -41,6 +41,13 @@ return array(
 		),
 	),
 
+	'siteselector_button' => 'Wähle eine Seite',
+	'siteselector' => array(
+		'title' => 'Wähle eine Seite',
+		'text' => 'Wähle eine seite aus der Liste aus',
+		'confirm' => 'Auswählen',
+		'cancel' => 'Abbrechen'
+	),
 	'picturemanager_button' => 'Öffne Bildmanager',
 	'nojavascript' => 'Ab hier wird javascript benötigt um alles korrekt nutzen zu können. <a target="_blank" href="http://www.activatejavascript.org/">So aktiviere ich mein Javascript!</a>',
 
@@ -259,8 +266,8 @@ return array(
 	),
 
 	'navigation' => array(
-		'add_header' => 'Neuer Navigationspunkt',
-		'edit_header' => 'Navigationspunkt bearbeiten',
+		'add_header' => 'Neue Navigationgruppe',
+		'create_header' => 'Navigationspunkt hinzufügen',
 		'current_entries' => 'Derzeitige Einträge',
 		'no_entries' => 'Deine Navigation ist leer.',
 		'none_parent' => '(Keins)',
@@ -277,8 +284,9 @@ return array(
 			'right' => 'Rechte Seite'
 		),
 
-		'menu_rename' => 'Umbenennen',
-		'menu_delete' => 'Löschen',
+		'add_navigation' => 'Navigation hinzufügen',
+		'edit_navigation' => 'Navigation umbenennen',
+		'delete_navigation' => 'Navigation löschen',
 
 		'image' => 'Bild',
 		'image_is_shown' => 'Bild wird angezeigt',

@@ -2,8 +2,9 @@ Portal Content Management System
 ====================
 #### v: 1.036
 
-Stable versions:
+Download versions (stable ones marked with *):
 ---------------------
+[Download a copy of 1.37 beta dev1](http://portalcms.hendrikweiler.com/pcms-1.37-beta-dev1.zip)<br />
 [Download a copy of 1.36](http://portalcms.hendrikweiler.com/pcms-1.36.zip)<br />
 [Download a copy of 1.35](http://portalcms.hendrikweiler.com/pcms-1.35.zip)<br />
 <br />

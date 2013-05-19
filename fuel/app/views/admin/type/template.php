@@ -1,4 +1,5 @@
 <script type="text/javascript" src="<?php print Uri::create('assets/js/tiny_mce/tiny_mce.js'); ?>"></script>
+<script type="text/javascript" src="<?php print Uri::create('assets/js/siteselector/siteselector.js') ?>"></script>
 <?php print Form::open(array('action'=>'admin/content/' . Uri::segment(3) . '/edit/' . Uri::segment(5) . '/type/13/edit','enctype'=>'multipart/form-data')) ?>
 <div class="span7">
     <div class="clearfix">
@@ -7,13 +8,21 @@
         <?php print Form::select('template', $selected_template, $templates); ?>
       </div>
     </div>
+    <div class="row" style="margin-bottom:20px;">
+      <div class="picturemanager-button"><?php print Lang::get('picturemanager_button') ?></div>
+    </div>
     <?php
-
+    $variableStorage = array();
     if(!empty($template_variables))
     {
     	foreach ($template_variables as $variable) 
     	{
-    		print '<h5>' . $variable . '</h5>';
+        if(in_array($variable, $variableStorage)) continue;
+
+        $variableStorage[] = $variable;
+
+        $split_var = explode('_', $variable);
+        print '<h5>' . $split_var[count($split_var)-1] . ' <span style="font-size:12px;color:#aaa">( ' . $variable . ' )</span></h5>';
     		if(preg_match('#(\$tpl_file_[\w]+)#i', $variable))
     		{
     			print Form::file(str_replace('$', '', $variable));
@@ -33,6 +42,33 @@
           print Form::textarea(str_replace('$', '', $variable),
                     str_replace(array('\"',"\'"),array('"',"'"),${str_replace('$','',$variable)})
                     , array('style'=>'width:100%'));
+        }
+        if(preg_match('#(\$tpl_siteselector_[\w]+)#i', $variable))
+        {
+          !isset( ${str_replace('$','',$variable)} ) and ${str_replace('$','',$variable)} = '';
+          $name = str_replace('$','',$variable);
+          print '<button class="btn siteselector_button_' . $name . ' ' . $name . '">' . __('siteselector_button') . '</button>';
+          $label = '&nbsp;';
+          $navigation = model_db_navigation::find(${str_replace('$','',$variable)});
+          if(!is_object($navigation)) {
+            $navigation = new stdClass;
+            $navigation->label = '';
+          } 
+          else {
+            $label = $navigation->label;
+          }
+          print '<div class="siteselector_selected_item siteselector_selected_item_' . $name . '">' . $label .'</div>';
+          print '<script>var siteselector_' . $name . ' = new pcms.siteselector($(".siteselector_button_' . $name . '"),{
+            title : "' . __('siteselector.title') . '",
+            text : "' . __('siteselector.text') . '",
+            confirm : "' . __('siteselector.confirm') . '",
+            cancel : "' . __('siteselector.cancel') . '"
+          });siteselector_' . $name . '.render();siteselector_' . $name . '.onConfirm = function(dialog_helper, event) {
+            $("input[name=' . $name . ']").attr("value",event.option_id);
+            $(".siteselector_selected_item_' . $name . '").html(event.option_label);
+            dialog_helper.cancel_dialog();
+          };</script>';
+          print Form::hidden($name, ${str_replace('$','',$variable)});
         }
     	}
     }
@@ -60,6 +96,9 @@
 <?php print Form::close(); ?>
 
 <script type="text/javascript">
+var picturemanager = new pcms.picturemanager();
+picturemanager.build_button('.picturemanager-button');
+
 tinyMCE.init({
   theme : "advanced",
   editor_selector : "mceEditor",

@@ -134,7 +134,8 @@ class Controller_Pages_Content_Type13 extends Controller
 		foreach ($_POST as $key => $value) 
 		{
     		if(preg_match('#(tpl_text_[\w]+)#i', $key)
-    			|| preg_match('#(tpl_rawtext_[\w]+)#i', $key))
+    			|| preg_match('#(tpl_rawtext_[\w]+)#i', $key)
+    			|| preg_match('#(tpl_siteselector_[\w]+)#i', $key))
     		{
     			$variables[$key] = Input::post($key);
     		}

@@ -2,25 +2,17 @@
 <storyboard>
 	<tour label="Eine neue Navigationsgruppe bearbeiten oder löschen" />
 	<steps>
-		<step live_target="#groups li:first" condition="rightclicked">
+		<step target="#form_name">
 			<position_difference top="20" left="20" />
-			<text>Durch das Rechtsklicken auf eine Gruppe wird ein Context-Menü geöffnet.</text>
+			<text>Ändern sie den Namen der Navigationgruppe.</text>
 		</step>
-		<step live_target="#groups li:first">
+		<step target=".success:eq(0)">
 			<position_difference top="20" left="20" />
-			<text>Es stehen zwei optionen zur verfügung Umbennen und Löschen. Wählen Sie Umbennen.</text>
+			<text>Editieren sie, in dem sie auf diesen Button klicken.</text>
 		</step>
-		<step live_target="#groups li:first">
-			<position_difference top="20" left="150" />
-			<text>Im zweiten Schritt füllen Sie dieses Textfeld aus.</text>
-		</step>
-		<step live_target="#groups li:first">
-			<position_difference top="20" left="180" />
-			<text>Mit dem grünem "O" bestätigen Sie ihre Eingabe</text>
-		</step>
-		<step live_target="#groups li:first">
+		<step live_target=".error:eq(0)">
 			<position_difference top="20" left="20" />
-			<text>Beim Löschen von Gruppen sollten Sie wissen, dass die Gruppe ohne erneute Bestätigung gelöscht wird, also seien Sie vorsichtig.</text>
+			<text>Um diese Navigationsgruppe zu löschen drücken sie diesen Button.</text>
 		</step>
 	</steps>
 </storyboard>

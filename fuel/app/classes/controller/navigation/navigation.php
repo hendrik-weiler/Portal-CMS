@@ -502,6 +502,26 @@ class Controller_Navigation_Navigation extends Controller
         Controller_Login::clear_cache();
 	}
 
+	public function action_group()
+	{
+		$this->_ajax = true;
+
+		switch (Input::post('type')) 
+		{
+			case __('navigation.delete_navigation'):
+				$this->action_group_delete();
+				break;
+			case __('navigation.add_navigation'):
+				$this->action_group_new();
+				break;
+			case __('navigation.edit_navigation'):
+				$this->action_group_edit();
+				break;
+		}
+
+		Response::redirect(Input::get('return'));
+	}
+
 	public function action_group_delete()
 	{
 		$this->_ajax = true;
@@ -509,11 +529,11 @@ class Controller_Navigation_Navigation extends Controller
                 if(count(model_db_navgroup::find('all')) == 1)
                     return;
                 
-		$group = model_db_navgroup::find($_GET['id']);
+		$group = model_db_navgroup::find($_POST['id']);
 		$group->delete();
 
 		$navs = model_db_navigation::find('all',array(
-			'where' => array('group_id'=>$_GET['id']),
+			'where' => array('group_id'=>$_POST['id']),
 		));
                 
                 $group = model_db_navgroup::find('first');
@@ -528,7 +548,7 @@ class Controller_Navigation_Navigation extends Controller
 		}
 
 		$sites = model_db_site::find('all',array(
-			'where' => array('group_id'=>$_GET['id']),
+			'where' => array('group_id'=>$_POST['id']),
 		));
 		
 
@@ -550,8 +570,8 @@ class Controller_Navigation_Navigation extends Controller
 	{
 		$this->_ajax = true;
 
-		$group = model_db_navgroup::find($_GET['id']);
-		$group->title = $_GET['name'];
+		$group = model_db_navgroup::find($_POST['id']);
+		$group->title = $_POST['name'];
 		$group->save();
 
 		$this->response->body = 'true';
@@ -562,7 +582,7 @@ class Controller_Navigation_Navigation extends Controller
 		$this->_ajax = true;
 
 		$group = new model_db_navgroup();
-		$group->title = $_GET['group'];
+		$group->title = $_POST['group'];
 		$group->save();
 
 		$group = model_db_navgroup::find('last');

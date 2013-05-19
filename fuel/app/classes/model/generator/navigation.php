@@ -24,6 +24,8 @@ class model_generator_navigation extends model_db_navigation
 {
 	private static $_navigation = array();
 
+	private static $siteselector = false;
+
 	private static function _retrieveData($group_id)
 	{
 		$result = null;
@@ -35,10 +37,18 @@ class model_generator_navigation extends model_db_navigation
 	{
 		$result = array();
 
-		$data = self::find('all',array(
-			'where' => array('parent'=>$parent,'group_id'=>$group_id,'show_in_navigation'=>1),
-			'order_by' => array('sort'=>'ASC')
-		));
+		if(static::$siteselector) {
+			$data = self::find('all',array(
+				'where' => array('parent'=>$parent,'group_id'=>$group_id),
+				'order_by' => array('sort'=>'ASC')
+			));
+		}
+		else {
+			$data = self::find('all',array(
+				'where' => array('parent'=>$parent,'group_id'=>$group_id,'show_in_navigation'=>1),
+				'order_by' => array('sort'=>'ASC')
+			));
+		}
 
 		if(Uri::segment(2) == '' && Uri::segment(3) == '')
 		{
@@ -188,6 +198,10 @@ class model_generator_navigation extends model_db_navigation
 			else
 				$html[$key] = View::factory('public/template/navigation_inner',$data);
 
+			if(static::$siteselector) {
+				$html[$key] = str_replace('<a', '<a data-id="' . $nav['id'] . '" ', $html[$key]);
+			}
+
 			if(isset($nav['sub']))
 			{
 				if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/navigation_outer.php'))
@@ -245,6 +259,10 @@ class model_generator_navigation extends model_db_navigation
 					else
 			            $innerHTML[$subKey] = View::factory('public/template/navigation_inner',$subData);
 
+					if(static::$siteselector) {
+						$innerHTML[$subKey] = str_replace('<a', '<a data-id="' . $sub['id'] . '" ', $innerHTML[$subKey]);
+					}
+
 					$subData['active_class'] = '';
 				}
 				$innerHTML = str_replace('{{INNER}}','',implode('',$innerHTML));
@@ -269,11 +287,13 @@ class model_generator_navigation extends model_db_navigation
 		return self::$_navigation;
 	}
 
-	public static function render($group_id)
+	public static function render($group_id, $siteselector = false)
 	{
+		static::$siteselector = $siteselector;
+
 		if(!model_generator_module::$navigation)
 			return;
-			
+
 		if(!preg_match('#[0-9]#i',$group_id))
 		{
 			$search = model_db_navgroup::find('first',array(
@@ -285,6 +305,7 @@ class model_generator_navigation extends model_db_navigation
 		}
 
 		self::_retrieveData($group_id);
+
 		return self::_navToHTML($group_id);
 	}
 }

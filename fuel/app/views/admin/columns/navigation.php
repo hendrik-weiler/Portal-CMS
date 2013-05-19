@@ -38,26 +38,6 @@
 
 ?>
 
-<script type="template" id="addnav_tpl">
-	<li>
-		<?php print Form::input('group_title','',array('class'=>'medium')); ?>
-		<a href="#" id="submit_group" class="btn success">O</a>
-		<a href="#" id="submit_cancel" class="btn error">X</a>
-	</li>
-</script>
-
-<script type="template" id="editnav_tpl">
-	<li>
-		<?php print Form::input('group_title','|title|',array('class'=>'medium')); ?>
-		<a href="#" id="rename_group" class="btn success">O</a>
-	</li>
-</script>
-
-<script type="template" id="new_nav_tpl">
-	<li>
-	  <a href="|url|">|title|</a>
-	</li>
-</script>
 
 <h3>
 	<?php print __('navigation.' . $mode . '_header'); ?>
@@ -67,22 +47,51 @@
 
 <ul id="groups" class="tabs">
 	<?php
+	$current_nav = '';
+	$current_id = 0;
 		$navi_groups = model_db_navgroup::find('all');
 		if(!empty($navi_groups)):
 		foreach($navi_groups as $group):
 	?>
-	<li id="<?php print $group->id; ?>" <?php print Uri::segment(3) == $group->id ? 'class="active"' : '' ?>><a href="<?php print Uri::create('admin/navigation/' . $group->id) ?>"><?php print $group->title ?></a></li>
+	<li id="<?php print $group->id; ?>" <?php 
+	if(Uri::segment(3) == $group->id) {
+		print 'class="active"';
+		$current_nav = $group->title;
+		$current_id = $group->id;
+	}  ?>><a href="<?php print Uri::create('admin/navigation/' . $group->id) ?>"><?php print $group->title ?></a></li>
 	<?php 
 			endforeach;
 			endif; 
 	?>
-	<li><a id="addnav" href="#">+</a></li>
 </ul>
-
+<div class="row" id="navedit">
+	<?php print Form::open(array('action'=>Uri::create('admin/navigation/group/action?return=' . Uri::current()),'class'=>'form_style_1')); ?>
+	<?php print Form::hidden('id', $current_id); ?>
+		<div class="span4">
+			<?php print Form::input('name',$current_nav,array('class'=>'medium')); ?>
+		</div>
+		<div class="span4" style="padding-right:10px;border-right:1px solid #ccc">
+			<?php print Form::submit('type',__('navigation.edit_navigation'),array('class'=>'btn success')); ?>
+			<br />
+			<?php if(count($navi_groups) != 1): ?>
+				<?php print Form::submit('type',__('navigation.delete_navigation'),array('class'=>'btn error')); ?>
+			<?php endif; ?>
+		</div>
+		<div class="span4">
+			<?php print Form::input('group','',array('class'=>'medium')); ?>
+		</div>
+		<div class="span2">
+			<?php print Form::submit('type',__('navigation.add_navigation'),array('class'=>'btn success')); ?>
+		</div>
+	<?php print FOrm::close(); ?>
+</div>
+<hr />
 <?php
 	print Form::open(array('action'=>($mode == 'add') ? 'admin/navigation/add' : Uri::current(),'class'=>'form_style_1','enctype'=>'multipart/form-data'));
 ?>
-
+<h3>
+	<?php print __('navigation.create_header'); ?>
+</h3>
 <div class="clearfix">
   <?php print Form::label(__('navigation.label')); ?>
   <div class="input">
@@ -238,11 +247,6 @@
 	}
 ?>
 </section>
-
-<div class="nav_menu">
-	<li><a href="#"><?php print __('navigation.menu_rename') ?></a></li>
-	<li><a href="#"><?php print __('navigation.menu_delete') ?></a></li>
-</div>
 
 <?php endif; ?>
 <script type="text/javascript">

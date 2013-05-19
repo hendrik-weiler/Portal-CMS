@@ -2,25 +2,17 @@
 <storyboard>
 	<tour label="Edit or delete an existing navigationgroup" />
 	<steps>
-		<step live_target="#groups li:first" condition="rightclicked">
+		<step target="#form_name">
 			<position_difference top="20" left="20" />
-			<text>By pressing right-click the context menu will opened.</text>
+			<text>Change the name of the current navigationgroup.</text>
 		</step>
-		<step live_target="#groups li:first">
+		<step target=".success:eq(0)">
 			<position_difference top="20" left="20" />
-			<text>Two options are available, rename and delete. Choose rename.</text>
+			<text>Edit it through clicking on this button.</text>
 		</step>
-		<step live_target="#groups li:first">
-			<position_difference top="20" left="150" />
-			<text>Now write down the new title.</text>
-		</step>
-		<step live_target="#groups li:first">
-			<position_difference top="20" left="180" />
-			<text>With the "O" you confirm the creation.</text>
-		</step>
-		<step live_target="#groups li:first">
+		<step live_target=".error:eq(0)">
 			<position_difference top="20" left="20" />
-			<text>If you want to delete a group, be alerted that you wont be asked if you really want to delete it.</text>
+			<text>To delete this navigationgroup, press on this button.</text>
 		</step>
 	</steps>
 </storyboard>

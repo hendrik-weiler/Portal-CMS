@@ -2,21 +2,13 @@
 <storyboard>
 	<tour label="Eine neue Navigationsgruppe erstellen" />
 	<steps>
-		<step live_target=".tabs li:last" condition="clicked">
+		<step live_target="#form_group">
 			<position_difference top="20" left="20" />
-			<text>Der erste schritt ist durch das drücken von plus wird ein Textfeld.</text>
+			<text>Füllen sie dieses Textfeld aus. Es beschreibt den Titel der Navigation, die dann zur identifizierung im Layout benutzt wird.</text>
 		</step>
-		<step target="form div label:first">
-			<position_difference top="-37" left="180" />
-			<text>Im zweiten Schritt füllen Sie dieses Textfeld aus.</text>
-		</step>
-		<step live_target="form div label:first">
-			<position_difference top="-37" left="240" />
-			<text>Mit dem grünem "O" bestätigen Sie ihre Eingabe</text>
-		</step>
-		<step live_target="form div label:first">
-			<position_difference top="-37" left="280" />
-			<text>Wenn Sie den Vorgang abbrechen möchten drücken Sie den roten "X" Button.</text>
+		<step target=".success:eq(1)">
+			<position_difference top="20" left="0" />
+			<text>Mit diesem Button bestätigen wird ihre Eingabe bestätigt.</text>
 		</step>
 	</steps>
 </storyboard>

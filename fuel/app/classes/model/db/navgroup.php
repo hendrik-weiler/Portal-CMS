@@ -29,7 +29,7 @@ class model_db_navgroup extends Orm\Model
 
   public static function setLangPrefix($prefix)
   {
-    self::$_table_name = $prefix . '_navigation_group';
+    static::$_table_name = $prefix . '_navigation_group';
   }
 
   public static function asSelectBox()

@@ -22,9 +22,9 @@
  */
 class model_about 
 {
-	public static $version = 1.036;
+	public static $version = 1.037;
 
-	public static $status = '';
+	public static $status = 'dev beta1';
 
 	public static function show_version()
 	{

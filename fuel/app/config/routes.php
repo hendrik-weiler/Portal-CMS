@@ -3,6 +3,10 @@ return array(
 	'_root_'  => 'public/index',  // The default route
 	'_404_'   => 'welcome/404',    // The main 404 route
 
+	# -- admin/siteselector
+
+	'admin/siteselector/data' => 'siteselector/siteselector/get_data',
+
 	# -- admin/picturemanager
 
 	'admin/content/picturemanager/own_pictures/delete_image' => 'picturemanager/picturemanager/own_pictures_delete',
@@ -96,6 +100,7 @@ return array(
 
 	# -- admin/navigation
 
+	'admin/navigation/group/action' => 'navigation/navigation/group',
 	'admin/navigation/group/edit' => 'navigation/navigation/group_edit',
 	'admin/navigation/group/new' => 'navigation/navigation/group_new',
 	'admin/navigation/group/delete' => 'navigation/navigation/group_delete',
