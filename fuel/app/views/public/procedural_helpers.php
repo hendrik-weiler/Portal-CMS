@@ -10,6 +10,11 @@ function navigation($group_id)
   return model_generator_navigation::render($group_id);
 }
 
+function cart_simple()
+{
+  return model_shop_cart::render_simple();
+}
+
 function content()
 {
   return model_generator_content::render();

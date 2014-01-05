@@ -31,6 +31,42 @@ class model_generator_content extends model_db_site
 
 	private static $_styleCounter = 0;
 
+	private static function _show_shop_step_cart() 
+	{
+		if(Uri::segment(4) == 1) {
+			return model_shop_order::show_shop_step_1();
+		}
+		if(Uri::segment(4) == 2) {
+			return model_shop_order::show_shop_step_2();
+		}
+		if(Uri::segment(4) == 3) {
+			return model_shop_order::show_shop_step_3();
+		}
+	}
+
+	private static function _show_shop_cart() 
+	{
+		return model_shop_cart::render();
+	}
+
+	private static function _show_shop_fullview() 
+	{
+		$data = array();
+
+		$data['article'] = model_db_article::find(model_generator_preparer::$shopId);
+
+		if(Input::post('shop_add_article') != '')
+		{
+			model_shop_cart::add_item(model_generator_preparer::$shopId, Input::post('shop_amount'));
+			
+		}
+
+    if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/shop_fullview.php'))
+      return View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/shop_fullview.php',$data);
+		else
+      return View::factory('public/template/shop_fullview',$data);
+	}
+
 	private static function _viewSite($site,$directly=false)
 	{
 
@@ -44,9 +80,20 @@ class model_generator_content extends model_db_site
 				$segment3 = 2;
 			}
 
+			if(model_generator_preparer::$isShop) {
+				if(model_generator_preparer::$shopLocation == 'cart->step') {
+					return static::_show_shop_step_cart();
+				}
+				else if(model_generator_preparer::$shopLocation == 'cart') {
+					return static::_show_shop_cart();
+				}
+				else {
+					return static::_show_shop_fullview();
+				}
+			}
+
 			if($site == null && Uri::segment($segment2) != 'news')
 				return false;
-				
 
 			if(Uri::segment($segment2) == 'news' && !self::$_renderSpecial)
 			{
@@ -387,8 +434,28 @@ class model_generator_content extends model_db_site
                 $return .= View::factory('public/template/flvvideoplayer',$data);
 
 			break;
+			case 15:
+				$data = array();
+
+				$data['category_names'] = array_map(function($id) {
+
+					return model_db_article_group::find($id)->get_label(model_generator_preparer::$lang);
+
+				}, Format::forge($content->parameter,'json')->to_array());
+				$data['categories'] = array_map(function($id) {
+
+					return model_db_article::find('all',array(
+						'where' => array('article_group_id'=>$id)
+					));
+
+				}, Format::forge($content->parameter,'json')->to_array());
 
 
+        if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/shop_category.php'))
+            $return .= View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/shop_category.php',$data);
+        else
+            $return .= View::factory('public/template/shop_category',$data);
+			break;
 			}
 
 			$return .= '</div>';
@@ -628,7 +695,13 @@ class model_generator_content extends model_db_site
 
 		$counter = 0;
 
-		self::$_tempLang = !empty(self::$_tempLang) ? self::$_tempLang : model_generator_preparer::$lang;
+		if(empty(self::$_tempLang)) {
+			if(model_generator_preparer::$isMainLanguage) {
+				self::$_tempLang = model_generator_preparer::$mainLang;
+			} else {
+				self::$_tempLang = model_generator_preparer::$lang;
+			}
+		}
 
 		$data['slideshow_height'] = 0;
 		$data['slideshow_width'] = 0;
@@ -638,56 +711,56 @@ class model_generator_content extends model_db_site
 			&& is_dir(DOCROOT . 'uploads/' . self::$_tempLang . '/gallery/' . $content->id . '/original'))
 		{
 
-                    $images = File::read_dir(DOCROOT . 'uploads/' . self::$_tempLang . '/gallery/' . $content->id . '/thumbs',1);
-                    if(!empty($images))
-                    {
-                        $info = getimagesize(DOCROOT . 'uploads/' . self::$_tempLang . '/gallery/' . $content->id . '/big/' . $images[0]);
-                        $data['slideshow_height'] = $info[1];
-                        $data['slideshow_width'] = $info[0];
-                    }
+      $images = File::read_dir(DOCROOT . 'uploads/' . self::$_tempLang . '/gallery/' . $content->id . '/thumbs',1);
+      if(!empty($images))
+      {
+          $info = getimagesize(DOCROOT . 'uploads/' . self::$_tempLang . '/gallery/' . $content->id . '/big/' . $images[0]);
+          $data['slideshow_height'] = $info[1];
+          $data['slideshow_width'] = $info[0];
+      }
 
-                    $images = Format::forge($content->parameter,'json')->to_array();
+      $images = Format::forge($content->parameter,'json')->to_array();
 
-                    foreach($images as $pic)
-                    {
-                            $pictures[$counter] = array();
-                            $pictures[$counter]['thumb'] = Uri::create('uploads/' . self::$_tempLang . '/gallery/' . $content->id . '/thumbs/' . $pic);
+      foreach($images as $pic)
+      {
+              $pictures[$counter] = array();
+              $pictures[$counter]['thumb'] = Uri::create('uploads/' . self::$_tempLang . '/gallery/' . $content->id . '/thumbs/' . $pic);
 
-                            if(isset($description[$counter]))
-                                    $pictures[$counter]['description'] = stripslashes($description[$counter]);
-                            else
-                                    $pictures[$counter]['description'] = '';
+              if(isset($description[$counter]))
+                      $pictures[$counter]['description'] = stripslashes($description[$counter]);
+              else
+                      $pictures[$counter]['description'] = '';
 
-                            $pictures[$counter]['original'] = Uri::create('uploads/' . self::$_tempLang . '/gallery/' . $content->id . '/original/' . $pic);
-                            $pictures[$counter]['big'] = Uri::create('uploads/' . self::$_tempLang . '/gallery/' . $content->id . '/big/' . $pic);
-                            $counter++;
-                    }
+              $pictures[$counter]['original'] = Uri::create('uploads/' . self::$_tempLang . '/gallery/' . $content->id . '/original/' . $pic);
+              $pictures[$counter]['big'] = Uri::create('uploads/' . self::$_tempLang . '/gallery/' . $content->id . '/big/' . $pic);
+              $counter++;
+      }
                 
-                }
+    }
 
 		$data['pictures'] = $pictures;
 		$data['group'] = 'group_' . model_generator_preparer::$lang . '_' . $content->id;
 		if($content->pictures == 'lightbox')
 		{
-                    if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/gallery_lightbox.php'))
-                        $path = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/gallery_lightbox.php';
-                    else
-                        $path = 'public/template/gallery_lightbox';
+      if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/gallery_lightbox.php'))
+          $path = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/gallery_lightbox.php';
+      else
+          $path = 'public/template/gallery_lightbox';
 
 
-                }
+    }
 		else if($content->pictures == 'slideshow')
 		{
-                    if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/gallery_slideshow.php'))
-                        $path = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/gallery_slideshow.php';
-                    else
-                        $path = 'public/template/gallery_slideshow';
-                }
+      if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/gallery_slideshow.php'))
+          $path = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/gallery_slideshow.php';
+      else
+          $path = 'public/template/gallery_slideshow';
+    }
 		else 
-                {
-                    if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/' . $content->pictures . '.php'))
-                        $path = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/' . $content->pictures . '.php';
-                    else 
+    {
+      if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/' . $content->pictures . '.php'))
+          $path = LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/' . $content->pictures . '.php';
+      else 
 			$path = 'public/template/' . $content->pictures;
 
 			if($content->pictures == 'custom/')
@@ -712,16 +785,16 @@ class model_generator_content extends model_db_site
 			$segment3 = 2;
 		}
 
-        if($current_site == null && Uri::segment($segment2) != 'news')
-        {
-            return View::forge('public/errors/error_no_site');
-        }
+    if($current_site == null && Uri::segment($segment2) != 'news')
+    {
+        return View::forge('public/errors/error_no_site');
+    }
                 
 		$site = self::_viewSite($current_site);
 
-        model_db_content::setLangPrefix(model_generator_preparer::$lang);
-        if(is_object($current_site) && count(model_db_content::find('first',array('where'=>array('site_id'=>$current_site->id)))) == 0 && Uri::segment(2) != 'news')
-            return View::forge('public/errors/error_no_content');
+    model_db_content::setLangPrefix(model_generator_preparer::$lang);
+    if(is_object($current_site) && count(model_db_content::find('first',array('where'=>array('site_id'=>$current_site->id)))) == 0 && Uri::segment(2) != 'news')
+        return View::forge('public/errors/error_no_content');
                
 		if(!$site && $site != '')
             Response::redirect(model_generator_preparer::$lang);

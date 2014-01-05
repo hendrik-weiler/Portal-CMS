@@ -7,6 +7,28 @@ return array(
 
 	'admin/siteselector/data' => 'siteselector/siteselector/get_data',
 
+	# -- admin/shop
+
+	'admin/shop/settings/edit' => 'shop/settings/edit',
+	'admin/shop/settings' => 'shop/settings/index',
+
+	'admin/shop/orders/accept/:id' => 'shop/order/accept',
+	'admin/shop/orders/cancel/:id' => 'shop/order/cancel',
+	'admin/shop/orders/display/invoice/:id' => 'shop/order/display_mail',
+	'admin/shop/orders/display/:id' => 'shop/order/display',
+	'admin/shop/orders' => 'shop/order/index',
+
+	'admin/shop/groups/delete/:id' => 'shop/group/delete',
+	'admin/shop/groups/edit/:id' => 'shop/group/edit',
+	'admin/shop/groups/add' => 'shop/group/add',
+	'admin/shop/groups' => 'shop/group/index',
+
+	'admin/shop/articles/delete/:id/picture/:index' => 'shop/article/delete_picture',
+	'admin/shop/articles/delete/:id' => 'shop/article/delete',
+	'admin/shop/articles/edit/:id' => 'shop/article/edit',
+	'admin/shop/articles/add' => 'shop/article/add',
+	'admin/shop/articles' => 'shop/article/index',
+
 	# -- admin/picturemanager
 
 	'admin/content/picturemanager/own_pictures/delete_image' => 'picturemanager/picturemanager/own_pictures_delete',
@@ -65,17 +87,20 @@ return array(
 	'admin/content/:id/edit/:content_id/type/8' => 'pages/content/type8',
 	'admin/content/:id/edit/:content_id/type/9' => 'pages/content/type9',
 	'admin/content/:id/edit/:content_id/type/10' => 'pages/content/type10',
-    'admin/content/:id/edit/:content_id/type/11' => 'pages/content/type11',
-    'admin/content/:id/edit/:content_id/type/12' => 'pages/content/type12',
+  'admin/content/:id/edit/:content_id/type/11' => 'pages/content/type11',
+  'admin/content/:id/edit/:content_id/type/12' => 'pages/content/type12',
 
-    'admin/content/:id/edit/:content_id/type/13' => 'pages/content/type13',
-    'admin/content/:id/edit/:content_id/type/13/edit' => 'pages/content/type13/edit',
-    'admin/content/:id/edit/:content_id/type/13/preview' => 'pages/content/type13/preview',
+  'admin/content/:id/edit/:content_id/type/13' => 'pages/content/type13',
+  'admin/content/:id/edit/:content_id/type/13/edit' => 'pages/content/type13/edit',
+  'admin/content/:id/edit/:content_id/type/13/preview' => 'pages/content/type13/preview',
 
-    'admin/content/:id/edit/:content_id/type/14' => 'pages/content/type14',
-    'admin/content/:id/edit/:content_id/type/14/edit' => 'pages/content/type14/edit',
-    'admin/content/:id/edit/:content_id/type/14/preview' => 'pages/content/type14/preview',
-    'admin/content/:id/edit/:content_id/type/14/save/skin/:skinname' => 'pages/content/type14/save_skin',
+  'admin/content/:id/edit/:content_id/type/14' => 'pages/content/type14',
+  'admin/content/:id/edit/:content_id/type/14/edit' => 'pages/content/type14/edit',
+  'admin/content/:id/edit/:content_id/type/14/preview' => 'pages/content/type14/preview',
+  'admin/content/:id/edit/:content_id/type/14/save/skin/:skinname' => 'pages/content/type14/save_skin',
+
+  'admin/content/:id/edit/:content_id/type/15' => 'pages/content/type15',
+  'admin/content/:id/edit/:content_id/type/15/edit' => 'pages/content/type15/edit',
 
 	'admin/content/add/:id' => 'pages/content/add',
 
@@ -149,6 +174,20 @@ return array(
 	'admin' => 'login/index',
 
 	# -- frontend
+
+	':lang/cart/step/2' => 'public/index',
+	':lang/cart/step/1' => 'public/index',
+	':lang/cart/overview' => 'public/index',
+	':lang/cart/remove/:index' => 'public/cart_remove',
+
+	':main/:sub/product/:id/:product_name' => 'public/index',
+	':main/product/:id/:product_name' => 'public/index',
+
+	':lang/:main/:sub/product/:id/:product_name' => 'public/index',
+	':lang/:main/product/:id/:product_name' => 'public/index',
+	':lang/product/:id/:product_name' => 'public/index',
+	'product/:id/:product_name' => 'public/index',
+	
 
 	'layout/picture/:path' => 'advanced/advanced/layout_image',
 	'player/serve/video/:videoname' => 'pages/content/type14/serve_video',

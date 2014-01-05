@@ -28,6 +28,9 @@
       <div class="language span8">
         <?php print language_switcher(); ?>
       </div>
+      <div class="span4">
+        <?php print cart_simple(); ?>
+      </div>
     </div>
     <div class="navigation row" <?php ($navigation_background_color != 'transparent') and print 'style="background: ' . $navigation_background_color .'"'; ?>>
       <?php print navigation($Main_navigation); ?>

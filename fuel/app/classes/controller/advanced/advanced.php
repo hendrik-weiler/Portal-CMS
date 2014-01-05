@@ -44,6 +44,26 @@ class Controller_Advanced_Advanced extends Controller
 		'inline_edit',
 		# general
 		'site_caching',
+		# shop
+		'invoice_logo', 'exchange_rates', 'shipping_costs','order_format',
+		'email',
+		'company',
+		'zip_code',
+		'street',
+		'first_name',
+		'last_name',
+		'country',
+		'phone',
+		'location',
+		'ust_id',
+		'tax_id',
+		'local_court',
+		'commercial_register_number',
+		'manager',
+		'bank_name',
+		'account_number',
+		'bank_sort_code',
+		'fax',
 	);
 
 	private static $defaultValue = array(
@@ -79,6 +99,29 @@ class Controller_Advanced_Advanced extends Controller
 		'inline_edit' => 0,
 		# general
 		'site_caching' => 0,
+		# shop
+		'invoice_logo' => '', 
+		'exchange_rates' => '{"en":"1"}',
+		'shipping_costs' => '{"0":"0","1":"0","2":"0","3":"0","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0"}',
+		'order_format' => 'R-{year}-{nr}',
+		'email' => '',
+		'company' => '',
+		'zip_code' => '',
+		'street' => '',
+		'first_name' => '',
+		'last_name' => '',
+		'country' => '',
+		'phone' => '',
+		'location' => '',
+		'ust_id' => '',
+		'tax_id' => '',
+		'local_court' => '',
+		'commercial_register_number' => '',
+		'manager' => '',
+		'bank_name' => '',
+		'account_number' => '',
+		'bank_sort_code' => '',
+		'fax' => '',
 	);
 
 	private static $minValue = array(
@@ -110,7 +153,30 @@ class Controller_Advanced_Advanced extends Controller
 		'navigation_image_width' => 10,
 		'navigation_image_height' => 10,
 		# help options
-		'inline_edit' => 0
+		'inline_edit' => 0,
+		# shop
+		'invoice_logo' => '', 
+		'exchange_rates' => '0',
+		'shipping_costs' => '',
+		'order_format' => 'R-{year}-{nr}',
+		'email' => '',
+		'company' => '',
+		'zip_code' => '',
+		'street' => '',
+		'first_name' => '',
+		'last_name' => '',
+		'country' => '',
+		'phone' => '',
+		'location' => '',
+		'ust_id' => '',
+		'tax_id' => '',
+		'local_court' => '',
+		'commercial_register_number' => '',
+		'manager' => '',
+		'bank_name' => '',
+		'account_number' => '',
+		'bank_sort_code' => '',
+		'fax' => '',
 	);
 
 	private static function _resizeAllPictures()

@@ -27,6 +27,12 @@ class model_helper_management_folder
 		if(!is_dir(DOCROOT . 'uploads'))
 			File::create_dir(DOCROOT , 'uploads');
 
+		if(!is_dir(DOCROOT . 'uploads/shop'))
+			File::create_dir(DOCROOT . 'uploads/shop');
+
+		if(!is_dir(DOCROOT . 'uploads/shop/article'))
+			File::create_dir(DOCROOT . 'uploads/shop/article');
+
 		foreach (model_db_language::find('all') as $lang) 
 		{
 			if(!is_dir(DOCROOT . 'uploads/' . $lang->prefix))

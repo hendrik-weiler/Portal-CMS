@@ -41,6 +41,12 @@ class model_generator_preparer extends model_db_site
 
 	public static $isMainLanguage = false;
 
+	public static $isShop = false;
+
+	public static $shopLocation = '';
+
+	public static $shopId = 0;
+
 	public static $publicVariables = array();
 
 	public static function addPublicVariables($array)
@@ -240,14 +246,14 @@ class model_generator_preparer extends model_db_site
 	private static function _getActualSite()
 	{
 
-        if(empty(self::$lang) && empty(self::$main) && empty(self::$sub))
+        if(empty(self::$lang) && empty(self::$main) && empty(self::$sub) && !static::$isShop)
         {
 
             $site = static::_get_first_site();
 
         }
 
-        if(!empty(self::$lang) && empty(self::$main) && empty(self::$sub))
+        if(!empty(self::$lang) && empty(self::$main) && empty(self::$sub) && !static::$isShop)
         {
         	if(static::$isMainLanguage)
         	{
@@ -259,7 +265,7 @@ class model_generator_preparer extends model_db_site
         	}
         }
 
-		if(!empty(self::$lang) && !empty(self::$main) && empty(self::$sub))
+		if(!empty(self::$lang) && !empty(self::$main) && empty(self::$sub) && !static::$isShop)
 		{
 
         	if(static::$isMainLanguage)
@@ -273,7 +279,7 @@ class model_generator_preparer extends model_db_site
 
 		}
 
-		if(!empty(self::$lang) && !empty(self::$main) && !empty(self::$sub))
+		if(!empty(self::$lang) && !empty(self::$main) && !empty(self::$sub) && !static::$isShop)
 		{
 			if(static::$isMainLanguage)
 			{
@@ -297,6 +303,58 @@ class model_generator_preparer extends model_db_site
 			static::$currentMainNav->url_title = '';
 		}
 
+		if(static::$isShop)
+		{
+
+			if(Uri::segment(1) == 'product') 
+			{
+				$site = static::_get_first_site();
+      	
+      	static::$shopLocation = 'product';
+			}
+
+			if(Uri::segment(2) == 'product')
+			{
+				if(static::$isMainLanguage) {
+					$site = static::_get_site_with_main_without_lang();
+				}
+				else {
+					$site = static::_get_first_site();
+				}
+	    	
+	    	static::$shopLocation = 'product';
+			}
+
+			if(Uri::segment(3) == 'product')
+			{
+				static::$shopLocation = 'product';
+				if(static::$isMainLanguage) {
+					$site = static::_get_site_with_mainsub_without_lang();
+				}
+				else {
+					$site = static::_get_site_with_main_with_lang();
+				}
+			}
+
+			if(Uri::segment(4) == 'product')
+			{
+				static::$shopLocation = 'product';
+				$site = static::_get_site_with_submain_with_lang();
+			}
+
+			if(static::$main == 'cart') {
+				$site = static::_get_first_site();
+				static::$shopLocation = 'cart';
+
+			}
+
+			if(static::$main == 'cart' && static::$sub == 'step') {
+				$site = static::_get_first_site();
+				static::$shopLocation = 'cart->step';
+
+			}
+		}
+
 		if(isset($site))
 		{
 			self::$currentSite = $site;
@@ -304,9 +362,24 @@ class model_generator_preparer extends model_db_site
 		}
 		else
 		{
-            static::_redirect_to_start();
+      static::_redirect_to_start();
 			return false;
 		}
+	}
+
+	private static function _is_shop()
+	{
+		if(Uri::segment(4) == 'product'
+			|| Uri::segment(3) == 'product'
+			|| Uri::segment(2) == 'product'
+			|| Uri::segment(1) == 'product'
+			|| Uri::segment(2) == 'cart' && Uri::segment(3) == 'overview'
+			|| Uri::segment(2) == 'cart' && Uri::segment(3) == 'step')
+		{
+			static::$isShop = true;
+		}
+
+
 	}
 
 	public static function initialize()
@@ -357,7 +430,9 @@ class model_generator_preparer extends model_db_site
 		Config::set('language',self::$lang);
 
 		Lang::load('frontend');
+		Lang::load('shop');
 
+		static::_is_shop();
 		self::_getActualSite();
 
 		// Adding public variables

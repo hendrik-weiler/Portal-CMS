@@ -74,7 +74,6 @@
         <img src="<?php print Uri::create('assets/img/admin/logo.png'); ?>" /> 
         <div class="version"><?php print model_about::show_version() ?></div>
       </div>
-      <?php print file_exists(APPPATH . 'INSTALL_TOOL_DISABLED') ? '' :  '<div class="error">' . __('constants.install_tool_usable') . '</div>' ?>
       
       <div class="span8" id="change_lang">
     <div class="clearfix">
@@ -100,6 +99,8 @@
 
       </div>
 
+    <?php print file_exists(APPPATH . 'INSTALL_TOOL_DISABLED') ? '' :  '<div class="error">' . __('constants.install_tool_usable') . '</div>' ?>
+    
     </header>
     <div id="main" role="main">
       <noscript>
@@ -128,6 +129,8 @@
           <?php if($permission[5]['valid']): ?>
           <li <?php print (in_array(Uri::segment(2),array('advanced','accounts'))) ? 'class="active"' : '' ?>><a href="<?php print Uri::create('admin/advanced'); ?>"><?php print __('nav.advanced') ?></a></li>
           <?php endif; ?>
+
+          <li><a href="<?php print Uri::create('admin/shop/articles'); ?>"><?php print __('nav.shop') ?></a></li>
         </ul>
       </nav>
       <section id="content" class="clearfix">
