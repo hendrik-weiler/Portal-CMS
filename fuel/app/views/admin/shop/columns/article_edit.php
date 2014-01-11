@@ -21,7 +21,7 @@
 		<h3><?php print __('shop.articles.restructuring'); ?></h3>
 		<div class="input-field">
 			<?php print Form::label(__('shop.articles.group')); ?> 
-			<?php print Form::select('article_group', $article->article_group_id, model_db_article_group::to_selectbox()); ?>
+			<?php print Form::select('article_group', $article->article_group_id, model_db_article_group::to_selectbox(Session::get('lang_prefix'))); ?>
 		</div>
 		<div class="input-field">
 			<?php print Form::label(__('shop.articles.article_nr')); ?> 

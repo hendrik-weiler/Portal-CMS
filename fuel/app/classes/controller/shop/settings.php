@@ -81,6 +81,14 @@ class Controller_Shop_Settings extends Controller
 			$location->value = Input::post('location');
 			$location->save();
 
+			$payment_method_advance_payment = model_db_option::getKey('payment_method_advance_payment');
+			$payment_method_advance_payment->value = Input::post('payment_method_advance_payment');
+			$payment_method_advance_payment->save();
+
+			$payment_method_invoice_payment = model_db_option::getKey('payment_method_invoice_payment');
+			$payment_method_invoice_payment->value = Input::post('payment_method_invoice_payment');
+			$payment_method_invoice_payment->save();
+
 			$company = model_db_option::getKey('company');
 			$company->value = Input::post('company');
 			$company->save();
@@ -189,7 +197,8 @@ class Controller_Shop_Settings extends Controller
 
 		$data['rates'] = array();
 		foreach (model_db_language::find('all') as $lang) {
-			!isset($rates[$lang->prefix]) or empty($rates[$lang->prefix]) and $rates[$lang->prefix] = 1;
+			!isset($rates[$lang->prefix]) and $rates[$lang->prefix] = 1;
+			empty($rates[$lang->prefix]) and $rates[$lang->prefix] = 1;
 			$data['rates'][$lang->prefix] = number_format($rates[$lang->prefix], 2, ',', '');
 		}
 
@@ -212,6 +221,9 @@ class Controller_Shop_Settings extends Controller
 		$data['ust_id'] = model_db_option::getKey('ust_id')->value;
 		$data['local_court'] = model_db_option::getKey('local_court')->value;
 		$data['commercial_register_number'] = model_db_option::getKey('commercial_register_number')->value;
+
+		$data['payment_method_invoice_payment'] = model_db_option::getKey('payment_method_invoice_payment')->value;
+		$data['payment_method_advance_payment'] = model_db_option::getKey('payment_method_advance_payment')->value;
 
 		$data['bank_name'] = model_db_option::getKey('bank_name')->value;
 		$data['account_number'] = model_db_option::getKey('account_number')->value;

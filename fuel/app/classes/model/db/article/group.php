@@ -27,13 +27,19 @@ class model_db_article_group extends Orm\Model
 
 	protected static $_properties = array('id', 'label');
 
-	public static function to_selectbox() 
+	public static function to_selectbox($lang_prefix) 
 	{
 		$return = array(
 			0 => __('shop.articles.not_set')
 		);
 		foreach (static::find('all') as $id => $group) {
-			$return[$id] = $group->label;
+			$data = Format::forge($group->label,'json')->to_array();
+			$prefix = Session::get('lang_prefix');
+			if(isset($data[$prefix])) {
+				$return[$id] = $data[$prefix];
+			} else {
+				$return[$id] = array_shift($data);
+			}
 		}
 
 		return $return;

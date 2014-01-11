@@ -59,7 +59,11 @@ class Controller_Pages_Content_Type15 extends Controller
 		$data['article_groups'] = model_db_article_group::find('all');
 
 		empty($this->content->parameter) or $this->content->parameter == 'null' and $this->content->parameter = '[]';
-		$data['selected_checkbox'] = Format::forge($this->content->parameter,'json')->to_array();
+		if(empty($this->content->parameter)) {	
+			$data['selected_checkbox'] = array();
+		} else {
+			$data['selected_checkbox'] = Format::forge($this->content->parameter,'json')->to_array();
+		}
 		
 		$this->data['content'] = View::factory('admin/type/shop',$data);
 	}

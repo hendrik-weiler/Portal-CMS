@@ -276,9 +276,32 @@
 
 			print '<strong>' . __('content.type.' . $nav->type) . '</strong>: <br />';
 
-			if(in_array($nav->type,array(1,2,3,6,7,10,11,12,13,14,15)))
+			if(in_array($nav->type,array(1,2,3,6,7,10,11,12,13,14)))
 			{
 				print empty($nav->label) ? '&nbsp;' : $nav->label;
+			}
+			else if($nav->type == 15)
+			{
+				if($nav->label != __('constants.untitled_element')) {
+
+					$labels = array();
+					$data = explode(',', $nav->label);
+					foreach ($data as $json) {
+						$data = Format::forge($json,'json')->to_array(); 
+						$prefix = Session::get('lang_prefix');
+						if(isset($data[$prefix])) {
+							$labels[] = $data[$prefix];
+						} else {
+							$labels[] = array_shift($data);
+						}
+						
+					}
+					
+					print implode(', ', $labels);
+
+				} else {
+					print '&nbsp;';
+				}
 			}
 			else
 			{

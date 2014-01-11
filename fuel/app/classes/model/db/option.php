@@ -35,7 +35,7 @@ class model_db_option extends Orm\Model
 
     if(empty($option))
     {
-      $option = new stdClass;
+      $option = new model_db_option();
       $option->key = $key;
       $option->value = 'undefined';
     }

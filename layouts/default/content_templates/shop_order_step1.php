@@ -68,22 +68,29 @@
 	<div class="shop-order-form-col2 span5">
 		<h5><?php print __('shop.order.payment_method') ?></h5>
 
+		<?php if(model_db_option::getKey('payment_method_advance_payment')->value == '1'): ?>
 		<div class="shop-order-form-group shop-order-form-group-payment-advance">
 			<?php $checked = array(); $payment_method == 'advance_payment' and $checked = array('checked'=>'checked'); ?>
 			<?php print Form::radio('payment_method', 'advance_payment', array('class'=>'shop-order-form-input') + $checked) ?> 
 			<?php print __('shop.order.advance_payment') ?>
 		</div>
+		<?php endif; ?>
 
+	<?php if(model_db_option::getKey('payment_method_invoice_payment')->value == '1'): ?>
 		<div class="shop-order-form-group shop-order-form-group-payment-invoice">
 			<?php $checked = array(); $payment_method == 'invoice_payment' and $checked = array('checked'=>'checked'); ?>
 			<?php print Form::radio('payment_method', 'invoice_payment', array('class'=>'shop-order-form-input') + $checked) ?> 
 			<?php print __('shop.order.invoice_payment') ?>
 		</div>
+		<?php endif; ?>
 
+		<?php if(model_db_option::getKey('payment_method_advance_payment')->value == '1'
+						or model_db_option::getKey('payment_method_invoice_payment')->value == '1'): ?>
 		<div class="shop-order-form-group">
 			<?php print Form::submit('back',__('shop.order.back')) ?>
 			<?php print Form::submit('next',__('shop.order.next')) ?>
 		</div>
+		<?php endif; ?>
 
 	</div>
 	<?php print Form::close(); ?>

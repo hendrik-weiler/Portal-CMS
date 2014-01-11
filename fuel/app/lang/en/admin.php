@@ -120,10 +120,24 @@ return array(
 			'delete' => 'Delete',
 			'back' => 'Back to overview',
 		),
+		'tax' => array(
+			'add_label' => 'Label', 
+			'add_value' => 'Tax',
+			'add' => 'Add a new group',
+			'edit' => 'Edit',
+			'save' => 'Save',
+			'delete' => 'Delete',
+			'back' => 'Back to overview',
+		),
 		'settings' => array(
 			'invoice_logo' => 'Invoice logo',
 			'invoice_data' => 'Invoice data',
 			'exchange_rates' => 'Exchanges rates',
+
+			'payment_methods' => 'Paymentmethods',
+			'payment_method_advance_payment' => 'Advance payment',
+			'payment_method_invoice_payment' => 'Invoice payment',
+
 			'shipping_costs' => 'Shipping costs',
 			'shipping_costs_with' => 'With summary: ',
 			'shipping_costs_costs_of' => ' shipping costs of ',
@@ -324,6 +338,11 @@ return array(
 			'dialog_save_confirm' => 'Save',
 			'dialog_save_cancel' => 'Cancel',
 		),
+		'15' => array(
+			'choose' => 'Choose one or more categories from this list:',
+			'submit' => 'Save',
+			'back' => 'Back to overview',
+		)
 	),
 
 	'sites' => array(

@@ -25,6 +25,25 @@
 			<?php endforeach; ?>
 	</div>
 	<div>
+			<h3><?php print __('shop.settings.payment_methods'); ?></h3>
+			<div class="input-field">
+				<?php 
+				$checked = array();
+				$payment_method_advance_payment == '1' and $checked = array('checked','checked');
+				print Form::checkbox('payment_method_advance_payment',1, $checked);
+				?>
+				<?php print Form::label(__('shop.settings.payment_method_advance_payment')); ?> 
+			</div>
+			<div class="input-field">
+				<?php 
+				$checked = array();
+				$payment_method_invoice_payment == '1' and $checked = array('checked','checked');
+				print Form::checkbox('payment_method_invoice_payment',1, $checked);
+				?>
+				<?php print Form::label(__('shop.settings.payment_method_invoice_payment')); ?> 
+			</div>
+	</div>
+	<div>
 			<h3><?php print __('shop.settings.shipping_costs'); $counter = 0; ?></h3>
 			<div class="shipping_fields">
 				<?php foreach ($shipping_costs as $key => $value): ?>

@@ -114,6 +114,15 @@ return array(
 		),
 		'groups' => array(
 			'add_label' => 'Name', 
+			'add' => 'Füge eine Steuergruppe hinzu',
+			'edit' => 'Bearbeiten',
+			'save' => 'Speichern',
+			'delete' => 'Löschen',
+			'back' => 'Zurück zur Übersicht',
+		),
+		'tax' => array(
+			'add_label' => 'Name', 
+			'add_value' => 'Umsatzsteuer',
 			'add' => 'Füge eine Warengruppe hinzu',
 			'edit' => 'Bearbeiten',
 			'save' => 'Speichern',
@@ -124,6 +133,11 @@ return array(
 			'invoice_logo' => 'Rechnungs logo',
 			'invoice_data' => 'Rechnungs daten',
 			'exchange_rates' => 'Wechselkurse',
+
+			'payment_methods' => 'Bezahlmethoden',
+			'payment_method_advance_payment' => 'Vorkasse',
+			'payment_method_invoice_payment' => 'Per Rechnung',
+
 			'shipping_costs' => 'Lieferpreise',
 			'shipping_costs_with' => 'Mit gesamtpreis: ',
 			'shipping_costs_costs_of' => ' Lieferpreis von ',
@@ -143,7 +157,7 @@ return array(
 			'fax' => 'Fax',
 			'ust_id' => 'Ust. Id',
 			'tax_id' => 'Steuernummer',
-			'local_court' => 'Geschäftsführer',
+			'local_court' => 'Amtsgericht',
 			'commercial_register_number' => 'Handelsregister Nummer',
 			'manager' => 'Geschäftsführer',
 			'bank_name' => 'Bankname',
@@ -325,6 +339,11 @@ return array(
 			'dialog_save_confirm' => 'Speichern',
 			'dialog_save_cancel' => 'Abbrechen',
 		),
+		'15' => array(
+			'choose' => 'Wählen Sie ein oder mehrere Kategorien aus, die Sie angezeigen wollen:',
+			'submit' => 'Speichern',
+			'back' => 'Zurück zur Übersicht',
+		)
 	),
 
 	'sites' => array(

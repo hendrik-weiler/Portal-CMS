@@ -18,6 +18,11 @@ return array(
 	'admin/shop/orders/display/:id' => 'shop/order/display',
 	'admin/shop/orders' => 'shop/order/index',
 
+	'admin/shop/tax/delete/:id' => 'shop/tax/delete',
+	'admin/shop/tax/edit/:id' => 'shop/tax/edit',
+	'admin/shop/tax/add' => 'shop/tax/add',
+	'admin/shop/tax' => 'shop/tax/index',
+
 	'admin/shop/groups/delete/:id' => 'shop/group/delete',
 	'admin/shop/groups/edit/:id' => 'shop/group/edit',
 	'admin/shop/groups/add' => 'shop/group/add',

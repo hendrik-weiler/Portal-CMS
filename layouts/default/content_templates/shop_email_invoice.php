@@ -3,7 +3,7 @@
 	<tr>
 		<td>
 			<br><br><br>
-			<span style="font-size:10px"><?php print $setting_company ?> &bull; <?php print $setting_street ?> &bull; <?php print $setting_zip_code . ' ' . $setting_location ?></span>
+			<span style="font-size:10px"><?php print $setting_company ?> &bull; <?php print $setting_street ?> &bull; <?php print $setting_zip_code . ' ' . $setting_location ?></span><br>
 			<?php print $company ?><br />
 			<?php print $first_name . ' ' . $last_name ?><br />
 			<?php print $street ?><br />
