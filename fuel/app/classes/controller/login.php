@@ -25,6 +25,8 @@ class Controller_Login extends Controller
 
 	private $data = array();
 
+	public $ajaxLogin = false;
+
 	public function before()
 	{
 		$this->data['error'] = null;
@@ -108,7 +110,10 @@ class Controller_Login extends Controller
 		{
 			$this->data['error'] = '<div class="alert-message error"><p>' . __('error') . '</p></div>';
 		}
-		$this->response->body = View::factory('admin/login/index',$this->data);
+
+		if($this->ajaxLogin == false) {
+			$this->response->body = View::factory('admin/login/index',$this->data);
+		}
 	}
 
 	public function action_logout()

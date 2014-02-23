@@ -77,6 +77,10 @@ class Controller_Shop_Order extends Controller
 		$data['order_id'] = $order->id;
 		
 		$this->data['content'] = View::factory('admin/shop/columns/orders_display',$data);
+
+        if(Input::post('back') != '') {
+            Response::redirect('admin/shop/orders');
+        }
 	}
 
 	public function action_display_mail()
@@ -104,6 +108,6 @@ class Controller_Shop_Order extends Controller
 
 	public function after($response)
 	{
-		$this->response->body = View::factory('admin/shop',$this->data);
+		$this->response->body = View::factory('admin/index',$this->data);
 	}
 }

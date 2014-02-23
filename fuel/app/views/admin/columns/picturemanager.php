@@ -19,18 +19,19 @@
 	</script>
 
 	<?php print \Asset::css('bootstrap.min.css') ?>
+    <?php print \Asset::css('ui.css') ?>
 	<?php print \Asset::css('picturemanager.css') ?>
 </head>
 <body>
-	<div class="container">
-		<div class="navigation">
+	<div class="row-fluid">
+		<div class="navigation col-xs-3">
 			<ul>
 				<?php foreach(Lang::get('picturemanager.types') as $key => $type): ?>
 				<li><a <?php print $key == $current_type ? 'class="active"' : '' ?> href="<?php print Uri::create('admin/picturemanager/' . $key) ?>"><?php print $type ?></a></li>
 				<?php endforeach; ?>
 			</ul>
 		</div>
-		<div class="content">
+		<div class="content col-xs-9">
 			<?php print $content ?>
 		</div>
 	</div>

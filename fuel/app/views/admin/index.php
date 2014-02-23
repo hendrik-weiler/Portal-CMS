@@ -16,7 +16,9 @@
 
   <!-- CSS concatenated and minified via ant build script-->
   <link rel="stylesheet" href="<?php print Uri::create('assets/css/bootstrap.min.css') ?>">
+  <link rel="stylesheet" href="<?php print Uri::create('assets/css/bootstrap-theme.min.css') ?>">
   <link rel="stylesheet" href="<?php print Uri::create('assets/css/admin.css') ?>">
+  <link rel="stylesheet" href="<?php print Uri::create('assets/css/ui.css') ?>">
   <link rel="stylesheet" href="<?php print Uri::create('assets/css/spectrum.css') ?>">
   <link rel="stylesheet" href="<?php print Uri::create('assets/css/elrte/smoothness/jquery-ui-1.8.13.custom.css') ?>">
   <!-- end CSS-->
@@ -29,6 +31,7 @@
   <?php print Asset\Manager::get('js->dialog->dialog') ?>
   <?php print Asset\Manager::get('js->picturemanager->picturemanager') ?>
   <?php print Asset\Manager::get('js->libs->spectrum') ?>
+  <?php print Asset\Manager::get('js->libs->bootstrap.min') ?>
 
   <script>
     var _prompt = {
@@ -37,6 +40,7 @@
       ok : '<?php print __('prompt.' . Uri::segment(2) . '.ok') ?>',
       cancel : '<?php print __('prompt.' . Uri::segment(2) . '.cancel') ?>'
     };
+    var _language = "<?php print str_replace("/","",model_db_accounts::getCol(Session::get('session_id'),'language')) ?>";
     var _url = '<?php print Uri::create('/') ?>';
     var _currentPos = '<?php 
     if(Uri::segment(2) == 'accounts')
@@ -47,97 +51,113 @@
       print Uri::segment(2);
     ?>';
   </script>
-  <script src="<?php print Uri::create('assets/js/libs/bootstrap-tabs.js') ?>"></script>
 </head>
 
 <body>
-  <div class="container">
-    <header>
-      <div class="userarea row">
-        <div class="user span3"><strong><?php print __('constants.user') . ':</strong> ' . model_db_accounts::getCol(Session::get('session_id'),'username') ?></div>  
-        <div class="span10 supersearch">
-          <div class="row">
-            <div class="span2">Supersearch</div>
-            <div class="span4"><?php print Form::select('supersearch_cat',0,Controller_Supersearch_Supersearch::get_supersearch_columns($permission)) ?></div>
-            <div class="span4"><?php print Form::input('supersearch_input','',array('class'=>'large')) ?></div>
-          </div>
-        </div>
-        <div class="logout span3">
-          <a style="padding-right:10px" href="<?php print Uri::create('admin/clear_cache?return=' . Uri::current()); ?>"><?php print __('nav.clear_cache') ?></a>
-          <a href="<?php print Uri::create('admin/logout'); ?>"><?php print __('nav.logout') ?></a>
-        </div>
+
+<div class="line row">
+  <div class="col-xs-8 padding15 searchdiv">
+    <div class="row inputbutton">
+      <div class="col-xs-8 inputbutton-input">
+          <?php print Form::input('supersearch_input','',array('placeholder'=>'Webseite durchsuchen...')) ?>
+          <?php print Form::select('supersearch_cat',0,Controller_Supersearch_Supersearch::get_supersearch_columns($permission),array('style'=>'display:none;')) ?>
       </div>
-
-      <div class="row logo_lang">
-
-      <div class="span7">
-        <img src="<?php print Uri::create('assets/img/admin/logo.png'); ?>" /> 
-        <div class="version"><?php print model_about::show_version() ?></div>
-      </div>
-      
-      <div class="span8" id="change_lang">
-    <div class="clearfix">
-     <?php print Form::label(__('constants.choose_lang')); ?>
-     <div class="input">
-        <?php 
-          
-
-          $langs = model_permission::getValidLanguages();
-
-          $curr_prefix = model_db_language::find('first',array(
-            'where' => array('prefix'=>Session::get('lang_prefix'))
-          ));
-
-          print Form::select('lang_prefix',$curr_prefix->id,$langs) . ' ';
-
-          print Form::submit('change',__('constants.choose_lang_submit'),array('class'=>'btn'));
-
-        ?>
+      <div class="col-xs-4 inputbutton-button">
+        <img src="<?php print Uri::create('assets/img/icons/lupe.gif') ?>" alt="">
       </div>
     </div>
-      </div>
+  </div>
+  <div class="col-xs-4 padding15 logoutdiv">
+      <a href="<?php print Uri::create('admin/clear_cache?return=' . Uri::current()); ?>"><?php print __('nav.clear_cache') ?></a>
+      <a href="<?php print Uri::create('admin/logout'); ?>"><?php print __('nav.logout') ?></a>
+  </div>
+</div>
+<div class="graycontainer globalmenu">
+  <div class="description">
+    Sprachversion
+  </div>
+  <div class="list">
+    <ul>
+    <?php 
+      $langs = model_permission::getValidLanguages();
 
-      </div>
+      $curr_prefix = model_db_language::find('first',array(
+        'where' => array('prefix'=>Session::get('lang_prefix'))
+      ));
 
-    <?php print file_exists(APPPATH . 'INSTALL_TOOL_DISABLED') ? '' :  '<div class="error">' . __('constants.install_tool_usable') . '</div>' ?>
-    
-    </header>
-    <div id="main" role="main">
-      <noscript>
-        <div class="well"><?php print __('nojavascript'); ?></div>
-      </noscript>
-      <nav class="clearfix">
-        <ul class="tabs">
-          <li <?php print (Uri::segment(2) == 'dashboard') ? 'class="active"' : '' ?>><a href="<?php print Uri::create('admin/dashboard'); ?>"><?php print __('nav.dashboard') ?></a></li>
+      $active = '';
+      foreach ($langs as $key => $value) {
+        $curr_prefix->id == $key ? $active = 'class="active"' : $active = '';
+        $lang = model_db_language::find($key);
+        print '<li><a ' . $active . ' href="' . Uri::create('admin/inlineedit/lang/change/' . $lang->prefix) . '?redirect=' . Uri::create('admin/dashboard') . '">' . $value . '</a></li>';
+      }
+    ?>
+    </ul>
+  </div>
+</div>
+
+<div class="graycontainer globalmenu">
+  <div class="description">
+    CMS
+  </div>
+  <div class="list">
+    <ul>
+          <li><a <?php print (Uri::segment(2) == 'dashboard') ? 'class="active"' : '' ?> href="<?php print Uri::create('admin/dashboard'); ?>"><?php print __('nav.dashboard') ?></a></li>
 
           <?php if($permission[0]['valid']): ?>
-          <li <?php print (in_array(Uri::segment(2),array('sites','content','navigation'))) ? 'class="active"' : '' ?>><a href="<?php print Uri::create('admin/navigation'); ?>"><?php print __('nav.navigation') ?></a></li>
+          <li><a <?php print (in_array(Uri::segment(2),array('sites','content','navigation'))) ? 'class="active"' : '' ?> href="<?php print Uri::create('admin/navigation'); ?>"><?php print __('nav.navigation') ?></a></li>
           <?php endif; ?>
 
           <?php if($permission[2]['valid']): ?>
-          <li <?php print (Uri::segment(2) == 'news') ? 'class="active"' : '' ?>><a href="<?php print Uri::create('admin/news'); ?>"><?php print __('nav.news') ?></a></li>
+          <li><a <?php print (Uri::segment(2) == 'news') ? 'class="active"' : '' ?> href="<?php print Uri::create('admin/news'); ?>"><?php print __('nav.news') ?></a></li>
           <?php endif; ?>
 
           <?php if($permission[4]['valid']): ?>
-          <li <?php print (Uri::segment(2) == 'language') ? 'class="active"' : '' ?>><a href="<?php print Uri::create('admin/language'); ?>"><?php print __('nav.language') ?></a></li>
+          <li><a <?php print (Uri::segment(2) == 'language') ? 'class="active"' : '' ?> href="<?php print Uri::create('admin/language'); ?>"><?php print __('nav.language') ?></a></li>
           <?php endif; ?>
 
           <?php if($permission[3]['valid']): ?>
-          <li <?php print (Uri::segment(2) == 'settings') ? 'class="active"' : '' ?>><a href="<?php print Uri::create('admin/settings'); ?>"><?php print __('nav.settings') ?></a></li>
+          <li><a <?php print (Uri::segment(2) == 'settings') ? 'class="active"' : '' ?> href="<?php print Uri::create('admin/settings'); ?>"><?php print __('nav.settings') ?></a></li>
           <?php endif; ?>
 
           <?php if($permission[5]['valid']): ?>
-          <li <?php print (in_array(Uri::segment(2),array('advanced','accounts'))) ? 'class="active"' : '' ?>><a href="<?php print Uri::create('admin/advanced'); ?>"><?php print __('nav.advanced') ?></a></li>
+          <li><a <?php print (in_array(Uri::segment(2),array('advanced','accounts'))) ? 'class="active"' : '' ?> href="<?php print Uri::create('admin/advanced'); ?>"><?php print __('nav.advanced') ?></a></li>
           <?php endif; ?>
+    </ul>
+  </div>
+</div>
 
-          <li><a href="<?php print Uri::create('admin/shop/articles'); ?>"><?php print __('nav.shop') ?></a></li>
-        </ul>
-      </nav>
-      <section id="content" class="clearfix">
+<div class="graycontainer globalmenu">
+  <div class="description">
+    Shop
+  </div>
+  <div class="list">
+    <ul>
+          <li><a <?php print (Uri::segment(3) == 'orders') ? 'class="active"' : '' ?> href="<?php print Uri::create('admin/shop/orders'); ?>"><?php print __('nav.orders') ?></a></li>
+
+          <li><a <?php print (Uri::segment(3) == 'articles') ? 'class="active"' : '' ?> href="<?php print Uri::create('admin/shop/articles'); ?>"><?php print __('nav.article') ?></a></li>
+
+          <li><a <?php print (Uri::segment(3) == 'groups') ? 'class="active"' : '' ?> href="<?php print Uri::create('admin/shop/groups'); ?>"><?php print __('nav.groups') ?></a></li>
+
+          <li><a <?php print (Uri::segment(3) == 'tax') ? 'class="active"' : '' ?> href="<?php print Uri::create('admin/shop/tax'); ?>"><?php print __('nav.tax_groups') ?></a></li>
+
+          <li><a <?php print (Uri::segment(3) == 'settings') ? 'class="active"' : '' ?> href="<?php print Uri::create('admin/shop/settings'); ?>"><?php print __('nav.shop_settings') ?></a></li>
+    </ul>
+  </div>
+</div>
+
+
+    <?php print file_exists(APPPATH . 'INSTALL_TOOL_DISABLED') ? '' :  '<div class="error">' . __('constants.install_tool_usable') . '</div>' ?>
+    
+
+      <noscript>
+        <div class="well"><?php print __('nojavascript'); ?></div>
+      </noscript>
+
+      <div class="content graycontainer">
         <?php print $content; ?>
-      </section>
-    </div>
-  </div> <!--! end of #container -->
+      </div>
+
 
   <!-- scripts concatenated and minified via ant build script-->
   <script src="<?php print Uri::create('assets/js/mylibs/prompt.js') ?>"></script>
@@ -161,6 +181,10 @@
   var supersearch = new pcms.supersearch();
   supersearch.init_keyboard_shorcuts();
   </script>
+
+
+  <?php print Asset\Manager::get('js->tooltip'); ?>
+  <?php  print Asset\Manager::get('js->type->global');  ?>
   <!-- end scripts-->
   
 </body>

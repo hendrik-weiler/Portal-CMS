@@ -23,9 +23,9 @@
 class model_db_article extends Orm\Model
 {
 
-	protected static $_table_name = 'article';
+	public static $_table_name = 'article';
 
-	protected static $_properties = array('id', 'nr', 'label', 'price','article_group_id','tax_group_id','description','images', 'main_image_index', 'sold_out');
+	public static $_properties = array('id', 'nr', 'label', 'price','article_group_id','tax_group_id','description','images', 'main_image_index', 'sold_out');
 
 	public function get_label($lang_prefix='') 
 	{

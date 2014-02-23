@@ -23,9 +23,9 @@
 class model_db_navigation extends Orm\Model
 {
 
-	protected static $_table_name = 'en_navigation';
+	public static $_table_name = 'en_navigation';
 
-	protected static $_properties = array('id', 'label', 'group_id','url_title', 'parent', 'show_in_navigation','show_sub', 'sort', 'image', 'image_is_shown', 'parameter');
+	public static $_properties = array('id', 'label', 'group_id','url_title', 'parent', 'show_in_navigation','show_sub', 'sort', 'image', 'image_is_shown', 'parameter');
 
 	public static function setLangPrefix($prefix)
 	{

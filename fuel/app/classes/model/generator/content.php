@@ -328,14 +328,15 @@ class model_generator_content extends model_db_site
 			foreach ($data as $key => $value) {
 				if(preg_match('#(tpl_siteselector_[\w]+)#i', $key)) {
 					$nav = model_db_navigation::find($value);
-					$data[$key] = array();
-					$data[$key]['label'] = $nav->label;
-					$data[$key]['url'] = $nav->generateUrl();
-					if(!is_object($nav)) {
-						$data[$key] = array();
-						$data[$key]['label'] = '';
-						$data[$key]['url'] = '';
-					}
+                    if(is_object($nav)) {
+                        $data[$key] = array();
+                        $data[$key]['label'] = $nav->label;
+                        $data[$key]['url'] = $nav->generateUrl();
+                    } else {
+                        $data[$key] = array();
+                        $data[$key]['label'] = '';
+                        $data[$key]['url'] = '';
+                    }
 				}
 			}
 

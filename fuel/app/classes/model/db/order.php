@@ -23,9 +23,9 @@
 class model_db_order extends Orm\Model
 {
 
-	protected static $_table_name = 'order';
+	public static $_table_name = 'order';
 
-	protected static $_properties = array('id', 'delivery_address', 'cart', 'summary_prices','accept','canceled','created_at');
+	public static $_properties = array('id', 'delivery_address', 'cart', 'summary_prices','accept','canceled','created_at');
 
 	private function _0000_nr($number)
 	{

@@ -72,6 +72,9 @@ return array(
 	'admin/advanced/layout/choose' => 'advanced/advanced/layout_choose',
 	'admin/advanced/layout' => 'advanced/advanced/layout',
 
+	'admin/advanced/import' => 'advanced/import/index',
+	'admin/advanced/import/check' => 'advanced/import/check',
+
 	'admin/advanced/edit' => 'advanced/advanced/edit',
 	'admin/advanced' => 'advanced/advanced/index',
 
@@ -139,6 +142,8 @@ return array(
 	'admin/navigation/delete/:id' => 'navigation/navigation/delete',
 	'admin/navigation/edit/:id' => 'navigation/navigation/edit',
 	'admin/navigation/add' => 'navigation/navigation/add',
+	'admin/navigation/:group/:main/:sub' => 'navigation/navigation/index_main_sub',
+	'admin/navigation/:group/:main' => 'navigation/navigation/index_main',
 	'admin/navigation/:group' => 'navigation/navigation/index',
 	'admin/navigation' => 'navigation/navigation/index',
 

@@ -211,6 +211,8 @@ return array(
 		'choose_lang_submit' => 'Change',
 		'untitled_element' => 'Untitled',
 		'install_tool_usable' => '<strong>Warning:</strong> The install tool is usable. Create app/INSTALL_TOOL_DISABLED to disable it.',
+        'more_options' => 'More options',
+        'less_options' => 'Less options',
 	),
 
 	'content' => array(
@@ -237,8 +239,8 @@ return array(
 		'none_available' => 'Currently no contents in this site',
 		'preview' => 'Preview',
 		'confirm' => 'Accept',
-		'confirm_count_single' => ' entry will be accepted',
-		'confirm_count_multiple' => ' entries will be accepted',
+		'confirm_count_single' => ' entry is selected',
+		'confirm_count_multiple' => ' entries are selected',
 	),
 
 	'types' => array(
@@ -347,13 +349,13 @@ return array(
 
 	'sites' => array(
 		'add_header' => 'Create a new free site',
-		'edit_header' => 'Edit a site',
+		'edit_header' => 'Options',
 		'current_entries' => 'Current entries',
 		'no_entries' => 'Your have no sites created yet.',
 		'label' => 'Label',
 		'redirect' => 'Redirecto to given url by click (optional)',
 		'add' => 'Add a new site',
-		'edit' => 'Edit site',
+		'edit' => 'Save changes',
 		'site_title' => 'Title of site',
 		'keywords' => 'Keywords (optional, komma seperated)',
 		'description' => 'Description (optional)',
@@ -393,6 +395,15 @@ return array(
 		'image' => 'Picture',
 		'image_is_shown' => 'Picture will be shown',
 
+        'placeholder_site' => 'Type in label of page...',
+        'placeholder_group' => 'Type in label of group...',
+
+        'add' => 'Add',
+        'group_header' => 'Navigationgroups',
+        'site_header' => 'Pages of',
+        'site_headersimple' => 'Pages',
+        'subsite_header' => 'Subpages of',
+
 		'use_default_styles' => 'Use default style',
 		'description' => 'Description',
 		'text_color' => 'Text color',
@@ -417,6 +428,7 @@ return array(
 			'general' => 'General',
 			'seo' => 'Searchoptimizing',
 			'modules' => 'Modules',
+            'accounts' => 'Accounts',
 			'assets' => 'CSS/JS',
 			'layout' => 'Layout',
 			'back' => 'Back',

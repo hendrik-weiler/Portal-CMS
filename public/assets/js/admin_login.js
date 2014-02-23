@@ -1,7 +1,7 @@
 $(function() {
-	var top = ($(window).height() / 2) - $('#container').height();
+	var top = ($(window).height() / 2) - $('.container').height() /2 ;
 
-	$('#container').css({
+	$('.container').css({
 		'margin-top' : top
 	})
 });

@@ -16,14 +16,6 @@ $('#form_change').click(function(e) {
 
 if(/admin\/language/.test(window.location.href))
 {
-	$('.delete').prompt({
-		header : _prompt.header,
-		text : _prompt.text,
-		ok : _prompt.ok,
-		cancel : _prompt.cancel,
-		href : 'attr.href',
-		data : []
-	});
 
 	$('#language_list').sortable();
 	$('#language_list').bind('sortupdate',function(event, ui) {
@@ -36,8 +28,8 @@ if(/admin\/language/.test(window.location.href))
 
 			$('#language_list div').removeClass('startlanguage');
 			$('#language_list div').eq(0).addClass('startlanguage');
-			var ltext = $('#language_list strong.startlanguage-text').clone();
-			$('#language_list strong.startlanguage-text').remove();
+			var ltext = $('#language_list div.startlanguage-text').clone();
+			$('#language_list div.startlanguage-text').remove();
 			$('#language_list div').eq(0).append(ltext);
 	});
 
@@ -47,16 +39,6 @@ if(/admin\/language/.test(window.location.href))
 
 if(/admin\/navigation/.test(window.location.href))
 {
-	$('#navigation_list').sortable({
-		update: function(event, ui) {
-			var data = [];
-			$.each($('#navigation_list section'),function(key,value) {
-				data[key] = $(this).attr('id');
-			});
-
-			$.post(_url + 'admin/navigation/order/update',{'order' : data});
-		}
-	});
 
 	$('body').on('click','#addnav',function(e) {
 		e.preventDefault();

@@ -1,16 +1,23 @@
 <script type="text/javascript" src="<?php print Uri::create('assets/js/tiny_mce/tiny_mce.js'); ?>"></script>
 <script type="text/javascript" src="<?php print Uri::create('assets/js/siteselector/siteselector.js') ?>"></script>
 <?php print Form::open(array('action'=>'admin/content/' . Uri::segment(3) . '/edit/' . Uri::segment(5) . '/type/13/edit','enctype'=>'multipart/form-data')) ?>
-<div class="span7">
-    <div class="clearfix">
-      <?php print Form::label(__('types.13.template')); ?>
-      <div class="input">
-        <?php print Form::select('template', $selected_template, $templates); ?>
-      </div>
+<div class="col-xs-1 backbutton">
+    <label>
+        <?php print Form::submit('back',__('types.15.back'),array('class'=>'hide')); ?>
+        <img src="<?php print Uri::create('assets/img/icons/arrow_left.png') ?>" alt=""/>
+    </label>
+</div>
+<div class="col-xs-11 vertical graycontainer globalmenu">
+    <div class="description">
+      <?php print Form::label(__('content.type.13')); ?>
     </div>
-    <div class="row" style="margin-bottom:20px;">
-      <div class="picturemanager-button"><?php print Lang::get('picturemanager_button') ?></div>
-    </div>
+    <div class="list">
+    <div class="col-xs-6 padding15">
+        <div class="picturemanager-button button"><?php print Lang::get('picturemanager_button') ?></div>
+        <?php print Form::label(__('types.13.template')); ?>
+        <div class="input">
+            <?php print Form::select('template', $selected_template, $templates); ?>
+        </div>
     <?php
     $variableStorage = array();
     if(!empty($template_variables))
@@ -47,7 +54,7 @@
         {
           !isset( ${str_replace('$','',$variable)} ) and ${str_replace('$','',$variable)} = '';
           $name = str_replace('$','',$variable);
-          print '<button class="btn siteselector_button_' . $name . ' ' . $name . '">' . __('siteselector_button') . '</button>';
+          print '<button class="button siteselector_button_' . $name . ' ' . $name . '">' . __('siteselector_button') . '</button>';
           $label = '&nbsp;';
           $navigation = model_db_navigation::find(${str_replace('$','',$variable)});
           if(!is_object($navigation)) {
@@ -76,7 +83,8 @@
 
     ?>
 </div>
-<div class="span8">
+</div>
+<div class="col-xs-6">
 	<h3><?php print __('types.13.preview') ?></h3>
 	<p>
 		<?php if($selected_template === 0) print __('types.13.info'); ?>
@@ -87,11 +95,11 @@
 		<?php endif; ?>
 	</p>
 </div>
-<div class="span16">
-	<div class="actions">
-		<?php print Form::submit('confirm',__('types.13.submit'),array('class'=>'btn primary')); ?>
-		<?php print Form::submit('back',__('types.13.back'),array('class'=>'btn secondary')); ?>
-	</div>
+
+<div class="col-xs-12 padding15">
+    <?php print Form::submit('confirm',__('types.13.submit'),array('class'=>'button')); ?>
+</div>
+
 </div>
 <?php print Form::close(); ?>
 

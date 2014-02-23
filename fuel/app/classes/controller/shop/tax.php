@@ -84,6 +84,9 @@ class Controller_Shop_Tax extends Controller
 
 		$this->data['content'] = View::factory('admin/shop/columns/tax_edit',$data);
 
+        if(Input::post('back') != '') {
+            Response::redirect('admin/shop/tax');
+        }
 	}
 
 	public function action_index()
@@ -97,6 +100,6 @@ class Controller_Shop_Tax extends Controller
 
 	public function after($response)
 	{
-		$this->response->body = View::factory('admin/shop',$this->data);
+		$this->response->body = View::factory('admin/index',$this->data);
 	}
 }

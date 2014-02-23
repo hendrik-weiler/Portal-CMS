@@ -93,7 +93,7 @@ return array(
 	'shop' => array(
 		'articles' => array(
 			'add_label' => 'Name', 
-			'add' => 'Füge einen Artikel dazu',
+			'add' => 'Hinzufügen',
 			'label_of_article' => 'Name des Artikels',
 			'article_images' => 'Artikel bilder',
 			'description' => 'Beschreibung',
@@ -212,6 +212,8 @@ return array(
 		'choose_lang_submit' => 'Wechsel',
 		'untitled_element' => 'Unbenannt',
 		'install_tool_usable' => '<strong>Achtung:</strong> Das Installationswerkzeug ist verwendbar. Erstelle app/INSTALL_TOOL_DISABLED um es auszuschalten.',
+        'more_options' => 'Mehr optionen',
+        'less_options' => 'Weniger optionen',
 	),
 
 	'content' => array(
@@ -354,7 +356,7 @@ return array(
 		'label' => 'Beschreibung',
 		'redirect' => 'Weiterleitung bei Klick(optional)',
 		'add' => 'Neue Seite',
-		'edit' => 'Seite ändern',
+		'edit' => 'Speichern',
 		'site_title' => 'Titel der Seite',
 		'keywords' => 'Schlüsselwörter (optional, Komma getrennt)',
 		'description' => 'Seitenbeschreibung (optional)',
@@ -375,8 +377,6 @@ return array(
 		'no_entries' => 'Deine Navigation ist leer.',
 		'none_parent' => '(Keins)',
 		'label' => 'Beschreibung',
-		'add' => 'Neuer Navigationspunkt',
-		'edit' => 'Navigationspunkt ändern',
 		'nav_group' => 'Navigationsgruppe',
 		'parent' => 'Befindet sich in',
 		'show_in_navigation' => 'Sichtbar in der Navigation',
@@ -386,6 +386,15 @@ return array(
 			'left' => 'Linke Seite',
 			'right' => 'Rechte Seite'
 		),
+
+        'placeholder_site' => 'Name der Seite angeben...',
+        'placeholder_group' => 'Name der Gruppe angeben...',
+
+        'add' => 'Hinzufügen',
+        'group_header' => 'Navigationsgruppen',
+        'site_header' => 'Seiten von',
+        'site_headersimple' => 'Seiten',
+        'subsite_header' => 'Unterseiten von',
 
 		'add_navigation' => 'Navigation hinzufügen',
 		'edit_navigation' => 'Navigation umbenennen',
@@ -419,6 +428,7 @@ return array(
 			'seo' => 'Suchmaschinenoptimierung',
 			'modules' => 'Module',
 			'assets' => 'CSS/JS',
+            'accounts' => 'Accounts',
 			'layout' => 'Layout',
 			'back' => 'Back',
 		),

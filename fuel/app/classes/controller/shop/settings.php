@@ -239,6 +239,6 @@ class Controller_Shop_Settings extends Controller
 
 	public function after($response)
 	{
-		$this->response->body = View::factory('admin/shop',$this->data);
+		$this->response->body = View::factory('admin/index',$this->data);
 	}
 }

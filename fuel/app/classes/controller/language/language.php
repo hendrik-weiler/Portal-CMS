@@ -167,6 +167,9 @@ class Controller_Language_Language extends Controller
 
 			Response::redirect('admin/language');
 		}
+        if(isset($_POST['back'])) {
+            Response::redirect('admin/language');
+        }
 		
 		$data['label'] = $row->label;
 		$data['prefix'] = $row->prefix;

@@ -1,79 +1,80 @@
-<h3>
-	<?php print __('news.header') ?>
-</h3>
 <?php print Form::open(array('action'=>Uri::current() . '/add','class'=>'form_style_1')); ?>
-  <div class="clearfix">
-   <?php print Form::label(__('news.title')); ?>
-   <div class="input">
-      <?php print Form::input('title',$title); ?>
+<div class="col-xs-12 vertical graycontainer globalmenu">
+    <div class="description">
+        <h3>
+            <?php print __('news.header') ?>
+        </h3>
     </div>
-  </div>
-<?php
-	print '<div class="actions">';
+    <div class="list padding15">
+        <?php print Form::label(__('news.title')); ?>
 
-	print Form::submit('submit',__('news.submit'),array('class'=>'btn primary'));
+        <?php print Form::input('title',$title); ?>
 
-	print '</div>';
+        <?php
 
-	print Form::close();
-?>
-<hr />
+        print Form::submit('submit',__('news.submit'),array('class'=>'button'));
 
-<?php
+        print Form::close();
+        ?>
+        <hr />
 
-	try
-	{
+        <?php
 
-		$news = model_db_news::find('all',array(
-			'order_by' => array('creation_date'=>'DESC')
-		));
+        try
+        {
 
-	}
-	catch(Exception $e)
-	{
-		Controller_Language_Language::add_language(Session::get('lang_prefix'),'',true);
-	}
+            $news = model_db_news::find('all',array(
+                'order_by' => array('creation_date'=>'DESC')
+            ));
 
-	if(empty($news))
-	{
-		print __('news.no_entries');
-	}
-	else
-	{
-		foreach($news as $new)
-		{
-			writeRow($new);
-		}
-	}
+        }
+        catch(Exception $e)
+        {
+            Controller_Language_Language::add_language(Session::get('lang_prefix'),'',true);
+        }
 
-	function writeRow($nav,$class='news_entry')
-	{
-		print '<section id="' . $nav->id . '" class="list_entry clearfix ' . $class . '">';
+        if(empty($news))
+        {
+            print __('news.no_entries');
+        }
+        else
+        {
+            foreach($news as $new)
+            {
+                writeRow($new);
+            }
+        }
 
-		print '<date>';
+        function writeRow($nav,$class='')
+        {
+            print '<div id="' . $nav->id . '" class="list_entry news_item ' . $class . '">';
 
-		$date = new DateTime($nav->creation_date);
+            print '<div class="col-xs-3 padding15">';
 
-		print $date->format(__('news.dateformat'));
+            $date = new DateTime($nav->creation_date);
 
-		print '</date>';
+            print $date->format(__('news.dateformat'));
 
-		print '<span>';
+            print '</div>';
 
-		print $nav->title;
+            print '<div class="col-xs-6 padding15">';
 
-		print '</span>';
+            print $nav->title;
 
-		print '<div>';
+            print '</div>';
 
-		print '<a href="' . Uri::create('admin/news/edit/' . $nav->id) . '">' . __('constants.edit') . '</a> ';
-		print '<a data-id="' . $nav->id . '" class="delete" href="' . Uri::create('admin/news/delete/' . $nav->id) . '">' . __('constants.delete') . '</a>';
+            print '<div class="col-xs-3 news-options">';
 
-		print '</div>';
+            print '<a data-id="' . $nav->id . '" class="delete" href="' . Uri::create('admin/news/delete/' . $nav->id) . '"><img src="' . Uri::create('assets/img/icons/delete.png') . '" /></a>';
+            print '<a href="' . Uri::create('admin/news/edit/' . $nav->id) . '"><img src="' . Uri::create('assets/img/icons/edit.png') . '" /></a> ';
 
-		print '</section>';
-	}
-?>
+            print '</div>';
+
+            print '</div>';
+        }
+        ?>
+    </div>
+</div>
 
 <script type="text/javascript">
 	var dialog = new pcms.dialog('.delete', {

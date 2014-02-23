@@ -1,48 +1,42 @@
 <script type="text/javascript" src="<?php print Uri::create('assets/js/tiny_mce/tiny_mce.js'); ?>"></script>
-<div class="row">
-  <h3>
-    <?php print __('types.1.header') ?>
-  </h3>
-
-  <?php
-    print Form::open(array('action'=>Uri::current(),'class'=>'form_style_1'));
-  ?>
-
-  <div class="clearfix">
-   <?php print Form::label(__('types.1.label')); ?>
-   <div class="input">
-      <?php print Form::input('label',$label); ?>
+<?php print Form::open(array('action'=>Uri::current(),'class'=>'form_style_1'));  ?>
+<div class="col-xs-1 backbutton">
+    <label>
+        <?php print Form::submit('back',__('types.15.back'),array('class'=>'hide')); ?>
+        <img src="<?php print Uri::create('assets/img/icons/arrow_left.png') ?>" alt=""/>
+    </label>
+</div>
+<div class="col-xs-11 vertical graycontainer globalmenu">
+    <div class="description">
+        <h3>
+            <?php print __('types.1.header') ?>
+        </h3>
     </div>
-  </div>
-    
-  <div class="row">
+    <div class="list padding15">
+        <?php print Form::label(__('types.1.label')); ?>
+        <?php print Form::input('label',$label); ?>
 
-    <div class="span16" style="margin-bottom:20px;">
-      <div class="picturemanager-button"><?php print Lang::get('picturemanager_button') ?></div>
-    </div>
+        <div class="picturemanager-button"><?php print Lang::get('picturemanager_button') ?></div>
+        <br/>
 
-    <div class="span4">
-      <?php print Form::textarea('editor',$text,array('style'=>'width:300px;height:400px;')); ?>
-    </div>
+        <div class="col-xs-4">
+            <?php print Form::textarea('editor',$text,array('style'=>'width:100%;height:400px;')); ?>
+        </div>
 
-    <div class="span4" style="margin-left:90px;">
-      <?php print Form::textarea('editor2',$text2,array('style'=>'width:300px;height:400px;')); ?>
-    </div>
+        <div class="col-xs-4">
+            <?php print Form::textarea('editor2',$text2,array('style'=>'width:100%;height:400px;')); ?>
+        </div>
 
-    <div class="span4"  style="margin-left:90px;">
-      <?php print Form::textarea('editor3',$text3,array('style'=>'width:300px;height:400px;')); ?>
-    </div>
-  </div>
-  <?php
-    print '<div class="actions">';
+        <div class="col-xs-4">
+            <?php print Form::textarea('editor3',$text3,array('style'=>'width:100%;height:400px;')); ?>
+        </div>
 
-    print Form::submit('submit',__('types.1.submit'),array('class'=>'btn primary')) . ' ';
-    print Form::submit('back',__('types.1.back'),array('class'=>'btn secondary'));
-
-    print '</div>';
+    <?php
+    print Form::submit('submit',__('types.1.submit'),array('class'=>'button'));
 
     print Form::close();
-  ?>
+    ?>
+    </div>
 </div>
 
 <script type="text/javascript">

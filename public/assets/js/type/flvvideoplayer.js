@@ -66,7 +66,7 @@ $(function() {
 	}
 	save_dialog.onValidation = function(helper, self) {
 
-		return self.html.find('input').attr('value') != '';
+		return self.html.find('input').val() != '';
 
 	}
 	save_dialog.onValidationFail = function(helper, self) {

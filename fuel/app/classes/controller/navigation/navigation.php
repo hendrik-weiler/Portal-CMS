@@ -129,13 +129,56 @@ class Controller_Navigation_Navigation extends Controller
 		$data['label'] = '';
 		$data['parent'] = 0;
 		$data['show_sub'] = 0;
-        $data['group_id'] = 0;
+    $data['group_id'] = 0;
 		$data['parent_array'] = $this->_getParentArray();		
 		$data['mode'] = 'add';
 		$data['use_default_styles'] = 1;
 		$data['description'] = '';
 		$data['text_color'] = '#000000';
 		$data['background_color'] = '#FFFFFF';
+
+		$data['groupid'] = $this->param('group');
+		
+		$this->data['content'] = View::factory('admin/columns/navigation',$data);
+	}
+
+	public function action_index_main()
+	{
+		$data = array();
+		$data['label'] = '';
+		$data['parent'] = 0;
+		$data['show_sub'] = 0;
+    $data['group_id'] = 0;
+		$data['parent_array'] = $this->_getParentArray();		
+		$data['mode'] = 'add';
+		$data['use_default_styles'] = 1;
+		$data['description'] = '';
+		$data['text_color'] = '#000000';
+		$data['background_color'] = '#FFFFFF';
+
+		$data['groupid'] = $this->param('group');
+		$data['mainid'] = $this->param('main');
+		
+		$this->data['content'] = View::factory('admin/columns/navigation',$data);
+	}
+
+	public function action_index_main_sub()
+	{
+		$data = array();
+		$data['label'] = '';
+		$data['parent'] = 0;
+		$data['show_sub'] = 0;
+    $data['group_id'] = 0;
+		$data['parent_array'] = $this->_getParentArray();		
+		$data['mode'] = 'add';
+		$data['use_default_styles'] = 1;
+		$data['description'] = '';
+		$data['text_color'] = '#000000';
+		$data['background_color'] = '#FFFFFF';
+
+		$data['groupid'] = $this->param('group');
+		$data['mainid'] = $this->param('main');
+		$data['subid'] = $this->param('sub');
 		
 		$this->data['content'] = View::factory('admin/columns/navigation',$data);
 	}
@@ -151,17 +194,17 @@ class Controller_Navigation_Navigation extends Controller
 			$nav_point->label = (empty($label)) ? __('constants.untitled_element') : $label;
 			$nav_point->url_title = model_generator_seo::friendly_title($nav_point->label);
 			$nav_point->group_id = Input::post('id');
-			$nav_point->show_in_navigation = Input::post('show_in_navigation') == 1;
+			$nav_point->show_in_navigation = 1;
 			$nav_point->parent = Input::post('parent');
 			$nav_point->show_sub = 0;
-			$nav_point->image_is_shown = Input::post('image_is_shown');
+			$nav_point->image_is_shown = 1;
 
 			$nav_point->parameter = json_encode(array(
 
-				'text_color' => Input::post('text_color'),
-				'use_default_styles' => Input::post('use_default_styles') != '',
-				'background_color' => Input::post('background_color'),
-				'description' => Input::post('description'), 
+				'text_color' => '#000000',
+				'use_default_styles' => true,
+				'background_color' => '#FFFFFF',
+				'description' => ''
 
 			));
 
@@ -177,62 +220,6 @@ class Controller_Navigation_Navigation extends Controller
 
 			$last = model_db_navigation::find('last');
 			$navigation_id = $last->id;
-
-			if(!is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images'))
-				File::create_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix'), 'navigation_images');
-
-			if(!is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id))
-			{
-				File::create_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images', $navigation_id);
-				File::create_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id, 'original');
-				File::create_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id, 'preview');
-				File::create_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id, 'thumbs');
-			}
-
-			if(!empty($nav_point->image))
-			{
-				File::delete(DOCROOT.'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/original/' . $nav_point->image);
-				File::delete(DOCROOT.'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/preview/' . $nav_point->image);
-				File::delete(DOCROOT.'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/thumbs/' . $nav_point->image);
-			}	
-
-			$config = array(
-			    'path' => DOCROOT.'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/original',
-			    'randomize' => true,
-			    'auto_rename' => false,
-			    'ext_whitelist' => array('img', 'jpg', 'jpeg', 'gif', 'png'),
-			);
-			Upload::process($config);
-
-			if (Upload::is_valid())
-			{
-				$options = \Controller_Advanced_Advanced::getOptions();
-				Upload::save();
-				foreach(Upload::get_files() as $file)
-				{
-					$resizeObj = new image\resize(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/original/' . $file['saved_as']);
-					$size = Image::sizes(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/original/' . $file['saved_as']);
-					
-					if($size->width >= 1280)
-						$size->width = 1280;
-
-					if($size->height >= 720)
-						$size->height = 720;
-
-					$resizeObj -> resizeImage($size->width, $size->height, 'auto');
-					$resizeObj -> saveImage(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/original/' . $file['saved_as'], 100);
-
-					$resizeObj -> resizeImage(60, 60, 'auto');
-					$resizeObj -> saveImage(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/preview/' . $file['saved_as'], 100);
-
-					$resizeObj -> resizeImage($options['navigation_image_width'], $options['navigation_image_height'], 'auto');
-					$resizeObj -> saveImage(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/thumbs/' . $file['saved_as'], 100);
-				}
-			}
-
-			$last->image = $file['saved_as'];
-
-			$last->save();
 
 			$last_nav = model_db_navigation::find('last');
 
@@ -255,7 +242,11 @@ class Controller_Navigation_Navigation extends Controller
 			$added_nav = model_db_navigation::find('last');
 			model_permission::addNavigationToPermissionList($added_nav->id);
 
-			Response::redirect('admin/navigation/' . Input::post('id'));
+            $subnav = "";
+            if(Input::post('parent') != 0) {
+                $subnav = "/" . Input::post('parent');
+            }
+			Response::redirect('admin/navigation/' . Input::post('id') . $subnav);
 		}
 	}
 
@@ -476,11 +467,24 @@ class Controller_Navigation_Navigation extends Controller
 				File::delete_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/flash/' . $content->id);
 		}
 
-		Response::redirect('admin/navigation');
+        $id = $this->id;
+        $parent = $nav_point->parent;
+        $group = $nav_point->group_id;
+
+        $addurlsegments = "/" . $group;
+        if($parent == 0) {
+            $addurlsegments .= "/" . $id;
+        } else {
+            $addurlsegments .= "/" . $parent . "/" . $id;
+        }
+
+		Response::redirect('admin/navigation'.$addurlsegments);
 	}
 
 	public function action_order()
 	{
+        $this->_ajax = true;
+
 		$order = Input::post('order');
 
 		$last_main_entry = 0;
@@ -488,15 +492,8 @@ class Controller_Navigation_Navigation extends Controller
 		foreach($order as $position => $id)
 		{
 			$row = model_db_navigation::find($id);
-			if($row->parent != 0)
-			{
-				$row->parent = $last_main_entry;
-			}
 			$row->sort = $position;
 			$row->save();
-
-			if($row->parent == 0)
-				$last_main_entry = $id;
 		}
 
         Controller_Login::clear_cache();
@@ -586,7 +583,8 @@ class Controller_Navigation_Navigation extends Controller
 		$group->save();
 
 		$group = model_db_navgroup::find('last');
-		$this->response->body = $group->id;
+
+        Response::redirect('admin/navigation/' . $group->id);
 	}
 
 	public function after($response)

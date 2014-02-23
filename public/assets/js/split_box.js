@@ -2,7 +2,7 @@ $(function() {
 
 	var split_selects = [];
 
-	var first_pos = $('input[name="split_box[]"]').eq(0).position();
+	var first_pos = $('input[name="split_box[]"]').eq(0).offset();
 
 	if(first_pos === undefined || first_pos == null) return false;
 
@@ -13,7 +13,7 @@ $(function() {
 
 	$('input[name="split_box[]"]').click(function(e) {
 
-		var pos = $(this).position();
+		var pos = $(this).offset();
 
 		$('div.split_box_container').show();
 		$('div.split_box_container').animate({

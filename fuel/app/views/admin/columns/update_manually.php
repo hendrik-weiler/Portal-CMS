@@ -1,38 +1,43 @@
-<div id="update">
-  <ul class="tabs" data-tabs="tabs">
-    <li><a href="<?php print Uri::create('admin/advanced') ?>"><?php print __('advanced.tabs.back') ?></a></li>
-    <li class="active"><a href="<?php print Uri::create('admin/advanced/update') ?>">Updates</a></li>
-  </ul>
-  <div class="row">
-  </div>
+<div class="col-xs-12 vertical graycontainer globalmenu">
+    <div class="description">
+        <?php print __('nav.advanced') ?>
+    </div>
+    <div class="list padding15">
+        <ul  class="nav nav-tabs">
+            <li><a href="<?php print Uri::create('admin/advanced') ?>"><?php print __('advanced.tabs.back') ?></a></li>
+            <li class="active"><a href="<?php print Uri::create('admin/advanced/update') ?>">Updates</a></li>
+        </ul>
+        <div class="row">
+        </div>
 
-  <div class="message row hide">
-    <?php print __('advanced.updater.no_update_able'); ?>
-  </div>
+        <div class="message row hide">
+            <?php print __('advanced.updater.no_update_able'); ?>
+        </div>
 
-  <?php if(Input::get('result') != ''): ?>
-  <div class="result message <?php print Input::get('result') ?> row">
-    <?php print __('advanced.updater.' . Input::get('result')) ?>
-  </div>
-  <?php endif; ?>
+        <?php if(Input::get('result') != ''): ?>
+            <div class="result message <?php print Input::get('result') ?> row">
+                <?php print __('advanced.updater.' . Input::get('result')) ?>
+            </div>
+        <?php endif; ?>
 
-  <div class="update head row">
-    <div class="release_date span3"><?php print __('advanced.updater.release_date') ?></div>
-    <div class="version span1"><?php print __('advanced.updater.version') ?></div>
-    <div class="description span8"><?php print __('advanced.updater.description') ?></div>
-  </div>
+        <div class="update head row">
+            <div class="release_date span3"><?php print __('advanced.updater.release_date') ?></div>
+            <div class="version span1"><?php print __('advanced.updater.version') ?></div>
+            <div class="description span8"><?php print __('advanced.updater.description') ?></div>
+        </div>
 
-  <div class="results">...</div>
+        <div class="results">...</div>
 
-  <?php print Form::open(array('action' => 'admin/advanced/update/execute/manually','enctype'=>'multipart/form-data')) ?>
-<div class="row information">
-  <?php print __('advanced.updater.manually.instruction') ?>
-</div>
-  <?php print Form::file('package'); ?>
-  <p>
-  <?php print Form::submit('update_to',__('advanced.updater.manually.update'),array('class'=>'btn primary')); ?>
-</p>
-  <?php print Form::close(); ?>
+        <?php print Form::open(array('action' => 'admin/advanced/update/execute/manually','enctype'=>'multipart/form-data')) ?>
+        <div class="row information">
+            <?php print __('advanced.updater.manually.instruction') ?>
+        </div>
+        <?php print Form::file('package'); ?>
+        <p>
+            <?php print Form::submit('update_to',__('advanced.updater.manually.update'),array('class'=>'button')); ?>
+        </p>
+        <?php print Form::close(); ?>
+    </div>
 </div>
 <script type="text/javascript">
 
@@ -47,16 +52,16 @@ var _current_lang = "<?php print $user_lang ?>";
 var _current_version = <?php print model_about::$version ?>;
 
 var row = $('<div class="update row">' +
-    '<div class="release_date span3"></div>' +
-    '<div class="version span1"></div>' +
-    '<div class="description span7"></div>' +
-    '<div class="update-action span4"><a target="_blank" class="btn" href=""></a></div>' +
+    '<div class="release_date col-xs-2"></div>' +
+    '<div class="version col-xs-2"></div>' +
+    '<div class="description col-xs-6"></div>' +
+    '<div class="update-action col-xs-2"><a target="_blank" class="btn" href=""></a></div>' +
   '</div>');
 
 $.ajax({
     url: _base_url + '/updates.js',
     dataType: 'jsonp',
-    complete: function(data) { 
+    success: function(data) {
 
       console.log(updates);
 
@@ -105,8 +110,12 @@ $.ajax({
         $('.results').append(new_row);
       });
     },
-    error : function() {
-      $('div.message.hide').show();
+    timeout : 3000,
+    statusCode : {
+        404 : function() {
+            console.log('asd')
+            $('div.message.hide').show();
+        }
     }
 });
 

@@ -23,9 +23,9 @@
 class model_db_tax_group extends Orm\Model
 {
 
-	protected static $_table_name = 'tax_group';
+	public static $_table_name = 'tax_group';
 
-	protected static $_properties = array('id', 'label', 'value');
+	public static $_properties = array('id', 'label', 'value');
 
 	public static function to_selectbox() 
 	{

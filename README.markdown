@@ -1,12 +1,7 @@
-Portal Content Management System
+Portal Content Management System 2014
 ====================
-#### v: 1.036
+#### v: 1.00
 
-Download versions (stable ones marked with *):
----------------------
-[Download a copy of 1.37 beta dev1*](http://portalcms.hendrikweiler.com/pcms-1.37-beta-dev1.zip)<br />
-[Download a copy of 1.36](http://portalcms.hendrikweiler.com/pcms-1.36.zip)<br />
-[Download a copy of 1.35](http://portalcms.hendrikweiler.com/pcms-1.35.zip)<br />
 <br />
 Build on [Fuel Framework](https://github.com/fuel/fuel)<br />
 Using:<br />

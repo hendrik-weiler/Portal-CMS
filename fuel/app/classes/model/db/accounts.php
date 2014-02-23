@@ -23,9 +23,9 @@
 class model_db_accounts extends Orm\Model
 {
 
-	protected static $_table_name = 'accounts';
+	public static $_table_name = 'accounts';
 
-	protected static $_properties = array('id', 'username', 'password', 'session','language','admin','permissions');
+	public static $_properties = array('id', 'username', 'password', 'session','language','admin','permissions');
 
 	public static function getCol($session,$col)
 	{

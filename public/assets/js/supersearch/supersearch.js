@@ -74,9 +74,16 @@ pcms.supersearch = function()
 
 	function _create_selector(content)
 	{
+		var input = $('#form_supersearch_input');
+		var width = $('.inputbutton-input').width();
+		var width2 = $('.inputbutton-button').width();
+		var pos = input.position();
+
 		$(selector_html).remove();
 		$(selector_html).css({
-			left : ($(window).width() / 2) - 415,
+			left : pos.left + 15,
+			top : pos.top + 15 + 47,
+			width : width + width2,
 			zIndex : 105
 		}).html($(content));
 		$('body').prepend(selector_html);
@@ -121,7 +128,7 @@ pcms.supersearch = function()
 		searchterm = $('#form_supersearch_input').val();
 		if(searchterm == '')
 		{
-			$(selector_html).fadeOut();
+			$(selector_html).fadeOut(0);
 			is_shown = false;
 			return;
 		}

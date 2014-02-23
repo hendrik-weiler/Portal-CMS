@@ -14,7 +14,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
   <!-- CSS concatenated and minified via ant build script-->
+  <link href='http://fonts.googleapis.com/css?family=Alegreya+Sans:300,500,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="<?php print Uri::create('assets/css/bootstrap.min.css') ?>">
+  <link rel="stylesheet" href="<?php print Uri::create('assets/css/bootstrap-theme.min.css') ?>">
+  <link rel="stylesheet" href="<?php print Uri::create('assets/css/ui.css') ?>">
   <link rel="stylesheet" href="<?php print Uri::create('assets/css/admin_login.css') ?>">
   <!-- end CSS-->
 
@@ -24,35 +27,19 @@
 <body>
 
   <div class="container">
-    <figure>
-      <img src="<?php print Uri::create('assets/img/admin/logo.png'); ?>" />      
-    </figure>
-    <div class="row">
-      <?php print Form::open('admin/login'); ?>
-        <div class="clearfix">
-          <label for="xlInput"><?php print Form::label(__('username')); ?></label>
-          <div class="input">
-            <?php print Form::input('username',$username); ?>
-          </div>
-        </div>
-        <div class="clearfix">
-          <label for="xlInput"><?php print Form::label(__('password')); ?></label>
-          <div class="input">
-            <?php print Form::password('password',''); ?>
-          </div>
-        </div>
-      
-      <div class="actions">
-        <?php print Form::submit('login',__('button'),array('class'=>'btn primary')); ?>
-      </div>
-    
-    <?php
+      <div style="text-align:center;margin: 20px 0;"><img src="<?php print Uri::create('assets/img/admin/logo.png'); ?>" /></div>   
+      <div class="graycontainer padding20">
+      <?php 
+      print Form::open('admin/login'); 
+      print Form::input('username',$username,array('placeholder'=>__('username'))); 
+      print Form::password('password','',array('placeholder'=>__('password'))); 
+      print Form::submit('login',__('button'),array('class'=>'button')); 
       print Form::close();
-
       print $error;
-    ?>
+      ?>
     </div>
-  </div> <!--! end of #container -->
+    <div style="text-align:center;padding-top:15px;"><?php print model_about::show_version() ?></div>
+  </div>
 
 
   <?php print Asset\Manager::get('js->include->1_jquery->jquery') ?>

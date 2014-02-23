@@ -37,8 +37,8 @@ pcms.dialog = function(selector, options)
 	var _box = $('<div class="prompt"></div>');
 	var _title = $('<h3></h3>');
 	var _text = $('<p></p>');
-	var _confirm = $('<button></button>');
-	var _cancel = $('<button></button>');
+	var _confirm = $('<button class="button"></button>');
+	var _cancel = $('<button class="button"></button>');
 	var _options = options;
 
 	this.html = null;

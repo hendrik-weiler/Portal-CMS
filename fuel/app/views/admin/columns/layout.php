@@ -1,10 +1,14 @@
-<section id="layout">
-  <ul class="tabs" data-tabs="tabs">
-    <li><a href="<?php print Uri::create('admin/advanced') ?>"><?php print __('advanced.tabs.back') ?></a></li>
-    <li class="active"><a href="<?php print Uri::create('admin/advanced/layout') ?>"><?php print __('advanced.tabs.layout') ?></a></li>
-  </ul>
+<div class="col-xs-12 vertical graycontainer globalmenu">
+    <div class="description">
+        <?php print __('nav.advanced') ?>
+    </div>
+    <div class="list padding15">
+      <ul class="nav nav-tabs">
+        <li><a href="<?php print Uri::create('admin/advanced') ?>"><?php print __('advanced.tabs.back') ?></a></li>
+        <li class="active"><a href="<?php print Uri::create('admin/advanced/layout') ?>"><?php print __('advanced.tabs.layout') ?></a></li>
+      </ul>
   <div class="row">
-    <div class="span4">
+    <div class="col-xs-3">
       <h2><?php print __('advanced.layout.current') ?></h2>
       <?php
           $layout = model_db_option::getKey('layout');
@@ -47,13 +51,13 @@
           }
 
           print '<div class="actions">';
-          print Form::submit('submit',__('constants.save'),array('class'=>'btn primary'));
+          print Form::submit('submit',__('constants.save'),array('class'=>'button primary'));
           print '</div>';
 
           print Form::close();
       ?>
     </div>
-    <div class="span11">
+    <div class="col-xs-9">
       <?php 
         foreach(File::read_dir(LAYOUTPATH . '/',1) as $key => $dir) 
         {
@@ -82,5 +86,5 @@
     </div>
   </div>
 
-</section>
+</div>
 <script>var _wait = "<?php print __('advanced.layout.wait') ?>";</script>

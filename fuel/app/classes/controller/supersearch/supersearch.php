@@ -300,7 +300,7 @@ class Controller_Supersearch_Supersearch extends Controller
 	{
 		$html = '<div class="result-block row">';
 
-		$html .= '<div class="span3 type">';
+		$html .= '<div class="col-xs-2 type">';
 
 		$html .= '<h6>' . __('supersearch.' . $this->type) . '</h6>';
 
@@ -309,7 +309,7 @@ class Controller_Supersearch_Supersearch extends Controller
 
 		$html .= '</div>';
 
-		$html .= '<div class="span10">';
+		$html .= '<div class="col-xs-10">';
 
 		$html .= '<ul>';
 

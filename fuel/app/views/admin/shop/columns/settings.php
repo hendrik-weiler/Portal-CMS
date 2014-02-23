@@ -1,7 +1,11 @@
 <?php print Form::open(array('action'=>'admin/shop/settings/edit','enctype'=>'multipart/form-data')); ?>
-<div class="row">
+<div class="col-xs-12 vertical graycontainer globalmenu">
+<div class="description">
+    <?php print __('nav.settings') ?>
+</div>
+<div class="list padding15">
 
-	<div class="span7">
+	<div class="col-xs-6">
 	<div>
 		<h3><?php print __('shop.settings.invoice_logo'); ?></h3>
 		<?php if(!empty($invoice_logo)): ?>
@@ -53,18 +57,18 @@
 					<?php print __('shop.settings.shipping_costs_costs_of'); ?> 
 					<?php print Form::input('cost_value_' . $counter, number_format($value, 2, ',', ''), array('class'=>'mini')); ?>
 					<?php if($counter >= 1): ?>
-					<div data-index="<?php print $counter ?>" class="btn remove_shipping error"><?php print __('shop.settings.remove_shipping'); ?></div>
+					<div data-index="<?php print $counter ?>" class="button remove_shipping error"><?php print __('shop.settings.remove_shipping'); ?></div>
 					<?php endif; ?>
 					<?php $counter++; ?>
 				</div>
 				<?php endforeach; ?>
 			</div>
-			<div class="btn success add_shipping"><?php print __('shop.settings.add_shipping'); ?></div>
+			<div class="button success add_shipping"><?php print __('shop.settings.add_shipping'); ?></div>
 	</div>
 
 </div>
 
-<div class="span7">
+<div class="col-xs-6">
 	<h3><?php print __('shop.settings.invoice_data'); ?></h3>
 
 	<div class="input-field">
@@ -164,10 +168,11 @@
 	</div>
 
 </div>
-
+    <br/>
+    <?php print Form::submit('edit_settings',__('shop.articles.save'), array('class'=>'button')) ?>
 </div>
-<div class="actions">
-	<?php print Form::submit('edit_settings',__('shop.articles.save'), array('class'=>'btn primary')) ?> 
+
+
 	<?php print Form::close(); ?>
 </div>
 

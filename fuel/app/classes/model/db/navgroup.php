@@ -25,7 +25,7 @@ class model_db_navgroup extends Orm\Model
 
   public static $_table_name = 'en_navigation_group';
 
-  protected static $_properties = array('id', 'title');
+  public static $_properties = array('id', 'title');
 
   public static function setLangPrefix($prefix)
   {

@@ -23,9 +23,9 @@
 class model_db_article_group extends Orm\Model
 {
 
-	protected static $_table_name = 'article_group';
+	public static $_table_name = 'article_group';
 
-	protected static $_properties = array('id', 'label');
+	public static $_properties = array('id', 'label');
 
 	public static function to_selectbox($lang_prefix) 
 	{

@@ -1,23 +1,31 @@
-<h3>
-  <?php print __('types.5.header') ?>
-</h3>
-
-<?php
-  print Form::open(array('action'=>Uri::current(),'class'=>'form_style_1','enctype'=>'multipart/form-data'));
-
-?>
-<div class="row">
-  <div class="span5">
-  <?php writeDownEverything('col_1',$col_1_selected); ?>
-  </div>
-  <div class="span5">
-  <?php writeDownEverything('col_2',$col_2_selected); ?>
-  </div>
-  <div class="span5">
-  <?php writeDownEverything('col_3',$col_3_selected); ?>
-  </div>
+<?php print Form::open(array('action'=>Uri::current(),'class'=>'form_style_1','enctype'=>'multipart/form-data')); ?>
+<div class="col-xs-1 backbutton">
+    <label>
+        <?php print Form::submit('back',__('types.15.back'),array('class'=>'hide')); ?>
+        <img src="<?php print Uri::create('assets/img/icons/arrow_left.png') ?>" alt=""/>
+    </label>
 </div>
-
+<div class="col-xs-11 vertical graycontainer globalmenu">
+    <div class="description">
+        <h3>
+            <?php print __('types.5.header') ?>
+        </h3>
+    </div>
+    <div class="list padding15">
+        <div class="col-xs-4">
+            <?php writeDownEverything('col_1',$col_1_selected); ?>
+        </div>
+        <div class="col-xs-4">
+            <?php writeDownEverything('col_2',$col_2_selected); ?>
+        </div>
+        <div class="col-xs-4">
+            <?php writeDownEverything('col_3',$col_3_selected); ?>
+        </div>
+        <div class="col-xs-12">
+            <?php print print Form::submit('submit',__('types.5.submit'),array('class'=>'button')) ?>
+        </div>
+    </div>
+</div>
 <?php
 function writeDownEverything($name,$selected)
 {
@@ -90,9 +98,7 @@ function writeDownEverything($name,$selected)
     }
   }
 }
-?>
 
-<?php
   function writeRowContent($nav,$id,$selected,$name)
   {
     print '<div id="' . $nav->id . '" class="list_entry clearfix content_type_entry">';
@@ -119,13 +125,6 @@ function writeDownEverything($name,$selected)
 
     print '</div>';
   }
-
-  print '<div class="actions">';
-
-  print Form::submit('submit',__('types.5.submit'),array('class'=>'btn primary')) . ' ';
-  print Form::submit('back',__('types.5.back'),array('class'=>'btn secondary'));
-
-  print '</div>';
 
   print Form::close();
 ?>

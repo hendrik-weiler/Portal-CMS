@@ -56,6 +56,9 @@ class Controller_Siteselector_Siteselector extends Controller
 		$result = array();
 		$lang_and_groups = array();
 
+        $default_lang = Config::get('language');
+        $default_prefix = Session::get('lang_prefix');
+
 		model_generator_module::$navigation = new stdClass;
 
 		foreach (model_db_language::find('all',array(
@@ -64,10 +67,13 @@ class Controller_Siteselector_Siteselector extends Controller
 
 			model_db_navigation::setLangPrefix($lang->prefix);
 			model_db_navgroup::setLangPrefix($lang->prefix);
+            Config::set('language',$lang->prefix);
+            Session::set('lang_prefix',$lang->prefix);
 
 			$lang_and_groups[$lang->prefix] = array();
 		
 			foreach (model_db_navgroup::find('all') as $navgroup_obj) {
+
 				$lang_and_groups[$lang->prefix][] = $navgroup_obj->title;
 
 				$navigation = new model_generator_navigation();
@@ -75,6 +81,9 @@ class Controller_Siteselector_Siteselector extends Controller
 			}
 
 		}
+
+        Config::set('language',$default_lang);
+        Session::set('lang_prefix',$default_prefix);
 
 		return json_encode(array('langgroups'=>$lang_and_groups,'navigations'=>$result));
 	}

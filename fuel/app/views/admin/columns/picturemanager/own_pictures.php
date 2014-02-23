@@ -4,7 +4,7 @@
 		<?php print Form::file('uploader');	?>
 	</div>
 	<div class="span4" style="padding-bottom:10px;">
-		<?php print Form::submit('upload',Lang::get('picturemanager.upload_button'),array('class'=>'btn primary')) ?>
+		<?php print Form::submit('upload',Lang::get('picturemanager.upload_button'),array('class'=>'button')) ?>
 	</div>
 	<?php print Form::close(); ?>
 </div>

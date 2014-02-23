@@ -23,9 +23,9 @@
 class model_db_option extends Orm\Model
 {
 
-	protected static $_table_name = 'options';
+	public static $_table_name = 'options';
 
-	protected static $_properties = array('id', 'key', 'value');
+	public static $_properties = array('id', 'key', 'value');
 
   public static function getKey($key)
   {

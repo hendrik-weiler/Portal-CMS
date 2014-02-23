@@ -23,9 +23,9 @@
 class model_db_news extends Orm\Model
 {
 
-	protected static $_table_name = 'en_news';
+	public static $_table_name = 'en_news';
 
-	protected static $_properties = array('id', 'title', 'picture', 'text', 'attachment', 'creation_date');
+	public static $_properties = array('id', 'title', 'picture', 'text', 'attachment', 'creation_date');
 
 	public static function setLangPrefix($prefix)
 	{

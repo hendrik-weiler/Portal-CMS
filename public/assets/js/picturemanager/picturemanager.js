@@ -25,7 +25,7 @@ if(pcms === undefined)
 
 pcms.picturemanager = function(options) 
 {
-	var _button = $('<button class="btn btn-secondary"></button>');
+	var _button = $('<button class="button"></button>');
 
 	this.build_button = function(selector) 
 	{

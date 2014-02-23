@@ -1,15 +1,22 @@
+<?php print Form::open(array('action'=>Uri::current(),'class'=>'form_style_1')); ?>
+<div class="col-xs-1 backbutton">
+    <label>
+        <?php print Form::submit('back',__('types.15.back'),array('class'=>'hide')); ?>
+        <img src="<?php print Uri::create('assets/img/icons/arrow_left.png') ?>" alt=""/>
+    </label>
+</div>
 <div class="row">
-  <h3>
-    <?php print __('types.11.header') ?>
-  </h3>
+    <div class="col-xs-11 vertical graycontainer globalmenu">
+      <div class="description">
+          <h3>
+            <?php print __('types.11.header') ?>
+          </h3>
+      </div>
+      <div class="list padding15">
 
-  <?php
-    print Form::open(array('action'=>Uri::current(),'class'=>'form_style_1'));
-  ?>
-  <div class="row">
-    <button id="addplaceholder" class="btn secondary"><?php print __('types.11.addplaceholder') ?></button>
-  </div>
-  <div class="row placeholder_container">
+    <button id="addplaceholder" class="button"><?php print __('types.11.addplaceholder') ?></button>
+
+  <div class="placeholder_container">
     <?php foreach ($parameter as $placeholder): ?>
     <div class="span4">
       <div class="delete">
@@ -22,20 +29,14 @@
     </div>
     <?php endforeach; ?>
   </div>
-  <div class="row">
-        <textarea name="html" style="width:100%;height:350px;"><?php print $text; ?></textarea>
-  </div>
-  <?php
-    print '<div class="actions">';
 
-    print Form::submit('submit',__('types.1.submit'),array('class'=>'btn primary')) . ' ';
-    print Form::submit('back',__('types.1.back'),array('class'=>'btn secondary'));
+  <textarea name="html" style="width:100%;height:350px;"><?php print $text; ?></textarea>
 
-    print '</div>';
-
-    print Form::close();
-  ?>
+  <?php print Form::submit('submit',__('types.constants.save'),array('class'=>'button')); ?>
+      </div>
 </div>
+</div>
+<?php print Form::close(); ?>
 <script>
     var placeholder_html = $('<div class="span4"><div class="delete"><a href="#"><?php print __('types.11.placeholder_delete') ?></a></div><?php print __('types.11.placeholder_name') ?><input value="" name="placeholder_name[]" /><?php print __('types.11.placeholder_text') ?><textarea name="placeholder_text[]"></textarea></div>');
 
@@ -45,7 +46,7 @@
     $('.placeholder_container').append(placeholder_html.clone());
   });
 
-  $('.placeholder_container div.delete a').live('click',function(e) {
+  $('.placeholder_container').on('click',"div.delete a",function(e) {
     e.preventDefault();
     $(this).parentsUntil('div.span4').parent().remove();
   });

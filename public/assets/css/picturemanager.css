@@ -9,11 +9,13 @@ body,html {
 .navigation {
 	float: left;
 	border-right: 1px solid #f9f9f9;
+    padding: 0;
 }
 
 .navigation ul {
 	list-style: none;
 	margin:0;
+    padding: 0;
 }
 
 .navigation a {
@@ -21,7 +23,7 @@ body,html {
 	padding: 5px;
 	padding-right: 0;
 	background: #f9f9f9;
-	width: 200px;
+	width: 100%;
 	text-decoration: none;
 	color: black;
 	cursor: pointer;
@@ -35,8 +37,8 @@ body,html {
 
 .content {
 	float: left;
-	width: 662px;
 	padding: 15px;
+    margin-top: 0;
 	padding-bottom: 0;
 	overflow:auto;
 }
@@ -53,12 +55,17 @@ body,html {
 
 .picture_list li {
   position: relative;
+    top: 0;
+    left: 0;
   display: inline;
 }
 
 .picture_list img {
   border:1px solid #f9f9f9;
   padding:3px;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .picture_list img:hover {
@@ -85,12 +92,12 @@ body,html {
 }
 
 .get_link {
-	bottom: 0;
+	top: 0;
 	left: 0;
 }
 
 .delete_picture {
-	bottom: 0;
+	top: 0;
 	left: 40px;
 }
 
@@ -113,6 +120,10 @@ body,html {
   top:0;
   left:50%;
   z-index: 2;
+}
+
+.prompt input {
+    width: 95% !important;
 }
 
 .prompt button {

@@ -217,6 +217,10 @@ class Controller_Shop_Article extends Controller
 
 		$this->data['content'] = View::factory('admin/shop/columns/article_edit',$data);
 
+        if(Input::post('back') != '') {
+            Response::redirect('admin/shop/articles');
+        }
+
 	}
 
 	public function action_index()
@@ -230,6 +234,6 @@ class Controller_Shop_Article extends Controller
 
 	public function after($response)
 	{
-		$this->response->body = View::factory('admin/shop',$this->data);
+		$this->response->body = View::factory('admin/index',$this->data);
 	}
 }

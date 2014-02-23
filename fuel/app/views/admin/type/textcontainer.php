@@ -1,39 +1,32 @@
 <script type="text/javascript" src="<?php print Uri::create('assets/js/tiny_mce/tiny_mce.js'); ?>"></script>
-<div class="row">
-  <h3>
-    <?php print __('types.1.header') ?>
-  </h3>
+<?php print Form::open(array('action'=>Uri::current(),'class'=>'form_style_1')); ?>
+<div class="col-xs-1 backbutton">
+    <label>
+        <?php print Form::submit('back',__('types.15.back'),array('class'=>'hide')); ?>
+        <img src="<?php print Uri::create('assets/img/icons/arrow_left.png') ?>" alt=""/>
+    </label>
+</div>
+<div class="col-xs-11 vertical graycontainer globalmenu">
+  <div class="description">
+      <h3>
+        <?php print __('types.1.header') ?>
+      </h3>
+  </div>
+  <div class="list padding15">
 
-  <?php
-    print Form::open(array('action'=>Uri::current(),'class'=>'form_style_1'));
-  ?>
-
-  <div class="clearfix">
    <?php print Form::label(__('types.1.label')); ?>
-   <div class="input">
-      <?php print Form::input('label',$label); ?>
-    </div>
-  </div>
-    
-  <div class="row">
-    <div class="span16" style="margin-bottom:20px;">
-      <div class="picturemanager-button"><?php print Lang::get('picturemanager_button') ?></div>
-    </div>
+   <?php print Form::input('label',$label); ?>
 
-    <div class="span16">
-        <?php print Form::textarea('editor',$text,array('style'=>'width:100%;height:400px;')); ?>
-    </div>
-  </div>
+   <div class="picturemanager-button"><?php print Lang::get('picturemanager_button') ?></div>
+
+      <br/>
+    <?php print Form::textarea('editor',$text,array('style'=>'width:100%;height:400px')); ?>
   <?php
-    print '<div class="actions">';
-
-    print Form::submit('submit',__('types.1.submit'),array('class'=>'btn primary')) . ' ';
-    print Form::submit('back',__('types.1.back'),array('class'=>'btn secondary'));
-
-    print '</div>';
+    print Form::submit('submit',__('types.1.submit'),array('class'=>'button'));
 
     print Form::close();
   ?>
+  </div>
 </div>
 <script type="text/javascript">
 var picturemanager = new pcms.picturemanager();

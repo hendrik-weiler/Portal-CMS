@@ -23,9 +23,9 @@
 class model_db_language extends Orm\Model
 {
 
-	protected static $_table_name = 'languages';
+	public static $_table_name = 'languages';
 
-	protected static $_properties = array('id', 'label', 'prefix', 'sort');
+	public static $_properties = array('id', 'label', 'prefix', 'sort');
 
 	public static function getLanguages()
 	{
