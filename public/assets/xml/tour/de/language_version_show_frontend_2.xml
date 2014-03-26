@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <storyboard>
 	<tour label="Die Sprachversionen auf der Webseite zum auswählen darstellen." />
+    <debug></debug>
 	<steps>
-		<step live_target="#advanced ul.tabs li:eq(2)" condition="clicked">
+		<step live_target=".nav li:eq(3)" condition="clicked" based_on="offset">
 			<position_difference top="20" left="20" />
 			<text>Gehen Sie auf den "Module"-Tab.</text>
 		</step>
-		<step live_target="#advanced ul.inputs-list li:eq(4)">
+		<step live_target="[name=module_language_switcher]">
 			<position_difference top="20" left="20" />
 			<text>Aktivieren Sie die "Sprachversion auswahl".</text>
 		</step>
-		<step live_target="#advanced div.actions input#form_submit">
+		<step live_target="#form_submit">
 			<position_difference top="20" left="60" />
 			<text>Speichern sie die Änderungen. Die Sprachen werden nun angezeigt.</text>
 		</step>

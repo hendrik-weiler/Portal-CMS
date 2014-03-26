@@ -87,7 +87,17 @@ class Controller_Install_Tool extends Controller
 		Config::set('language',Session::get('lang'));
 
 		Lang::load('install');
+
 	}
+
+    public function cleanUploadsFolder()
+    {
+        File::delete_dir(DOCROOT.'/uploads',true);
+        File::create_dir(DOCROOT, 'uploads', 0777);
+        File::create_dir(DOCROOT.'/uploads', 'shop', 0777);
+        File::create_dir(DOCROOT.'/uploads/shop', 'article', 0777);
+        File::create_dir(DOCROOT.'/uploads/shop', 'logo', 0777);
+    }
 
 	public function action_index()
 	{
@@ -152,15 +162,23 @@ class Controller_Install_Tool extends Controller
 			Session::destroy();
 			Response::redirect('admin');
 		}
-		
+
 		if(isset($_POST['submit_2']))
 		{
 			$val = Validation::factory('my_validation');
 			$val->add_field('username', Input::post('username'), 'required|min_length[3]');
 			$val->add_field('password', Input::post('password'), 'required|min_length[3]');
 
+            if(!is_writable(DOCROOT.'/uploads')) {
+                print 'Your project folder needs to be set to 777 (writeable). If you gave them needed rights reload the page.';
+                exit;
+                return $this->response;
+            }
+
 			if ($val->run())
 			{
+                $this->cleanUploadsFolder();
+
 				Migrate::latest();
 		        $account = new model_db_accounts();
 		        $account->username = Input::post('username');
@@ -177,9 +195,9 @@ class Controller_Install_Tool extends Controller
 		        $language->sort = 0;
 		        $language->save();
 
-						$group = new model_db_navgroup();
-						$group->title = 'Main';
-						$group->save();
+                $group = new model_db_navgroup();
+                $group->title = 'Main';
+                $group->save();
 
 		        Controller_Advanced_Advanced::initializeOptions();
 

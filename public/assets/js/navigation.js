@@ -7,7 +7,7 @@ $(function() {
         cancel  : _prompt.cancel
     });
     del.onConfirm = function(dialog_helper, event)    {
-        var id = $(del.initiator).attr('data-id');
+        var id = $(event.initiator).attr('data-id');
         window.location.href = _url + '/admin/navigation/delete/' + id;
     }
     del.render();
@@ -19,7 +19,7 @@ $(function() {
         cancel  : _prompt.cancel
     });
     del.onConfirm = function(dialog_helper, event)    {
-        var id = $(del.initiator).attr('data-id');
+        var id = $(event.initiator).attr('data-id');
         dialog_helper.post_data(_url + 'admin/navigation/group/delete', {
             id : id
         }, function(data) {

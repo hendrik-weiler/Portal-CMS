@@ -13,7 +13,7 @@ return array(
 	'questions' => array(
 		'supersearch' => 'Learn about supersearch',
 
-		'updater' => 'Updating the system',
+		//'updater' => 'Updating the system',
 
 		'content' => 'Create a new content',
 		'content_news' => 'Display news on the website',
@@ -45,7 +45,7 @@ return array(
 	'question_permissions' => array(
 		'supersearch' => '-1',
 
-		'updater' => '-1',
+		//'updater' => '-1',
 
 		'content' => '0,1',
 		'content_news' => '0,1',
@@ -76,7 +76,7 @@ return array(
 	'question_links_show' => array(
 		'supersearch' => 'tour',
 
-		'updater' => 'tour|shortcut',
+		//'updater' => 'tour|shortcut',
 
 		'content' => 'tour|shortcut',
 		'content_news' => 'tour|shortcut',

@@ -77,7 +77,7 @@ class Controller_Siteselector_Siteselector extends Controller
 				$lang_and_groups[$lang->prefix][] = $navgroup_obj->title;
 
 				$navigation = new model_generator_navigation();
-				$result[] = $navigation->render($navgroup_obj->id,true);
+				$result[$lang->prefix] = $navigation->render($navgroup_obj->id,true);
 			}
 
 		}

@@ -152,6 +152,47 @@ class Controller_Pages_Pages extends Controller
 		$site->save();
 	}
 
+    public function got_sub_points($site)
+    {
+        $nav = model_db_navigation::find($site->navigation_id);
+        $subpoints = model_db_navigation::find('first',array(
+           'where' => array('parent'=>$nav->id)
+        ));
+
+        return is_object($subpoints);
+    }
+
+    public function action_delete_image()
+    {
+
+        $nav_point = model_db_site::find($this->id);
+        $real_nav_point = model_db_navigation::find($nav_point->navigation_id);
+
+        $navigation_id = $real_nav_point->id;
+
+        if($real_nav_point->image != '') {
+            if(is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id)) {
+                if(is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/preview')) {
+                    if(file_exists(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/preview/' . $real_nav_point->image)) {
+                        File::delete(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/preview/' . $real_nav_point->image);
+                    }
+                }
+                if(is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/thumbs')) {
+                    if(file_exists(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/thumbs/' . $real_nav_point->image)) {
+                        File::delete(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/thumbs/' . $real_nav_point->image);
+                    }
+                }
+                if(is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/original')) {
+                    if(file_exists(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/original/' . $real_nav_point->image)) {
+                        File::delete(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/original/' . $real_nav_point->image);
+                    }
+                }
+            }
+        }
+
+        Response::redirect("admin/sites/edit/" . $nav_point->id);
+    }
+
 	public function action_edit()
 	{		
 		$perm = model_permission::getNavigationRights();
@@ -183,6 +224,7 @@ class Controller_Pages_Pages extends Controller
 				$real_nav_point->show_in_navigation = Input::post('show_in_navigation') != '';
 				$real_nav_point->parent = Input::post('parent');
 				$real_nav_point->group_id = Input::post('group_id');
+                $real_nav_point->show_sub = Input::post('show_sub');
 				$real_nav_point->label = empty($label) ? __('constants.untitled_element') : $label;
 				$real_nav_point->url_title = model_generator_seo::friendly_title($nav_point->label);
 			}
@@ -197,6 +239,22 @@ class Controller_Pages_Pages extends Controller
 			);
 			Upload::process($config);
 
+            if(!is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images')) {
+                File::create_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix'), "navigation_images", 0777);
+            }
+            if(!is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id)) {
+                File::create_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images' , $navigation_id, 0777);
+            }
+            if(!is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/preview')) {
+                File::create_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id, 'preview', 0777);
+            }
+            if(!is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/thumbs')) {
+                File::create_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id, 'thumbs', 0777);
+            }
+            if(!is_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/original')) {
+                File::create_dir(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id, 'original', 0777);
+            }
+
 			$image_file = '';
 
 			if (Upload::is_valid())
@@ -207,7 +265,7 @@ class Controller_Pages_Pages extends Controller
 					File::delete(DOCROOT.'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/original/' . $real_nav_point->image);
 					File::delete(DOCROOT.'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/preview/' . $real_nav_point->image);
 					File::delete(DOCROOT.'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/thumbs/' . $real_nav_point->image);
-				}	
+				}
 
 				$options = \Controller_Advanced_Advanced::getOptions();
 				Upload::save();
@@ -222,7 +280,7 @@ class Controller_Pages_Pages extends Controller
 					if($size->height >= 720)
 						$size->height = 720;
 
-					$resizeObj -> resizeImage($size->width, $size->height, 'auto');
+                    $resizeObj -> resizeImage($size->width, $size->height, 'auto');
 					$resizeObj -> saveImage(DOCROOT . 'uploads/' . Session::get('lang_prefix') . '/navigation_images/' . $navigation_id . '/original/' . $file['saved_as'], 100);
 
 					$resizeObj -> resizeImage(60, 60, 'auto');
@@ -233,6 +291,7 @@ class Controller_Pages_Pages extends Controller
 				}
 				$image_file = $file['saved_as'];
 			}
+
 			$real_nav_point->image = empty($image_file) ? $real_nav_point->image : $image_file;
 			$real_nav_point->image_is_shown = Input::post('image_is_shown');
 
@@ -301,6 +360,11 @@ class Controller_Pages_Pages extends Controller
 
 		if(isset($data['parent_array'][$navigation->id]))
 			unset($data['parent_array'][$navigation->id]);
+
+        $data['got_sub_points'] = false;
+        if($this->got_sub_points($nav_point)) {
+            $data['got_sub_points'] = true;
+        }
 
 		$data['mode'] = 'edit';
 

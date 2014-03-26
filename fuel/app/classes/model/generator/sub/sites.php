@@ -83,7 +83,14 @@ class model_generator_sub_sites extends model_db_navigation
 			$data['active_class'] = '';
 			$data['target'] = '_self';
 			$data['label'] = $navigation->label;
-			$data['link'] = Uri::create(model_generator_preparer::$lang . '/' . $main_nav->url_title . '/' . $navigation->url_title);
+            if(model_generator_preparer::$isMainLanguage)
+            {
+                $data['link'] = Uri::create($main_nav->url_title . '/' . $navigation->url_title);
+            }
+            else{
+                $data['link'] = Uri::create(model_generator_preparer::$lang . '/' . $main_nav->url_title . '/' . $navigation->url_title);
+            }
+
 			$site = model_db_site::find('first',array(
 				'where' => array('navigation_id'=>$navigation->id)
 			));

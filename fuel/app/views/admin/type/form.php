@@ -28,7 +28,7 @@
     <h3>
       <?php print __('types.2.form_header'); ?>
     </h3>
-    <table>
+    <table class="table">
       <thead>
         <tr>
           <th><?php print __('types.2.required'); ?></th>
@@ -138,7 +138,7 @@
             <?php print Form::checkbox('text_visible',1,$checked) ?>
           </td>
           <td>
-            <?php print Form::textarea('text_label',$text_label,array('style'=>'width:300px;height:120px')) ?>
+            <?php print Form::textarea('text_label',$text_label,array('style'=>'width:100%;height:180px')) ?>
           </td>
         </tr>
       </tbody>

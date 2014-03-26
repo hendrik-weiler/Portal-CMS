@@ -2,16 +2,16 @@
 <storyboard>
 	<tour label="Ein anderes Layout der Seite verpassen" />
 	<steps>
-		<step target=".choose_layout:first">
+		<step target=".choose_layout:first" based_on="offset">
 			<position_difference top="10" left="10" />
 			<text>Durch klicken auf diese Radiobuttons können Sie zwischen den Layouts wechseln. Der Wechsel erfolgt sofort.</text>
 		</step>
-		<step target="form:first">
-			<position_difference top="120" left="120" />
+		<step target="form:first" based_on="offset">
+			<position_difference top="60" left="120" />
 			<text>In diesem Bereich können Sie die Navigationsgruppen zuweisen. Sie werden dann im Layout an der im Template vorgesehenen Stelle angezeigt.</text>
 		</step>
-		<step target=".actions #form_submit">
-			<position_difference top="20" left="-60" />
+		<step target=".actions #form_submit" based_on="offset">
+			<position_difference top="20" left="30" />
 			<text>Sie speichern die Einstellungen, indem Sie auf den Button drücken.</text>
 		</step>
 	</steps>

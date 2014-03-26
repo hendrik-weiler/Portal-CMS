@@ -27,6 +27,8 @@
 
 <strong>Rechnung <?php print $order->get_order_nr(); ?></strong>
 
+<p>Auftragsgemäß berechnen wir Ihnen den Aufbau der bestellten Anlage:</p>
+
 <div class="shop-order-cart">
 <table style="width:100%" cellpadding="0" cellspacing="0" border="0">
 		<tr>
@@ -61,6 +63,10 @@
 		</tr>
 	</table>
 </div>
+
+<p>Es gelten die gesetzlichen Bestimmungen des Kaufvertrags. Darüber hinaus gelten die Garantiebestimmungen der Hersteller.</p>
+
+<p>Diese Rechnung wurde maschinell erstellt und ist ohne Unterschrift gültig.</p>
 
 <div class="footer" style="clear:both;font-size:12px;border-top:1px solid black;">
 	<div class="sp1" style="float:left;width:79%;">

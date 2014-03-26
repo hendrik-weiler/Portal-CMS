@@ -43,11 +43,15 @@ class Controller_Login extends Controller
 	public static function clear_cache()
 	{
 		// CSS Cache Public
-		File::delete_dir(DOCROOT . 'cache',true);
+        if(is_dir(DOCROOT . 'cache')) {
+		    File::delete_dir(DOCROOT . 'cache',true);
+        }
 		File::create_dir(DOCROOT, 'cache');
 
 		// CSS Cache APPPath
-		File::delete_dir(APPPATH . 'cache',true);
+        if(is_dir(APPPATH . 'cache')) {
+		    File::delete_dir(APPPATH . 'cache',true);
+        }
 		File::create_dir(APPPATH, 'cache');
 		Cache::delete_all();
 	}

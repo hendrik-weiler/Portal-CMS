@@ -55,7 +55,7 @@
 
 <body>
 
-<div class="line row">
+<div class="line row" style="margin-right:0;">
   <div class="col-xs-8 padding15 searchdiv">
     <div class="row inputbutton">
       <div class="col-xs-8 inputbutton-input">
@@ -74,7 +74,7 @@
 </div>
 <div class="graycontainer globalmenu">
   <div class="description">
-    Sprachversion
+    <?php print __('constants.languageversion') ?>
   </div>
   <div class="list">
     <ul>
@@ -100,7 +100,7 @@
   <div class="description">
     CMS
   </div>
-  <div class="list">
+  <div class="list cms_nav">
     <ul>
           <li><a <?php print (Uri::segment(2) == 'dashboard') ? 'class="active"' : '' ?> href="<?php print Uri::create('admin/dashboard'); ?>"><?php print __('nav.dashboard') ?></a></li>
 
@@ -113,7 +113,7 @@
           <?php endif; ?>
 
           <?php if($permission[4]['valid']): ?>
-          <li><a <?php print (Uri::segment(2) == 'language') ? 'class="active"' : '' ?> href="<?php print Uri::create('admin/language'); ?>"><?php print __('nav.language') ?></a></li>
+          <li class="break"><a <?php print (Uri::segment(2) == 'language') ? 'class="active"' : '' ?> href="<?php print Uri::create('admin/language'); ?>"><?php print __('nav.language') ?></a></li>
           <?php endif; ?>
 
           <?php if($permission[3]['valid']): ?>
@@ -127,11 +127,12 @@
   </div>
 </div>
 
+<?php if(model_permission::$user->admin): ?>
 <div class="graycontainer globalmenu">
   <div class="description">
     Shop
   </div>
-  <div class="list">
+  <div class="list shop_nav">
     <ul>
           <li><a <?php print (Uri::segment(3) == 'orders') ? 'class="active"' : '' ?> href="<?php print Uri::create('admin/shop/orders'); ?>"><?php print __('nav.orders') ?></a></li>
 
@@ -139,13 +140,13 @@
 
           <li><a <?php print (Uri::segment(3) == 'groups') ? 'class="active"' : '' ?> href="<?php print Uri::create('admin/shop/groups'); ?>"><?php print __('nav.groups') ?></a></li>
 
-          <li><a <?php print (Uri::segment(3) == 'tax') ? 'class="active"' : '' ?> href="<?php print Uri::create('admin/shop/tax'); ?>"><?php print __('nav.tax_groups') ?></a></li>
+          <li class="break"><a <?php print (Uri::segment(3) == 'tax') ? 'class="active"' : '' ?> href="<?php print Uri::create('admin/shop/tax'); ?>"><?php print __('nav.tax_groups') ?></a></li>
 
           <li><a <?php print (Uri::segment(3) == 'settings') ? 'class="active"' : '' ?> href="<?php print Uri::create('admin/shop/settings'); ?>"><?php print __('nav.shop_settings') ?></a></li>
     </ul>
   </div>
 </div>
-
+<?php endif; ?>
 
     <?php print file_exists(APPPATH . 'INSTALL_TOOL_DISABLED') ? '' :  '<div class="error">' . __('constants.install_tool_usable') . '</div>' ?>
     

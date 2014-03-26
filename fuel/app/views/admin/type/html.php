@@ -18,7 +18,7 @@
 
   <div class="placeholder_container">
     <?php foreach ($parameter as $placeholder): ?>
-    <div class="span4">
+    <div class="col-xs-3">
       <div class="delete">
         <a href="#"><?php print __('types.11.placeholder_delete') ?></a>
       </div>
@@ -32,22 +32,22 @@
 
   <textarea name="html" style="width:100%;height:350px;"><?php print $text; ?></textarea>
 
-  <?php print Form::submit('submit',__('types.constants.save'),array('class'=>'button')); ?>
+  <?php print Form::submit('submit',__('constants.save'),array('class'=>'button')); ?>
       </div>
 </div>
 </div>
 <?php print Form::close(); ?>
 <script>
-    var placeholder_html = $('<div class="span4"><div class="delete"><a href="#"><?php print __('types.11.placeholder_delete') ?></a></div><?php print __('types.11.placeholder_name') ?><input value="" name="placeholder_name[]" /><?php print __('types.11.placeholder_text') ?><textarea name="placeholder_text[]"></textarea></div>');
+    var placeholder_html = $('<div class="col-xs-3"><div class="delete"><a href="#"><?php print __('types.11.placeholder_delete') ?></a></div><?php print __('types.11.placeholder_name') ?><input value="" name="placeholder_name[]" /><?php print __('types.11.placeholder_text') ?><textarea name="placeholder_text[]"></textarea></div>');
 
   $('#addplaceholder').click(function(e) {
     e.preventDefault();
-    var name = $('.placeholder_container').find('div.span4').length;
+    var name = $('.placeholder_container').find('div.col-xs-3').length;
     $('.placeholder_container').append(placeholder_html.clone());
   });
 
   $('.placeholder_container').on('click',"div.delete a",function(e) {
     e.preventDefault();
-    $(this).parentsUntil('div.span4').parent().remove();
+    $(this).parentsUntil('div.col-xs-3').parent().remove();
   });
 </script>

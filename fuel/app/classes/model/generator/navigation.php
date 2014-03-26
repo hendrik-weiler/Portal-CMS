@@ -146,8 +146,6 @@ class model_generator_navigation extends model_db_navigation
 			$data['active_class'] = '';
 			$data['target'] = '_self';
 			$data['label'] = $nav['label'];
-			$data['image'] = Uri::create('uploads/' . Uri::segment(1) . '/navigation_images/' . $nav['id'] . '/thumbs/' . $nav['image']);
-			$data['image_exists'] = is_file(DOCROOT . 'uploads/' . Uri::segment(1) . '/navigation_images/' . $nav['id'] . '/preview/' . $nav['image']);
 			$data['image_is_shown'] = $nav['image_is_shown'];
 			$data['description'] = $nav['description'];
 			$data['use_default_styles'] = $nav['use_default_styles'];
@@ -156,6 +154,17 @@ class model_generator_navigation extends model_db_navigation
 			$data['content_count'] = count(model_db_content::find('all',array(
 				'where' => array('site_id'=>$search->id)
 			)));
+
+            if(model_generator_preparer::$isMainLanguage)
+            {
+                $data['image'] = Uri::create('uploads/' . model_generator_preparer::$mainLang . '/navigation_images/' . $nav['id'] . '/thumbs/' . $nav['image']);
+                $data['image_exists'] = is_file(DOCROOT . 'uploads/' . model_generator_preparer::$mainLang . '/navigation_images/' . $nav['id'] . '/preview/' . $nav['image']);
+            }
+            else
+            {
+                $data['image'] = Uri::create('uploads/' . model_generator_preparer::$lang . '/navigation_images/' . $nav['id'] . '/thumbs/' . $nav['image']);
+                $data['image_exists'] = is_file(DOCROOT . 'uploads/' . model_generator_preparer::$lang . '/navigation_images/' . $nav['id'] . '/preview/' . $nav['image']);
+            }
 
 			if(model_generator_preparer::$isMainLanguage)
 			{
@@ -227,15 +236,17 @@ class model_generator_navigation extends model_db_navigation
 					if(model_generator_preparer::$isMainLanguage)
 					{
 						$subData['link'] = Uri::create($nav['url_title'] . '/' . $sub['url_title']);
+                        $subData['image'] = Uri::create('uploads/' . model_generator_preparer::$mainLang . '/navigation_images/' . $sub['id'] . '/thumbs/' . $sub['image']);
+                        $subData['image_exists'] = is_file(DOCROOT . 'uploads/' . model_generator_preparer::$mainLang . '/navigation_images/' . $sub['id'] . '/preview/' . $sub['image']);
 					}
 					else
 					{
 						$subData['link'] = Uri::create(model_generator_preparer::$lang . '/' . $nav['url_title'] . '/' . $sub['url_title']);
+                        $subData['image'] = Uri::create('uploads/' . model_generator_preparer::$lang . '/navigation_images/' . $sub['id'] . '/thumbs/' . $sub['image']);
+                        $subData['image_exists'] = is_file(DOCROOT . 'uploads/' . model_generator_preparer::$lang . '/navigation_images/' . $sub['id'] . '/preview/' . $sub['image']);
 					}
 
 					$subData['target'] = '_self';
-					$subData['image'] = Uri::create('uploads/' . Uri::segment(1) . '/navigation_images/' . $sub['id'] . '/thumbs/' . $sub['image']);
-					$subData['image_exists'] = is_file(DOCROOT . 'uploads/' . Uri::segment(1) . '/navigation_images/' . $sub['id'] . '/preview/' . $sub['image']);
 					$subData['image_is_shown'] = $sub['image_is_shown'];
 					$subData['description'] = $sub['description'];
 					$subData['use_default_styles'] = $sub['use_default_styles'];

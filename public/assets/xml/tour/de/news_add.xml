@@ -2,11 +2,11 @@
 <storyboard>
 	<tour label="Eine neue Nachricht erstellen" />
 	<steps>
-		<step target="#form_title">
+		<step target="#form_title" based_on="offset">
 			<position_difference top="20" left="100" />
 			<text>Geben Sie den Titel der neuen Nachricht ein.</text>
 		</step>
-		<step target="#form_submit">
+		<step target="#form_submit" based_on="offset">
 			<position_difference top="20" left="60" />
 			<text>Zum Erstellen drücken Sie auf diesen Button.</text>
 		</step>

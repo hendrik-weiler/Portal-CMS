@@ -43,6 +43,7 @@ class Controller_Dashboard_Dashboard extends Controller
 
 	public function action_index()
 	{
+
 		$data = array();
 		try 
 		{
@@ -61,6 +62,7 @@ class Controller_Dashboard_Dashboard extends Controller
 
 	public function after($response)
 	{
+
 		$this->response->body = View::factory('admin/index',$this->data);
 	}
 }

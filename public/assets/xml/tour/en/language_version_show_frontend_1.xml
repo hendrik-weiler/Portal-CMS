@@ -2,16 +2,16 @@
 <storyboard>
 	<tour label="Display a list of all available website languages on the website" />
 	<steps>
-		<step target="#form_submit">
-			<position_difference top="-60" left="120" />
+        <step target="#form_submit" based_on="offset">
+            <position_difference top="-60" left="120" />
 			<text>Create a language version.</text>
 		</step>
-		<step target="#language_list">
-			<position_difference top="10" left="320" />
+        <step target="#language_list" based_on="offset">
+            <position_difference top="10" left="320" />
 			<text>Drag and drop the entries to the order you like it.</text>
 		</step>
-		<step live_target=".tabs li:eq(5)" redirect_by_click="admin/advanced#tour=language_version_show_frontend_2">
-			<position_difference top="20" left="60" />
+        <step live_target=".cms_nav a:eq(5)" redirect_by_click="admin/advanced#tour=language_version_show_frontend_2" based_on="offset">
+            <position_difference top="20" left="60" />
 			<text>Open the "Advanced settings".</text>
 		</step>
 	</steps>

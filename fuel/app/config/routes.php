@@ -126,6 +126,7 @@ return array(
 
 	'admin/sites/order/update' => 'pages/pages/order',
 	'admin/sites/delete/:id' => 'pages/pages/delete',
+    'admin/sites/edit/:id/delete/image' => 'pages/pages/delete_image',
 	'admin/sites/edit/:id' => 'pages/pages/edit',
 	'admin/sites/add' => 'pages/pages/add',
 	'admin/sites/:group' => 'pages/pages/index',

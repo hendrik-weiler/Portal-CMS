@@ -213,6 +213,7 @@ return array(
 		'install_tool_usable' => '<strong>Warning:</strong> The install tool is usable. Create app/INSTALL_TOOL_DISABLED to disable it.',
         'more_options' => 'More options',
         'less_options' => 'Less options',
+        'languageversion' => 'Languageversion',
 	),
 
 	'content' => array(
@@ -441,6 +442,7 @@ return array(
 			'inline_edit' => 'Website direct edit mode',
 			'general' => 'General',
 			'site_caching' => 'Website caching',
+            'show_full_news' => 'Show news without restrictions',
 		),
 		'layout' => array(
 			'wait' => 'Please wait....',

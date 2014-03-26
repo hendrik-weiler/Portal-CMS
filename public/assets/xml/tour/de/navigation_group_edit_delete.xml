@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <storyboard>
 	<tour label="Eine neue Navigationsgruppe bearbeiten oder löschen" />
+    <debug></debug>
 	<steps>
-		<step target="#form_name">
+        <step target=".open-navigationmenu" condition="clicked">
+            <position_difference top="20" left="5" />
+            <text>Klicken Sie hier um das Navigationsgruppen Menü zu öffnen.</text>
+        </step>
+		<step target=".edit-group:eq(0)" based_on="offset">
 			<position_difference top="20" left="20" />
 			<text>Ändern sie den Namen der Navigationgruppe.</text>
 		</step>
-		<step target=".success:eq(0)">
+		<step live_target=".options-label:eq(0) input" based_on="offset" mode="ignore_position">
 			<position_difference top="20" left="20" />
-			<text>Editieren sie, in dem sie auf diesen Button klicken.</text>
+			<text>Geben Sie Ihren Namen an.</text>
 		</step>
-		<step live_target=".error:eq(0)">
+        <step target=".edit-group:eq(0)" based_on="offset">
+            <position_difference top="20" left="20" />
+            <text>Speichern Sie, in dem sie auf diesen Button klicken.</text>
+        </step>
+		<step target=".delete-group:eq(0)" based_on="offset">
 			<position_difference top="20" left="20" />
 			<text>Um diese Navigationsgruppe zu löschen drücken sie diesen Button.</text>
 		</step>

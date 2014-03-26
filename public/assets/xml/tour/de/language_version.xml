@@ -2,23 +2,23 @@
 <storyboard>
 	<tour label="Eine neue Website für eine andere Sprache erstellen" />
 	<steps>
-		<step target="#form_label">
+		<step target="#form_label" based_on="offset">
 			<position_difference top="20" left="100" />
 			<text>Geben Sie den Namen der Sprache ein (z.b Spanisch ).</text>
 		</step>
-		<step target="#form_prefix">
+		<step target="#form_prefix" based_on="offset">
 			<position_difference top="20" left="100" />
 			<text>Geben Sie den kürzel der Sprache ein (z.b es).</text>
 		</step>
-		<step target="#form_submit">
+		<step target="#form_submit" based_on="offset">
 			<position_difference top="20" left="60" />
 			<text>Bestätigen Sie hier Ihre Eingabe</text>
 		</step>
-		<step target="#form_lang_prefix">
+		<step target="#form_lang_prefix" based_on="offset">
 			<position_difference top="20" left="60" />
 			<text>Wählen Sie hier die gewünschte Sprachversion aus.</text>
 		</step>
-		<step target="#form_change">
+		<step target="#form_change" based_on="offset">
 			<position_difference top="20" left="60" />
 			<text>Drücken Sie auf den Button und Sie können die Inhalte der neuen Websiteversion bearbeiten.</text>
 		</step>

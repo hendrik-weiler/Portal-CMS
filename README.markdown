@@ -1,6 +1,8 @@
 Portal Content Management System 2014
 ====================
-#### v: 1.00
+#### v: 1.00 prerelease
+
+[Download](https://dl.dropboxusercontent.com/u/15699766/portalcms/PortalCMS-Pre.zip)<br/>
 
 <br />
 Build on [Fuel Framework](https://github.com/fuel/fuel)<br />

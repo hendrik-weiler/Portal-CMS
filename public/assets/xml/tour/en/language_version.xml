@@ -2,24 +2,24 @@
 <storyboard>
 	<tour label="Create a new website language version" />
 	<steps>
-		<step target="#form_label">
-			<position_difference top="20" left="100" />
+        <step target="#form_label" based_on="offset">
+            <position_difference top="20" left="100" />
 			<text>Please fill out a language (z.b Spanish ).</text>
-		</step>
-		<step target="#form_prefix">
-			<position_difference top="20" left="100" />
+        </step>
+        <step target="#form_prefix" based_on="offset">
+            <position_difference top="20" left="100" />
 			<text>Please fill out a shorthand symbol (for instance es).</text>
 		</step>
-		<step target="#form_submit">
-			<position_difference top="20" left="60" />
+        <step target="#form_submit" based_on="offset">
+            <position_difference top="20" left="60" />
 			<text>Confirm your choice.</text>
 		</step>
-		<step target="#form_lang_prefix">
-			<position_difference top="20" left="60" />
+        <step target="#form_lang_prefix" based_on="offset">
+            <position_difference top="20" left="60" />
 			<text>Choose the language version which you want to edit.</text>
 		</step>
-		<step target="#form_change">
-			<position_difference top="20" left="60" />
+        <step target="#form_change" based_on="offset">
+            <position_difference top="20" left="60" />
 			<text>Press this to button to change the current language version.</text>
 		</step>
 	</steps>

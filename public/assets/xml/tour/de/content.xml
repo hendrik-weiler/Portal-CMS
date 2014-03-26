@@ -2,11 +2,11 @@
 <storyboard>
 	<tour label="Einen neuen Inhalt erstellen" />
 	<steps>
-		<step target="#form_type">
+		<step target="#form_type" based_on="offset">
 			<position_difference top="20" left="100" />
 			<text>Wählen Sie den gewünschten Inhalt aus, der hinzugefügt werden soll.</text>
 		</step>
-		<step target="#form_addContent">
+		<step target="#form_addContent" based_on="offset">
 			<position_difference top="20" left="30" />
 			<text>Drücken sie auf das Plus um den neuen Inhalt hinzuzufügen.</text>
 		</step>

@@ -31,7 +31,7 @@ class Controller_Advanced_Advanced extends Controller
 	private static $options = array(
 		# general
 		'news_thumbs_width','news_thumbs_height','gallery_thumbs_width','gallery_thumbs_height',
-		'show_last','show_max_token','layout','landing_page',
+		'show_last','show_max_token','layout','landing_page', 'show_full_news',
 		# seo
 		'analytics_id','robots',
 		# modules
@@ -76,6 +76,7 @@ class Controller_Advanced_Advanced extends Controller
 		'show_max_token' => '100',
 		'layout' => 'default',
         'landing_page' => '{"1":"0"}',
+        'show_full_news' => '0',
 		# seo
 		'analytics_id' => 'UA-XXXXXXXX-X',
 		'robots' => 'index,follow',
@@ -102,7 +103,7 @@ class Controller_Advanced_Advanced extends Controller
 		# shop
 		'invoice_logo' => '', 
 		'exchange_rates' => '{"en":"1"}',
-		'shipping_costs' => '{"0":"0","1":"0","2":"0","3":"0","4":"0","5":"0","6":"0","7":"0","8":"0","9":"0","10":"0"}',
+		'shipping_costs' => '{"0":"0","1":"0","2":"0","3":"0"}',
 		'order_format' => 'R-{year}-{nr}',
 		'email' => '',
 		'company' => '',
@@ -133,6 +134,7 @@ class Controller_Advanced_Advanced extends Controller
 		'show_last' => '1',
 		'show_max_token' => '50',
 		'default' => '0',
+        'show_full_news' => '0',
 		# seo
 		'analytics_id' => 'UA-XXXXXXXX-X',
 		'robots' => '',
@@ -278,7 +280,7 @@ class Controller_Advanced_Advanced extends Controller
 					$test->value = $value;
 					$test->save();
 				}
-				else if(preg_match('#(module_|asset_|inline_edit|site_caching)#i',$option) && empty($value))
+				else if(preg_match('#(module_|asset_|inline_edit|site_caching|show_full_news)#i',$option) && empty($value))
 				{
 					$test->value = 0;
 					$test->save();

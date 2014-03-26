@@ -3,11 +3,11 @@
 <?php endif; ?>
 <?php foreach($galleries as $gallery): ?>
 
-<div class="gallery">
+<div class="gallery row">
 
 	<h3><?php print $gallery->label ?></h3>
 	<?php $path = 'uploads/' . Session::get('lang_prefix') . '/gallery/' . $gallery->id . '/thumbs/'; ?>
-	<ul class="picture_list">
+	<div class="picture_list">
 		<?php 
 			$pictures = json_decode($gallery->parameter,true);
 			$pictures = empty($pictures) ? array() : $pictures;
@@ -17,12 +17,12 @@
 		<?php endif; ?>
 
 		<?php foreach($pictures as $picture): ?>
-		<li>
+		<div class="col-xs-5 picture">
 			<img src="<?php print Uri::create($path . $picture) ?>">
 			<a class="get_link" href=""><?php print Lang::get('picturemanager.get_link') ?></a>
-		</li>
+		</div>
 		<?php endforeach; ?>
-	</ul>
+	</div>
 
 </div>
 <?php endforeach; ?>
@@ -43,9 +43,9 @@
 	}
 	link_dialog.onInitiate = function(helper, event) {
 		var text = $('<input style="width:240px" value="" />');
-		var index = $('.picture_list li a').index(event.currentTarget);
+		var index = $('.picture_list .picture a').index(event.currentTarget);
 
-		$(text).attr('value',$('.picture_list li').eq(index).find('img').attr('src').replace('thumbs','big'));
+		$(text).attr('value',$('.picture_list .picture').eq(index).find('img').attr('src').replace('thumbs','big'));
 		helper.set_new_content({
 			text : text
 		});

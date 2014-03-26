@@ -7,7 +7,7 @@
 
 	<h3><?php print $news->title ?></h3>
 
-	<ul class="picture_list">
+	<div class="picture_list">
 		<?php 
 			$pictures = json_decode($news->picture,true);
 			$pictures = empty($pictures) ? array() : $pictures;
@@ -20,24 +20,24 @@
 		<?php endif; ?>
 
 		<?php if(isset($pictures['picture_1'])): ?>
-		<li>
+		<div class="col-xs-3 picture">
 			<img src="<?php print Uri::create($pictures['picture_1']) ?>">
 			<a class="get_link" href=""><?php print Lang::get('picturemanager.get_link') ?></a>
-		</li>
+		</div>
 		<?php endif; ?>
 		<?php if(isset($pictures['picture_2'])): ?>
-		<li>
+		<div class="col-xs-3 picture">
 			<img src="<?php print Uri::create($pictures['picture_2']) ?>">
 			<a class="get_link" href=""><?php print Lang::get('picturemanager.get_link') ?></a>
-		</li>
+		</div>
 		<?php endif; ?>
 		<?php if(isset($pictures['picture_2'])): ?>
-		<li>
+		<div class="col-xs-3 picture">
 			<img src="<?php print Uri::create($pictures['picture_3']) ?>">
 			<a class="get_link" href=""><?php print Lang::get('picturemanager.get_link') ?></a>
-		</li>
+		</div>
 		<?php endif; ?>
-	</ul>
+	</div>
 
 </div>
 <?php endforeach; ?>
@@ -58,9 +58,9 @@
 	}
 	link_dialog.onInitiate = function(helper, event) {
 		var text = $('<input style="width:240px" value="" />');
-		var index = $('.picture_list li a').index(event.currentTarget);
+		var index = $('.picture_list .picture a').index(event.currentTarget);
 
-		$(text).attr('value',$('.picture_list li').eq(index).find('img').attr('src').replace('thumb','big'));
+		$(text).attr('value',$('.picture_list .picture').eq(index).find('img').attr('src').replace('thumb','big'));
 		helper.set_new_content({
 			text : text
 		});

@@ -35,7 +35,7 @@ class Controller_Shop_Order extends Controller
 
 		$permissions = model_permission::mainNavigation();
 		$this->data['permission'] = $permissions[Session::get('lang_prefix')];
-		if(!model_permission::currentLangValid())
+		if(!model_permission::currentLangValid() && model_permission::$user->admin)
 			Response::redirect('admin/logout');
 
 		Lang::load('tasks');
@@ -87,7 +87,7 @@ class Controller_Shop_Order extends Controller
 	{
 		$data = array();
 
-		$mail = new model_shop_invoice_mail($this->param('id'));
+		$mail = new model_shop_invoice_mail($this->param('id'), Session::get('lang_prefix'));
 
 		$response = Response::forge($mail->show());
 		$response->set_header('Content-Type','text/html; charset=utf-8');

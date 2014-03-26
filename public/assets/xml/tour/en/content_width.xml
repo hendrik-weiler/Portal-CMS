@@ -2,20 +2,20 @@
 <storyboard>
 	<tour label="Set single contents into columns" />
 	<steps>
-		<step target="input[name='split_box[]']:eq(0)">
-			<position_difference top="15" left="-25" />
+        <step target=".content_width_text:eq(0)" based_on="offset" mode="ignore_position">
+            <position_difference top="15" left="105" />
 			<text>Here you see the current setting.</text>
 		</step>
-		<step target="input[name='split_box[]']:eq(0)" condition="clicked">
-			<position_difference top="15" left="10" />
+        <step target="input[name='split_box[]']:eq(0)" condition="clicked" based_on="offset">
+            <position_difference top="15" left="10" />
 			<text>Click on the checkbox.</text>
 		</step>
-		<step target="div.split_box_container">
-			<position_difference top="50" left="30" />
+        <step target="div.split_box_container" based_on="offset">
+            <position_difference top="50" left="30" />
 			<text>Choose the setting, what the different contents should have.</text>
 		</step>
-		<step target="div.split_box_container">
-			<position_difference top="50" left="130" />
+        <step target="div.split_box_container" based_on="offset">
+            <position_difference top="70" left="150" />
 			<text>Accept the settings.</text>
 		</step>
 	</steps>

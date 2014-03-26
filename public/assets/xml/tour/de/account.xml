@@ -2,35 +2,39 @@
 <storyboard>
 	<tour label="Ein neues Benutzerkonto anlegen" />
 	<steps>
-		<step target="#form_username">
+		<step target="#form_username" based_on="offset">
 			<position_difference top="20" left="100" />
 			<text>Geben Sie Ihren Benutzernamen ein.</text>
 		</step>
-		<step target="#form_password">
+		<step target="#form_password" based_on="offset">
 			<position_difference top="20" left="60" />
 			<text>Geben Sie Ihr Passwort ein.</text>
 		</step>
-		<step target="#form_language">
+		<step target="#form_language" based_on="offset">
 			<position_difference top="20" left="60" />
 			<text>Wählen Sie hier welche Systemsprache der Nutzer beim Einloggen haben soll.</text>
 		</step>
-		<step target="#form_admin">
+        <step target=".more-options" based_on="offset" condition="clicked">
+            <position_difference top="20" left="60" />
+            <text>Klicken Sie hier um mehr optionen zu erhalten.</text>
+        </step>
+		<step target="#form_admin" based_on="offset">
 			<position_difference top="10" left="10" />
 			<text>Falls der Benutzeraccount alle Rechte haben soll, aktivieren Sie die Checkbox.</text>
 		</step>
-		<step target="input[name='global_language[]']:first">
+		<step target="input[name='global_language[]']:first" based_on="offset">
 			<position_difference top="20" left="60" />
 			<text>Wählen Sie hier welche Sprachen der Website für den Benutzeraccount zugänglich sein sollen.</text>
 		</step>
-		<step target="#tabs_menu">
+		<step target="#tabs_menu" based_on="offset">
 			<position_difference top="20" left="60" />
 			<text>Wählen sie die Sprachversionen der Website aus. Dieser Bereich ist für die nicht-Admin Accounts. Hier können die Rechte vergeben werden.</text>
 		</step>
-		<step target="#tabs_menu">
+		<step target="#tabs_menu" based_on="offset">
 			<position_difference top="120" left="60" />
 			<text>Es ist möglich nur bestimmte Bereiche für einen Benutzeraccount sichtbar zu machen. Wählen Sie einfach die jeweiligen Bereiche aus.</text>
 		</step>
-		<step target="#form_submit">
+		<step target="#form_submit" based_on="offset">
 			<position_difference top="20" left="120" />
 			<text>Zum erstellen dieses Accounts diesen Button drücken.</text>
 		</step>

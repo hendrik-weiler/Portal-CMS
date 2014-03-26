@@ -48,8 +48,6 @@ class Controller_Advanced_Update extends Controller
 
 		$permissions = model_permission::mainNavigation();
 		$this->data['permission'] = $permissions[Session::get('lang_prefix')];
-		if(!$this->data['permission'][5]['valid'] || !model_permission::currentLangValid())
-			Response::redirect('admin/logout');
 
 		$language_version = Session::get('lang_prefix');
 		model_db_content::setLangPrefix($language_version);
@@ -131,6 +129,10 @@ class Controller_Advanced_Update extends Controller
 
 	public function action_index()
 	{
+        if(!model_permission::$user->admin) {
+            return $this->response;
+        }
+
 		$data = array();
 
 		$data['use_fsock'] = $this->fsock_able;
@@ -178,6 +180,11 @@ class Controller_Advanced_Update extends Controller
 	{
 		$this->_ajax = true;
 
+        if(!model_permission::$user->admin) {
+            print 'no rights';
+            return $this->response;
+        }
+
 		$update_version = explode(':',Input::post('update_to'));
 		$update_version = trim($update_version[1]);
 
@@ -212,6 +219,11 @@ class Controller_Advanced_Update extends Controller
 	public function action_execute_manually()
 	{
 		$this->_ajax = true;
+
+        if(!model_permission::$user->admin) {
+            print 'no rights';
+            return $this->response;
+        }
 
 		$config = array(
 		    'path' => DOCROOT . '../',

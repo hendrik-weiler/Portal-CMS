@@ -101,8 +101,14 @@ class model_db_article extends Orm\Model
 
 		$price = $price / floatval($rates[$lang_prefix]);
 
+		if(isset($currency_definition[$lang_prefix])) {
+			$definition_def = $currency_definition[$lang_prefix];		
+		} else {
+			$definition_def = $currency_definition['en'];
+		}
+
 		if(!$raw) {
-			$price = number_format($price, 2, ',', '') . $currency_definition[$lang_prefix];
+			$price = number_format($price, 2, ',', '') . $definition_def;
 		}
 
 		return $price;

@@ -43,7 +43,7 @@ pcms.siteselector = function(selector, options)
 	var _confirm = $('<button></button>');
 	var _cancel = $('<button></button>');
 
-	var _selection = $('<select>');
+	var _selection = $('<select>').hide();
 	var _option = $('<option>');
 	var _optgroup = $('<optgroup>');
 
@@ -59,6 +59,8 @@ pcms.siteselector = function(selector, options)
 	var _options = options;
 
 	var _data = {};
+
+	var _firstlang = 'en';
 
 	_text.append(_selection);
 	_text.append(_selectorcontent);
@@ -124,7 +126,7 @@ pcms.siteselector = function(selector, options)
 	function showNavigation(index) {
 
 		var html = _data.navigations[index];
-
+		console.log(_data, html)
 		_selectorcontent.html(html);
 
 		_selectorcontent.find('a').hover(function() {
@@ -185,23 +187,31 @@ pcms.siteselector = function(selector, options)
 
 		self.html = $(box);
 
+		var first = false;
+
 		$.getJSON(_url + 'admin/siteselector/data', function(data) {
 			_data = data;
+			console.log(_data);
 			$.each(data.langgroups, function(lang, navigations) {
+				if(!first) {
+					_firstlang = lang;
+					first = true;
+				}
 				var group = _optgroup.clone();
 				group.attr('label', lang);
 				$.each(navigations, function(key, title) {
 					var option = _option.clone();
-					option.attr('value',key);
+					option.attr('value',lang);
 					option.html(title);
 					group.append(option);
 				});
 				_selection.append(group);
 			});
-			showNavigation(0);
+			showNavigation(_firstlang);
 
 			_selection.change(function() {
 				var index = $(_selection.find('option')).index($(_selection).find('option:selected'));
+				console.log(index);
 				showNavigation(index);
 			});
 		});

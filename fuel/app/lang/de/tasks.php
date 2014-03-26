@@ -13,10 +13,10 @@ return array(
 	'questions' => array(
 		'supersearch' => 'Supersearch kennenlernen',
 
-		'updater' => 'Das System updaten',
+		//'updater' => 'Das System updaten',
 
 		'content' => 'Einen neuen Inhalt erstellen',
-		'content_news' => 'Nachrichten darstellen auf der Website',
+		'content_news' => 'Neuigkeiten darstellen auf der Website',
 		'content_width' => 'Einzelne Inhalte in spalten aufteilen',
 
 		'navigation' => 'Einen neuen Eintrag in der Navigation erstellen',
@@ -29,8 +29,8 @@ return array(
 
 		'language' => 'Die Systemsprache ändern',
 
-		'news' => 'Eine neue Nachricht erstellen',
-		'news_edit' => 'Eine bestehende Nachricht bearbeiten',
+		'news' => 'Eine neue Neuigkeit erstellen',
+		'news_edit' => 'Bestehende Neuigkeiten bearbeiten',
 
 		'account' => 'Ein neues Benutzerkonto anlegen',
 		'account_edit' => 'Ein bestehendes Benutzerkonto bearbeiten',
@@ -44,7 +44,7 @@ return array(
 	'question_permissions' => array(
 		'supersearch' => '-1',
 
-		'updater' => '-1',
+		//'updater' => '-1',
 
 		'content' => '0,1',
 		'content_news' => '0,1',
@@ -75,7 +75,7 @@ return array(
 	'question_links_show' => array(
 		'supersearch' => 'tour',
 
-		'updater' => 'tour|shortcut',
+		//'updater' => 'tour|shortcut',
 
 		'content' => 'tour|shortcut',
 		'content_news' => 'tour|shortcut',
@@ -106,7 +106,7 @@ return array(
 	'question_links' => array(
 		'supersearch' => 'admin/news#tour=supersearch',
 
-		'updater' => 'admin/advanced/update#tour=updater',
+		//'updater' => 'admin/advanced/update#tour=updater',
 
 		'content' => 'open-supersearch//sites/no_main#tour=content',
 		'content_news' => 'open-supersearch//sites/no_main#tour=content_news',

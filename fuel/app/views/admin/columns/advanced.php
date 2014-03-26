@@ -14,7 +14,7 @@
             <li><a data-toggle="tab" href="#assets"><?php print __('advanced.tabs.assets') ?></a></li>
             <li><a href="<?php print Uri::create('admin/advanced/layout') ?>"><?php print __('advanced.tabs.layout') ?></a></li>
             <!-- <li><a href="<?php print Uri::create('admin/advanced/update') ?>">Updates</a></li> -->
-            <li><a href="<?php print Uri::create('admin/advanced/import') ?>">Data Import</a></li>
+            <!-- <li><a href="<?php print Uri::create('admin/advanced/import') ?>">Data Import</a></li> -->
         </ul>
 
         <div class="tab-content">
@@ -117,6 +117,17 @@
                     <?php print Form::label(__('advanced.news.show_max_token')); ?>
                     <div class="input">
                         <?php print Form::input('show_max_token',$show_max_token); ?>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <?php print Form::label(__('advanced.header.show_full_news')); ?>
+                    <div class="input">
+                        <?php
+                        $checked = array();
+                        $value = 0;
+                        if($show_full_news == 1) $checked = array('checked'=>'checked');
+                        ?>
+                        <?php print Form::checkbox('show_full_news',1, $checked); ?>
                     </div>
                 </div>
             </div>

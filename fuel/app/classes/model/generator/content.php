@@ -69,7 +69,6 @@ class model_generator_content extends model_db_site
 
 	private static function _viewSite($site,$directly=false)
 	{
-
 		if(!$directly)
 		{
 			$segment2 = 2;
@@ -517,10 +516,10 @@ class model_generator_content extends model_db_site
 		$data['swfPath'] = Uri::create($path . $content->flash_file);
 		$data['title'] = $content->label;
 
-                if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/flash.php'))
-                    return View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/flash.php',$data);
-                else
-                    return View::factory('public/template/flash',$data);
+        if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/flash.php'))
+            return View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/flash.php',$data);
+        else
+            return View::factory('public/template/flash',$data);
 	}
 
 	private static function _showContactform($content)
@@ -549,9 +548,30 @@ class model_generator_content extends model_db_site
 				$mail_content['data'] = $_POST;
 				$mail_content['time'] = $time;
 				unset($mail_content['data']['contact_submit']);
-				$message = View::factory('public/template/contactform_email',$mail_content);
-			  mail($data['sendTo'], $regard, $message);
-			  $data['success'] = __('contactform.success');
+
+                if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/contactform_email_admin.php'))
+                    $message = View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/contactform_email_admin.php',$mail_content);
+                else
+                    $message = View::factory('public/template/contactform_email_admin',$mail_content);
+
+				$header = 'From: no-reply@' . $_SERVER['HTTP_HOST'] . "\r\n" .
+				    'Reply-To: no-reply@' . $_SERVER['HTTP_HOST'] . "\r\n" .
+				    'X-Mailer: PHP/' . phpversion();
+
+				mail($data['sendTo'], $regard, $message, $header);
+
+                if(isset($mail_content['data']['email_text'])) {
+                	$mail_content['data']['language'] = model_generator_preparer::$publicVariables['current_language'];
+
+	                if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/contactform_email_user.php'))
+	                    $message = View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/contactform_email_user.php',$mail_content);
+	                else
+	                    $message = View::factory('public/template/contactform_email_user',$mail_content);
+
+					mail($mail_content['data']['email_text'], $regard, $message, $header);
+				}
+
+				$data['success'] = __('contactform.success');
 			}
 			else
 			{
@@ -561,9 +581,10 @@ class model_generator_content extends model_db_site
 			    	if(isset($errors[str_replace('_required','_text',$key)]))
 			    		$data[str_replace('_required','_text',$key) . '_error'] = array('class'=>'error');
 			    }
+			    $data += $_POST;
 			}
 
-			$data += $_POST;
+			
 		}
                 
                 if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/contactform.php'))
@@ -596,19 +617,26 @@ class model_generator_content extends model_db_site
 			$data['title'] = $new->title;
 			$data['full_text'] = $new->text;
 
-			$new->text = strip_tags($new->text,'<span><h1><h2><h3><h4><h5><h6><p><a><br>');
-			#$short_text = explode("\n", wordwrap($new->text, $options['show_max_token'], "\n"));
-			$short_text = substr( $new->text, 0, @strpos( $new->text, ".", $options['show_max_token'] )+1 );
-			$data['short_text'] = $short_text;#$short_text[0];
+            if(model_db_option::getKey('show_full_news')->value == '1') {
+                $data['short_text'] = $new->text;
+            } else {
+                $new->text = strip_tags($new->text,'<span><h1><h2><h3><h4><h5><h6><p><a><br>');
+                #$short_text = explode("\n", wordwrap($new->text, $options['show_max_token'], "\n"));
+                $short_text = substr( $new->text, 0, @strpos( $new->text, ".", $options['show_max_token'] )+1 );
+                $data['short_text'] = $short_text;#$short_text[0];
+            }
 
 			$date = new DateTime($new->creation_date);
 			$data['time'] = $date->format(__('news.dateformat'));
 
 			$data['fullview_link'] = Uri::create(model_generator_preparer::$lang . '/news/' . $new->id . '/' . Inflector::friendly_title($new->title));
 
+            if(model_db_option::getKey('show_full_news')->value == '1') {
+                $data['fullview_link'] = '';
+            }
+
 			if(strlen($new->text) <= $options['show_max_token'])
 			{
-				//$data['fullview_link'] = '';
 				$data['short_text'] = $new->text;
 			}	
 

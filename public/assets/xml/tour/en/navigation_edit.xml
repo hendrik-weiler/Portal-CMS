@@ -2,40 +2,44 @@
 <storyboard>
 	<tour label="Edit an entry of the navigation" />
 	<steps>
-		<step target="#form_label">
-			<position_difference top="20" left="200" />
+        <step target="#form_label" based_on="offset">
+            <position_difference top="20" left="200" />
 			<text>Fill out the title.</text>
 		</step>
-		<step target="#form_redirect">
-			<position_difference top="20" left="200" />
+        <step target="#form_redirect" based_on="offset">
+            <position_difference top="20" left="200" />
 			<text>If this navigationspoint should redirect to another website, fill a link inside the textfield.</text>
 		</step>
-		<step target="#form_landing_page">
-			<position_difference top="15" left="15" />
+        <step target=".more-options" based_on="offset" condition="clicked">
+            <position_difference top="20" left="200" />
+            <text>Click here to see more options.</text>
+        </step>
+        <step target="#form_landing_page" based_on="offset">
+            <position_difference top="15" left="15" />
 			<text>Activate this, if this navigationpoint should be displayed as startsite</text>
 		</step>
-		<step target="#form_current_template">
-			<position_difference top="20" left="200" />
+        <step target="#form_current_template" based_on="offset">
+            <position_difference top="20" left="200" />
 			<text>Choose a template from the layout folder.</text>
 		</step>
-		<step target="#form_site_title">
-			<position_difference top="20" left="200" />
-			<text>This will change the title of the browser<text>
+        <step target="#form_site_title" based_on="offset">
+            <position_difference top="20" left="200" />
+			<text>This will change the title of the browser</text>
 		</step>
-		<step target="#form_keywords">
-			<position_difference top="40" left="200" />
+        <step target="#form_keywords" based_on="offset">
+            <position_difference top="40" left="200" />
 			<text>For the searchengines, write keywords seperated by comma</text>
 		</step>
-		<step target="#form_description">
-			<position_difference top="70" left="200" />
+        <step target="#form_description" based_on="offset">
+            <position_difference top="70" left="200" />
 			<text>or the searchengines, write a short description of the topic.</text>
 		</step>
-		<step target="#form_show_in_navigation">
-			<position_difference top="15" left="15" />
+        <step target="#form_show_in_navigation" based_on="offset">
+            <position_difference top="15" left="15" />
 			<text>If this navigationspoint shouldnt be visible, deativate this checkbox.</text>
 		</step>
-		<step target="#form_submit">
-			<position_difference top="20" left="60" />
+        <step target="#form_submit" based_on="offset">
+            <position_difference top="20" left="60" />
 			<text>Save the changes.</text>
 		</step>
 	</steps>

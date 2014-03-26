@@ -70,7 +70,7 @@
 
             <ul class="nav nav-tabs">
             <?php $counter = 0; ?>
-            <?php foreach ($labels as $prefix => $value): ?>
+            <?php foreach ($descriptions as $prefix => $value): ?>
                 <?php $active = ''; if($counter == 0) {$active = "active";} ?>
                 <li class="<?php print $active ?>">
                     <a data-toggle="tab" href="#<?php print $prefix ?>_2">
@@ -84,7 +84,7 @@
             <div class="tab-content">
 
                 <?php $counter = 0; ?>
-                <?php foreach ($labels as $prefix => $value): ?>
+                <?php foreach ($descriptions as $prefix => $value): ?>
                     <?php $active = 'tab-pane fade'; if($counter == 0) {$active = "tab-pane fade in active";} ?>
                     <div id="<?php print $prefix ?>_2" class="<?php print $active ?>">
                         <br/>

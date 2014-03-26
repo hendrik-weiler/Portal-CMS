@@ -168,8 +168,10 @@
 	</div>
 
 </div>
-    <br/>
-    <?php print Form::submit('edit_settings',__('shop.articles.save'), array('class'=>'button')) ?>
+	<div class="col-xs-12">
+	    <br/>
+	    <?php print Form::submit('edit_settings',__('shop.articles.save'), array('class'=>'button')) ?>
+    </div>
 </div>
 
 

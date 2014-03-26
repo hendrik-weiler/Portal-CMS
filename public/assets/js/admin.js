@@ -14,27 +14,32 @@ $('#form_change').click(function(e) {
 	},300).delay(400);
 });
 
+function updateLanguageSort() {
+	var data = [];
+	$.each($('#language_list .language_entry'),function(key,value) {
+		data[key] = $(this).attr('id');
+	});
+
+	$.post(_url + 'admin/language/order/update',{'order' : data});
+}
+
 if(/admin\/language/.test(window.location.href))
 {
 
+	var ltext = $('#language_list div.startlanguage-text');
+
 	$('#language_list').sortable();
 	$('#language_list').bind('sortupdate',function(event, ui) {
-			var data = [];
-			$.each($('#language_list div'),function(key,value) {
-				data[key] = $(this).attr('id');
-			});
+			updateLanguageSort();
 
-			$.post(_url + 'admin/language/order/update',{'order' : data});
-
-			$('#language_list div').removeClass('startlanguage');
-			$('#language_list div').eq(0).addClass('startlanguage');
-			var ltext = $('#language_list div.startlanguage-text').clone();
-			$('#language_list div.startlanguage-text').remove();
-			$('#language_list div').eq(0).append(ltext);
+			$('#language_list .language_entry').removeClass('startlanguage');
+			$('#language_list .language_entry').eq(0).addClass('startlanguage');
+			$('#language_list .language_entry.startlanguage-text').remove();
+			$('#language_list .language_entry').eq(0).append(ltext);
 	});
 
 	$('#language_list div').eq(0).addClass('startlanguage');
-	$('#language_list').trigger('sortupdate');
+	updateLanguageSort();
 }
 
 if(/admin\/navigation/.test(window.location.href))

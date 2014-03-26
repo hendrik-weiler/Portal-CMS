@@ -32,7 +32,9 @@ class model_shop_invoice_mail
 
 	private $_order;
 
-	private function _generate_body($mail=false)
+	private $_lang;
+
+	private function _generate_body($mail=false, $lang)
 	{
 		$data = array();
 
@@ -75,16 +77,18 @@ class model_shop_invoice_mail
 
 		Lang::load('shop');
 
-    if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/shop_email_invoice.php'))
-      return View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/shop_email_invoice.php',$data);
+    if(file_exists(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/shop_email_invoice_' . $lang . '.php'))
+      return View::factory(LAYOUTPATH . '/' . model_db_option::getKey('layout')->value . '/content_templates/shop_email_invoice_' . $lang . '.php',$data);
 		else
-      return View::factory('public/template/shop_email_invoice',$data);
+      return View::factory('public/template/shop_email_invoice_en',$data);
 	}
 
-	public function __construct($order_id)
+	public function __construct($order_id, $lang)
 	{
 
 		$this->_email = Email::forge();
+
+		$this->_lang = $lang;
 
 		$order = model_db_order::find($order_id);
 		$this->_order = $order;
@@ -110,12 +114,12 @@ class model_shop_invoice_mail
 			$this->_email->attach('uploads/shop/logo/' . $invoice_logo, true, 'cid:logo');
 		}
 
-		$this->_email->html_body($this->_generate_body(true));
+		$this->_email->html_body($this->_generate_body(true, $lang));
 	}
 
 	public function show()
 	{
-		return $this->_generate_body(false);
+		return $this->_generate_body(false, $this->_lang);
 	}
 	
 	public function send()

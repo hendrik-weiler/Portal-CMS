@@ -57,6 +57,8 @@ pcms.tour = function()
 
 	var next_step = false;
 
+    var debug_mode = false;
+
 	function _get_current_tour()
 	{
 		return window.location.hash.split('tour=')[1];
@@ -69,13 +71,25 @@ pcms.tour = function()
 
 	function _refresh_storyline(xml)
 	{
+
+        debug_mode = xml.find('debug').length == 1;
+
 		position_top = [];
 		position_left = [];
 		texts = [];
 		conditions = [];
 		targets = [];
+
 		xml.find('step').each(function(key, obj) {
+
+            if(debug_mode) console.log('------ Step ' + key + ': -------');
+
 			var target = $(obj).attr('target');
+            var position_based_on = $(obj).attr('based_on');
+
+            if($.type(position_based_on) == 'undefined') {
+                position_based_on = 'position';
+            }
 
 			if($(obj).attr('target') === undefined && $(obj).attr('live_target') !== undefined)
 				target = $(obj).attr('live_target');
@@ -83,12 +97,34 @@ pcms.tour = function()
 			if($(target).length == 0 && $(obj).attr('not_found_target') !== undefined)
 				target = $(obj).attr('not_found_target');
 
-			if($(target).length == 0) return;
-			var target_position = $(target).position();
-			if($(target).css('top') != 'auto')
+            var ignore_position = $(obj).attr('mode') == "ignore_position";
+            if(debug_mode && ignore_position) console.log('------ Mode=ignore_position ------');
+
+			if($(target).length == 0) {
+                if(debug_mode) {
+                    console.log("Target: " + target + " not found.");
+                }
+                return;
+            }
+
+            if(position_based_on == 'position') {
+                var target_position = $(target).position();
+            } else {
+                var target_position = $(target).offset();
+            }
+
+            if(debug_mode) {
+                console.log(target_position);
+            }
+
+			if($(target).css('top') != 'auto' && !ignore_position)
 			{
 				target_position.top = parseFloat( $(target).css('top').replace('px','') );
 				target_position.left = parseFloat( $(target).css('left').replace('px','') );
+                if(debug_mode) {
+                    console.log('------ Positioned ' + key + ': -------');
+                    console.log(target_position);
+                }
 			}
 			position_top.push( target_position.top + parseInt($(obj).find('position_difference').attr('top')) );
 			position_left.push( target_position.left + parseInt($(obj).find('position_difference').attr('left')) );
@@ -102,6 +138,8 @@ pcms.tour = function()
 	{
 		_refresh_storyline($(_xml_data));
 
+        if(debug_mode) console.log('------ Showing Step ' + number + ': -------');
+
 		var target = targets[number];
 		var top = position_top[number];
 		var left = position_left[number];
@@ -111,6 +149,19 @@ pcms.tour = function()
 		var live_target = $(storyboard).find('step').eq(number).attr('live_target');
 		var redirect_after = $(storyboard).find('step').eq(number).attr('redirect_after');
 		var redirect_by_click = $(storyboard).find('step').eq(number).attr('redirect_by_click');
+        var execute_javascript = $(storyboard).find('step').eq(number).attr('execute_javascript');
+        var javascript = $(storyboard).find('step').eq(number).find('javascript').text();
+        var position_based_on = $(storyboard).find('step').attr('based_on');
+        var ignore_position = $(storyboard).find('step').eq(number).attr('mode') == "ignore_position";
+
+        if($.type(position_based_on) == 'undefined') {
+            position_based_on = 'position';
+        }
+
+        if(debug_mode) {
+            console.log("1 top=",top);
+            console.log("1 left=",left);
+        }
 
 		if(redirect_by_click !== undefined)
 		{
@@ -119,15 +170,42 @@ pcms.tour = function()
 			condition = 'clicked';
 		}
 
+        if($.type(execute_javascript) == 'undefined') {
+            execute_javascript = 'after';
+        }
+
 		next_step = false;
 
 		if(live_target !== undefined)
 		{
+            if(debug_mode) console.log('------ Using live target  -------');
+
 			live_target = $(storyboard).find('step').eq(number).attr('not_found_target') !== undefined ? target : live_target;
-			var new_target = $(live_target).position();
-			top = new_target.top + parseInt($(storyboard).find('step').eq(number).find('position_difference').attr('top'));
-			left = new_target.left + parseInt($(storyboard).find('step').eq(number).find('position_difference').attr('left'));
+            if(position_based_on == 'position') {
+			    var new_target = $(live_target).position();
+            }
+            else {
+                var new_target = $(live_target).offset();
+            }
+            if(!ignore_position) {
+                top = new_target.top + parseInt($(storyboard).find('step').eq(number).find('position_difference').attr('top'));
+                left = new_target.left + parseInt($(storyboard).find('step').eq(number).find('position_difference').attr('left'));
+            } else {
+                if(debug_mode) console.log('------ Ignore Position in Live Target');
+            }
+            if(debug_mode) console.log('------ Position=', new_target);
 		}
+
+
+        if(execute_javascript == 'before') {
+            eval(javascript);
+        }
+
+
+        if(debug_mode) {
+            console.log("2 top=",top);
+            console.log("2 left=",left);
+        }
 
 		$(_cursor).animate({
 			top : top,
@@ -138,6 +216,10 @@ pcms.tour = function()
 			var cursor = _get_cursor_location();
 			if(number == position_left.length-1 && redirect_after === undefined && redirect_by_click === undefined)
 				$(textbox).find('a').text(_end_tour_button);
+
+            if(execute_javascript == 'after') {
+                eval(javascript);
+            }
 
 			$('body').prepend(textbox);
 

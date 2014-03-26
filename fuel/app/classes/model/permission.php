@@ -26,7 +26,7 @@ class model_permission extends model_db_accounts
 
   private static $currentCategory;
 
-  private static $user;
+  public static $user;
 
   private static $language;
 

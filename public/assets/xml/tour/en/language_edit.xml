@@ -2,12 +2,12 @@
 <storyboard>
 	<tour label="Edit an entry of the navigation" />
 	<steps>
-		<step target="#form_language">
-			<position_difference top="20" left="100" />
+        <step target="#form_language" based_on="offset">
+            <position_difference top="20" left="100" />
 			<text>Here you can choose the wanted language.</text>
 		</step>
-		<step target="#form_submit">
-			<position_difference top="20" left="40" />
+        <step target="#form_submit" based_on="offset">
+            <position_difference top="20" left="40" />
 			<text>Save the settings.</text>
 		</step>
 	</steps>

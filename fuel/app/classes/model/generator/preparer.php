@@ -100,21 +100,25 @@ class model_generator_preparer extends model_db_site
         		'order_by' => array('sort'=>'ASC')
         	));
 
-        	$sub = model_db_navigation::find('first',array(
-        		'where' => array('parent'=>$nav->id),
-        		'order_by' => array('sort'=>'ASC')
-        	));
+        	if(!is_null($nav)) {
 
-        	if(is_object($sub))
-        	{
-        		$id = $sub->id;
+	        	$sub = model_db_navigation::find('first',array(
+	        		'where' => array('parent'=>$nav->id),
+	        		'order_by' => array('sort'=>'ASC')
+	        	));
+
+	        	if(is_object($sub))
+	        	{
+	        		$id = $sub->id;
+	        	}
+
+	        	$id = $nav->id;
+
+	        	$site = model_db_site::find('first',array(
+	        		'where' => array('navigation_id'=>$id)
+	        	));
+
         	}
-
-        	$id = $nav->id;
-
-        	$site = model_db_site::find('first',array(
-        		'where' => array('navigation_id'=>$id)
-        	));
         }
     
         $parents = static::getParentsFromSite($site);
@@ -250,6 +254,9 @@ class model_generator_preparer extends model_db_site
         {
 
             $site = static::_get_first_site();
+            if(is_null($site)) {
+            	return false;
+            }
 
         }
 
@@ -263,6 +270,9 @@ class model_generator_preparer extends model_db_site
         	{
         		$site = static::_get_first_site();
         	}
+            if(is_null($site)) {
+            	return false;
+            }
         }
 
 		if(!empty(self::$lang) && !empty(self::$main) && empty(self::$sub) && !static::$isShop)
@@ -458,6 +468,19 @@ class model_generator_preparer extends model_db_site
 		}
 
 		static::addPublicVariables($data + $parameter);
+
+		$lang = $data['current_language'];
+
+		$layoutpath = APPPATH . '../../layouts/' . model_db_option::getKey('layout')->value . '/lang';
+		$langfilepath = $layoutpath . '/' . $lang . '/frontend.php';
+		if(file_exists($langfilepath)) {
+			Lang::load_path($langfilepath);
+		}
+
+        $langfilepath2 = $layoutpath . '/' . $lang . '/shop.php';
+        if(file_exists($langfilepath2)) {
+            Lang::load_path($langfilepath2);
+        }
 	}
 
 	public static function getParentsFromSite($site)

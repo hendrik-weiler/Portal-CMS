@@ -7,11 +7,18 @@
 		$group_id = $site->group_id;
                 if($site == null)
                    Response::redirect('admin/sites');
+
+        $nav = model_db_navigation::find($site->navigation_id);
+
+        $subpointbackaddition = "";
+        if($nav->parent != 0) {
+            $subpointbackaddition = "/" . $nav->parent;
+        }
 	}
 ?>
 <div class="row">
     <div class="col-xs-1 backbutton">
-        <a href="<?php print Uri::create('admin/navigation/' . $group_id) ?>">
+        <a href="<?php print Uri::create('admin/navigation/' . $group_id . $subpointbackaddition) ?>">
             <img src="<?php print Uri::create('assets/img/icons/arrow_left.png') ?>" alt=""/>
         </a>
     </div>
@@ -44,9 +51,21 @@
 	    <?php print Form::input('redirect',$redirect); ?>
 	  </div>
 	</div>
+    <?php if($got_sub_points): ?>
+        <?php print Form::label(__('navigation.show_sub')); ?>
+        <br/><br/>
+        <?php print Form::select('show_sub',$show_sub, array(
+            0 => __('navigation.show_sub_list.none'),
+            1 => __('navigation.show_sub_list.left'),
+            2 => __('navigation.show_sub_list.right'),
+        )); ?>
+        <br/><br/>
+    <?php else: ?>
     <a class="more-options" href="#"><?php print __('constants.more_options') ?></a>
     <a class="less-options" href="#"><?php print __('constants.less_options') ?></a>
+    <?php endif; ?>
     <div class="more-options-box">
+
 	<div class="clearfix">
 	 <?php print Form::label(__('sites.landingpage')); ?>
 	 <div class="input">
@@ -140,6 +159,7 @@
   <div class="input">
 	<?php if($image_exists): ?>
 	<img src="<?php print $image ?>" />
+        <a href="<?php print Uri::create('admin/sites/edit/' . $site->id . '/delete/image') ?>"><img src="<?php print Uri::create('assets/img/icons/delete.png') ?>"></a>
 	<?php endif; ?>
     <?php print Form::file('image'); ?>
   </div>
@@ -186,6 +206,7 @@
 	<?php	print Form::close();	?>
     </div>
 	</div>
+    <?php if(!$got_sub_points): ?>
     <div class="col-xs-5 vertical graycontainer globalmenu">
         <div class="description">
 		<?php if(Uri::segment(3) == 'edit'): ?>
@@ -252,6 +273,7 @@
         </div>
 		<?php endif; ?>
 	</div>
+<?php endif; ?>
 		<?php
 
 		function writeRow($nav,$class='sites_entry')

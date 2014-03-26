@@ -49,7 +49,7 @@
             <ul>
                 <li>
                     <form method="post" action="<?php print Uri::create('admin/navigation/group/new') ?>">
-                        <div class="options">
+                        <div class="options navigation_groups">
                             <div class="options-label">
                                 <input placeholder="<?php print __('navigation.placeholder_group') ?>" type="text" name="group" />
                             </div>
@@ -65,7 +65,7 @@
     <div class="col-xs-1 open-navigationmenu">
         <img src="<?php print Uri::create('assets/img/icons/arrow_right.png') ?>" alt=""/>
     </div>
-	<div class="col-xs-3 vertical graycontainer globalmenu">
+	<div class="col-xs-4 vertical graycontainer globalmenu">
 		<div class="description">
             <div class="navigationmenu-opened">
                 <?php print __('navigation.site_header') . ' ' . $maintitle ?>
@@ -150,7 +150,7 @@
                     <form method="post" action="<?php print Uri::create('admin/navigation/add') ?>">
                         <input type="hidden" name="id" value="<?php print Uri::segment(3) ?>"/>
                         <input type="hidden" name="parent" value="0"/>
-                        <div class="options">
+                        <div class="options navigation_sites">
                             <div class="options-label">
                                 <input placeholder="<?php print __('navigation.placeholder_site') ?>" type="text" name="label" />
                             </div>
@@ -172,7 +172,7 @@
 
     ?>
     <?php if(isset($mainid)): ?>
-	<div class="col-xs-3 vertical graycontainer globalmenu">
+	<div class="col-xs-4 vertical graycontainer globalmenu">
 		<div class="description">
             <?php print __('navigation.subsite_header') . ' ' . $title ?>
 		</div>
@@ -249,8 +249,8 @@
             <ul>
                 <li>
                     <form method="post" action="<?php print Uri::create('admin/navigation/add') ?>">
-                        <input type="hidden" name="id" value="<?php print Uri::segment(4) ?>"/>
-                        <input type="hidden" name="parent" value="<?php print Uri::segment(3) ?>"/>
+                        <input type="hidden" name="id" value="<?php print Uri::segment(3) ?>"/>
+                        <input type="hidden" name="parent" value="<?php print Uri::segment(4) ?>"/>
                         <div class="options">
                             <div class="options-label">
                                 <input placeholder="<?php print __('navigation.placeholder_site') ?>" type="text" name="label" />

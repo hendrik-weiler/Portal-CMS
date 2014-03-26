@@ -73,7 +73,7 @@
 
             $radio = Form::radio('layout',$key,$check + array('class'=>'choose_layout'));
             print '
-            <div>
+            <div class="layout_entry">
               <h3>' . $settings['name'] . '</h3>
               <img height="150" width="150" src="' . Uri::create('admin/advanced/layout/preview/' . strtolower($key) . '/' . $settings['preview']) . '" alt="' . $settings['name'] . '_preview" />
               <article>' . $description . '</article>

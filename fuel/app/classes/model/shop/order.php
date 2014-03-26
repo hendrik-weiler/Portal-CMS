@@ -203,7 +203,13 @@ class model_shop_order extends model_shop_countries
 	  	$order->accept = 0;
 	  	$order->save();
 
-	  	$mail = new model_shop_invoice_mail(model_db_order::find('last')->id);
+	  	if(model_generator_preparer::$isMainLanguage) {
+	  		$lang = model_generator_preparer::$mainLang;
+	  	} else {
+			$lang = model_generator_preparer::$lang;
+	  	}
+
+	  	$mail = new model_shop_invoice_mail(model_db_order::find('last')->id, $lang);
 	  	$mail->send();
 
 			Response::redirect(model_generator_preparer::$lang . '/cart/step/3');

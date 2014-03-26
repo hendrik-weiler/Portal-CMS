@@ -63,8 +63,8 @@ return array(
 		'no_entries' => 'Noch keine Nachrichten erstellt.',
 
 		'edit' => array(
-			'header' => 'Änderung',
-			'submit' => 'Bearbeiten',
+			'header' => 'Nachricht bearbeiten',
+			'submit' => 'Änderungen speichern',
 			'back' => 'Zurück zur Übersicht',
 			'title' => 'Titel',
 			'pictures' => 'Bilder',
@@ -101,7 +101,7 @@ return array(
 			'pricing' => 'Preisgestaltung',
 			'price' => 'Preis',
 			'tax_group' => 'Steuergruppe',
-			'edit' => 'Bearbeiten',
+			'edit' => 'Änderungen speichern',
 			'save' => 'Speichern',
 			'delete' => 'Löschen',
 			'back' => 'Zurück zur Übersicht',
@@ -115,7 +115,7 @@ return array(
 		'groups' => array(
 			'add_label' => 'Name', 
 			'add' => 'Füge eine Steuergruppe hinzu',
-			'edit' => 'Bearbeiten',
+			'edit' => 'Änderungen speichern',
 			'save' => 'Speichern',
 			'delete' => 'Löschen',
 			'back' => 'Zurück zur Übersicht',
@@ -124,7 +124,7 @@ return array(
 			'add_label' => 'Name', 
 			'add_value' => 'Umsatzsteuer',
 			'add' => 'Füge eine Warengruppe hinzu',
-			'edit' => 'Bearbeiten',
+			'edit' => 'Änderungen speichern',
 			'save' => 'Speichern',
 			'delete' => 'Löschen',
 			'back' => 'Zurück zur Übersicht',
@@ -214,6 +214,7 @@ return array(
 		'install_tool_usable' => '<strong>Achtung:</strong> Das Installationswerkzeug ist verwendbar. Erstelle app/INSTALL_TOOL_DISABLED um es auszuschalten.',
         'more_options' => 'Mehr optionen',
         'less_options' => 'Weniger optionen',
+        'languageversion' => 'Sprachversion',
 	),
 
 	'content' => array(
@@ -249,7 +250,7 @@ return array(
 			'header' => 'Bearbeitene den Textcontainer',
 			'label' => 'Titel',
 			'back' => 'Zurück zur Übersicht',
-			'submit' => 'Bearbeiten',
+			'submit' => 'Änderungen speichern',
 		),
 		'2' => array(
 			'header' => 'Verwalte dein Formular',
@@ -280,7 +281,7 @@ return array(
 			'picture_submit' => 'Dateien hochladen',
 			'image_header' => 'Bilder in der Galerie',
 			'no_entries' => 'Die Galerie besitzt noch keine Bilder',
-			'submit' => 'Bearbeiten',
+			'submit' => 'Änderungen speichern',
 		),
 		'5' => array(
 			'header' => 'Wähle ein bereits existierender Inhalt',
@@ -417,7 +418,7 @@ return array(
 			'lang' => 'Beschreibung',
 			'lang_prefix' => 'Prefix(e.g. de,en)',
 			'add_button' => 'Neue Sprache hinzufügen',
-			'edit_button' => 'Bearbeiten'
+			'edit_button' => 'Änderungen speichern'
 		),
 		'startlanguage' => 'Das ist die Start-sprache',
 	),
@@ -440,6 +441,7 @@ return array(
 			'inline_edit' => 'Webseiten direkt bearbeitungsmodus',
 			'general' => 'Allgemein',
 			'site_caching' => 'Website caching',
+            'show_full_news' => 'Zeige Einträge ohne Filterung/Restriktion',
 		),
 		'layout' => array(
 			'wait' => 'Bitte warten...',

@@ -4,12 +4,12 @@ return array(
 
 	'shop' => array(
 		'fullview' => array(
-			'add_to_cart' => 'Add to cart'
-
+			'add_to_cart' => 'Add to cart',
+			'sold_out' => 'Sold out!',
 		),
 		'simple_view' => array(
-			'description' => ' arcticles worth\'s '
-
+			'description' => ' arcticles worth\'s ',
+			'sold_out' => 'Sold out!',
 		),
 		'cart' => array(
 			'to_cart' => 'Go to cart',

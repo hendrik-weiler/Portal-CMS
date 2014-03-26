@@ -11,15 +11,15 @@
 <?php if(empty($pictures)): ?>
 <h3><?php print __('picturemanager.no_pictures'); ?></h3>
 <?php endif; ?>
-<ul class="picture_list">
+<div class="picture_list">
 	<?php foreach($pictures as $picture): ?>
-	<li>
+	<div class="col-xs-3 picture">
 		<img src="<?php print $picture ?>">
 		<a class="get_link" href=""><?php print Lang::get('picturemanager.get_link') ?></a>
 		<a class="delete_picture" data-src="<?php print $picture ?>" href=""><?php print Lang::get('picturemanager.delete_button') ?></a>
-	</li>
+	</div>
 	<?php endforeach; ?>
-</ul>
+</div>
 
 <script type="text/javascript">
 	
@@ -52,10 +52,10 @@
 	}
 	link_dialog.onInitiate = function(helper, event) {
 		var text = $('<input style="width:240px" value="" />');
-		var index = $('.picture_list li a.get_link').index(event.currentTarget);
+		var index = $('.picture_list .picture a.get_link').index(event.currentTarget);
 
-		console.log( $('.picture_list li').eq(index).find('img').attr('src'), index );
-		$(text).attr('value',$('.picture_list li').eq(index).find('img').attr('src').replace('thumbs','original'));
+		console.log( $('.picture_list .picture').eq(index).find('img').attr('src'), index );
+		$(text).attr('value',$('.picture_list .picture').eq(index).find('img').attr('src').replace('thumbs','original'));
 		helper.set_new_content({
 			text : text
 		});

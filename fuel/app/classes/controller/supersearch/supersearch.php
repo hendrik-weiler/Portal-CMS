@@ -369,7 +369,7 @@ class Controller_Supersearch_Supersearch extends Controller
 				else
 				{
 					$content_type = __('supersearch_results.main_point');
-					$link = \Uri::create('admin/navigation/edit/' . $result->id);
+					$link = \Uri::create('admin/sites/edit/' . $result->id);
 				}
 
 				$navi = model_db_navigation::find($result->navigation_id);
