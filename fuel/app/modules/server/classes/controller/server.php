@@ -184,7 +184,6 @@ class Controller_Server extends \Controller
 					$name = $cmd[0];
 					if($type != false)
 					{
-						$finfo = new \finfo();
 						$filepath = static::$serve_list[$type][$name];
 						$type = static::_get_mimetype($filepath);
 						$this->response->set_header('Content-Type', $type);
