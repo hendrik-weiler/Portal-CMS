@@ -9,8 +9,9 @@
 	<link rel="stylesheet" href="style.css">
 	<script src="jquery.nav.js"></script>
 	<script>
-		$(document).ready(function() {
+		$(function() {
 			$('#nav').onePageNav();
+			$('#nav li').eq(0).addClass('current');
 		});
 	</script>
 </head>
