@@ -3,14 +3,47 @@
 <head>
 	<title>PortalCMS</title>
 	<meta charset="utf-8" />
+	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400' rel='stylesheet' type='text/css'>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="//raw.githubusercontent.com/hendrik-weiler/Portal-CMS/gh-pages/style.css">
 	<link rel="stylesheet" href="style.css">
+	<script src="jquery.nav.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#nav').onePageNav();
+		});
+	</script>
 </head>
 <body>
 	<div id="menu">
-		<ul>
+		<img src="https://raw.githubusercontent.com/hendrik-weiler/Portal-CMS/gh-pages/public/assets/img/admin/logo.png" alt="">
+		<ul id="nav">
 			<li><a href="#about">About</a></li>
 			<li><a href="#tutorials">Tutorials</a></li>
 		</ul>
+	</div>
+	<div class="content full" id="about">
+		<div class="inner">
+			<h1>PORTAL CMS 2014</h1>
+			<h2>Pre-Release</h2>
+			<a href="" class="button">Download</a>
+		</div>
+	</div>
+	<div class="content" id="tutorials">
+		<h1>Tutorials</h1>
+		<div class="line"></div>
+		<div class="video">
+			<div class="col1">
+					<h1>01 Install</h1>
+					<p>Learn how to install the CMS!</p>
+			</div>
+			<div class="col2">
+				<video>
+				<source src="video.ogg" type="video/ogg" />
+				<source src="video.mp4" type="video/mp4" />
+				</video>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
