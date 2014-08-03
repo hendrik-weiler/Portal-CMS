@@ -12,6 +12,11 @@
 		$(function() {
 			$('#nav').onePageNav();
 			$('#nav li').eq(0).addClass('current');
+
+			$('img.vid').click(function(){
+			    var video = '<iframe src="'+ $(this).attr('data-video') +'"></iframe>';
+			    $(this).replaceWith(video);
+			});
 		});
 	</script>
 </head>
@@ -39,10 +44,7 @@
 					<p>Learn how to install the CMS!</p>
 			</div>
 			<div class="col2">
-				<video width="1024" height="768" controls>
-				<source src="https://github.com/hendrik-weiler/Portal-CMS/raw/gh-pages/videos/test2.ogg" type="video/ogg" />
-				<source src="https://github.com/hendrik-weiler/Portal-CMS/raw/gh-pages/videos/test2.mp4" type="video/mp4" />
-				</video>
+				<img src="img/01-install.png" class="vid" data-video="https://www.youtube.com/watch?v=0Jy-bnst-w0" alt="">
 			</div>
 		</div>
 	</div>
