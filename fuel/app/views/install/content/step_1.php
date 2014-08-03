@@ -15,9 +15,11 @@
 
 			print __('steps.1.offline_description');
 
-			print Form::input('username',__('steps.1.user'),array('tabindex'=>1));
+            print Form::input('host','localhost',array('tabindex'=>1));
 
-			print Form::input('password',__('steps.1.pass'),array('tabindex'=>2));
+			print Form::input('username',__('steps.1.user'),array('tabindex'=>2));
+
+			print Form::input('password',__('steps.1.pass'),array('tabindex'=>3));
 		?>
 		<h3>
 			<?php print __('steps.1.db_header') ?>
@@ -34,9 +36,11 @@
 
 			print __('steps.1.online_description');
 
-			print Form::input('online_username',__('steps.1.user'),array('tabindex'=>5));
+            print Form::input('online_host','localhost',array('tabindex'=>5));
 
-			print Form::input('online_password',__('steps.1.pass'),array('tabindex'=>6));
+			print Form::input('online_username',__('steps.1.user'),array('tabindex'=>6));
+
+			print Form::input('online_password',__('steps.1.pass'),array('tabindex'=>7));
 		?>
 		<h3>
 			<?php print __('steps.1.db_header') ?>

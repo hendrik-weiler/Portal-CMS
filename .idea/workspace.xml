@@ -2,112 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ccee26c-3c98-44fa-b7a3-52b54802e5fe" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/layouts/wsolar2014/assets/img/footer-logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/layouts/wsolar2014/assets/img/header-logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/layouts/wsolar2014/assets/img/phone.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/layouts/wsolar2014/assets/css/bootstrap-theme.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/layouts/wsolar2014/assets/css/bootstrap.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/layouts/wsolar2014/content_templates/contactform_email_admin.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/layouts/wsolar2014/content_templates/contactform_email_user.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/layouts/wsolar2014/content_templates/custom/einspeiseverguetung.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/layouts/wsolar2014/lang/de/frontend.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/layouts/wsolar2014/lang/en/frontend.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/layouts/default/lang/de/shop.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/layouts/default/lang/en/shop.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/layouts/wsolar2014/lang/de/shop.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/layouts/wsolar2014/lang/en/shop.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/INSTALL_TOOL_DISABLED" afterPath="$PROJECT_DIR$/fuel/app/INSTALL_TOOL_DISABLED" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.markdown" afterPath="$PROJECT_DIR$/README.markdown" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/classes/model/about.php" afterPath="$PROJECT_DIR$/fuel/app/classes/model/about.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/de/account.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/de/account.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/en/account.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/en/account.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/de/account_edit.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/de/account_edit.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/en/account_edit.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/en/account_edit.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/css/admin.css" afterPath="$PROJECT_DIR$/public/assets/css/admin.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/js/admin.js" afterPath="$PROJECT_DIR$/public/assets/js/admin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/lang/de/admin.php" afterPath="$PROJECT_DIR$/fuel/app/lang/de/admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/lang/en/admin.php" afterPath="$PROJECT_DIR$/fuel/app/lang/en/admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/classes/controller/advanced/advanced.php" afterPath="$PROJECT_DIR$/fuel/app/classes/controller/advanced/advanced.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/views/admin/columns/advanced.php" afterPath="$PROJECT_DIR$/fuel/app/views/admin/columns/advanced.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/classes/controller/shop/article.php" afterPath="$PROJECT_DIR$/fuel/app/classes/controller/shop/article.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/classes/model/db/article.php" afterPath="$PROJECT_DIR$/fuel/app/classes/model/db/article.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/views/admin/shop/columns/article_edit.php" afterPath="$PROJECT_DIR$/fuel/app/views/admin/shop/columns/article_edit.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/layouts/default/video/skin/asd.xml" afterPath="$PROJECT_DIR$/layouts/default/video/skin/asd.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/bootstrap.php" afterPath="$PROJECT_DIR$/fuel/app/bootstrap.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/classes/model/generator/content.php" afterPath="$PROJECT_DIR$/fuel/app/classes/model/generator/content.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/de/content.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/de/content.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/en/content.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/en/content.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/de/content_news.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/de/content_news.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/en/content_news.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/en/content_news.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/de/content_width.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/de/content_width.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/en/content_width.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/en/content_width.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/classes/controller/dashboard/dashboard.php" afterPath="$PROJECT_DIR$/fuel/app/classes/controller/dashboard/dashboard.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/views/admin/type/form.php" afterPath="$PROJECT_DIR$/fuel/app/views/admin/type/form.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/views/admin/columns/picturemanager/galleries.php" afterPath="$PROJECT_DIR$/fuel/app/views/admin/columns/picturemanager/galleries.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/classes/controller/shop/group.php" afterPath="$PROJECT_DIR$/fuel/app/classes/controller/shop/group.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/views/admin/type/html.php" afterPath="$PROJECT_DIR$/fuel/app/views/admin/type/html.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/de/images.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/de/images.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/en/images.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/en/images.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/views/admin/index.php" afterPath="$PROJECT_DIR$/fuel/app/views/admin/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/de/language_edit.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/de/language_edit.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/en/language_edit.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/en/language_edit.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/de/language_version.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/de/language_version.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/en/language_version.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/en/language_version.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/de/language_version_show_frontend_1.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/de/language_version_show_frontend_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/en/language_version_show_frontend_1.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/en/language_version_show_frontend_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/de/language_version_show_frontend_2.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/de/language_version_show_frontend_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/en/language_version_show_frontend_2.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/en/language_version_show_frontend_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/views/admin/columns/layout.php" afterPath="$PROJECT_DIR$/fuel/app/views/admin/columns/layout.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/de/layout.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/de/layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/en/layout.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/en/layout.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/classes/controller/login.php" afterPath="$PROJECT_DIR$/fuel/app/classes/controller/login.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/classes/model/shop/invoice/mail.php" afterPath="$PROJECT_DIR$/fuel/app/classes/model/shop/invoice/mail.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/js/navigation.js" afterPath="$PROJECT_DIR$/public/assets/js/navigation.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/classes/model/generator/navigation.php" afterPath="$PROJECT_DIR$/fuel/app/classes/model/generator/navigation.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/views/admin/columns/navigation.php" afterPath="$PROJECT_DIR$/fuel/app/views/admin/columns/navigation.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/de/navigation.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/de/navigation.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/en/navigation.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/en/navigation.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/de/navigation_edit.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/de/navigation_edit.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/en/navigation_edit.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/en/navigation_edit.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/de/navigation_group.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/de/navigation_group.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/en/navigation_group.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/en/navigation_group.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/de/navigation_group_edit_delete.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/de/navigation_group_edit_delete.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/en/navigation_group_edit_delete.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/en/navigation_group_edit_delete.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/views/admin/columns/picturemanager/news.php" afterPath="$PROJECT_DIR$/fuel/app/views/admin/columns/picturemanager/news.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/de/news_add.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/de/news_add.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/en/news_add.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/en/news_add.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/classes/controller/shop/order.php" afterPath="$PROJECT_DIR$/fuel/app/classes/controller/shop/order.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/classes/model/shop/order.php" afterPath="$PROJECT_DIR$/fuel/app/classes/model/shop/order.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/views/admin/columns/picturemanager/own_pictures.php" afterPath="$PROJECT_DIR$/fuel/app/views/admin/columns/picturemanager/own_pictures.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/classes/controller/pages/pages.php" afterPath="$PROJECT_DIR$/fuel/app/classes/controller/pages/pages.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/classes/model/permission.php" afterPath="$PROJECT_DIR$/fuel/app/classes/model/permission.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/classes/model/generator/preparer.php" afterPath="$PROJECT_DIR$/fuel/app/classes/model/generator/preparer.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/config/routes.php" afterPath="$PROJECT_DIR$/fuel/app/config/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/classes/controller/shop/settings.php" afterPath="$PROJECT_DIR$/fuel/app/classes/controller/shop/settings.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/views/admin/shop/columns/settings.php" afterPath="$PROJECT_DIR$/fuel/app/views/admin/shop/columns/settings.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/lang/de/shop.php" afterPath="$PROJECT_DIR$/fuel/app/lang/de/shop.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/lang/en/shop.php" afterPath="$PROJECT_DIR$/fuel/app/lang/en/shop.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/layouts/default/content_templates/shop_email_invoice.php" afterPath="$PROJECT_DIR$/layouts/default/content_templates/shop_email_invoice.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/layouts/default/content_templates/shop_fullview.php" afterPath="$PROJECT_DIR$/layouts/default/content_templates/shop_fullview.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/de/sidebar.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/de/sidebar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/en/sidebar.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/en/sidebar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/classes/model/generator/sub/sites.php" afterPath="$PROJECT_DIR$/fuel/app/classes/model/generator/sub/sites.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/views/admin/columns/sites.php" afterPath="$PROJECT_DIR$/fuel/app/views/admin/columns/sites.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/js/siteselector/siteselector.js" afterPath="$PROJECT_DIR$/public/assets/js/siteselector/siteselector.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/classes/controller/siteselector/siteselector.php" afterPath="$PROJECT_DIR$/fuel/app/classes/controller/siteselector/siteselector.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/js/supersearch/supersearch.js" afterPath="$PROJECT_DIR$/public/assets/js/supersearch/supersearch.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/classes/controller/supersearch/supersearch.php" afterPath="$PROJECT_DIR$/fuel/app/classes/controller/supersearch/supersearch.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/de/supersearch.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/de/supersearch.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/xml/tour/en/supersearch.xml" afterPath="$PROJECT_DIR$/public/assets/xml/tour/en/supersearch.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/lang/de/tasks.php" afterPath="$PROJECT_DIR$/fuel/app/lang/de/tasks.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/lang/en/tasks.php" afterPath="$PROJECT_DIR$/fuel/app/lang/en/tasks.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/classes/controller/shop/tax.php" afterPath="$PROJECT_DIR$/fuel/app/classes/controller/shop/tax.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/views/install/content/step_1.php" afterPath="$PROJECT_DIR$/fuel/app/views/install/content/step_1.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/views/install/content/step_2.php" afterPath="$PROJECT_DIR$/fuel/app/views/install/content/step_2.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/classes/controller/install/tool.php" afterPath="$PROJECT_DIR$/fuel/app/classes/controller/install/tool.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/js/tour/tour.js" afterPath="$PROJECT_DIR$/public/assets/js/tour/tour.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/css/ui.css" afterPath="$PROJECT_DIR$/public/assets/css/ui.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fuel/app/classes/controller/advanced/update.php" afterPath="$PROJECT_DIR$/fuel/app/classes/controller/advanced/update.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Portal-CMS.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -130,19 +27,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="layout.css" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/layouts/wsolar2014/assets/css/layout.css">
+      <file leaf-file-name="tool.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/fuel/app/classes/controller/install/tool.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="283" column="18" selection-start="4327" selection-end="4327" vertical-scroll-proportion="0.9431913" vertical-offset="3116" max-vertical-offset="4350">
+            <state line="150" column="28" selection-start="4583" selection-end="4583" vertical-scroll-proportion="0.43882978" vertical-offset="1920" max-vertical-offset="3630">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="contactform.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/layouts/wsolar2014/content_templates/contactform.php">
+      <file leaf-file-name="step_2.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fuel/app/views/install/content/step_2.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="26" selection-start="1421" selection-end="1421" vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="1305">
+            <state line="8" column="81" selection-start="179" selection-end="179" vertical-scroll-proportion="-5.0" vertical-offset="0" max-vertical-offset="420">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="step_1.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fuel/app/views/install/content/step_1.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="42" selection-start="535" selection-end="535" vertical-scroll-proportion="-11.875" vertical-offset="0" max-vertical-offset="1110">
               <folding />
             </state>
           </provider>
@@ -161,8 +67,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/public/assets/js/tour/tour.js" />
-        <option value="$PROJECT_DIR$/fuel/app/classes/controller/supersearch/supersearch.php" />
         <option value="$PROJECT_DIR$/public/assets/xml/tour/de/sidebar.xml" />
         <option value="$PROJECT_DIR$/public/assets/xml/tour/de/language_edit.xml" />
         <option value="$PROJECT_DIR$/public/assets/xml/tour/de/news_add.xml" />
@@ -202,7 +106,6 @@
         <option value="$PROJECT_DIR$/public/assets/xml/tour/en/navigation_edit.xml" />
         <option value="$PROJECT_DIR$/fuel/app/classes/model/about.php" />
         <option value="$PROJECT_DIR$/README.markdown" />
-        <option value="$PROJECT_DIR$/fuel/app/classes/controller/install/tool.php" />
         <option value="$PROJECT_DIR$/fuel/app/classes/controller/language/language.php" />
         <option value="$PROJECT_DIR$/public/assets/css/admin.css" />
         <option value="$PROJECT_DIR$/public/assets/css/ui.css" />
@@ -212,6 +115,9 @@
         <option value="$PROJECT_DIR$/fuel/app/views/admin/type/form.php" />
         <option value="$PROJECT_DIR$/layouts/wsolar2014/content_templates/contactform.php" />
         <option value="$PROJECT_DIR$/layouts/wsolar2014/assets/css/layout.css" />
+        <option value="$PROJECT_DIR$/fuel/app/views/install/content/step_2.php" />
+        <option value="$PROJECT_DIR$/fuel/app/views/install/content/step_1.php" />
+        <option value="$PROJECT_DIR$/fuel/app/classes/controller/install/tool.php" />
       </list>
     </option>
   </component>
@@ -219,7 +125,7 @@
   <component name="ProjectFrameBounds">
     <option name="y" value="22" />
     <option name="width" value="2560" />
-    <option name="height" value="1317" />
+    <option name="height" value="1329" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -276,11 +182,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="layouts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="wsolar2014" />
+              <option name="myItemId" value="public" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -297,12 +199,18 @@
               <option name="myItemId" value="layouts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="wsolar2014" />
+              <option name="myItemId" value="Portal-CMS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Portal-CMS" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="content_templates" />
+              <option name="myItemId" value="fuel" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -316,15 +224,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="layouts" />
+              <option name="myItemId" value="fuel" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="wsolar2014" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -338,19 +242,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="layouts" />
+              <option name="myItemId" value="fuel" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="wsolar2014" />
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -364,7 +264,149 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="layouts" />
+              <option name="myItemId" value="fuel" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="install" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Portal-CMS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Portal-CMS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fuel" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="install" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="content" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Portal-CMS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Portal-CMS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fuel" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Portal-CMS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Portal-CMS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fuel" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="classes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Portal-CMS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Portal-CMS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fuel" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="classes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Portal-CMS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Portal-CMS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fuel" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="classes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="install" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -441,28 +483,29 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="2560" height="1317" extended-state="6" />
-    <editor active="false" />
+    <frame x="0" y="22" width="2560" height="1329" extended-state="6" />
+    <editor active="true" />
     <layout>
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33010492" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962668" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962668" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27958697" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28157267" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32899022" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32899022" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -484,21 +527,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/fuel/app/classes/controller/advanced/update.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="225" column="9" selection-start="6278" selection-end="6278" vertical-scroll-proportion="0.57908165" vertical-offset="2694" max-vertical-offset="4155" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/xml/tour/de/content.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="0" selection-start="313" selection-end="411" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/xml/tour/en/content.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="54" selection-start="415" selection-end="415" vertical-scroll-proportion="0.1125" vertical-offset="0" max-vertical-offset="1200" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/assets/xml/tour/de/content_news.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="0" selection-start="309" selection-end="407" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285" />
@@ -687,11 +715,6 @@
         <state line="114" column="66" selection-start="3383" selection-end="3383" vertical-scroll-proportion="0.7270408" vertical-offset="855" max-vertical-offset="3150" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fuel/app/classes/controller/install/tool.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="206" column="38" selection-start="6072" selection-end="6072" vertical-scroll-proportion="0.61734694" vertical-offset="2364" max-vertical-offset="3570" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/assets/js/supersearch/supersearch.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="157" column="11" selection-start="4590" selection-end="4590" vertical-scroll-proportion="0.5125" vertical-offset="1740" max-vertical-offset="3960" />
@@ -732,16 +755,44 @@
         <state line="140" column="100" selection-start="5884" selection-end="5884" vertical-scroll-proportion="0.80867344" vertical-offset="1149" max-vertical-offset="2325" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/layouts/wsolar2014/assets/css/layout.css">
+    <entry file="file://$PROJECT_DIR$/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="283" column="18" selection-start="4327" selection-end="4327" vertical-scroll-proportion="0.9431913" vertical-offset="3116" max-vertical-offset="4350">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2085">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/layouts/wsolar2014/content_templates/contactform.php">
+    <entry file="file://$PROJECT_DIR$/public/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="26" selection-start="1421" selection-end="1421" vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="1305">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1212">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuel/app/config/db.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1215">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuel/app/views/install/content/step_2.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="81" selection-start="179" selection-end="179" vertical-scroll-proportion="-5.0" vertical-offset="0" max-vertical-offset="420">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuel/app/views/install/content/step_1.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="42" selection-start="535" selection-end="535" vertical-scroll-proportion="-11.875" vertical-offset="0" max-vertical-offset="1110">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fuel/app/classes/controller/install/tool.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="150" column="28" selection-start="4583" selection-end="4583" vertical-scroll-proportion="0.43882978" vertical-offset="1920" max-vertical-offset="3630">
           <folding />
         </state>
       </provider>
