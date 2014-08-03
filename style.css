@@ -33,6 +33,10 @@ body, html {
 	padding: 20px 0;
 }
 
+.vid {
+	cursor: pointer;
+}
+
 #nav li.current a,
 #menu a:hover {
 	color: white;
