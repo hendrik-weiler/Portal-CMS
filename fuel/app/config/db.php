@@ -14,12 +14,12 @@ return array(
 	'active' => Config::get('environment'),
 
 	Fuel::DEVELOPMENT => array(
-		'type'			=> 'mysql',
+		'type'			=> 'mysqli',
 		'connection'	=> array(
-			'hostname'   => 'localhost',
-			'database'   => 'portalcms1',
-			'username'   => 'root',
-			'password'   => 'root',
+			'hostname'   => '[host]',
+			'database'   => '[db]',
+			'username'   => '[user]',
+			'password'   => '[pass]',
 			'persistent' => false,
 		),
 		'table_prefix' => '',
@@ -29,12 +29,12 @@ return array(
 	),
 
 	Fuel::PRODUCTION => array(
-		'type'			=> 'mysql',
+		'type'			=> 'mysqli',
 		'connection'	=> array(
-			'hostname'   => 'localhost',
-			'database'   => '',
-			'username'   => 'Username',
-			'password'   => 'Password',
+			'hostname'   => '[online_host]',
+			'database'   => '[online_db]',
+			'username'   => '[online_user]',
+			'password'   => '[online_pass]',
 			'persistent' => false,
 		),
 		'table_prefix' => '',
@@ -44,7 +44,7 @@ return array(
 	),
 
 	Fuel::TEST => array(
-		'type'			=> 'mysql',
+		'type'			=> 'mysqli',
 		'connection'	=> array(
 			'hostname'   => 'localhost',
 			'database'   => 'fuel_test',
@@ -59,7 +59,7 @@ return array(
 	),
 
 	Fuel::STAGE => array(
-		'type'			=> 'mysql',
+		'type'			=> 'mysqli',
 		'connection'	=> array(
 			'hostname'   => 'localhost',
 			'database'   => 'fuel_stage',

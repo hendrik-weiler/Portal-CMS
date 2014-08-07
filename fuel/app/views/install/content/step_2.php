@@ -8,11 +8,11 @@
 
 	print Form::open(array('action'=>'admin/install/3','class'=>'form_style_1'));
 
-	print Form::input('username',__('steps.1.user'),array('tabindex'=>1));
+	print Form::input('username',__('steps.1.user'),array('tabindex'=>2));
 
-	print Form::input('password',__('steps.1.pass'),array('tabindex'=>2));
+	print Form::input('password',__('steps.1.pass'),array('tabindex'=>3));
 
-	print Form::submit('submit_2',__('steps.next'),array('tabindex'=>3));
+	print Form::submit('submit_2',__('steps.next'),array('tabindex'=>4));
 
 	print Form::close();
 ?>

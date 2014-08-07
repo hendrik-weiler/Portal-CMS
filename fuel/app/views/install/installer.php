@@ -14,6 +14,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
   <!-- CSS concatenated and minified via ant build script-->
+  <link href='http://fonts.googleapis.com/css?family=Alegreya+Sans:300' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="<?php print Uri::create('assets/css/install.css') ?>">
   <!-- end CSS-->
 

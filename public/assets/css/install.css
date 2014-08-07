@@ -67,15 +67,17 @@ td { vertical-align: top; }
    ========================================================================== */
 
 body {
-  background: #ccc;
+  background: #fff;
+  font-family: 'Alegreya Sans', sans-serif;
+  font-weight: 300;
 }
 
 #container {
   width: 500px;
   margin:auto;
   margin-top: 180px;
-  border:1px solid #f8f8f8;
-  background: #d9d9d9;
+  border:1px solid #5DB1D9;
+  background: #fff;
   padding:15px;
   border-radius: 10px;
   overflow:hidden;
@@ -130,11 +132,16 @@ body {
 .form_style_1 input,
 .form_style_1 select,
 .form_style_1 textarea {
-  display:block;
-  border:1px solid black;
-  padding:5px;
-  margin:3px;
-  width: 160px;
+  border: 1px solid #5DB1D9;
+  padding: 10px 16px;
+  color: #5DB1D9;
+  font-family: 'Alegreya Sans', sans-serif;
+  font-weight: 300;
+  font-size: 18px;
+  font-style: normal;
+  vertical-align: baseline;
+  width: 92%;
+  margin: 5px 0;
 }
 
 /* ------------ steps styling ---------- */
@@ -153,15 +160,14 @@ header li {
   text-align:center;
   padding: 5px 0;
   margin: 3px 2px;
-  border:1px dashed #e8e8e8;
   font-weight:bold;
   font-size:90%;
 }
 
 .active {
-  background: #777;
+  background: #5DB1D9;
   color:white;
-  border:1px dashed white;
+  border:none;
 }
 
 .error {
@@ -180,7 +186,7 @@ footer ul {
 
 footer h4 {
   margin: 5px 0;
-  border-bottom: 1px solid #f8f8f8;
+  border-bottom: 1px solid #5DB1D9;
   padding-bottom:2px;
 }
 
@@ -198,7 +204,7 @@ footer li {
 }
 
 #tabs div {
-  background: #f8f8f8;
+  background: #5DB1D9;
   border:1px solid #a8a8a8;
   border-top:none;
   padding:8px;
@@ -213,31 +219,18 @@ footer li {
   width:240px;
   padding:3px;
   border-radius: 5px 5px 0 0;
-  border:1px solid #a8a8a8;
+  border:1px solid #5DB1D9;
   border-bottom:none;
   text-align:center;
   text-decoration:none;
   color:black;
-  background: #BDBDBD;
-  background: -webkit-gradient(linear, 0 0, 0 bottom, from(#BDBDBD), to(#f8f8f8));
-  background: -webkit-linear-gradient(#BDBDBD, #f8f8f8);
-  background: -moz-linear-gradient(#BDBDBD, #f8f8f8);
-  background: -ms-linear-gradient(#BDBDBD, #f8f8f8);
-  background: -o-linear-gradient(#BDBDBD, #f8f8f8);
-  background: linear-gradient(#BDBDBD, #f8f8f8);
-  -pie-background: linear-gradient(#BDBDBD, #f8f8f8);
+  background: #fff;
+  -pie-background: linear-gradient(#BDBDBD, #5DB1D9);
 }
 
 .active_tab,
 #tabs a:hover {
-  background: #D9A5B2 !important;
-  background: -webkit-gradient(linear, 0 0, 0 bottom, from(#D9A5B2), to(#f8f8f8)) !important;
-  background: -webkit-linear-gradient(#D9A5B2, #f8f8f8) !important;
-  background: -moz-linear-gradient(#D9A5B2, #f8f8f8) !important;
-  background: -ms-linear-gradient(#D9A5B2, #f8f8f8) !important;
-  background: -o-linear-gradient(#D9A5B2, #f8f8f8) !important;
-  background: linear-gradient(#D9A5B2, #f8f8f8) !important;
-  -pie-background: linear-gradient(#D9A5B2, #f8f8f8) !important;
+  background: #5DB1D9 !important;
 }
 /* ==|== non-semantic helper classes ======================================== */
 .ir { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; }

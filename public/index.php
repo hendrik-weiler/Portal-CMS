@@ -39,20 +39,28 @@ defined('FUEL_START_MEM') or define('FUEL_START_MEM', memory_get_usage());
 // Boot the app
 require_once APPPATH.'bootstrap.php';
 
-// Generate the request, execute it and send the output.
-$response = Request::factory()->execute()->response();
+if(file_exists(APPPATH.'config/db.php.bak')
+	|| preg_match('#admin/install#', $_SERVER['REQUEST_URI'])) {
 
-// This will add the execution time and memory usage to the output.
-// Comment this out if you don't use it.
-$bm = Profiler::app_total();
-$response->body(str_replace(array('{exec_time}', '{mem_usage}'), array(round($bm[0], 4), round($bm[1] / pow(1024, 2), 3)), $response->body()));
+	// Generate the request, execute it and send the output.
+	$response = Request::factory()->execute()->response();
 
-$response->send(true);
+	// This will add the execution time and memory usage to the output.
+	// Comment this out if you don't use it.
+	$bm = Profiler::app_total();
+	$response->body(str_replace(array('{exec_time}', '{mem_usage}'), array(round($bm[0], 4), round($bm[1] / pow(1024, 2), 3)), $response->body()));
 
-// Fire off the shutdown event
-Event::shutdown();
+	$response->send(true);
 
-// Make sure everything is flushed to the browser
-ob_end_flush();
+	// Fire off the shutdown event
+	Event::shutdown();
+
+	// Make sure everything is flushed to the browser
+	ob_end_flush();
+
+}
+else {
+	print "<strong>PortalCMS</strong> is not installed.<p><a href=\"/admin/install\">Click me to install!</a></p>";
+}
 
 /* End of file index.php */

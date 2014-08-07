@@ -43,26 +43,32 @@ class Controller_Install_Tool extends Controller
 		return $html;
 	}
 
-	private function _updateDBConfig($username,$password,$database,$online_username,$online_password,$online_database)
+	private function _updateDBConfig($host,$username,$password,$database,$online_host,$online_username,$online_password,$online_database)
 	{
-		File::copy(APPPATH . 'config/db.php', APPPATH . 'config/db.php.bak');
-		$file_content = File::read(APPPATH . 'config/db.php', true);
-		$file_content = str_replace(array(
-			'[user]',
-			'[pass]',
-			'[db]',
-			'[online_db]',
-			'[online_user]',
-			'[online_pass]',
-		),array(
-			$username,
-			$password,
-			$database,
-			$online_database,
-			$online_username,
-			$online_password
-		),$file_content);
-		File::update(APPPATH, 'config/db.php', $file_content);
+        if(!file_exists(APPPATH . 'config/db.php.bak')) {
+            File::copy(APPPATH . 'config/db.php', APPPATH . 'config/db.php.bak');
+            $file_content = File::read(APPPATH . 'config/db.php', true);
+            $file_content = str_replace(array(
+                '[host]',
+                '[user]',
+                '[pass]',
+                '[db]',
+                '[online_host]',
+                '[online_db]',
+                '[online_user]',
+                '[online_pass]',
+            ),array(
+                $host,
+                $username,
+                $password,
+                $database,
+                $host,
+                $database,
+                $username,
+                $password
+            ),$file_content);
+            File::update(APPPATH, 'config/db.php', $file_content);
+        }
 	}
 
 	public function before()
@@ -125,24 +131,24 @@ class Controller_Install_Tool extends Controller
 	{
 		if(isset($_POST['submit']))
 		{
-			$link = mysql_connect('localhost',Input::post('username'), Input::post('password'));
-			if (!$link) 
+			$link = mysqli_connect(Input::post('host'),Input::post('username'), Input::post('password'));
+			if ($link->connect_error)
 			{
 			    Session::set('error',__('steps.1.error_no_login'));
 			    Response::redirect('admin/install/' . Session::get('step'));
 			}
-			$db = mysql_select_db(Input::post('database'));
-			if(!$db)
+            $mysqli = @new mysqli(Input::post('host'),Input::post('username'), Input::post('password'),Input::post('database'));
+			if(!$mysqli)
 			{
-				$create = mysql_query('create database ' . Input::post('database'));
+				$create = $link->query('create database ' . Input::post('database'));
 				if(!$create)
 				{
 					Session::set('error',Session::get('steps.1.error_no_login') . __('steps.1.error_no_rights'));
 					Response::redirect('admin/install/' . Session::get('step'));
 				}
 			}
-			$this->_updateDBConfig(Input::post('username'),Input::post('password'),Input::post('database'),
-								   Input::post('online_username'),Input::post('online_password'),Input::post('online_database'));
+			$this->_updateDBConfig(Input::post('host'),Input::post('username'),Input::post('password'),Input::post('database'),
+                                   Input::post('online_host'),Input::post('online_username'),Input::post('online_password'),Input::post('online_database'));
 			Session::set('error','');
 		}
 
