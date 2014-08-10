@@ -14,12 +14,11 @@
 			$('#nav li').eq(0).addClass('current');
 
 			$('img.vid').click(function(){
-			    var video = '<iframe src="'+ $(this).attr('data-video') +'" frameborder="0" allowfullscreen></iframe>';
-			    $(this).replaceWith(video);
-			    var width = $('.vid').width(),
+			    var video = '<iframe class="frame" src="'+ $(this).attr('data-video') +'" frameborder="0" allowfullscreen></iframe>',
+			    		width = $('.vid').width(),
 			    		height = $('.vid').height();
-
-			    $('iframe').width(width).height(height);
+			    $(this).replaceWith(video);
+			    $('.frame').width(width).height(height);
 			});
 		});
 	</script>
