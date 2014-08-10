@@ -2,7 +2,7 @@ Portal Content Management System 2014
 ====================
 #### v: 1.00 prerelease
 
-[Download](https://dl.dropboxusercontent.com/u/15699766/portalcms/PortalCMS-Pre.zip)<br/>
+[Github Page](http://hendrik-weiler.github.io/Portal-CMS/)<br/>
 
 <br />
 Build on [Fuel Framework](https://github.com/fuel/fuel)<br />
@@ -39,16 +39,9 @@ Features:
 * Supersearch
 * Actionarea
 
-Development Testapp:
----------------------
-[http://portalcms.hendrikweiler.com/admin](http://portalcms.hendrikweiler.com/admin)<br />
-Username: admin<br />
-Password: test<br />
-
 Requirements:
 ---------------------
-PHP 5.3<br />
-fsockopen ( else manually updating )<br />
+PHP > 5.3<br />
 mod_rewrite
 
 
@@ -81,9 +74,16 @@ If you set the destinated path, make sure your path includes the public folder a
 Snippet for inside of the httpd-vhosts.conf:<br>
 <pre>
 &lt;VirtualHost *:80&gt;
-  ServerName portalcms.hendrikweiler.com
-  SetEnv FUEL_ENV production
-  DocumentRoot "/sites/portalcms.hendrikweiler.com/public"
+    ErrorLog /home/root/portalcms/error.log
+    DocumentRoot /home/root/portalcms/public
+    &lt;Directory "/home/root/portalcms/public"&gt;
+            Order allow,deny
+            Allow from all
+            Options Indexes FollowSymLinks MultiViews
+            AllowOverride all
+            # New directive needed in Apache 2.4.3:
+            Require all granted
+    &lt;/Directory&gt;
 &lt;/VirtualHost&gt;
 </pre>
 
