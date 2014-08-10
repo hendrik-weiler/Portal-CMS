@@ -14,8 +14,12 @@
 			$('#nav li').eq(0).addClass('current');
 
 			$('img.vid').click(function(){
-			    var video = '<iframe width="1280" height="720" src="'+ $(this).attr('data-video') +'" frameborder="0" allowfullscreen></iframe>';
+			    var video = '<iframe src="'+ $(this).attr('data-video') +'" frameborder="0" allowfullscreen></iframe>';
 			    $(this).replaceWith(video);
+			    var width = $('.vid').width(),
+			    		height = $('.vid').height();
+
+			    $('iframe').width(width).height(height);
 			});
 		});
 	</script>
@@ -44,7 +48,7 @@
 					<p>Learn how to install the CMS!</p>
 			</div>
 			<div class="col2">
-				<img src="img/01-install.png" class="vid" data-video="http://youtube.com/embed/0Jy-bnst-w0?autoplay=1" alt="">
+				<img src="img/01-install.png" class="vid" data-video="http://youtube.com/embed/CbeCke0PvI8?autoplay=1" alt="">
 			</div>
 		</div>
 	</div>
