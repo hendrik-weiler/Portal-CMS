@@ -86,6 +86,16 @@ class Controller_Pages_Content_Type13 extends Controller
 		}
 
 		$data['content_id'] = $this->content_id;
+		$file = $this->param('file');
+		$data['code'] = '';
+		$data['currentFile'] = $file;
+		if($file != null) {
+			$layout = model_db_option::getKey('layout');
+			$path = APPPATH . '../../layouts/'.$layout->value.'/content_templates/custom/'.$file;
+
+			$content = file_get_contents($path);
+			$data['code'] = $content;
+		}
 		
 		$this->data['content'] = View::factory('admin/type/template',$data);
 	}
@@ -174,6 +184,55 @@ class Controller_Pages_Content_Type13 extends Controller
 
 		model_generator_module::$content = true;
 		print model_generator_content::renderContent($this->content_id, Session::get('lang_prefix')) ;
+	}
+
+	public function action_add_file()
+	{
+		$this->_ajax = true;
+
+		$layout = model_db_option::getKey('layout');
+
+		$ppath = APPPATH . '../../layouts/'.$layout->value.'/content_templates/custom/';
+		$filename = Input::post('filename');
+		
+		File::create($ppath, $filename, '// Good luck!');
+
+		Response::redirect('admin/content/'.$this->param('id').'/edit/'.$this->param('content_id').'/type/13/file/'.$filename);
+	}
+
+	public function action_save_file()
+	{
+		$this->_ajax = true;
+
+		$file = $this->param('file');
+		$file = explode('/', $file);
+		$file = $file[0];
+		$layout = model_db_option::getKey('layout');
+		$ppath = APPPATH . '../../layouts/'.$layout->value.'/content_templates/custom/';
+		$path = $ppath.$file;
+		$code = Input::post('code');
+
+
+		if(isset($_POST['delete'])) {
+			unlink($path);
+
+			Response::redirect('admin/content/'.$this->param('id').'/edit/'.$this->param('content_id').'/type/13');
+		} else {
+			$filename = Input::post('filename');
+			if($file != $filename) {
+				File::rename($path, $ppath.$filename);
+				if(file_exists($path)) {
+					File::delete($path);
+				}
+				$file = $filename;
+			}
+
+			file_put_contents($path, $code);
+
+			Response::redirect('admin/content/'.$this->param('id').'/edit/'.$this->param('content_id').'/type/13/file/'.$file);
+		}
+
+		
 	}
 
 	public function after($response)

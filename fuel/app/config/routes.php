@@ -102,6 +102,10 @@ return array(
   'admin/content/:id/edit/:content_id/type/13/edit' => 'pages/content/type13/edit',
   'admin/content/:id/edit/:content_id/type/13/preview' => 'pages/content/type13/preview',
 
+  'admin/content/:id/edit/:content_id/type/13/file/add' => 'pages/content/type13/add_file',
+  'admin/content/:id/edit/:content_id/type/13/file/:file/save' => 'pages/content/type13/save_file',
+  'admin/content/:id/edit/:content_id/type/13/file/:file' => 'pages/content/type13',
+
   'admin/content/:id/edit/:content_id/type/14' => 'pages/content/type14',
   'admin/content/:id/edit/:content_id/type/14/edit' => 'pages/content/type14/edit',
   'admin/content/:id/edit/:content_id/type/14/preview' => 'pages/content/type14/preview',

@@ -148,8 +148,10 @@ class Controller_Pages_Pages extends Controller
 	public static function update_site($site_id)
 	{
 		$site = model_db_site::find($site_id);
-		$site->changed = date('Y-m-d H:i:s',time());
-		$site->save();
+		if(is_object($site)) {
+			$site->changed = date('Y-m-d H:i:s',time());
+			$site->save();
+		}
 	}
 
     public function got_sub_points($site)

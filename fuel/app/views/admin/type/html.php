@@ -30,7 +30,7 @@
     <?php endforeach; ?>
   </div>
 
-  <textarea name="html" style="width:100%;height:350px;"><?php print $text; ?></textarea>
+  <textarea id="html" name="html" style="width:100%;height:350px;"><?php print $text; ?></textarea>
 
   <?php print Form::submit('submit',__('constants.save'),array('class'=>'button')); ?>
       </div>
@@ -49,5 +49,24 @@
   $('.placeholder_container').on('click',"div.delete a",function(e) {
     e.preventDefault();
     $(this).parentsUntil('div.col-xs-3').parent().remove();
+  });
+</script>
+<link rel="stylesheet" href="<?php print Uri::create('assets/css/codemirror/codemirror.css') ?>">
+<link rel="stylesheet" href="<?php print Uri::create('assets/css/codemirror/night.css') ?>">
+<script type="text/javascript" src="<?php print Uri::create('assets/js/codemirror/codemirror.js'); ?>"></script>
+<script type="text/javascript" src="<?php print Uri::create('assets/js/codemirror/xml.js') ?>"></script>
+<script type="text/javascript" src="<?php print Uri::create('assets/js/codemirror/css.js') ?>"></script>
+<script type="text/javascript" src="<?php print Uri::create('assets/js/codemirror/htmlmixed.js') ?>"></script>
+<script type="text/javascript" src="<?php print Uri::create('assets/js/codemirror/php.js') ?>"></script>
+<script>
+  var editor = CodeMirror.fromTextArea(document.getElementById("html"), {
+    lineNumbers: true,
+    matchBrackets: true,
+    mode: "text/html",
+    indentUnit: 4,
+    indentWithTabs: true
+  });
+  editor.on('keyup', function(cm) {
+    cm.save();
   });
 </script>
