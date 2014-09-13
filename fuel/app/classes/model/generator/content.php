@@ -556,6 +556,8 @@ class model_generator_content extends model_db_site
 
 				$header = 'From: no-reply@' . $_SERVER['HTTP_HOST'] . "\r\n" .
 				    'Reply-To: no-reply@' . $_SERVER['HTTP_HOST'] . "\r\n" .
+				    "MIME-Version: 1.0\r\n" .
+				    "Content-type: text/html; charset=utf-8\r\n".
 				    'X-Mailer: PHP/' . phpversion();
 
 				mail($data['sendTo'], $regard, $message, $header);

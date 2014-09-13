@@ -142,7 +142,7 @@
 			<?php foreach($customFiles as $file): ?>
 				<?php if($file != '.' and $file != '..'): ?>
 				<li>
-					<a <?php $currentFile==$file and print 'class="active"'; ?> href="/admin/content/3/edit/5/type/13/file/<?php print $file; ?>"><?php print $file; ?></a>
+					<a <?php $currentFile==$file and print 'class="active"'; ?> href="<?php print Uri::create('/admin/content/3/edit/' . Uri::segment(5) . '/type/13/file/'. $file); ?>"><?php print $file; ?></a>
 				</li>
 				<?php endif; ?>
 			<?php endforeach; ?>

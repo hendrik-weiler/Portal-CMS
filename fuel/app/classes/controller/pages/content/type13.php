@@ -173,6 +173,8 @@ class Controller_Pages_Content_Type13 extends Controller
 
 		$layout = model_db_option::getKey('layout');
 
+		include_once APPPATH.'views/public/procedural_helpers.php';
+
 		model_generator_layout::$name = $layout->value;
 
 	    $settings = file_get_contents(LAYOUTPATH . '/' . $layout->value . '/settings.json');
