@@ -14,6 +14,9 @@
     </div>
     <?php if($currentFile==''): ?>
     <div class="tplnormalcontent">
+    <?php if($currentFile==''): ?>
+    <a id="openetplditor" href="#">Open Editor</a>
+    <?php endif; ?>
     <div class="list">
     <div class="col-xs-6 padding15">
     		<?php print Form::open(array('action'=>'admin/content/' . Uri::segment(3) . '/edit/' . Uri::segment(5) . '/type/13/edit','enctype'=>'multipart/form-data')) ?>
@@ -106,19 +109,20 @@
 <?php print Form::close(); ?>
 
 
-</div>
+</div></div>
 <?php endif; ?>
 <style>
   #closeetplditor,
   #openetplditor {
     font-size: 26px;
     text-decoration: none;
-    color: red;
+    display: block;
+    text-align: center;
+    background-color: #0D3082;
+    color: white;
   }
 </style>
-<?php if($currentFile==''): ?>
-<a id="openetplditor" href="#">Open Editor</a>
-<?php else: ?>
+<?php if($currentFile!=''): ?>
 <a id="closeetplditor" href="#">Close Editor</a>
 <?php endif; ?>
 
