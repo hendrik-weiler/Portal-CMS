@@ -186,8 +186,9 @@ class model_generator_preparer extends model_db_site
 
 		if(!empty($main))
 		{
+
 			$sub = model_db_navigation::find('first',array(
-				'where' => array('url_title'=>self::$main)
+				'where' => array('url_title'=>self::$main,'parent'=>$main->id)
 			));
 
 			if(!empty($sub))
@@ -455,9 +456,8 @@ class model_generator_preparer extends model_db_site
 			$data['content_count'] = count(model_db_content::find('all',array(
 				'where' => array('site_id'=>model_generator_preparer::$currentSite->id)
 			)));
-
-			
-			if(property_exists(static::$currentSubNav, 'parameter'))
+			//var_dump(get_class(static::$currentSubNav));
+			if(get_class(static::$currentSubNav)!="stdClass")
 			{
 				$parameter = Format::forge(static::$currentSubNav->parameter,'json')->to_array();
 			}

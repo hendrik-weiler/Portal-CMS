@@ -109,10 +109,13 @@ class model_generator_navigation extends model_db_navigation
 				model_generator_preparer::$currentMainNav->url_title = '';
 			}
 
-			if(model_generator_preparer::$currentSubNav->url_title == $nav->url_title || model_generator_preparer::$currentMainNav->url_title == $nav->url_title)
+			if(model_generator_preparer::$currentSubNav->url_title == $nav->url_title and $nav->parent == model_generator_preparer::$currentMainNav->id
+				 or model_generator_preparer::$currentMainNav->url_title == $nav->url_title) {
 				$result[$nav->id]['active'] = true;
-			else
+			}
+			else {
 				$result[$nav->id]['active'] = false;
+			}
 
 			$sub = self::find('all',array(
 				'where' => array('parent'=>$nav->id,'group_id'=>$group_id),
