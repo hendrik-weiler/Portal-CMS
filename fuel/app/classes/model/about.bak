@@ -24,7 +24,7 @@ class model_about
 {
 	public static $version = 1.000;
 
-	public static $status = 'pre-release.beta2 rev.166';
+	public static $status = 'pre-release.beta2 rev.{{revision}}';
 
 	public static function show_version()
 	{

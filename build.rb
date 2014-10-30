@@ -31,6 +31,13 @@ Dir.glob(directory+"/public/uploads/**").each { |f|
 	end
 }
 
+if(File.exists?(directory+"/fuel/app/classes/model/about.bak"))
+	file = File.open(directory+"/fuel/app/classes/model/about.bak", "rb")
+	contents = file.read
+	
+	File.open(directory+"/fuel/app/classes/model/about.php", 'w') { |file| file.write(contents.gsub("{{revision}}",buildnumber.to_s)) }
+end
+
 Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
   Dir[File.join(directory, '**', '**')].each do |file|
   	
