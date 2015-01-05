@@ -1,5 +1,5 @@
 <?php
-	print Form::open(array('action'=>'admin/advanced/edit','id'=>'advanced_form','class'=>'form_style_1'));
+    print Form::open(array('action'=>'admin/advanced/edit','id'=>'advanced_form','class'=>'form_style_1'));
 ?>
 <div class="col-xs-12 vertical graycontainer globalmenu">
     <div class="description">
@@ -143,6 +143,12 @@
                 <?php print Form::label(__('advanced.seo.robots')); ?>
                 <div class="input">
                     <?php print Form::input('robots',$robots); ?>
+                </div>
+            </div>
+            <div class="clearfix">
+                <?php print Form::label('Website Title'); ?>
+                <div class="input">
+                    <?php print Form::input('titleformat',$titleformat); ?>
                 </div>
             </div>
         </div>

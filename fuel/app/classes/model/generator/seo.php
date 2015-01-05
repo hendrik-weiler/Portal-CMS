@@ -29,9 +29,26 @@ class model_generator_seo
 			return;
 			
 		$title = (empty($site->site_title) ? $site->label : $site->site_title);
-		return '<title>' . stripslashes($title) . '</title>
-					<meta name="keywords" content="' . stripslashes($site->keywords) . '">'
-			 . '<meta name="description" content="' . $site->description . '">'
+
+		$titleformat = model_db_option::getKey('titleformat')->value;
+
+		$titlecompleted = str_replace('{sitename}', $title, $titleformat);
+
+		$keywords = stripslashes($site->keywords);
+		$description = $site->description;
+
+		$keywordsTag = '';
+		$descriptionTag = '';
+		if(!empty($keywords)) {
+			$keywordsTag = '<meta name="keywords" content="' . $keywords . '">';
+		}
+		if(!empty($description)) {
+			$descriptionTag = '<meta name="description" content="' . $description . '">';
+		}
+
+		return '<title>' . stripslashes($titlecompleted) . '</title>'
+			 . 	$keywordsTag
+			 .  $descriptionTag
 			 . '<base href="' . Uri::create('/') . '" />'
 			 #. '<meta http-equiv="Content-Language" content="' . model_generator_preparer::$lang . '" />'
 			 #. '<meta name="language" content="' . model_generator_preparer::$lang . '" />'

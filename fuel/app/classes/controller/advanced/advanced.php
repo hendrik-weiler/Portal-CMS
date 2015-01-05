@@ -33,7 +33,7 @@ class Controller_Advanced_Advanced extends Controller
 		'news_thumbs_width','news_thumbs_height','gallery_thumbs_width','gallery_thumbs_height',
 		'show_last','show_max_token','layout','landing_page', 'show_full_news',
 		# seo
-		'analytics_id','robots',
+		'analytics_id','robots','titleformat',
 		# modules
 		'module_navigation','module_content','module_seo_head','module_seo_analytics','module_language_switcher',
 		# assets
@@ -80,6 +80,7 @@ class Controller_Advanced_Advanced extends Controller
 		# seo
 		'analytics_id' => 'UA-XXXXXXXX-X',
 		'robots' => 'index,follow',
+		'titleformat' => '{sitename}',
 		# modules
 		'module_navigation' => '1',
 		'module_content' => '1',
@@ -138,6 +139,7 @@ class Controller_Advanced_Advanced extends Controller
 		# seo
 		'analytics_id' => 'UA-XXXXXXXX-X',
 		'robots' => '',
+		'titleformat' => '{sitename}',
 		# modules
 		'module_navigation' => '0',
 		'module_content' => '0',
